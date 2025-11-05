@@ -1,0 +1,40 @@
+<header>
+
+    <nav
+        class="navbar navbar-expand-lg shadow-sm position-fixed w-100 z-3 pt-2">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ path('home') }}">
+                <img class="logo" src="{{ asset('assets/img/logo/logo.webp') }}" alt="logo cœur à Quatre Pattes"/></a>
+                <span>Cœur à Quatre Pattes</span>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown"
+                aria-expanded="false"
+                aria-label="Toggle main navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+                class="collapse navbar-collapse justify-content-end"
+                id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="">Donner</a> {# dés que la route est faite rajouter ceci dans href : {{ path('donation') }} #}
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="">Adopter</a> {# dés que la route est faite rajouter ceci dans href : {{ path('adoption') }} #}
+                    </li>
+
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="">Participer</a> {# dés que la route est faite rajouter ceci dans href : {{ path('contribute') }} #}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Evénements</a> {# dés que la route est faite rajouter ceci dans href : {{ path('event') }} #}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
