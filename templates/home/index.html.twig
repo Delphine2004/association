@@ -1,0 +1,401 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Coeurs à Quatre Pattes{% endblock %}
+
+{% block body %}
+<main class="pt-5">
+
+    <!--Section hero-->
+    <section id="hero" class="container py-5">
+      <div class=" hero row justify-content-center align-content-center">
+        <!--Image-->
+        <div class="imgHero col-12 col-md-5 mb-4 mb-md-0 d-flex justify-content-center">
+          <img
+            src="{{ asset('assets/img/Logo/Logo.webp') }}" 
+            alt="Logo association Coeurs à quatre pattes"
+            class="img-fluid object-fit-cover" />
+        </div>
+        <!-- Titre et boutons-->
+        <div class="col-12 col-md-7 d-flex flex-column justify-content-center py-5">
+          <!--Le titre et le slogan-->
+          <div class="mb-4 ">
+            <h1 class="text-center text-lg-end fw-bold pb-3 hero-title">Cœur à Quatre Pattes</h1>
+            <p class=" text-center text-lg-start fst-italic hero-slogan">
+              "Offrez-leur un foyer, gagnez un ami pour la vie."
+            </p>
+          </div>
+          <!--Boutons-->
+          <div class="d-flex flex-column flex-md-row justify-content-md-end gap-4">
+            <!-- Bouton sur mobile -->
+            <a
+              class="btn w-100 d-md-none"
+              href="#"
+              role="button"
+              aria-label="Donner">Donner</a>
+
+
+            <a
+              class="btn w-100 d-md-none "
+              href="#"
+              role="button"
+              aria-label="Adopter">Adopter</a>
+
+
+            <!-- Bouton sur desktop -->
+            <a
+              class="btn px-4 d-none d-md-inline"
+              href="#"
+              role="button"
+              aria-label="Donner">Donner</a>
+
+
+            <a
+              class="btn px-4 d-none d-md-inline "
+              href="#"
+              role="button"
+              aria-label="Adopter">Adopter</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!--Section home-->
+    <section id="home" class="container-fluid mx-auto py-5">
+      <div class="container text-center px-5 ">
+        <!-- Présentation -->
+        <h2 class="text-center mb-4">Qui sommes-nous&nbsp;?</h2>
+        <div class="row align-items-center">
+          <!-- Paragraphe de présentation-->
+          <div class="col-12 col-md-8 text-md-start mb-4 mb-md-0">
+            <p>
+              Bienvenue sur le site de l'association <strong>"Cœurs à Quatre Pattes"</strong>.
+              Nous sommes une association dédiée à la protection et à l'adoption des animaux
+              abandonnés ou maltraités. Depuis notre création en 2015, nous œuvrons chaque jour
+              pour offrir une seconde chance aux compagnons à quatre pattes.
+            </p>
+            <p>
+              Notre mission : <strong>secourir, soigner</strong> et <strong>trouver un foyer aimant</strong>
+              pour chaque animal. Grâce à notre réseau de familles d'accueil et à notre centre
+              d'hébergement, nous avons déjà permis à plus de 2 000 animaux de retrouver amour
+              et sécurité.
+            </p>
+            <p>
+              Nous menons également des actions de sensibilisation dans les écoles et auprès du
+              grand public pour encourager une adoption responsable et le respect du bien-être animal.
+            </p>
+            <p>
+              Rejoignez l'aventure et faites partie de notre combat contre l'abandon et la maltraitance.
+            </p>
+            <div>
+              <a class="btn px-4" href="#" role="button">Nous rejoindre</a>
+            </div>
+
+          </div>
+          <!-- Image-->
+          <div class="col-12 col-md-4 d-flex justify-content-center p-2">
+            <img
+              src="{{ asset('assets/img/autres/team.jpg') }}"
+              class="img-fluid rounded mx-auto d-block"
+              alt="les membres de l'association Coeurs à quatre pattes" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!--Section adoption-->
+    <section
+      id="adoption"
+      class="container text-center py-5">
+      <!--Section à adopter-->
+      <div class="to-adopt mx-auto mb-5" style="max-width: 900px;">
+        <!--Presentation-->
+        <h2 class=" mb-4">Ils n'attendent que vous</h2>
+        <p class=" mb-4">
+          Adopter un animal, c'est offrir une seconde chance à un être
+          vivant en quête d'amour. Chaque adoption transforme deux vies :
+          celle de l'animal recueilli et celle du foyer qui s'enrichit d'une
+          présence affectueuse et fidèle.
+        </p>
+        <!--Carousel des animaux adoptés-->
+        <div
+          id="carousel-to-adopt"
+          class="carousel slide mx-auto"
+          style="max-width: 600px"
+          data-bs-ride="carousel"
+          data-bs-interval="5000">
+          aria-label="Carrousel des animaux à adopter">
+
+          <!--Les images du carousel-->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                src="{{ asset('assets/img/animaux/chat1.jpg') }}"
+                class="d-block w-100 img-fluid"
+                alt="animal de compagnie" />
+              <div class="carousel-caption d-block">
+                <h5>Nom de l'animal et son âge</h5>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img
+                src="{{ asset('assets/img/animaux/chien1.jpg') }}" 
+                class="d-block w-100 img-fluid"
+                alt="animal de compagnie" />
+              <div class="carousel-caption d-block">
+                <h5>Nom de l'animal et son âge</h5>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img
+                src="{{ asset('assets/img/animaux/chat3.jpg') }}"
+                class="d-block w-100 img-fluid"
+                alt="animal de compagnie" />
+              <div class="carousel-caption d-block">
+                <h5>Nom de l'animal et son âge</h5>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- Lien vers la page adoption -->
+        <a class="btn m-4 px-4" href="#" role="button" aria-label="Rechercher les animaux à adopter">Rechercher</a>
+
+      </div>
+      <!--Section adoptés-->
+      <div class="adopted mx-auto" style="max-width: 900px;">
+        <!--Presentation-->
+        <h2 class=" mb-4">Ils ont trouvé leur nouveau foyer</h2>
+        <p class=" mb-4">
+          Un temps sans foyer, nos protégés vivent aujourd'hui leur
+          meilleure vie chez des familles aimantes. Leurs regards lumineux et
+          leurs jeux joyeux témoignent du bonheur retrouvé grâce à votre générosité.
+        </p>
+        <!--Carousel des animaux adoptés-->
+        <div
+          id="carousel-adopted"
+          class="carousel slide mx-auto"
+          style="max-width: 600px"
+          data-bs-ride="carousel"
+          data-bs-interval="5000">
+
+          <!-- Les Images du carousel des animaux adoptés -->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                src="{{ asset('assets/img/animaux/chien2.jpg') }}"
+                class="d-block w-100 img-fluid"
+                alt="animal de compagnie" />
+              <div class="carousel-caption d-block">
+                <h5>Nom de l'animal et son âge</h5>
+                <p>Presentation et histoire de l'animal</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img
+                src="{{ asset('assets/img/animaux/chien3.jpg') }}" 
+                class="d-block w-100 img-fluid"
+                alt="animal de compagnie" />
+              <div class="carousel-caption d-block">
+                <h5>Nom de l'animal et son âge</h5>
+                <p>Presentation et histoire de l'animal</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img
+                src="{{ asset('assets/img/animaux/chat2.jpg') }}"
+                class="d-block w-100 img-fluid"
+                alt="animal de compagnie" />
+              <div class="carousel-caption d-block">
+                <h5>Nom de l'animal et son âge</h5>
+                <p>Presentation et histoire de l'animal</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!--Section événements-->
+    <section
+      id="event"
+      class="container align-items-center text-center py-5 ">
+      <!-- Présentation des événements -->
+      <div class="col-10 justify-content-center mx-auto py-5">
+        <h2 class="text-center mb-4">Les Evénements</h2>
+        <p class="text-center">
+          Découvrez nos prochains rendez-vous solidaires ! Journées portes
+          ouvertes, collectes de dons, séances d'adoption et ateliers de
+          sensibilisation - notre calendrier regorge d'occasions de vous
+          engager pour la cause animale. Rejoignez-nous pour ces moments de
+          partage où chaque participation contribue concrètement au bien-être
+          de nos protégés.
+        </p>
+      </div>
+      <!-- Les cartes des événements -->
+      <div class="row justify-content-center g-4 mx-auto py-5">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card" style="width: 10rem">
+            <img
+              src="{{ asset('assets/img/events/anniversaire.jpg') }}"
+              class="card-img-top"
+              alt="annivesaire" />
+            <div class="card-body">
+              <p class="card-text">
+                Le 15 juin, célébrons ensemble le 8ème anniversaire de notre
+                association ! Une journée festive pour honorer tous nos
+                sauvetages réussis.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card" style="width: 10rem">
+            <img
+              src="{{ asset('assets/img/events/balade.jpg') }}"
+              class="card-img-top"
+              alt="promenade des animaux" />
+            <div class="card-body">
+              <p class="card-text">
+                Rejoignez notre Grande Promenade annuelle le 23 mai ! Une
+                balade joyeuse où maîtres et animaux adoptés partagent un
+                moment inoubliable ensemble.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card" style="width: 10rem">
+            <img
+              src="{{ asset('assets/img/events/jeux.jpg') }}"
+              class="card-img-top"
+              alt="Bien-être des animaux" />
+            <div class="card-body">
+              <p class="card-text">
+                Atelier "Bien-être animal" le 7 juin : apprenez les gestes
+                essentiels pour prendre soin de votre compagnon avec nos
+                vétérinaires bénévoles.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card" style="width: 10rem">
+            <img
+              src="{{ asset('assets/img/events/noël.jpg') }}"
+              class="card-img-top"
+              alt="Collecte" />
+            <div class="card-body">
+              <p class="card-text">
+                Collecte solidaire au centre commercial Les Rives du 10 au 12
+                juillet : vos dons de nourriture et accessoires sauveront des
+                vies !
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- lien vers la page événements -->
+      <div class="row justify-content-center mx-auto py-5">
+        <a class="btn w-25" href="#" role="button">Plus d'événement</a>
+      </div>
+      <!-- Newsletter -->
+      <div class="row justify-content-center mx-auto py-5">
+        <!-- présentation newsletter -->
+        <p class="text-center">
+          Restez informé de nos actions et sauvetages ! Inscrivez-vous à notre newsletter mensuelle pour ne manquer aucune actualité de nos protégés.
+        </p>
+        <!-- Inscription newsletter -->
+        <div class="container my-5">
+          <form class="row justify-content-center align-items-end g-3"
+            action="#"
+            method="post">
+
+            <div class="col-12 col-md-8">
+              <!-- Champ Email -->
+              <div>
+                <label for="newsletter_email" class="form-label"></label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="newsletter_email"
+                  aria-describedby="emailNewsletter"
+                  name="email"
+                  placeholder="exemple@mail.com"
+                  required />
+              </div>
+
+            <!-- Bouton -->
+            <div class="col-12 col-md-3 text-md-start text-center align-self-center">
+              <button type="submit" class="btn w-100">
+                S'inscrire
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+
+    <!--Section adress-->
+    <section id="adress" class="container-fluid mx-auto py-5">
+      <div class="container text-center mx-auto">
+        <h2 class="text-center mb-4">Où nous trouver ?</h2>
+
+        <div class="row justify-content-center text-center">
+          <!-- Horaires + Adresse -->
+          <div class="col-12 col-md-4 mx-auto ">
+            <h4>Horaires</h4>
+            <div class="mx-auto py-3">
+              <div class="d-flex justify-content-between"><span>Lundi</span><span>10:00 - 20:00</span></div>
+              <div class="d-flex justify-content-between"><span>Mardi</span><span>10:00 - 20:00</span></div>
+              <div class="d-flex justify-content-between"><span>Mercredi</span><span>10:00 - 20:00</span></div>
+              <div class="d-flex justify-content-between"><span>Jeudi</span><span>10:00 - 20:00</span></div>
+              <div class="d-flex justify-content-between"><span>Vendredi</span><span>10:00 - 20:00</span></div>
+              <div class="d-flex justify-content-between"><span>Samedi</span><span>10:00 - 20:00</span></div>
+              <div class="d-flex justify-content-between"><span>Dimanche</span><span>10:00 - 20:00</span></div>
+            </div>
+
+            <h4 class="pt-5">Adresse</h4>
+            <p>100 rue introuvable<br />99000 QUELQUE PART</p>
+          </div>
+
+          <!-- Carte -->
+          <div class="col-12 col-md-8 mb-4">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2648.7113213397724!2d2.6783482999999992!3d48.4044867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e5f30b363aa115%3A0x5f677a18dd01695f!2sParking%20Mont%20Aigu!5e0!3m2!1sfr!2sfr!4v1746388522468!5m2!1sfr!2sfr"
+              width="100%"
+              height="450"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Localisation"></iframe>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="row justify-content-center mx-auto py-5">
+          <!-- Présentation contact -->
+          <div class="col-12 col-md-9 mb-3 text-md-start">
+            <p>
+              Vous n'avez pas trouvé ce que vous chercher sur le site ou vous
+              avez besoin de renseignement complémentaire? N'hésitez pas à nos
+              contacter via ce formulaire. Nous vous répondrons dans les
+              meilleurs délais.
+            </p>
+          </div>
+          <!-- Lien vers formulaire de contact -->
+          <div class="col-12 col-md-3 text-md-start">
+            <a class="btn" href="#" role="button">Nous contacter</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+{% endblock %}
