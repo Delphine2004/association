@@ -17,10 +17,18 @@ class Picture
     private ?string $url = null;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $main = null;
+    private bool $main = false;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\ManyToOne(inversedBy: 'pictures')]
+    private ?Animal $animal = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -39,12 +47,12 @@ class Picture
         return $this;
     }
 
-    public function isMain(): ?bool
+    public function isMain(): bool
     {
         return $this->main;
     }
 
-    public function setMain(?bool $main): static
+    public function setMain(bool $main): static
     {
         $this->main = $main;
 
@@ -59,6 +67,18 @@ class Picture
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getAnimal(): ?Animal
+    {
+        return $this->animal;
+    }
+
+    public function setAnimal(?Animal $animal): static
+    {
+        $this->animal = $animal;
 
         return $this;
     }

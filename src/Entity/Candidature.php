@@ -36,14 +36,20 @@ class Candidature
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'candidatures')]
+    private ?Animal $animal = null;
+
+    #[ORM\ManyToOne(inversedBy: 'candidatures')]
+    private ?User $user = null;
+
     public function __construct()
     {
-        if (null === $this->createdAt) {
+        if ($this->createdAt === null) {
             $this->createdAt = new \DateTimeImmutable();
         }
 
-        if (null === $this->updatedAt) {
-            $this->updatedAt = $this->createdAt;
+        if ($this->updatedAt === null) {
+            $this->updatedAt =  new \DateTimeImmutable();
         }
     }
 
@@ -52,7 +58,7 @@ class Candidature
         return $this->id;
     }
 
-    public function getCandidatureStatus(): ?string
+    public function getCandidatureStatus(): ?CandidatureStatus
     {
         return $this->candidatureStatus;
     }
@@ -64,12 +70,12 @@ class Candidature
         return $this;
     }
 
-    public function getCandidateFirstName(): ?string
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
-    public function setCandidateFirstName(string $firstName): static
+    public function setFirstName(string $firstName): static
     {
         if (null !== $firstName) {
             $firstName = trim($firstName);
@@ -166,5 +172,29 @@ class Candidature
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
+    }
+
+    public function getAnimal(): ?Animal
+    {
+        return $this->animal;
+    }
+
+    public function setAnimal(?Animal $animal): static
+    {
+        $this->animal = $animal;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

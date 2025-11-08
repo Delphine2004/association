@@ -8,6 +8,8 @@ use App\Enum\AnimalRace;
 use App\Enum\AnimalGender;
 use App\Enum\AdoptionStatus;
 use App\Utils\RegexPatterns;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 use InvalidArgumentException;
 use DateTimeImmutable;
@@ -26,7 +28,7 @@ class Animal
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(length: 255)]
     private ?string $description = null;
 
     #[ORM\Column(type: 'string', length: 20, enumType: AnimalType::class)]
@@ -42,22 +44,22 @@ class Animal
     private ?AdoptionStatus $adoptionStatus = null;
 
     #[ORM\Column]
-    private ?bool $vaccinated = null;
+    private bool $vaccinated = false;
 
     #[ORM\Column]
-    private ?bool $sterilized = null;
+    private bool $sterilized = false;
 
     #[ORM\Column]
-    private ?bool $chipped = null;
+    private bool $chipped = false;
 
     #[ORM\Column]
-    private ?bool $compatibleKid = null;
+    private bool $compatibleKid = false;
 
     #[ORM\Column]
-    private ?bool $compatibleCat = null;
+    private bool $compatibleCat = false;
 
     #[ORM\Column]
-    private ?bool $compatibleDog = null;
+    private bool $compatibleDog = false;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTime $birthday = null;
@@ -71,6 +73,27 @@ class Animal
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    /**
+     * @var Collection<int, Picture>
+     */
+    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'animal')]
+    private Collection $pictures;
+
+    /**
+     * @var Collection<int, Specification>
+     */
+    #[ORM\ManyToMany(targetEntity: Specification::class, inversedBy: 'animals')]
+    private Collection $specifications;
+
+    /**
+     * @var Collection<int, Candidature>
+     */
+    #[ORM\OneToMany(targetEntity: Candidature::class, mappedBy: 'animal')]
+    private Collection $candidatures;
+
+    #[ORM\ManyToOne(inversedBy: 'animals')]
+    private ?User $user = null;
+
     public function __construct()
     {
         if ($this->createdAt === null) {
@@ -80,6 +103,9 @@ class Animal
         if ($this->updatedAt === null) {
             $this->updatedAt = $this->createdAt;
         }
+        $this->pictures = new ArrayCollection();
+        $this->specifications = new ArrayCollection();
+        $this->candidatures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -133,7 +159,7 @@ class Animal
         return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): ?AnimalType
     {
         return $this->type;
     }
@@ -145,7 +171,7 @@ class Animal
         return $this;
     }
 
-    public function getRace(): ?string
+    public function getRace(): ?AnimalRace
     {
         return $this->race;
     }
@@ -157,7 +183,7 @@ class Animal
         return $this;
     }
 
-    public function getGender(): ?string
+    public function getGender(): ?AnimalGender
     {
         return $this->gender;
     }
@@ -169,7 +195,7 @@ class Animal
         return $this;
     }
 
-    public function getAdoptionStatus(): ?string
+    public function getAdoptionStatus(): ?AdoptionStatus
     {
         return $this->adoptionStatus;
     }
@@ -181,7 +207,7 @@ class Animal
         return $this;
     }
 
-    public function isVaccinated(): ?bool
+    public function isVaccinated(): bool
     {
         return $this->vaccinated;
     }
@@ -193,7 +219,7 @@ class Animal
         return $this;
     }
 
-    public function isSterilized(): ?bool
+    public function isSterilized(): bool
     {
         return $this->sterilized;
     }
@@ -205,7 +231,7 @@ class Animal
         return $this;
     }
 
-    public function isChipped(): ?bool
+    public function isChipped(): bool
     {
         return $this->chipped;
     }
@@ -217,7 +243,7 @@ class Animal
         return $this;
     }
 
-    public function isCompatibleKid(): ?bool
+    public function isCompatibleKid(): bool
     {
         return $this->compatibleKid;
     }
@@ -229,7 +255,7 @@ class Animal
         return $this;
     }
 
-    public function isCompatibleCat(): ?bool
+    public function isCompatibleCat(): bool
     {
         return $this->compatibleCat;
     }
@@ -241,7 +267,7 @@ class Animal
         return $this;
     }
 
-    public function isCompatibleDog(): ?bool
+    public function isCompatibleDog(): bool
     {
         return $this->compatibleDog;
     }
@@ -306,5 +332,101 @@ class Animal
     private function updateTimestamp(): void
     {
         $this->updatedAt = new DateTimeImmutable();
+    }
+
+    /**
+     * @return Collection<int, Picture>
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function addPicture(Picture $picture): static
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures->add($picture);
+            $picture->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): static
+    {
+        if ($this->pictures->removeElement($picture)) {
+            // set the owning side to null (unless already changed)
+            if ($picture->getAnimal() === $this) {
+                $picture->setAnimal(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Specification>
+     */
+    public function getSpecifications(): Collection
+    {
+        return $this->specifications;
+    }
+
+    public function addSpecification(Specification $specification): static
+    {
+        if (!$this->specifications->contains($specification)) {
+            $this->specifications->add($specification);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecification(Specification $specification): static
+    {
+        $this->specifications->removeElement($specification);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Candidature>
+     */
+    public function getCandidatures(): Collection
+    {
+        return $this->candidatures;
+    }
+
+    public function addCandidature(Candidature $candidature): static
+    {
+        if (!$this->candidatures->contains($candidature)) {
+            $this->candidatures->add($candidature);
+            $candidature->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidature(Candidature $candidature): static
+    {
+        if ($this->candidatures->removeElement($candidature)) {
+            // set the owning side to null (unless already changed)
+            if ($candidature->getAnimal() === $this) {
+                $candidature->setAnimal(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }
