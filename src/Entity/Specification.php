@@ -11,6 +11,7 @@ use InvalidArgumentException;
 
 use App\Repository\SpecificationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
 
 #[ORM\Entity(repositoryClass: SpecificationRepository::class)]
 class Specification
@@ -23,8 +24,8 @@ class Specification
     #[ORM\Column(length: 50)]
     private ?string $specificationName = null;
 
-    #[ORM\Column(type: 'string', length: 50, enumType: SpecificationCategory::class, nullable: true)]
-    private ?string $specificationCategory = null;
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: SpecificationCategory::class, nullable: true)]
+    private ?SpecificationCategory $specificationCategory = null;
 
     /**
      * @var Collection<int, Animal>

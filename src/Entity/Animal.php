@@ -2,22 +2,26 @@
 
 namespace App\Entity;
 
-use App\Repository\AnimalRepository;
 use App\Enum\AnimalType;
 use App\Enum\AnimalRace;
 use App\Enum\AnimalGender;
 use App\Enum\AdoptionStatus;
 use App\Utils\RegexPatterns;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+
+use App\Repository\AnimalRepository;
 
 use InvalidArgumentException;
 use DateTimeImmutable;
+use DateTime;
 
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
+
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Animal
 {
     #[ORM\Id]
@@ -31,47 +35,47 @@ class Animal
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column(type: 'string', length: 20, enumType: AnimalType::class)]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalType::class)]
     private ?AnimalType $type = null;
 
-    #[ORM\Column(type: 'string', length: 20, enumType: AnimalRace::class)]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalRace::class)]
     private ?AnimalRace $race = null;
 
-    #[ORM\Column(type: 'string', length: 20, enumType: AnimalGender::class)]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalGender::class)]
     private ?AnimalGender $gender = null;
 
-    #[ORM\Column(type: 'string', length: 20, enumType: AdoptionStatus::class)]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: AdoptionStatus::class)]
     private ?AdoptionStatus $adoptionStatus = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $vaccinated = false;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $sterilized = false;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $chipped = false;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $compatibleKid = false;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $compatibleCat = false;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $compatibleDog = false;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTime $birthday = null;
+    private ?DateTime $birthday = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $arrivalDate = null;
+    private ?DateTime $arrivalDate = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $updatedAt = null;
 
     /**
      * @var Collection<int, Picture>
@@ -94,15 +98,21 @@ class Animal
     #[ORM\ManyToOne(inversedBy: 'animals')]
     private ?User $user = null;
 
+    #[ORM\PrePersist]
+    public function onPrePersist(): void
+    {
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate(): void
+    {
+        $this->updatedAt = new DateTimeImmutable();
+    }
+
     public function __construct()
     {
-        if ($this->createdAt === null) {
-            $this->createdAt = new \DateTimeImmutable();
-        }
-
-        if ($this->updatedAt === null) {
-            $this->updatedAt = $this->createdAt;
-        }
         $this->pictures = new ArrayCollection();
         $this->specifications = new ArrayCollection();
         $this->candidatures = new ArrayCollection();
@@ -120,22 +130,18 @@ class Animal
 
     public function setName(string $name): static
     {
-        if ($name !== null) {
-            $name = trim($name);
 
-            if (empty($name)) {
-                throw new InvalidArgumentException("Le nom est obligatoire.");
-            }
+        $name = trim($name);
 
-            if (!preg_match(RegexPatterns::ONLY_TEXTE_REGEX, $name)) {
-                throw new InvalidArgumentException("Le nom doit être compris entre 1 et 60 caractères autorisés.");
-            }
-            $this->name = strtoupper($name);
-        } else {
-            $this->name = null;
+        if (empty($name)) {
+            throw new InvalidArgumentException("Le nom est obligatoire.");
         }
 
-        $this->updateTimestamp();
+        if (!preg_match(RegexPatterns::ONLY_TEXTE_REGEX, $name)) {
+            throw new InvalidArgumentException("Le nom doit être compris entre 1 et 60 caractères autorisés.");
+        }
+        $this->name = strtoupper($name);
+
         return $this;
     }
 
@@ -146,16 +152,14 @@ class Animal
 
     public function setDescription(string $description): static
     {
-        if ($description !== null) {
-            $description = trim($description);
+        $description = trim($description);
 
-            if (!preg_match(RegexPatterns::FREE_TEXT_REGEX, $description)) {
-                throw new InvalidArgumentException("La description peut contenir entre 2 et 255 caractères autorisés.");
-            }
+        if (!preg_match(RegexPatterns::FREE_TEXT_REGEX, $description)) {
+            throw new InvalidArgumentException("La description peut contenir entre 2 et 255 caractères autorisés.");
         }
 
         $this->description = ucfirst($description);
-        $this->updateTimestamp();
+
         return $this;
     }
 
@@ -215,7 +219,7 @@ class Animal
     public function setVaccinated(bool $vaccinated): static
     {
         $this->vaccinated = $vaccinated;
-        $this->updateTimestamp();
+
         return $this;
     }
 
@@ -227,7 +231,7 @@ class Animal
     public function setSterilized(bool $sterilized): static
     {
         $this->sterilized = $sterilized;
-        $this->updateTimestamp();
+
         return $this;
     }
 
@@ -239,7 +243,7 @@ class Animal
     public function setChipped(bool $chipped): static
     {
         $this->chipped = $chipped;
-        $this->updateTimestamp();
+
         return $this;
     }
 
@@ -251,7 +255,7 @@ class Animal
     public function setCompatibleKid(bool $compatibleKid): static
     {
         $this->compatibleKid = $compatibleKid;
-        $this->updateTimestamp();
+
         return $this;
     }
 
@@ -263,7 +267,7 @@ class Animal
     public function setCompatibleCat(bool $compatibleCat): static
     {
         $this->compatibleCat = $compatibleCat;
-        $this->updateTimestamp();
+
         return $this;
     }
 
@@ -275,16 +279,16 @@ class Animal
     public function setCompatibleDog(bool $compatibleDog): static
     {
         $this->compatibleDog = $compatibleDog;
-        $this->updateTimestamp();
+
         return $this;
     }
 
-    public function getBirthday(): ?\DateTime
+    public function getBirthday(): ?DateTime
     {
         return $this->birthday;
     }
 
-    public function setBirthday(?\DateTime $birthday): static
+    public function setBirthday(?DateTime $birthday): static
     {
         if ($birthday !== null) {
             $today = new DateTimeImmutable('today');
@@ -296,12 +300,12 @@ class Animal
         return $this;
     }
 
-    public function getArrivalDate(): ?\DateTime
+    public function getArrivalDate(): ?DateTime
     {
         return $this->arrivalDate;
     }
 
-    public function setArrivalDate(\DateTime $arrivalDate): static
+    public function setArrivalDate(DateTime $arrivalDate): static
     {
         if ($arrivalDate !== null) {
             $today = new DateTimeImmutable('today');
@@ -317,22 +321,17 @@ class Animal
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    // ---- Mise à jour de la date de modification
-    private function updateTimestamp(): void
-    {
-        $this->updatedAt = new DateTimeImmutable();
-    }
 
     /**
      * @return Collection<int, Picture>

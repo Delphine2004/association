@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use App\Enum\UserRole;
-
 use App\Utils\RegexPatterns;
+use App\Repository\UserRepository;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -14,10 +14,12 @@ use DateTimeImmutable;
 
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\DBAL\Types\Types;
 
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -31,16 +33,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
-    #[ORM\Column(type: 'string', length: 50, enumType: UserRole::class)]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: UserRole::class)]
     private ?UserRole $role = null;
 
-    #[ORM\Column(type: 'datetime_immutable')]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(type: 'datetime_immutable')]
-    private ?\DateTimeImmutable $updatedAt = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $updatedAt = null;
 
-    private bool $isFromDatabase = false;
 
     /**
      * @var Collection<int, Candidature>
@@ -54,15 +55,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Animal::class, mappedBy: 'user')]
     private Collection $animals;
 
+    #[ORM\PrePersist]
+    public function onPrePersist(): void
+    {
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate(): void
+    {
+        $this->updatedAt = new DateTimeImmutable();
+    }
+
     public function __construct()
     {
-        if ($this->createdAt === null) {
-            $this->createdAt = new \DateTimeImmutable();
-        }
-
-        if ($this->updatedAt === null) {
-            $this->updatedAt =  new \DateTimeImmutable();
-        }
         $this->candidatures = new ArrayCollection();
         $this->animals = new ArrayCollection();
     }
@@ -99,7 +106,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->email = null;
         }
 
-        $this->updateTimestamp();
         return $this;
     }
 
@@ -124,7 +130,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->password = $passwordToStore;
-        $this->updateTimestamp();
+
         return $this;
     }
 
@@ -151,17 +157,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRole(UserRole $role): static
     {
         $this->role = $role;
-        $this->updateTimestamp();
+
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
     }
@@ -182,12 +188,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         };
     }
 
-    // ---- Mise à jour de la date de modification
-
-    protected function updateTimestamp(): void
-    {
-        $this->updatedAt = new DateTimeImmutable();
-    }
 
     /**
      * @return Collection<int, Candidature>

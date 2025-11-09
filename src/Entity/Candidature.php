@@ -3,11 +3,16 @@
 namespace App\Entity;
 
 use App\Enum\CandidatureStatus;
-use App\Repository\CandidatureRepository;
 use App\Utils\RegexPatterns;
+use App\Repository\CandidatureRepository;
+
+use DateTimeImmutable;
+
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
 
 #[ORM\Entity(repositoryClass: CandidatureRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Candidature
 {
     #[ORM\Id]
@@ -15,7 +20,7 @@ class Candidature
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 20, enumType: CandidatureStatus::class)]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: CandidatureStatus::class)]
     private ?CandidatureStatus $candidatureStatus = null;
 
     #[ORM\Column(length: 50)]
@@ -30,11 +35,11 @@ class Candidature
     #[ORM\Column(length: 20)]
     private ?string $phone = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $updatedAt = null;
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'candidatures')]
     private ?Animal $animal = null;
@@ -42,16 +47,19 @@ class Candidature
     #[ORM\ManyToOne(inversedBy: 'candidatures')]
     private ?User $user = null;
 
-    public function __construct()
+    #[ORM\PrePersist]
+    public function onPrePersist(): void
     {
-        if ($this->createdAt === null) {
-            $this->createdAt = new \DateTimeImmutable();
-        }
-
-        if ($this->updatedAt === null) {
-            $this->updatedAt =  new \DateTimeImmutable();
-        }
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
     }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate(): void
+    {
+        $this->updatedAt = new DateTimeImmutable();
+    }
+
 
     public function getId(): ?int
     {
@@ -164,12 +172,12 @@ class Candidature
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
     }
