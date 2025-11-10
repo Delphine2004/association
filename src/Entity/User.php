@@ -43,18 +43,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?DateTimeImmutable $updatedAt = null;
 
 
-    /**
-     * @var Collection<int, Candidature>
-     */
-    #[ORM\OneToMany(targetEntity: Candidature::class, mappedBy: 'user')]
-    private Collection $candidatures;
-
-    /**
-     * @var Collection<int, Animal>
-     */
-    #[ORM\OneToMany(targetEntity: Animal::class, mappedBy: 'user')]
-    private Collection $animals;
-
     #[ORM\PrePersist]
     public function onPrePersist(): void
     {
@@ -68,11 +56,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->updatedAt = new DateTimeImmutable();
     }
 
-    public function __construct()
-    {
-        $this->candidatures = new ArrayCollection();
-        $this->animals = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -183,66 +166,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
             throw new InvalidArgumentException('Le mot de passe doit contenir au minimun une minuscule, une majuscule, un chiffre, un caractère spécial et contenir 12 caractéres au total.');
         };
-    }
-
-
-    /**
-     * @return Collection<int, Candidature>
-     */
-    public function getCandidatures(): Collection
-    {
-        return $this->candidatures;
-    }
-
-    public function addCandidature(Candidature $candidature): static
-    {
-        if (!$this->candidatures->contains($candidature)) {
-            $this->candidatures->add($candidature);
-            $candidature->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCandidature(Candidature $candidature): static
-    {
-        if ($this->candidatures->removeElement($candidature)) {
-            // set the owning side to null (unless already changed)
-            if ($candidature->getUser() === $this) {
-                $candidature->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Animal>
-     */
-    public function getAnimals(): Collection
-    {
-        return $this->animals;
-    }
-
-    public function addAnimal(Animal $animal): static
-    {
-        if (!$this->animals->contains($animal)) {
-            $this->animals->add($animal);
-            $animal->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAnimal(Animal $animal): static
-    {
-        if ($this->animals->removeElement($animal)) {
-            // set the owning side to null (unless already changed)
-            if ($animal->getUser() === $this) {
-                $animal->setUser(null);
-            }
-        }
-
-        return $this;
     }
 }

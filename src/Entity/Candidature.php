@@ -21,7 +21,7 @@ class Candidature
     private ?int $id = null;
 
     #[ORM\Column(type: Types::STRING, length: 50, enumType: CandidatureStatus::class)]
-    private ?CandidatureStatus $candidatureStatus = null;
+    private ?CandidatureStatus $status = null;
 
     #[ORM\Column(length: 50)]
     private ?string $firstName = null;
@@ -44,8 +44,6 @@ class Candidature
     #[ORM\ManyToOne(inversedBy: 'candidatures')]
     private ?Animal $animal = null;
 
-    #[ORM\ManyToOne(inversedBy: 'candidatures')]
-    private ?User $user = null;
 
     #[ORM\PrePersist]
     public function onPrePersist(): void
@@ -66,14 +64,14 @@ class Candidature
         return $this->id;
     }
 
-    public function getCandidatureStatus(): ?CandidatureStatus
+    public function getStatus(): ?CandidatureStatus
     {
-        return $this->candidatureStatus;
+        return $this->status;
     }
 
-    public function setCandidatureStatus(CandidatureStatus $candidatureStatus): static
+    public function setStatus(CandidatureStatus $status): static
     {
-        $this->candidatureStatus = $candidatureStatus;
+        $this->status = $status;
 
         return $this;
     }
@@ -190,18 +188,6 @@ class Candidature
     public function setAnimal(?Animal $animal): static
     {
         $this->animal = $animal;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
 
         return $this;
     }

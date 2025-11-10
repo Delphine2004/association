@@ -45,7 +45,7 @@ class Animal
     private ?AnimalGender $gender = null;
 
     #[ORM\Column(type: Types::STRING, length: 50, enumType: AdoptionStatus::class)]
-    private ?AdoptionStatus $adoptionStatus = null;
+    private ?AdoptionStatus $status = null;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $vaccinated = false;
@@ -95,8 +95,6 @@ class Animal
     #[ORM\OneToMany(targetEntity: Candidature::class, mappedBy: 'animal')]
     private Collection $candidatures;
 
-    #[ORM\ManyToOne(inversedBy: 'animals')]
-    private ?User $user = null;
 
     #[ORM\PrePersist]
     public function onPrePersist(): void
@@ -199,14 +197,14 @@ class Animal
         return $this;
     }
 
-    public function getAdoptionStatus(): ?AdoptionStatus
+    public function getStatus(): ?AdoptionStatus
     {
-        return $this->adoptionStatus;
+        return $this->status;
     }
 
-    public function setAdoptionStatus(AdoptionStatus $adoptionStatus): static
+    public function setStatus(AdoptionStatus $status): static
     {
-        $this->adoptionStatus = $adoptionStatus;
+        $this->status = $status;
 
         return $this;
     }
@@ -413,18 +411,6 @@ class Animal
                 $candidature->setAnimal(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): static
-    {
-        $this->user = $user;
 
         return $this;
     }
