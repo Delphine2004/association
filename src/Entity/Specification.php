@@ -22,10 +22,10 @@ class Specification
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $specificationName = null;
+    private ?string $name = null;
 
     #[ORM\Column(type: Types::STRING, length: 50, enumType: SpecificationCategory::class, nullable: true)]
-    private ?SpecificationCategory $specificationCategory = null;
+    private ?SpecificationCategory $category = null;
 
     /**
      * @var Collection<int, Animal>
@@ -43,42 +43,41 @@ class Specification
         return $this->id;
     }
 
-    public function getSpecificationName(): ?string
+    public function getName(): ?string
     {
-        return $this->specificationName;
+        return $this->name;
     }
 
-    public function setSpecificationName(string $specificationName): static
+    public function setName(string $name): static
     {
-        if ($specificationName !== null) {
-            $specificationName = trim($specificationName);
+        $name = trim($name);
 
-            if (empty($specificationName)) {
-                throw new InvalidArgumentException("Le nom est obligatoire.");
-            }
-
-            if (!preg_match(RegexPatterns::ONLY_TEXTE_REGEX, $specificationName)) {
-                throw new InvalidArgumentException("Le nom doit être compris entre 1 et 60 caractères autorisés.");
-            }
-            $this->specificationName = ucfirst($specificationName);
+        if (empty($name)) {
+            throw new InvalidArgumentException("Le nom est obligatoire.");
         }
+
+        if (!preg_match(RegexPatterns::ONLY_TEXTE_REGEX, $name)) {
+            throw new InvalidArgumentException("Le nom doit être compris entre 1 et 60 caractères autorisés.");
+        }
+        $this->name = ucfirst($name);
+
 
         return $this;
     }
 
-    public function getSpecificationCategory(): ?SpecificationCategory
+    public function getCategory(): ?SpecificationCategory
     {
-        return $this->specificationCategory;
+        return $this->category;
     }
 
-    public function getSpecificationCategoryValue(): ?string
+    public function getCategoryValue(): ?string
     {
-        return $this->specificationCategory?->value;
+        return $this->category?->value;
     }
 
-    public function setSpecificationCategory(?SpecificationCategory $specificationCategory): static
+    public function setCategory(?SpecificationCategory $category): static
     {
-        $this->specificationCategory = $specificationCategory;
+        $this->category = $category;
 
         return $this;
     }
