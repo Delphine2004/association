@@ -1,4 +1,11 @@
 @use "utils/fonts";
 @use "utils/colors";
+@use "utils/variables";
 @use "base/reset";
 @use "base/base";
+@use "layout/header";
+@use "layout/footer";
+@use "component/button";
+@use "component/card";
+@use "component/form";
+@use "pages/home";

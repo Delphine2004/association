@@ -1,0 +1,44 @@
+@use "../utils/fonts";
+@use "../utils/variables";
+
+.navbar {
+    // Utiliser la variable SCSS pour la hauteur
+    min-height: variables.$header-height-desktop;
+
+    // Centrer verticalement le contenu (par défaut)
+    .container {
+        // Aligner les éléments dans le container
+        align-items: center;
+    }
+
+    // Ajustement de la hauteur et de l'alignement pour l'élément de marque
+    .navbar-brand {
+        padding-top: 0; // Annuler le pt-2 de la nav si vous voulez un alignement parfait
+        padding-bottom: 0;
+
+        span {
+            font-size: 1.25rem; // Taille du texte à côté du logo
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+    }
+
+    .navbar-brand .logo {
+        // Utilisation de la variable SCSS
+        height: variables.$logo-max-size;
+        width: auto; // Garder le ratio
+        max-width: 100%;
+    }
+
+    // Réduire la hauteur du header sur les petits écrans (Mobile First)
+    @media (max-width: 991.98px) {
+        // 991.98px est le breakpoint lg de Bootstrap
+        .navbar {
+            min-height: variables.$header-height-mobile;
+        }
+        .navbar-brand .logo {
+            // Le logo est aussi plus petit sur mobile
+            height: variables.$logo-max-size * 0.8; // 80% de la taille desktop, par exemple
+        }
+    }
+}

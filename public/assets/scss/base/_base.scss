@@ -1,9 +1,11 @@
 @use "../utils/fonts";
 @use "../utils/colors";
+@use "../utils/variables";
 
 body {
     font-family: fonts.$font-secondary;
     font-size: fonts.$font-size-base;
+    line-height: 1.4;
 }
 
 h1,
@@ -11,4 +13,9 @@ h2,
 h3 {
     font-family: fonts.$font-primary;
     font-size: fonts.$font-size-lg;
+}
+
+h2,
+h3 {
+    font-size: fonts.$font-size-md;
 }

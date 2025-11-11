@@ -4,3 +4,32 @@ $bs-darkgreen: #536102;
 $bs-green: #d6d9bf;
 $bs-brown: #734d3f;
 $bs-white: #f2eadf;
+
+body {
+    background-color: $bs-white;
+    color: $bs-brown;
+}
+
+.navbar,
+footer,
+.card-body {
+    background-color: $bs-pink;
+    color: $bs-brown;
+}
+
+#home,
+#adress,
+.filter {
+    background-color: $bs-lightPink;
+}
+
+.btn {
+    background-color: $bs-green;
+    border: $bs-brown solid 0.5px;
+    color: $bs-brown;
+}
+
+.btn:hover {
+    background-color: $bs-darkgreen;
+    color: $bs-green;
+}
