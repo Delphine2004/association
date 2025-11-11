@@ -1,0 +1,14 @@
+@use "../utils/fonts";
+@use "../utils/colors";
+
+body {
+    font-family: fonts.$font-secondary;
+    font-size: fonts.$font-size-base;
+}
+
+h1,
+h2,
+h3 {
+    font-family: fonts.$font-primary;
+    font-size: fonts.$font-size-lg;
+}
