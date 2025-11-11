@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Animal index{% endblock %}
+
+{% block body %}
+    <h1>Animal index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Race</th>
+                <th>Gender</th>
+                <th>Status</th>
+                <th>Vaccinated</th>
+                <th>Sterilized</th>
+                <th>Chipped</th>
+                <th>CompatibleKid</th>
+                <th>CompatibleCat</th>
+                <th>CompatibleDog</th>
+                <th>Birthday</th>
+                <th>ArrivalDate</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for animal in animals %}
+            <tr>
+                <td>{{ animal.id }}</td>
+                <td>{{ animal.name }}</td>
+                <td>{{ animal.description }}</td>
+                <td>{{ animal.type }}</td>
+                <td>{{ animal.race }}</td>
+                <td>{{ animal.gender }}</td>
+                <td>{{ animal.status }}</td>
+                <td>{{ animal.vaccinated ? 'Yes' : 'No' }}</td>
+                <td>{{ animal.sterilized ? 'Yes' : 'No' }}</td>
+                <td>{{ animal.chipped ? 'Yes' : 'No' }}</td>
+                <td>{{ animal.compatibleKid ? 'Yes' : 'No' }}</td>
+                <td>{{ animal.compatibleCat ? 'Yes' : 'No' }}</td>
+                <td>{{ animal.compatibleDog ? 'Yes' : 'No' }}</td>
+                <td>{{ animal.birthday ? animal.birthday|date('Y-m-d') : '' }}</td>
+                <td>{{ animal.arrivalDate ? animal.arrivalDate|date('Y-m-d') : '' }}</td>
+                <td>{{ animal.createdAt ? animal.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ animal.updatedAt ? animal.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_animal_show', {'id': animal.id}) }}">show</a>
+                    <a href="{{ path('app_animal_edit', {'id': animal.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="18">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_animal_new') }}">Create new</a>
+{% endblock %}
