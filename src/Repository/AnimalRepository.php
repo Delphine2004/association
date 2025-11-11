@@ -29,7 +29,7 @@ class AnimalRepository extends ServiceEntityRepository
             ->select('DISTINCT a', 'p', 's', 'c') // évite les doublons de ligne
             ->leftJoin('a.pictures', 'p')->addSelect('p') // left inclus l'animal même si pas de photo
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidature', 'c')->addSelect('s')
+            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
@@ -45,10 +45,10 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByType(AnimalType $type, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c') // évite les doublons de ligne
-            ->leftJoin('a.pictures', 'p')->addSelect('p') // left inclus l'animal même si pas de photo
+            ->select('DISTINCT a', 'p', 's', 'c')
+            ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidature', 'c')->addSelect('s')
+            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.type = :type')
             ->setParameter('type', $type->value)
             ->orderBy('a.id',  $orderBy)
@@ -62,10 +62,10 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByRace(AnimalRace $race, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c') // évite les doublons de ligne
-            ->leftJoin('a.pictures', 'p')->addSelect('p') // left inclus l'animal même si pas de photo
+            ->select('DISTINCT a', 'p', 's', 'c')
+            ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidature', 'c')->addSelect('s')
+            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.race = :race')
             ->setParameter('race', $race->value)
             ->orderBy('a.id',  $orderBy)
@@ -79,10 +79,10 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByGender(AnimalGender $gender, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c') // évite les doublons de ligne
-            ->leftJoin('a.pictures', 'p')->addSelect('p') // left inclus l'animal même si pas de photo
+            ->select('DISTINCT a', 'p', 's', 'c')
+            ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidature', 'c')->addSelect('s')
+            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.gender = :gender')
             ->setParameter('gender', $gender->value)
             ->orderBy('a.id',  $orderBy)
@@ -96,10 +96,10 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByAdoptionStatus(AdoptionStatus $status, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c') // évite les doublons de ligne
-            ->leftJoin('a.pictures', 'p')->addSelect('p') // left inclus l'animal même si pas de photo
+            ->select('DISTINCT a', 'p', 's', 'c')
+            ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidature', 'c')->addSelect('s')
+            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.status = :status')
             ->setParameter('status', $status->value)
             ->orderBy('a.id',  $orderBy)
@@ -113,10 +113,10 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByVaccination(bool $isVaccinated, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c') // évite les doublons de ligne
-            ->leftJoin('a.pictures', 'p')->addSelect('p') // left inclus l'animal même si pas de photo
+            ->select('DISTINCT a', 'p', 's', 'c')
+            ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidature', 'c')->addSelect('s')
+            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.vaccinated = :vaccinated')
             ->setParameter('vaccinated', $isVaccinated)
             ->orderBy('a.id',  $orderBy)
@@ -129,10 +129,10 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsBySterilization(bool $isSterilized, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c') // évite les doublons de ligne
-            ->leftJoin('a.pictures', 'p')->addSelect('p') // left inclus l'animal même si pas de photo
+            ->select('DISTINCT a', 'p', 's', 'c')
+            ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidature', 'c')->addSelect('s')
+            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.sterilized = :sterilized')
             ->setParameter('sterilized', $isSterilized)
             ->orderBy('a.id',  $orderBy)
@@ -145,10 +145,10 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByChipping(bool $isChipped, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c') // évite les doublons de ligne
-            ->leftJoin('a.pictures', 'p')->addSelect('p') // left inclus l'animal même si pas de photo
+            ->select('DISTINCT a', 'p', 's', 'c')
+            ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidature', 'c')->addSelect('s')
+            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.chipped = :chipped')
             ->setParameter('chipped', $isChipped)
             ->orderBy('a.id',  $orderBy)
@@ -162,10 +162,10 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsBySpecificationCategory(SpecificationCategory $category, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c') // évite les doublons de ligne
-            ->leftJoin('a.pictures', 'p')->addSelect('p') // left inclus l'animal même si pas de photo
+            ->select('DISTINCT a', 'p', 's', 'c')
+            ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidature', 'c')->addSelect('s')
+            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('s.category = :category')
             ->setParameter('category', $category->value)
             ->orderBy('a.id',  $orderBy)
@@ -173,5 +173,50 @@ class AnimalRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    // Par plusieurs critéres
+    public function findAnimalsByFilters(?array $criteria): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('DISTINCT a', 'p', 's', 'c')
+            ->leftJoin('a.pictures', 'p')->addSelect('p')
+            ->leftJoin('a.specifications', 's')->addSelect('s')
+            ->leftJoin('a.candidatures', 'c')->addSelect('c');
+
+        if (!$criteria) {
+            return $qb->getQuery()->getResult();
+        }
+
+        if (!empty($criteria['type'])) {
+            $qb->andWhere('a.type = :type')
+                ->setParameter('type', $criteria['type']->value);
+        }
+
+        if (!empty($criteria['race'])) {
+            $qb->andWhere('a.race = :race')
+                ->setParameter('race', $criteria['race']->value);
+        }
+
+        if (!empty($criteria['gender'])) {
+            $qb->andWhere('a.gender = :gender')
+                ->setParameter('gender', $criteria['gender']->value);
+        }
+
+        if (!empty($criteria['compatibleKid'])) {
+            $qb->andWhere('a.compatibleKid = true');
+        }
+
+        if (!empty($criteria['compatibleCat'])) {
+            $qb->andWhere('a.compatibleCat = true');
+        }
+
+        if (!empty($criteria['compatibleDog'])) {
+            $qb->andWhere('a.compatibleDog = true');
+        }
+
+        $qb->orderBy('a.arrivalDate', 'DESC');
+
+        return $qb->getQuery()->getResult();
     }
 }
