@@ -1,0 +1,156 @@
+/*  les couleurs avec le :root */
+:root,
+[data-bs-theme="light"] {
+    --bs-pink: #f2937e;
+    --bs-white: #f2eadf;
+    --bs-black: #333333;
+    --bs-lightPink: #f2b8a2;
+    --bs-brown: #734d3f;
+    --bs-green: #d6d9bf;
+    --bs-darkgreen: #536102;
+}
+
+/*Taille des polices*/
+.hero-title {
+    font-size: 2.75rem;
+}
+
+.hero-slogan {
+    font-size: 1.25rem;
+}
+
+/* Les couleurs et les polices */
+body {
+    font-family: Roboto, "Open Sans", sans-serif;
+    background-color: var(--bs-white);
+    color: var(--bs-brown);
+}
+
+h1,
+h2,
+h3 {
+    font-family: Quicksand, sans-serif;
+}
+
+.navbar,
+footer,
+.card-body {
+    background-color: var(--bs-pink);
+    color: var(--bs-brown);
+}
+
+#home,
+#adress {
+    background-color: var(--bs-lightPink);
+}
+
+/*Les couleurs des boutons*/
+.btn {
+    background-color: var(--bs-green);
+    border: var(--bs-brown) solid 0.5px;
+    color: var(--bs-brown);
+}
+
+.btn:hover {
+    background-color: var(--bs-darkgreen);
+    color: var(--bs-green);
+}
+
+/*-------*/
+
+.logo {
+    width: 50px;
+    height: auto;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*Hero - Images*/
+
+.imgHero {
+    width: 300px;
+}
+.imgHero img {
+    width: 100%;
+}
+
+/*Images*/
+.carousel-item img {
+    width: 200px;
+    height: 400px; /* tu peux ajuster cette hauteur */
+    object-fit: cover;
+}
+
+/*------*/
+/*Section hero*/
+
+/* Section home*/
+
+/* Section contact*/
+
+/*Section adoption*/
+.carousel-item img {
+    max-height: 500px; /* ou une hauteur que tu souhaites */
+    width: auto; /* pour que la largeur s’ajuste au ratio */
+    max-width: 100%; /* pour ne jamais dépasser la largeur du conteneur */
+    object-fit: cover; /* coupe si besoin pour bien remplir */
+    margin: 0 auto; /* centre horizontalement */
+    display: block;
+    border-radius: 0.5rem; /* optionnel : coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* optionnel */
+}
+
+/* section événements*/
+.card-square {
+    position: relative;
+    width: 100%; /* la carte prend toute la largeur de sa colonne */
+    aspect-ratio: 1 / 1; /* carte carrée (largeur = hauteur) */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.card-square img .card-img-top {
+    object-fit: cover;
+    height: 60%; /* laisse 60% pour l'image */
+    border-top-left-radius: 0.25rem; /* pour garder arrondi Bootstrap */
+    border-top-right-radius: 0.25rem;
+}
+
+.card-square .card-body {
+    flex-grow: 1;
+    padding: 0.75rem;
+    overflow: 0.75rem;
+}
+
+/* Page adoption */
+#adoption {
+    padding-top: 8rem;
+}
+
+@media (min-width: 768px) {
+    /* Taille police*/
+    .hero-title {
+        font-size: 2rem;
+    }
+    .hero-slogan {
+        font-size: 1rem;
+    }
+
+    .logo {
+        width: 70px;
+    }
+
+    .to-adopt,
+    .adopted {
+        max-width: 900px;
+    }
+
+    #carousel-to-adopt {
+        max-width: 600px;
+    }
+}

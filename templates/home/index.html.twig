@@ -29,14 +29,14 @@
             <!-- Bouton sur mobile -->
             <a
               class="btn w-100 d-md-none"
-              href="#"
+              href="{{ path('donation') }}"
               role="button"
               aria-label="Donner">Donner</a>
 
 
             <a
               class="btn w-100 d-md-none "
-              href="#"
+              href="{{ path('adoption') }}"
               role="button"
               aria-label="Adopter">Adopter</a>
 
@@ -44,14 +44,14 @@
             <!-- Bouton sur desktop -->
             <a
               class="btn px-4 d-none d-md-inline"
-              href="#"
+              href="{{ path('donation') }}"
               role="button"
               aria-label="Donner">Donner</a>
 
 
             <a
               class="btn px-4 d-none d-md-inline "
-              href="#"
+              href="{{ path('adoption') }}"
               role="button"
               aria-label="Adopter">Adopter</a>
           </div>
@@ -88,7 +88,7 @@
               Rejoignez l'aventure et faites partie de notre combat contre l'abandon et la maltraitance.
             </p>
             <div>
-              <a class="btn px-4" href="#" role="button">Nous rejoindre</a>
+              <a class="btn px-4" href="{{ path('contribution') }}" role="button">Nous rejoindre</a>
             </div>
 
           </div>
@@ -101,7 +101,7 @@
           </div>
         </div>
       </div>
-    </section>
+      </section>
 
 
     <!--Section adoption-->
@@ -109,7 +109,7 @@
       id="adoption"
       class="container text-center py-5">
       <!--Section à adopter-->
-      <div class="to-adopt mx-auto mb-5" style="max-width: 900px;">
+      <div class="to-adopt mx-auto mb-5">
         <!--Presentation-->
         <h2 class=" mb-4">Ils n'attendent que vous</h2>
         <p class=" mb-4">
@@ -122,9 +122,8 @@
         <div
           id="carousel-to-adopt"
           class="carousel slide mx-auto"
-          style="max-width: 600px"
           data-bs-ride="carousel"
-          data-bs-interval="5000">
+          data-bs-interval="5000"
           aria-label="Carrousel des animaux à adopter">
 
           <!--Les images du carousel-->
@@ -162,11 +161,11 @@
           </div>
         </div>
         <!-- Lien vers la page adoption -->
-        <a class="btn m-4 px-4" href="#" role="button" aria-label="Rechercher les animaux à adopter">Rechercher</a>
+        <a class="btn m-4 px-4" href="{{ path('adoption') }}" role="button" aria-label="Rechercher les animaux à adopter">Rechercher</a>
 
       </div>
       <!--Section adoptés-->
-      <div class="adopted mx-auto" style="max-width: 900px;">
+      <div class="adopted mx-auto">
         <!--Presentation-->
         <h2 class=" mb-4">Ils ont trouvé leur nouveau foyer</h2>
         <p class=" mb-4">
@@ -178,7 +177,6 @@
         <div
           id="carousel-adopted"
           class="carousel slide mx-auto"
-          style="max-width: 600px"
           data-bs-ride="carousel"
           data-bs-interval="5000">
 
@@ -223,23 +221,43 @@
     <!--Section événements-->
     <section
       id="event"
-      class="container align-items-center text-center py-5 ">
-      <!-- Présentation des événements -->
-      <div class="col-10 justify-content-center mx-auto py-5">
-        <h2 class="text-center mb-4">Les Evénements</h2>
-        <p class="text-center">
-          Découvrez nos prochains rendez-vous solidaires ! Journées portes
-          ouvertes, collectes de dons, séances d'adoption et ateliers de
-          sensibilisation - notre calendrier regorge d'occasions de vous
-          engager pour la cause animale. Rejoignez-nous pour ces moments de
-          partage où chaque participation contribue concrètement au bien-être
-          de nos protégés.
-        </p>
+        class="container text-center py-5 ">
+        <!-- Présentation des événements -->
+          <div class="col-10 mx-auto py-5">
+          <h2 class="mb-4">Les Evénements</h2>
+          <p>
+            Découvrez nos prochains rendez-vous solidaires ! Journées portes
+            ouvertes, collectes de dons, séances d'adoption et ateliers de
+            sensibilisation - notre calendrier regorge d'occasions de vous
+            engager pour la cause animale. Rejoignez-nous pour ces moments de
+            partage où chaque participation contribue concrètement au bien-être
+            de nos protégés.
+          </p>
+        </div>
+
+            <div class="row">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+          <div class="card">
+            <img src="{{ asset('assets/img/events/anniversaire.jpg') }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 mb-3 mb-sm-0">
+          <div class="card">
+            <img src="{{ asset('assets/img/events/anniversaire.jpg') }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+            </div>
+          </div>
+        </div>
       </div>
+
       <!-- Les cartes des événements -->
       <div class="row justify-content-center g-4 mx-auto py-5">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-          <div class="card" style="width: 10rem">
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="card card-square">
             <img
               src="{{ asset('assets/img/events/anniversaire.jpg') }}"
               class="card-img-top"
@@ -253,8 +271,8 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-          <div class="card" style="width: 10rem">
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="card card-square">
             <img
               src="{{ asset('assets/img/events/balade.jpg') }}"
               class="card-img-top"
@@ -268,8 +286,8 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-          <div class="card" style="width: 10rem">
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="card card-square">
             <img
               src="{{ asset('assets/img/events/jeux.jpg') }}"
               class="card-img-top"
@@ -283,8 +301,8 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-          <div class="card" style="width: 10rem">
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="card card-square">
             <img
               src="{{ asset('assets/img/events/noël.jpg') }}"
               class="card-img-top"
@@ -299,41 +317,34 @@
           </div>
         </div>
       </div>
+
       <!-- lien vers la page événements -->
-      <div class="row justify-content-center mx-auto py-5">
-        <a class="btn w-25" href="#" role="button">Plus d'événement</a>
-      </div>
+      
+        <a href="{{ path('event') }}" class="btn w-100 w-md-auto px-4" role="button">Plus d'événement</a>
+      
+      
       <!-- Newsletter -->
       <div class="row justify-content-center mx-auto py-5">
         <!-- présentation newsletter -->
-        <p class="text-center">
-          Restez informé de nos actions et sauvetages ! Inscrivez-vous à notre newsletter mensuelle pour ne manquer aucune actualité de nos protégés.
-        </p>
-        <!-- Inscription newsletter -->
-        <div class="container my-5">
-          <form class="row justify-content-center align-items-end g-3"
-            action="#"
-            method="post">
-
-            <div class="col-12 col-md-8">
-              <!-- Champ Email -->
-              <div>
-                <label for="newsletter_email" class="form-label"></label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="newsletter_email"
-                  aria-describedby="emailNewsletter"
-                  name="email"
-                  placeholder="exemple@mail.com"
-                  required />
-              </div>
-
-            <!-- Bouton -->
-            <div class="col-12 col-md-3 text-md-start text-center align-self-center">
-              <button type="submit" class="btn w-100">
-                S'inscrire
-              </button>
+        <div class="col-12 col-md-8">
+          <p>
+            Restez informé de nos actions et sauvetages ! Inscrivez-vous à notre newsletter mensuelle pour ne manquer aucune actualité de nos protégés.
+          </p>
+          <form class="row g-3 align-items-end" action="#" method="post" novalidate>
+            <div class="col-12 col-md-9">
+              <label for="newsletter_email" class="form-label visually-hidden">Adresse email</label>
+              <input
+                type="email"
+                id="newsletter_email"
+                name="email"
+                class="form-control"
+                placeholder="exemple@mail.com"
+                required
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div class="col-12 col-md-3">
+              <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
             </div>
           </form>
         </div>
@@ -370,7 +381,6 @@
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2648.7113213397724!2d2.6783482999999992!3d48.4044867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e5f30b363aa115%3A0x5f677a18dd01695f!2sParking%20Mont%20Aigu!5e0!3m2!1sfr!2sfr!4v1746388522468!5m2!1sfr!2sfr"
               width="100%"
               height="450"
-              style="border: 0"
               allowfullscreen=""
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
