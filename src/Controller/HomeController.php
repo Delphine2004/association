@@ -15,4 +15,36 @@ class HomeController extends AbstractController
             'message' => 'ajout Bootstrap OK !'
         ]);
     }
+
+    #[Route('/donation', name: 'donation')]
+    public function renderDonation(): Response
+    {
+        return $this->render('home/donation.html.twig', [
+            'message' => 'ajout Bootstrap OK !'
+        ]);
+    }
+
+    #[Route('/adoption', name: 'adoption')]
+    public function renderAdoption(): Response
+    {
+        return $this->render('home/adoption.html.twig', [
+            'message' => 'ajout Bootstrap OK !'
+        ]);
+    }
+
+    #[Route('/contribution', name: 'contribution')]
+    public function renderContribution(): Response
+    {
+        return $this->render('home/contribution.html.twig', [
+            'message' => 'ajout Bootstrap OK !'
+        ]);
+    }
+
+    #[Route('/event', name: 'event')]
+    public function renderEvent(): Response
+    {
+        return $this->render('home/event.html.twig', [
+            'message' => 'ajout Bootstrap OK !'
+        ]);
+    }
 }
