@@ -27,7 +27,7 @@ class CandidatureRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.status = :status')
-            ->setParameter('status', $status)
+            ->setParameter('status', $status->value)
             ->orderBy('c.id',  $orderBy)
             ->setMaxResults($limit)
             ->getQuery()
