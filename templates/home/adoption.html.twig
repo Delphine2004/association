@@ -38,34 +38,73 @@ Pattes{% endblock %} {% block body %}
 </section>
 
 <section class="adoption-search container-fluid">
-    <div>
-        <form id="filter-bar">
-            <div class="mb-3">
-                <label for="disabledSelect" class="form-label"
-                    >Disabled select menu</label
-                >
-                <select id="disabledSelect" class="form-select">
-                    <option>Disabled select</option>
-                </select>
+    <!-- Filtre -->
+    <div class="card p-4 shadow-sm mb-4">
+        <h5 class="mb-3">Filtrer les animaux</h5>
+
+        {{ form_start(searchForm, { method: "get" }) }}
+        <div class="row g-3">
+            <div class="col-md-3">
+                {{ form_row(searchForm.type) }}
             </div>
-            <div class="mb-3">
-                <label for="disabledSelect" class="form-label"
-                    >Disabled select menu</label
-                >
-                <select id="disabledSelect" class="form-select">
-                    <option>Disabled select</option>
-                </select>
+            <div class="col-md-3">
+                {{ form_row(searchForm.race) }}
             </div>
-            <div class="mb-3">
-                <label for="disabledSelect" class="form-label"
-                    >Disabled select menu</label
-                >
-                <select id="disabledSelect" class="form-select">
-                    <option>Disabled select</option>
-                </select>
+            <div class="col-md-3">
+                {{ form_row(searchForm.gender) }}
             </div>
-            <button type="submit" class="btn btn-primary">Rechercher</button>
-        </form>
+            <div class="col-md-3 d-flex align-items-end">
+                <button class="btn btn-primary w-100">Filtrer</button>
+            </div>
+        </div>
+
+        <div class="row g-3 mt-3">
+            <div class="col-md-4">
+                {{ form_row(searchForm.compatibleKid) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(searchForm.compatibleCat) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_row(searchForm.compatibleDog) }}
+            </div>
+        </div>
+        {{ form_end(searchForm) }}
+    </div>
+
+    <!-- Resultats -->
+    <div class="row">
+        {% if animals is empty %}
+        <div class="col-12">
+            <div class="alert alert-warning text-center">
+                Aucun animal ne correspond à votre recherche 😢
+            </div>
+        </div>
+        {% else %} {% for animal in animals %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                {% if animal.pictures|length > 0 %}
+                <img
+                    src="{{ asset('uploads/animals/' ~ animal.pictures[0].fileName) }}"
+                    class="card-img-top"
+                    alt="{{ animal.name }}"
+                />
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ animal.name }}</h5>
+                    <p class="mb-1">
+                        <strong>Type :</strong> {{ animal.type.value }}
+                    </p>
+                    <p class="mb-1">
+                        <strong>Race :</strong> {{ animal.race.value }}
+                    </p>
+                    <p class="mb-1">
+                        <strong>Genre :</strong> {{ animal.gender.value }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %} {% endif %}
     </div>
 </section>
 {% endblock %}
