@@ -4,38 +4,3 @@
 .imgHero img {
     width: 100%;
 }
-
-/*Images*/
-.carousel-item img {
-    width: 200px;
-    height: 400px; /* tu peux ajuster cette hauteur */
-    object-fit: cover;
-}
-
-/* section événements*/
-.card-square {
-    position: relative;
-    width: 100%; /* la carte prend toute la largeur de sa colonne */
-    aspect-ratio: 1 / 1; /* carte carrée (largeur = hauteur) */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.card-square img .card-img-top {
-    object-fit: cover;
-    height: 60%; /* laisse 60% pour l'image */
-    border-top-left-radius: 0.25rem; /* pour garder arrondi Bootstrap */
-    border-top-right-radius: 0.25rem;
-}
-
-.card-square .card-body {
-    flex-grow: 1;
-    padding: 0.75rem;
-    overflow: 0.75rem;
-}
-
-/* Page adoption */
-#adoption {
-    padding-top: 8rem;
-}

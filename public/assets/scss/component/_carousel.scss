@@ -1,0 +1,39 @@
+#carousel-to-adopt,
+#carousel-adopted,
+#carousel-event {
+    max-width: 800px; /* largeur max du carrousel */
+    margin: 0 auto;
+}
+
+#carousel-to-adopt .carousel-inner,
+#carousel-adopted .carousel-inner,
+#carousel-event .carousel-inner {
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+#carousel-to-adopt .carousel-item img,
+#carousel-adopted .carousel-item img,
+#carousel-event .carousel-item img {
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (min-width: 768px) {
+    #carousel-to-adopt .carousel-inner,
+    #carousel-adopted .carousel-inner,
+    #carousel-event .carousel-inner {
+        width: 60%;
+    }
+}
+
+@media (min-width: 1200px) {
+    #carousel-to-adopt .carousel-item img,
+    #carousel-adopted .carousel-item img,
+    #carousel-event .carousel-item img {
+        height: 750px;
+    }
+}
