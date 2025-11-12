@@ -29,6 +29,9 @@ class AnimalSearchType extends AbstractType
                 'placeholder' => 'Choisir un type', // Première option vide
                 'label' => 'Type',
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-select', // class bootstrap
+                ],
             ])
             ->add('race', EnumType::class, [
                 'class' => AnimalRace::class,
@@ -36,6 +39,9 @@ class AnimalSearchType extends AbstractType
                 'placeholder' => 'Choisir une race', // Première option vide
                 'label' => 'Race',
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-select',
+                ],
             ])
             ->add('gender', EnumType::class, [
                 'class' => AnimalGender::class,
@@ -43,18 +49,30 @@ class AnimalSearchType extends AbstractType
                 'placeholder' => 'Choisir un genre', // Première option vide
                 'label' => 'Genre',
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-select',
+                ],
             ])
             ->add('compatibleKid', CheckboxType::class, [
                 'label' => 'Compatible Enfants',
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-check-input',
+    ],
             ])
             ->add('compatibleCat', CheckboxType::class, [
                 'label' => 'Compatible Chats',
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-check-input',
+    ],
             ])
             ->add('compatibleDog', CheckboxType::class, [
                 'label' => 'Compatible Chiens',
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-check-input',
+    ],
             ])
         ;
     }
