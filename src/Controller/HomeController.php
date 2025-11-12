@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Repository\AnimalRepository;
+use App\Form\AnimalSearchType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -25,10 +29,21 @@ class HomeController extends AbstractController
     }
 
     #[Route('/adoption', name: 'adoption')]
-    public function renderAdoption(): Response
+    public function renderAdoption(Request $request, AnimalRepository $animalRepository): Response
     {
+        // Création du formulaire
+        $form = $this->createForm(AnimalSearchType::class);
+        $form->handleRequest($request);
+
+        // Données du formulaire
+        $criteria = $form->getData();
+
+        // Récupération des animaux filtrés
+        $animals = $animalRepository->findAnimalsByFilters($criteria);
+
         return $this->render('home/adoption.html.twig', [
-            'message' => 'ajout Bootstrap OK !'
+            'searchForm' => $form->createView(),
+            'animals' => $animals,
         ]);
     }
 
