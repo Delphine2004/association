@@ -26,10 +26,9 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalById(int $id): ?Animal
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c') // évite les doublons de ligne
+            ->select('DISTINCT a', 'p', 's') // évite les doublons de ligne
             ->leftJoin('a.pictures', 'p')->addSelect('p') // left inclus l'animal même si pas de photo
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
@@ -45,10 +44,9 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByType(AnimalType $type, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c')
+            ->select('DISTINCT a', 'p', 's')
             ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.type = :type')
             ->setParameter('type', $type->value)
             ->orderBy('a.id',  $orderBy)
@@ -62,10 +60,9 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByRace(AnimalRace $race, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c')
+            ->select('DISTINCT a', 'p', 's')
             ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.race = :race')
             ->setParameter('race', $race->value)
             ->orderBy('a.id',  $orderBy)
@@ -79,10 +76,9 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByGender(AnimalGender $gender, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c')
+            ->select('DISTINCT a', 'p', 's')
             ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.gender = :gender')
             ->setParameter('gender', $gender->value)
             ->orderBy('a.id',  $orderBy)
@@ -96,10 +92,9 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByAdoptionStatus(AdoptionStatus $status, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c')
+            ->select('DISTINCT a', 'p', 's')
             ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.status = :status')
             ->setParameter('status', $status->value)
             ->orderBy('a.id',  $orderBy)
@@ -113,10 +108,9 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByVaccination(bool $isVaccinated, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c')
+            ->select('DISTINCT a', 'p', 's')
             ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.vaccinated = :vaccinated')
             ->setParameter('vaccinated', $isVaccinated)
             ->orderBy('a.id',  $orderBy)
@@ -129,10 +123,9 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsBySterilization(bool $isSterilized, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c')
+            ->select('DISTINCT a', 'p', 's')
             ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.sterilized = :sterilized')
             ->setParameter('sterilized', $isSterilized)
             ->orderBy('a.id',  $orderBy)
@@ -145,10 +138,9 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByChipping(bool $isChipped, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c')
+            ->select('DISTINCT a', 'p', 's')
             ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('a.chipped = :chipped')
             ->setParameter('chipped', $isChipped)
             ->orderBy('a.id',  $orderBy)
@@ -162,10 +154,9 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsBySpecificationCategory(SpecificationCategory $category, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c')
+            ->select('DISTINCT a', 'p', 's')
             ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidatures',  'c')->addSelect('c')
             ->andWhere('s.category = :category')
             ->setParameter('category', $category->value)
             ->orderBy('a.id',  $orderBy)
@@ -179,10 +170,9 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByFilters(?array $criteria): array
     {
         $qb = $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p', 's', 'c')
+            ->select('DISTINCT a', 'p', 's')
             ->leftJoin('a.pictures', 'p')->addSelect('p')
-            ->leftJoin('a.specifications', 's')->addSelect('s')
-            ->leftJoin('a.candidatures', 'c')->addSelect('c');
+            ->leftJoin('a.specifications', 's')->addSelect('s');
 
         if (!$criteria) {
             return $qb->getQuery()->getResult();
