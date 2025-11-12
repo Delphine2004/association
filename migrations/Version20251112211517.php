@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20251112104103 extends AbstractMigration
+final class Version20251112211517 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -22,13 +22,11 @@ final class Version20251112104103 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE animal (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(50) NOT NULL, description VARCHAR(255) NOT NULL, type VARCHAR(50) NOT NULL, race VARCHAR(50) NOT NULL, gender VARCHAR(50) NOT NULL, status VARCHAR(50) NOT NULL, vaccinated TINYINT(1) DEFAULT 0 NOT NULL, sterilized TINYINT(1) DEFAULT 0 NOT NULL, chipped TINYINT(1) DEFAULT 0 NOT NULL, compatible_kid TINYINT(1) DEFAULT 0 NOT NULL, compatible_cat TINYINT(1) DEFAULT 0 NOT NULL, compatible_dog TINYINT(1) DEFAULT 0 NOT NULL, birthday DATE DEFAULT NULL, arrival_date DATE NOT NULL, created_at DATETIME DEFAULT NULL COMMENT \'(DC2Type:datetime_immutable)\', updated_at DATETIME DEFAULT NULL COMMENT \'(DC2Type:datetime_immutable)\', PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE animal_specification (animal_id INT NOT NULL, specification_id INT NOT NULL, INDEX IDX_24E22BBF8E962C16 (animal_id), INDEX IDX_24E22BBF908E2FFE (specification_id), PRIMARY KEY(animal_id, specification_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE candidature (id INT AUTO_INCREMENT NOT NULL, animal_id INT DEFAULT NULL, status VARCHAR(50) NOT NULL, first_name VARCHAR(50) NOT NULL, last_name VARCHAR(50) NOT NULL, email VARCHAR(255) NOT NULL, phone VARCHAR(20) NOT NULL, created_at DATETIME DEFAULT NULL COMMENT \'(DC2Type:datetime_immutable)\', updated_at DATETIME DEFAULT NULL COMMENT \'(DC2Type:datetime_immutable)\', INDEX IDX_E33BD3B88E962C16 (animal_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE picture (id INT AUTO_INCREMENT NOT NULL, animal_id INT DEFAULT NULL, url VARCHAR(255) DEFAULT NULL, main TINYINT(1) DEFAULT 0 NOT NULL, created_at DATETIME DEFAULT NULL COMMENT \'(DC2Type:datetime_immutable)\', INDEX IDX_16DB4F898E962C16 (animal_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE specification (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(50) NOT NULL, category VARCHAR(50) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, role VARCHAR(50) NOT NULL, created_at DATETIME DEFAULT NULL COMMENT \'(DC2Type:datetime_immutable)\', updated_at DATETIME DEFAULT NULL COMMENT \'(DC2Type:datetime_immutable)\', UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE animal_specification ADD CONSTRAINT FK_24E22BBF8E962C16 FOREIGN KEY (animal_id) REFERENCES animal (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE animal_specification ADD CONSTRAINT FK_24E22BBF908E2FFE FOREIGN KEY (specification_id) REFERENCES specification (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE candidature ADD CONSTRAINT FK_E33BD3B88E962C16 FOREIGN KEY (animal_id) REFERENCES animal (id)');
         $this->addSql('ALTER TABLE picture ADD CONSTRAINT FK_16DB4F898E962C16 FOREIGN KEY (animal_id) REFERENCES animal (id)');
     }
 
@@ -37,11 +35,9 @@ final class Version20251112104103 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE animal_specification DROP FOREIGN KEY FK_24E22BBF8E962C16');
         $this->addSql('ALTER TABLE animal_specification DROP FOREIGN KEY FK_24E22BBF908E2FFE');
-        $this->addSql('ALTER TABLE candidature DROP FOREIGN KEY FK_E33BD3B88E962C16');
         $this->addSql('ALTER TABLE picture DROP FOREIGN KEY FK_16DB4F898E962C16');
         $this->addSql('DROP TABLE animal');
         $this->addSql('DROP TABLE animal_specification');
-        $this->addSql('DROP TABLE candidature');
         $this->addSql('DROP TABLE picture');
         $this->addSql('DROP TABLE specification');
         $this->addSql('DROP TABLE user');
