@@ -3,11 +3,7 @@
 namespace App\Entity;
 
 use App\Enum\UserRole;
-use App\Utils\RegexPatterns;
 use App\Repository\UserRepository;
-
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 
 use InvalidArgumentException;
 use DateTimeImmutable;
@@ -97,22 +93,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password, bool $isHashed = false): static
+    public function setPassword(string $password): static
     {
-        if ($password === null) {
-            $this->password = null;
-            return $this;
-        }
-
-        $passwordToStore = trim($password);
-
-
-        if (!$isHashed) {
-            $this->validatePassword($passwordToStore);
-            $passwordToStore = password_hash($passwordToStore, PASSWORD_DEFAULT);
-        }
-
-        $this->password = $passwordToStore;
+        $this->password = $password;
 
         return $this;
     }
@@ -157,14 +140,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     // ne pas supprimer car fait partie de UserInterface
     public function eraseCredentials(): void {}
-
-    private function validatePassword(string $password): void
-    {
-        $password = trim($password);
-
-        if (!preg_match(RegexPatterns::PASSWORD, $password)) {
-
-            throw new InvalidArgumentException('Le mot de passe doit contenir au minimun une minuscule, une majuscule, un chiffre, un caractère spécial et contenir 12 caractéres au total.');
-        };
-    }
 }
