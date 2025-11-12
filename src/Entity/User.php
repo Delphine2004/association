@@ -4,17 +4,20 @@ namespace App\Entity;
 
 use App\Enum\UserRole;
 use App\Repository\UserRepository;
+use App\Utils\RegexPatterns;
 
-use InvalidArgumentException;
 use DateTimeImmutable;
 
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'Cet email est déjà utilisé.')]
 #[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -23,12 +26,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: "Ce champ est obligatoire.")]
+    #[Assert\Email(message: "Email invalide")]
+    #[Assert\Length(max: 255, maxMessage: "L'email ne doit pas dépasser 255 caractères.")]
     #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
 
+    #[Assert\NotBlank(message: "Ce champ est obligatoire.")]
+    #[Assert\Length(
+        min: 8,
+        max: 50,
+        minMessage: "Le mot de passe doit contenir au moins {{ limit }} caractères.",
+        maxMessage: "Le mot de passe ne peut pas dépasser {{ limit }} caractères."
+    )]
+    #[Assert\PasswordStrength(minScore: Assert\PasswordStrength::STRENGTH_MEDIUM)]
+    #[Assert\Regex(
+        pattern: RegexPatterns::PASSWORD,
+        message: "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial."
+    )]
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
+    #[Assert\NotNull(message: "Veuillez sélectionner un rôle.")]
     #[ORM\Column(type: Types::STRING, length: 50, enumType: UserRole::class)]
     private ?UserRole $role = null;
 
@@ -70,20 +89,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setEmail(string $email): static
     {
-        if ($email !== null) {
-            $email = trim($email);
-
-            if (empty($email)) {
-                throw new InvalidArgumentException("L'email est obligatoire. ");
-            }
-
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                throw new InvalidArgumentException("L'email est invalide.");
-            }
-            $this->email = strtolower($email);
-        } else {
-            $this->email = null;
-        }
+        $this->email = $email;
 
         return $this;
     }
