@@ -6,7 +6,7 @@ use App\Repository\UserRepository;
 use App\Entity\User;
 use App\Enum\UserRole;
 
-use App\Form\UserType;
+use App\Form\UserAdminType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +36,7 @@ final class AdminController extends AbstractController
         UserPasswordHasherInterface $passwordHasher
     ): Response {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user, ['is_edit' => false]);
+        $form = $this->createForm(UserAdminType::class, $user, ['is_edit' => false]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -89,7 +89,7 @@ final class AdminController extends AbstractController
         EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher
     ): Response {
-        $form = $this->createForm(UserType::class, $user, ['is_edit' => true]);
+        $form = $this->createForm(UserAdminType::class, $user, ['is_edit' => true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
