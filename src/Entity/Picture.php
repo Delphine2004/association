@@ -6,8 +6,9 @@ use App\Repository\PictureRepository;
 
 use DateTimeImmutable;
 
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PictureRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -18,7 +19,10 @@ class Picture
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: "L'URL de l'image est obligatoire.")]
+    #[Assert\Length(max: 255, maxMessage: "L'URL ne doit pas dépasser 255 caractères.")]
+    #[Assert\Url(message: "L'URL '{{ value }}' n'est pas une URL valide.")]
+    #[ORM\Column(length: 255)]
     private ?string $url = null;
 
     #[ORM\Column(type: Types::BOOLEAN,  options: ['default' => false])]
@@ -27,6 +31,7 @@ class Picture
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $createdAt = null;
 
+    #[Assert\NotBlank(message: "L'image doit être associée à un animal.")]
     #[ORM\ManyToOne(inversedBy: 'pictures')]
     private ?Animal $animal = null;
 

@@ -10,15 +10,13 @@ use App\Utils\RegexPatterns;
 
 use App\Repository\AnimalRepository;
 
-use InvalidArgumentException;
 use DateTimeImmutable;
-use DateTime;
 
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
-
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -29,22 +27,32 @@ class Animal
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
+    #[Assert\Regex(RegexPatterns::ONLY_TEXTE_REGEX)]
+    #[Assert\Length(max: 50, maxMessage: "Le nom ne doit pas dépasser 50 caractères.")]
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
+    #[Assert\NotBlank(message: "La description est obligatoire.")]
+    #[Assert\Regex(RegexPatterns::FREE_TEXT_REGEX)]
+    #[Assert\Length(max: 255, maxMessage: "La description ne doit pas dépasser 255 caractères.")]
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalType::class)]
+    #[Assert\NotBlank(message: "Veuillez sélectionner un type.")]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalType::class, nullable: false)]
     private ?AnimalType $type = null;
 
-    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalRace::class)]
+    #[Assert\NotBlank(message: "Veuillez sélectionner une race.")]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalRace::class, nullable: false)]
     private ?AnimalRace $race = null;
 
-    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalGender::class)]
+    #[Assert\NotBlank(message: "Veuillez sélectionner un genre.")]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalGender::class, nullable: false)]
     private ?AnimalGender $gender = null;
 
-    #[ORM\Column(type: Types::STRING, length: 50, enumType: AdoptionStatus::class)]
+    #[Assert\NotNull(message: "Le statut d'adoption est obligatoire.")]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: AdoptionStatus::class, nullable: false)]
     private ?AdoptionStatus $status = null;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
@@ -65,11 +73,20 @@ class Animal
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $compatibleDog = false;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?DateTime $birthday = null;
+    #[Assert\Type('DateTime')] // Assurez-vous que c'est bien une date si elle est renseignée
+    #[Assert\LessThan('today', message: "La date de naissance ne peut pas être dans le futur.")]
+    #[Assert\LessThan(
+        propertyPath: 'arrivalDate',
+        message: "La date de naissance doit être antérieure à la date d'arrivée."
+    )]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    private ?DateTimeImmutable $birthday = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?DateTime $arrivalDate = null;
+    #[Assert\Type('DateTimeImmutable')]
+    #[Assert\NotBlank(message: "La date d'arrivée est obligatoire.")]
+    #[Assert\LessThan('today', message: "La date d'arrivée ne peut pas être dans le futur.")]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+    private ?DateTimeImmutable $arrivalDate = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $createdAt = null;
@@ -89,12 +106,6 @@ class Animal
     #[ORM\ManyToMany(targetEntity: Specification::class, inversedBy: 'animals')]
     private Collection $specifications;
 
-    /**
-     * @var Collection<int, Candidature>
-     */
-    #[ORM\OneToMany(targetEntity: Candidature::class, mappedBy: 'animal')]
-    private Collection $candidatures;
-
 
     #[ORM\PrePersist]
     public function onPrePersist(): void
@@ -113,7 +124,6 @@ class Animal
     {
         $this->pictures = new ArrayCollection();
         $this->specifications = new ArrayCollection();
-        $this->candidatures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,16 +139,7 @@ class Animal
     public function setName(string $name): static
     {
 
-        $name = trim($name);
-
-        if (empty($name)) {
-            throw new InvalidArgumentException("Le nom est obligatoire.");
-        }
-
-        if (!preg_match(RegexPatterns::ONLY_TEXTE_REGEX, $name)) {
-            throw new InvalidArgumentException("Le nom doit être compris entre 1 et 60 caractères autorisés.");
-        }
-        $this->name = strtoupper($name);
+        $this->name = ucfirst($name);
 
         return $this;
     }
@@ -150,11 +151,6 @@ class Animal
 
     public function setDescription(string $description): static
     {
-        $description = trim($description);
-
-        if (!preg_match(RegexPatterns::FREE_TEXT_REGEX, $description)) {
-            throw new InvalidArgumentException("La description peut contenir entre 2 et 255 caractères autorisés.");
-        }
 
         $this->description = ucfirst($description);
 
@@ -281,40 +277,26 @@ class Animal
         return $this;
     }
 
-    public function getBirthday(): ?DateTime
+    public function getBirthday(): ?DateTimeImmutable
     {
         return $this->birthday;
     }
 
-    public function setBirthday(?DateTime $birthday): static
+    public function setBirthday(?DateTimeImmutable $birthday): static
     {
-        if ($birthday !== null) {
-            $today = new DateTimeImmutable('today');
-            if ($birthday > $today) {
-                throw new InvalidArgumentException(" La date ne peut pas être dans le futur.");
-            }
-        }
+
         $this->birthday = $birthday;
         return $this;
     }
 
-    public function getArrivalDate(): ?DateTime
+    public function getArrivalDate(): ?DateTimeImmutable
     {
         return $this->arrivalDate;
     }
 
-    public function setArrivalDate(DateTime $arrivalDate): static
+    public function setArrivalDate(DateTimeImmutable $arrivalDate): static
     {
-        if ($arrivalDate !== null) {
-            $today = new DateTimeImmutable('today');
-            if ($arrivalDate > $today) {
-                throw new InvalidArgumentException(" La date ne peut pas être dans le futur.");
-            }
 
-            if ($this->birthday !== null && $arrivalDate < $this->birthday) {
-                throw new InvalidArgumentException("La date d'arrivée ne peut pas être antérieure à la date de naissance.");
-            }
-        }
         $this->arrivalDate = $arrivalDate;
         return $this;
     }
@@ -381,36 +363,6 @@ class Animal
     public function removeSpecification(Specification $specification): static
     {
         $this->specifications->removeElement($specification);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Candidature>
-     */
-    public function getCandidatures(): Collection
-    {
-        return $this->candidatures;
-    }
-
-    public function addCandidature(Candidature $candidature): static
-    {
-        if (!$this->candidatures->contains($candidature)) {
-            $this->candidatures->add($candidature);
-            $candidature->setAnimal($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCandidature(Candidature $candidature): static
-    {
-        if ($this->candidatures->removeElement($candidature)) {
-            // set the owning side to null (unless already changed)
-            if ($candidature->getAnimal() === $this) {
-                $candidature->setAnimal(null);
-            }
-        }
 
         return $this;
     }

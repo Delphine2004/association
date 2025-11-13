@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Enum\UserRole;
 use App\Repository\UserRepository;
-use App\Utils\RegexPatterns;
 
 use DateTimeImmutable;
 

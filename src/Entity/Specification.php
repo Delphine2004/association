@@ -4,14 +4,14 @@ namespace App\Entity;
 
 use App\Enum\SpecificationCategory;
 use App\Utils\RegexPatterns;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-
-use InvalidArgumentException;
 
 use App\Repository\SpecificationRepository;
-use Doctrine\ORM\Mapping as ORM;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SpecificationRepository::class)]
 class Specification
@@ -21,10 +21,14 @@ class Specification
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: "Le nom est obligatoire.")]
+    #[Assert\Regex(RegexPatterns::ONLY_TEXTE_REGEX)]
+    #[Assert\Length(max: 50, maxMessage: "Le nom ne doit pas dépasser 50 caractères.")]
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::STRING, length: 50, enumType: SpecificationCategory::class, nullable: true)]
+    #[Assert\NotBlank(message: "Veuillez sélectionner une catégorie.")]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: SpecificationCategory::class, nullable: false)]
     private ?SpecificationCategory $category = null;
 
     /**
@@ -50,17 +54,8 @@ class Specification
 
     public function setName(string $name): static
     {
-        $name = trim($name);
 
-        if (empty($name)) {
-            throw new InvalidArgumentException("Le nom est obligatoire.");
-        }
-
-        if (!preg_match(RegexPatterns::ONLY_TEXTE_REGEX, $name)) {
-            throw new InvalidArgumentException("Le nom doit être compris entre 1 et 60 caractères autorisés.");
-        }
         $this->name = ucfirst($name);
-
 
         return $this;
     }
