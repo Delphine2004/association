@@ -32,18 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
 
-    #[Assert\NotBlank(message: "Ce champ est obligatoire.")]
-    #[Assert\Length(
-        min: 8,
-        max: 50,
-        minMessage: "Le mot de passe doit contenir au moins {{ limit }} caractères.",
-        maxMessage: "Le mot de passe ne peut pas dépasser {{ limit }} caractères."
-    )]
-    #[Assert\PasswordStrength(minScore: Assert\PasswordStrength::STRENGTH_MEDIUM)]
-    #[Assert\Regex(
-        pattern: RegexPatterns::PASSWORD,
-        message: "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial."
-    )]
+    // Validation faite dans le type
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
@@ -119,6 +108,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = ($this->role) ? [$this->role->value] : [];
+
+        $roles[] = 'ROLE_USER'; // rôle requis par symfony
 
         return array_unique($roles);
     }
