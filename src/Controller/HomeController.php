@@ -47,15 +47,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/contribution', name: 'contribution')]
-    public function renderContribution(): Response
-    {
-        return $this->render('home/contribution.html.twig', [
-            'message' => 'ajout Bootstrap OK !'
-        ]);
-    }
-
-    #[Route('/event', name: 'event')]
+    #[Route('/evenements', name: 'events')]
     public function renderEvent(): Response
     {
         return $this->render('home/event.html.twig', [
