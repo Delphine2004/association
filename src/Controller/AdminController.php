@@ -29,14 +29,6 @@ final class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_show', methods: ['GET'])]
-    public function show(User $user): Response
-    {
-        return $this->render('admin/show.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
@@ -68,6 +60,14 @@ final class AdminController extends AbstractController
         // Que le formulaire soit invalide ou que le mdp soit vide, on revient ici pour afficher le formulaire
         return $this->render('admin/new.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_admin_show', methods: ['GET'])]
+    public function show(User $user): Response
+    {
+        return $this->render('admin/show.html.twig', [
+            'user' => $user,
         ]);
     }
 
