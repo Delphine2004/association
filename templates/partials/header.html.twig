@@ -77,10 +77,16 @@
                     connectés -->
                     {% if is_granted('ROLE_EMPLOYE')%}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Animaux</a>
+                        <a
+                            class="nav-link"
+                            href="{{ path('app_animal_index') }}"
+                            >Animaux</a
+                        >
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Evénements</a>
+                        <a class="nav-link" href="{{ path('app_event_index') }}"
+                            >Evénements</a
+                        >
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('user_dashboard') }}"
