@@ -17,9 +17,12 @@ class UserRepository extends ServiceEntityRepository
     }
 
 
-
-    public function findAllUsers(): array
+    public function findUsersWithoutRole(string $role): array
     {
-        return $this->findAll();
+        return $this->createQueryBuilder('u')
+            ->where('u.role != :role')
+            ->setParameter('role', $role)
+            ->getQuery()
+            ->getResult();
     }
 }
