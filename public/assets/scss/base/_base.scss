@@ -3,9 +3,23 @@
 @use "../utils/variables";
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: fonts.$font-secondary;
     font-size: fonts.$font-size-base;
     line-height: 1.4;
+}
+
+header,
+footer {
+    height: variables.$header-height-desktop;
+    height: variables.$footer-height-desktop;
+    flex-shrink: 0; /* Empêche le header/footer de rétrécir */
+}
+
+main {
+    flex-grow: 1; /* prend tout l'espace disponible */
 }
 
 h1,
