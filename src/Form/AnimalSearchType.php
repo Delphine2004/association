@@ -2,18 +2,13 @@
 
 namespace App\Form;
 
-use App\Entity\Animal;
-use App\Entity\Specification;
-
 use App\Enum\AnimalType;
 use App\Enum\AnimalRace;
 use App\Enum\AnimalGender;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,9 +20,9 @@ class AnimalSearchType extends AbstractType
         $builder
             ->add('type', EnumType::class, [
                 'class' => AnimalType::class,
+                'label' => 'Type',
                 'choice_label' => 'name', // Afficher le nom du type
                 'placeholder' => 'Choisir un type', // Première option vide
-                'label' => 'Type',
                 'required' => false,
                 'attr' => [
                     'class' => 'form-select', // class bootstrap
@@ -35,9 +30,10 @@ class AnimalSearchType extends AbstractType
             ])
             ->add('race', EnumType::class, [
                 'class' => AnimalRace::class,
+                'label' => 'Race',
                 'choice_label' => 'name', // Afficher le nom du type
                 'placeholder' => 'Choisir une race', // Première option vide
-                'label' => 'Race',
+
                 'required' => false,
                 'attr' => [
                     'class' => 'form-select',
@@ -45,9 +41,10 @@ class AnimalSearchType extends AbstractType
             ])
             ->add('gender', EnumType::class, [
                 'class' => AnimalGender::class,
+                'label' => 'Genre',
                 'choice_label' => 'name', // Afficher le nom du type
                 'placeholder' => 'Choisir un genre', // Première option vide
-                'label' => 'Genre',
+
                 'required' => false,
                 'attr' => [
                     'class' => 'form-select',
@@ -58,21 +55,21 @@ class AnimalSearchType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'class' => 'form-check-input',
-    ],
+                ],
             ])
             ->add('compatibleCat', CheckboxType::class, [
                 'label' => 'Compatible Chats',
                 'required' => false,
                 'attr' => [
                     'class' => 'form-check-input',
-    ],
+                ],
             ])
             ->add('compatibleDog', CheckboxType::class, [
                 'label' => 'Compatible Chiens',
                 'required' => false,
                 'attr' => [
                     'class' => 'form-check-input',
-    ],
+                ],
             ])
         ;
     }
@@ -80,7 +77,7 @@ class AnimalSearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Détacher le formulaire de l'entité Animal ***
+            // Détacher le formulaire de l'entité
             'data_class' => null,
             'method' => 'GET',
             'csrf_protection' => false,

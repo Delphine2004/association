@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Animal;
-use App\Entity\Specification;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -33,11 +32,6 @@ class AnimalType extends AbstractType
             ])
             ->add('updatedAt', null, [
                 'widget' => 'single_text',
-            ])
-            ->add('specifications', EntityType::class, [
-                'class' => Specification::class,
-                'choice_label' => 'id',
-                'multiple' => true,
             ])
         ;
     }
