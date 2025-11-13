@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Repository\UserRepository;
-use App\Form\UserSearchType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class AdminController extends AbstractController
 {
-    #[Route('/admin/dashboard', name: 'admin_dashboard')]
+    #[Route('/admin/dashboard', name: 'admin_dashboard', methods: ['GET'])]
     public function adminAccount(Request $request, UserRepository $userRepository): Response
     {
 
