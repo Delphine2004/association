@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+class UserAdminType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -55,11 +55,15 @@ class UserType extends AbstractType
                         'minScore' => Assert\PasswordStrength::STRENGTH_MEDIUM,
                     ]),
                 ],
-            ])
-            ->add('role', EnumType::class, [
+            ]);
+        if (!$options['is_edit']) {
+            $builder->add('role', EnumType::class, [
                 'class' => UserRole::class,
                 'label' => 'Rôle',
-                'choices' => UserRole::cases(), // Récupère toutes les valeurs de l'Enum (PHP 8.1+)
+                'choices' => array_filter(
+                    UserRole::cases(),
+                    fn(UserRole $role) => $role !== UserRole::ADMIN
+                ), // Récupère toutes les valeurs de l'Enum et filtre le rôle admin
                 'choice_label' => fn(UserRole $role) => $role->name, // Utilisez une fonction pour afficher le nom
                 'placeholder' => 'Choisir un rôle', // Première option vide
 
@@ -67,7 +71,8 @@ class UserType extends AbstractType
                 'attr' => [
                     'class' => 'form-select',
                 ],
-            ])
+            ]);
+        }
             /*
             ->add('passwordConfirm', PasswordType::class, [
                 'label' => 'Confirmer le mot de passe',
