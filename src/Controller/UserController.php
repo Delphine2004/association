@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\UserRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,38 +17,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 final class UserController extends AbstractController
 {
 
-    #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(
-        Request $request,
-        EntityManagerInterface $entityManager,
-        UserPasswordHasherInterface $passwordHasher
-    ): Response {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user, ['is_edit' => false]);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $plainPassword = $form->get('password')->getData();
-
-            if (empty($plainPassword)) {
-                $this->addFlash('error', 'Le mot de passe est obligatoire.');
-                // Ici, on *ne redirige pas* : on laisse tomber la suite et on réaffiche le formulaire
-            } else {
-                $hashedPassword = $passwordHasher->hashPassword($user, $plainPassword);
-                $user->setPassword($hashedPassword);
-
-                $entityManager->persist($user);
-                $entityManager->flush();
-
-                $this->addFlash('success', 'Utilisateur créé avec succès.');
-                return $this->redirectToRoute('admin_dashboard');
-            }
-        }
-
-        // Que le formulaire soit invalide ou que le mdp soit vide, on revient ici pour afficher le formulaire
-        return $this->render('user/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
+    #[Route('/dashboard', name: 'user_dashboard', methods: ['GET'])]
+    public function userAccount(): Response
+    {
+        return $this->render('user/index.html.twig', []);
     }
 
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
@@ -65,7 +38,7 @@ final class UserController extends AbstractController
         EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher
     ): Response {
-        $form = $this->createForm(UserType::class, $user, ['is_edit' => true]);
+        $form = $this->createForm(UserType::class, $user, []);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -80,23 +53,12 @@ final class UserController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Utilisateur modifié avec succès.');
-            return $this->redirectToRoute('admin_dashboard', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('user_dashboard', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
-    }
-
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('admin_dashboard', [], Response::HTTP_SEE_OTHER);
     }
 }

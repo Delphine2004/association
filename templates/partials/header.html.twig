@@ -83,15 +83,20 @@
                         <a class="nav-link" href="#">Evénements</a>
                     </li>
                     <li class="nav-item">
-                        <a
-                            class="nav-link"
-                            href="{{ path('employee_dashboard') }}"
+                        <a class="nav-link" href="{{ path('user_dashboard') }}"
                             >Tableau de bord</a
                         >
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mon compte</a>
+                        <a
+                            class="nav-link"
+                            href="{{
+                                path('app_user_show', { id: app.user.id })
+                            }}"
+                            >Mon compte</a
+                        >
                     </li>
+
                     {% endif %}
                     <!-- Liens visibles uniquement par les
                     utilisateurs connectés -->

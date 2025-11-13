@@ -1,0 +1,13 @@
+{{ form_start(form) }}
+
+<div class="mb-3">
+    {{ form_label(form.password) }}
+    {{ form_widget(form.password) }}
+    {{ form_errors(form.password) }}
+</div>
+
+<button class="btn btn-success">
+    {{ button_label|default('Enregistrer') }}
+</button>
+
+{{ form_end(form) }}
