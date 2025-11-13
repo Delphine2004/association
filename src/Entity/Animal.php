@@ -101,10 +101,10 @@ class Animal
     private Collection $pictures;
 
     /**
-     * @var Collection<int, Specification>
+     * @var Collection<int, User>
      */
-    #[ORM\ManyToMany(targetEntity: Specification::class, inversedBy: 'animals')]
-    private Collection $specifications;
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'animals')]
+    private Collection $users;
 
 
     #[ORM\PrePersist]
@@ -123,7 +123,7 @@ class Animal
     public function __construct()
     {
         $this->pictures = new ArrayCollection();
-        $this->specifications = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -344,25 +344,28 @@ class Animal
     }
 
     /**
-     * @return Collection<int, Specification>
+     * @return Collection<int, User>
      */
-    public function getSpecifications(): Collection
+    public function getUsers(): Collection
     {
-        return $this->specifications;
+        return $this->users;
     }
 
-    public function addSpecification(Specification $specification): static
+    public function addUser(User $user): static
     {
-        if (!$this->specifications->contains($specification)) {
-            $this->specifications->add($specification);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addAnimal($this);
         }
 
         return $this;
     }
 
-    public function removeSpecification(Specification $specification): static
+    public function removeUser(User $user): static
     {
-        $this->specifications->removeElement($specification);
+        if ($this->users->removeElement($user)) {
+            $user->removeAnimal($this);
+        }
 
         return $this;
     }
