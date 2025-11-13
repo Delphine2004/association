@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
-use App\Repository\UserRepository;
+
+use App\Repository\AnimalRepository;
+use App\Repository\EventRepository;
 use App\Entity\User;
+use App\Enum\AdoptionStatus;
 use App\Form\UserType;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,9 +21,19 @@ final class UserController extends AbstractController
 {
 
     #[Route('/dashboard', name: 'user_dashboard', methods: ['GET'])]
-    public function userAccount(): Response
+    public function userAccount(AnimalRepository $animalRepository, EventRepository $eventRepository): Response
     {
-        return $this->render('user/index.html.twig', []);
+
+        // Récupération des animaux à examiner
+        $animals = $animalRepository->findAnimalsByAdoptionStatus(AdoptionStatus::EN_SOIN);
+
+        // Récupération des évenements à venir
+        $events = $eventRepository->findFutureEvents();
+
+        return $this->render('user/index.html.twig', [
+            'animals' => $animals,
+            'events' => $events,
+        ]);
     }
 
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
