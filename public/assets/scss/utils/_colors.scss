@@ -12,14 +12,15 @@ body {
 
 .navbar,
 footer,
-.card-body {
+.card-header {
     background-color: $bs-pink;
     color: $bs-brown;
 }
 
 #home,
 #adress,
-.filter {
+.filter,
+.card-body {
     background-color: $bs-lightPink;
 }
 
