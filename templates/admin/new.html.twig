@@ -1,19 +1,17 @@
 {% extends 'base.html.twig' %} {% block title %}Espace Admin - Création
 utilisateur{% endblock %} {% block body %}
 <main class="pt-5">
-    <section id="adoption" class="container-fluid py-5">
-        <div class="container mx-auto">
-            <h1 class="text-center mb-4">Création d'un utilisateur</h1>
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-8">
-                    {{ include("admin/_form.html.twig") }}
-                </div>
+    <section id="admin-account" class="container-fluid py-5">
+        <div class="container">
+            <h1 class="text-center mb-5">Création d'un utilisateur</h1>
+
+            <div class="mx-auto form-add">
+                {{ include("admin/_form.html.twig") }}
             </div>
-        </div>
-        <div class="row justify-content-center mt-4">
-            <div class="col-auto">
+
+            <div class="text-center mt-5">
                 <a class="btn" href="{{ path('admin_dashboard') }}"
-                    >Revenir à la liste</a
+                    >Revenir au tableau de bord</a
                 >
             </div>
         </div>

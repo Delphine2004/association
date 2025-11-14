@@ -5,8 +5,8 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 use App\Entity\User;
 use App\Enum\UserRole;
-
 use App\Form\UserAdminType;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,7 +82,7 @@ final class AdminController extends AbstractController
         return $this->redirectToRoute('admin_dashboard', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_admin_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
         User $user,

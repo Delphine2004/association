@@ -1,62 +1,55 @@
 {% extends 'base.html.twig' %} {% block title %}Espace Admin{% endblock %} {%
 block body %}
 <main class="pt-5">
-    <section id="adoption" class="container-fluid py-5">
-        <div class="container mx-auto">
-            <h1 class="text-center mb-4">Gestion des utilisateurs</h1>
+    <section id="admin-account" class="container-fluid py-5">
+        <div class="container">
+            <h1 class="text-center mb-5">Gestion des utilisateurs</h1>
 
             <div class="row justify-content-center">
                 <div class="col-12 col-md-10 col-lg-8">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Rôle</th>
-                                <th scope="col">Date de Création</th>
-                                <th scope="col">Date de modification</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for user in users %}
-                            <tr>
-                                <th scope="row">{{ user.id }}</th>
-                                <td>{{ user.email }}</td>
-                                <td>{{ user.role.name }}</td>
-                                <td>
-                                    {{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}
-                                </td>
-                                <td>
-                                    {{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}
-                                </td>
-                                <td>
-                                    <a
-                                        class="btn"
-                                        href="{{
-                                            path('app_user_edit', {
-                                                id: user.id
-                                            })
-                                        }}"
-                                        >Modifier</a
-                                    >
-                                </td>
-                            </tr>
-                            {% else %}
-                            <tr>
-                                <td colspan="6">Aucun utilisateur trouvé.</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="row justify-content-center mt-4">
-                <div class="col-auto">
-                    <a class="btn" href="{{ path('app_user_new') }}"
-                        >Ajouter un utilisateur</a
-                    >
+                    <div class="table-responsive shadow-sm border rounded mb-5">
+                        <table class="table table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Rôle</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.role.name }}</td>
+                                    <td>
+                                        <a
+                                            class="btn"
+                                            href="{{
+                                                path('app_admin_show', {
+                                                    id: user.id
+                                                })
+                                            }}"
+                                            >Voir</a
+                                        >
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="3">
+                                        Aucun utilisateur trouvé.
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center mb-5">
+                        <a
+                            class="btn btn-large"
+                            href="{{ path('app_user_new') }}"
+                            >Ajouter un utilisateur</a
+                        >
+                    </div>
                 </div>
             </div>
         </div>
