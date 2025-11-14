@@ -11,8 +11,10 @@ use App\Utils\RegexPatterns;
 use App\Repository\AnimalRepository;
 
 use DateTimeImmutable;
+use DateTimeInterface;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -73,20 +75,17 @@ class Animal
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $compatibleDog = false;
 
-    #[Assert\Type('DateTime')] // Assurez-vous que c'est bien une date si elle est renseignée
-    #[Assert\LessThan('today', message: "La date de naissance ne peut pas être dans le futur.")]
-    #[Assert\LessThan(
-        propertyPath: 'arrivalDate',
-        message: "La date de naissance doit être antérieure à la date d'arrivée."
-    )]
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
-    private ?DateTimeImmutable $birthday = null;
+    #[Assert\Type('DateTimeInterface')]
+    #[Assert\LessThan('today UTC', message: "La date de naissance ne peut pas être dans le futur.")]
+    #[ORM\Column(type: 'date', nullable: true)]
+    private ?DateTimeInterface $birthday = null;
 
-    #[Assert\Type('DateTimeImmutable')]
+
     #[Assert\NotBlank(message: "La date d'arrivée est obligatoire.")]
-    #[Assert\LessThan('today', message: "La date d'arrivée ne peut pas être dans le futur.")]
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
-    private ?DateTimeImmutable $arrivalDate = null;
+    #[Assert\Type('DateTimeInterface')]
+    #[Assert\LessThan('today UTC', message: "La date d'arrivée ne peut pas être dans le futur.")]
+    #[ORM\Column(type: 'date')]
+    private ?DateTimeInterface $arrivalDate = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $createdAt = null;
@@ -97,7 +96,12 @@ class Animal
     /**
      * @var Collection<int, Picture>
      */
-    #[ORM\OneToMany(targetEntity: Picture::class, mappedBy: 'animal')]
+    #[ORM\OneToMany(
+        targetEntity: Picture::class,
+        mappedBy: 'animal',
+        cascade: ['persist', 'remove'],
+        orphanRemoval: true
+    )]
     private Collection $pictures;
 
     /**
@@ -277,24 +281,24 @@ class Animal
         return $this;
     }
 
-    public function getBirthday(): ?DateTimeImmutable
+    public function getBirthday(): ?DateTimeInterface
     {
         return $this->birthday;
     }
 
-    public function setBirthday(?DateTimeImmutable $birthday): static
+    public function setBirthday(?DateTimeInterface $birthday): static
     {
 
         $this->birthday = $birthday;
         return $this;
     }
 
-    public function getArrivalDate(): ?DateTimeImmutable
+    public function getArrivalDate(): ?DateTimeInterface
     {
         return $this->arrivalDate;
     }
 
-    public function setArrivalDate(DateTimeImmutable $arrivalDate): static
+    public function setArrivalDate(DateTimeInterface $arrivalDate): static
     {
 
         $this->arrivalDate = $arrivalDate;
@@ -310,6 +314,21 @@ class Animal
     public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
+    }
+
+
+    #[Assert\Callback]
+    public function validateBirthday(ExecutionContextInterface $context): void
+    {
+        if ($this->birthday === null || $this->arrivalDate === null) {
+            return;
+        }
+
+        if ($this->birthday >= $this->arrivalDate) {
+            $context->buildViolation("La date de naissance doit être antérieure à la date d'arrivée.")
+                ->atPath('birthday')
+                ->addViolation();
+        }
     }
 
 

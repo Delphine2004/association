@@ -7,6 +7,7 @@ use App\Utils\RegexPatterns;
 use App\Repository\EventRepository;
 
 use DateTimeImmutable;
+use DateTimeInterface; // uniquement la date
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -15,6 +16,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Event
 {
     #[ORM\Id]
@@ -25,11 +27,12 @@ class Event
     #[Assert\Type('DateTimeInterface')]
     #[Assert\NotBlank(message: "La date de l'événement est obligatoire.")]
     #[Assert\GreaterThanOrEqual('today', message: "La date de l'événement ne peut pas être dans le passé.")]
-    #[ORM\Column]
-    private ?DateTimeImmutable $date = null;
+    #[ORM\Column(type: 'date')]
+    private ?DateTimeInterface $date = null;
 
-    #[Assert\Regex(RegexPatterns::ONLY_TEXTE_REGEX)]
+
     #[Assert\NotBlank(message: "L'endroit de l'événement est obligatoire.")]
+    #[Assert\Regex(RegexPatterns::ONLY_TEXTE_REGEX)]
     #[Assert\Length(max: 100, maxMessage: "L'endroit ne doit pas dépasser 100 caractères.")]
     #[ORM\Column(length: 100)]
     private ?string $place = null;
@@ -76,12 +79,12 @@ class Event
         return $this->id;
     }
 
-    public function getDate(): ?DateTimeImmutable
+    public function getDate(): ?DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(DateTimeImmutable $date): static
+    public function setDate(DateTimeInterface $date): static
     {
         $this->date = $date;
 
