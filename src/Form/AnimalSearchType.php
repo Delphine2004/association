@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Enum\AnimalType;
+use App\Enum\AnimalCategory;
 use App\Enum\AnimalRace;
 use App\Enum\AnimalGender;
 
@@ -19,7 +19,7 @@ class AnimalSearchType extends AbstractType
     {
         $builder
             ->add('type', EnumType::class, [
-                'class' => AnimalType::class,
+                'class' => AnimalCategory::class,
                 'label' => 'Type',
                 'choice_label' => 'name', // Afficher le nom du type
                 'placeholder' => 'Choisir un type', // Première option vide

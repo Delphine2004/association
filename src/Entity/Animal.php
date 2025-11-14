@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Enum\AnimalType;
+use App\Enum\AnimalCategory;
 use App\Enum\AnimalRace;
 use App\Enum\AnimalGender;
 use App\Enum\AdoptionStatus;
@@ -40,8 +40,8 @@ class Animal
     private ?string $description = null;
 
     #[Assert\NotBlank(message: "Veuillez sélectionner un type.")]
-    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalType::class, nullable: false)]
-    private ?AnimalType $type = null;
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalCategory::class, nullable: false)]
+    private ?AnimalCategory $type = null;
 
     #[Assert\NotBlank(message: "Veuillez sélectionner une race.")]
     #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalRace::class, nullable: false)]
@@ -157,12 +157,12 @@ class Animal
         return $this;
     }
 
-    public function getType(): ?AnimalType
+    public function getType(): ?AnimalCategory
     {
         return $this->type;
     }
 
-    public function setType(AnimalType $type): static
+    public function setType(AnimalCategory $type): static
     {
         $this->type = $type;
 
