@@ -1,32 +1,4 @@
-body {
-  background-color: #f2eadf;
-  color: #734d3f;
-}
-
-.navbar,
-footer,
-.card-body {
-  background-color: #f2937e;
-  color: #734d3f;
-}
-
-#home,
-#adress,
-.filter {
-  background-color: #f2b8a2;
-}
-
-.btn {
-  background-color: #d6d9bf;
-  border: #734d3f solid 0.5px;
-  color: #734d3f;
-}
-
-.btn:hover {
-  background-color: #536102;
-  color: #d6d9bf;
-}
-
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -36,9 +8,25 @@ footer,
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: "Roboto", "Open Sans", sans-serif;
   font-size: 16px;
   line-height: 1.4;
+  background-color: #f2eadf;
+  color: #734d3f;
+}
+
+header,
+footer {
+  flex-shrink: 0; /* Empêche le header/footer de rétrécir */
+  background-color: #f2937e;
+  color: #734d3f;
+}
+
+main {
+  flex-grow: 1; /* prend tout l'espace disponible */
 }
 
 h1,
@@ -54,32 +42,62 @@ h3 {
 }
 
 .navbar {
-  min-height: 80px;
-}
-.navbar .container {
-  align-items: center;
-}
-.navbar .navbar-brand {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.navbar .navbar-brand span {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-left: 0.5rem;
+  min-height: 60px;
+  background-color: #f2937e;
+  color: #734d3f;
 }
 .navbar .navbar-brand .logo {
   height: 40px;
   width: auto;
   max-width: 100%;
 }
-@media (max-width: 991.98px) {
+@media (max-width: 992px) {
   .navbar .navbar {
-    min-height: 60px;
+    min-height: 55px;
   }
   .navbar .navbar-brand .logo {
     height: 32px;
   }
+}
+
+footer {
+  min-height: 310px;
+  background-color: #f2937e;
+  color: #734d3f;
+}
+@media (min-width: 768px) {
+  footer {
+    min-height: 190px;
+  }
+}
+
+.btn {
+  background-color: #d6d9bf;
+  border: #734d3f solid 0.5px;
+  color: #734d3f;
+}
+
+.btn:hover {
+  background-color: #536102;
+  color: #d6d9bf;
+}
+
+.card-header {
+  background-color: #f2937e;
+  color: #734d3f;
+}
+
+.card-body {
+  background-color: #f2b8a2;
+}
+
+#admin-account .form-edit,
+#admin-account .form-add {
+  max-width: 700px;
+}
+
+.filter {
+  background-color: #f2b8a2;
 }
 
 #carousel-to-adopt,
@@ -106,6 +124,10 @@ h3 {
   object-position: center;
 }
 
+#carousel-event .carousel-item img {
+  height: 250px;
+}
+
 @media (min-width: 768px) {
   #carousel-to-adopt .carousel-inner,
   #carousel-adopted .carousel-inner,
@@ -119,7 +141,15 @@ h3 {
   #carousel-event .carousel-item img {
     height: 750px;
   }
+  #carousel-event .carousel-item img {
+    height: 400px;
+  }
 }
+#home,
+#adress {
+  background-color: #f2b8a2;
+}
+
 .imgHero {
   width: 300px;
 }
