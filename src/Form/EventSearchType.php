@@ -2,11 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Event;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EventSearchType extends AbstractType
@@ -14,29 +15,28 @@ class EventSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date', null, [
+            ->add('id', IntegerType::class, [
+                'label' => 'N°',
+                'required' => false,
                 'widget' => 'single_text',
+                'html5' => true,
+                'attr' => ['class' => 'form-control',],
             ])
-            ->add('place')
-            ->add('description')
-            ->add('createdAt', null, [
+            ->add('date', DateType::class, [
+                'label' => 'Date de l\'événement',
+                'required' => false,
                 'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('users', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
-        ;
+
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Event::class,
+            // Détacher le formulaire de l'entité
+            'data_class' => null,
+            'method' => 'GET',
+            'csrf_protection' => false,
         ]);
     }
 }
