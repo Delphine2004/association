@@ -80,7 +80,7 @@ class AnimalSearchStaffType extends AbstractType
                 'placeholder' => 'JJ/MM/AAAA',
                 'required' => false,
                 'attr' => [
-                    'class' => 'form-select',
+                    'class' => 'form-control',
                 ],
             ])
         ;
@@ -89,7 +89,10 @@ class AnimalSearchStaffType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Animal::class,
+            // Détacher le formulaire de l'entité
+            'data_class' => null,
+            'method' => 'GET',
+            'csrf_protection' => false,
         ]);
     }
 }
