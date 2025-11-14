@@ -9,13 +9,15 @@ body {
     font-family: fonts.$font-secondary;
     font-size: fonts.$font-size-base;
     line-height: 1.4;
+    background-color: colors.$bs-white;
+    color: colors.$bs-brown;
 }
 
 header,
 footer {
-    height: variables.$header-height-desktop;
-    height: variables.$footer-height-desktop;
     flex-shrink: 0; /* Empêche le header/footer de rétrécir */
+    background-color: colors.$bs-pink;
+    color: colors.$bs-brown;
 }
 
 main {

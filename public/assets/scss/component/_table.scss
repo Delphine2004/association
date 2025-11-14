@@ -1,10 +1,6 @@
 @use "../utils/colors";
 
-.card-header {
+thead {
     background-color: colors.$bs-pink;
     color: colors.$bs-brown;
-}
-
-.card-body {
-    background-color: colors.$bs-lightPink;
 }
