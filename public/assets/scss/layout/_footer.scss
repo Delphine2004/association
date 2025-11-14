@@ -1,7 +1,9 @@
 @use "../utils/variables";
 
 footer {
-    .container {
+    min-height: variables.$footer-height-mobile;
+
+    @media (min-width: 768px) {
         min-height: variables.$footer-height-desktop;
     }
 }
