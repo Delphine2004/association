@@ -21,8 +21,7 @@ class EventType extends AbstractType
                 'label' => 'Date de l\'événement',
                 'required' => true,
                 'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => '01/06/2026'
+                    'class' => 'form-control'
                 ],
             ])
             ->add('place', TextType::class, [
