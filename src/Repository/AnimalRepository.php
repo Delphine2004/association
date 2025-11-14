@@ -4,9 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Animal;
 
-use App\Enum\AnimalType;
-use App\Enum\AnimalRace;
-use App\Enum\AnimalGender;
 use App\Enum\AdoptionStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
