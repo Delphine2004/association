@@ -1,59 +1,70 @@
-{% extends 'base.html.twig' %} {% block title %}Espace utilisateur - Information
-compte{% endblock %} {% block body %}
+{% extends 'base.html.twig' %} {% block title %}Espace utilisateur -
+Informations compte{% endblock %} {% block body %}
 
 <main class="pt-5">
-    <section id="adoption" class="container-fluid py-5">
-        <div class="container mx-auto">
+    <section id="admin-account" class="py-5">
+        <div class="container">
             <h1 class="text-center mb-4">Information du compte</h1>
-        </div>
 
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-10 col-lg-8">
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <th>Id</th>
-                            <td>{{ user.id }}</td>
-                        </tr>
-                        <tr>
-                            <th>Email</th>
-                            <td>{{ user.email }}</td>
-                        </tr>
-                        <tr>
-                            <th>Rôle</th>
-                            <td>{{ user.role.name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Date de Création</th>
-                            <td>
-                                {{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Date de modification</th>
-                            <td>
-                                {{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+            <div class="mx-auto" style="max-width: 700px">
+                <!-- Card utilisateur -->
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-body">
+                        <!-- Ligne : Id -->
+                        <div
+                            class="d-flex justify-content-between py-2 border-bottom"
+                        >
+                            <strong>Id</strong>
+                            <span>{{ user.id }}</span>
+                        </div>
 
-        <div class="row justify-content-center mt-4">
-            <div class="col-auto">
-                <a
-                    class="btn"
-                    href="{{ path('app_user_edit', { id: user.id }) }}"
-                    >Modifier</a
+                        <!-- Ligne : Email -->
+                        <div
+                            class="d-flex justify-content-between py-2 border-bottom"
+                        >
+                            <strong>Email</strong>
+                            <span>{{ user.email }}</span>
+                        </div>
+
+                        <!-- Ligne : Rôle -->
+                        <div
+                            class="d-flex justify-content-between py-2 border-bottom"
+                        >
+                            <strong>Rôle</strong>
+                            <span>{{ user.role.name }}</span>
+                        </div>
+
+                        <!-- Ligne : Date de création -->
+                        <div
+                            class="d-flex justify-content-between py-2 border-bottom"
+                        >
+                            <strong>Date de création</strong>
+                            <span>
+                                {{ user.createdAt ? user.createdAt|date('Y-m-d H:i') : '' }}
+                            </span>
+                        </div>
+
+                        <!-- Ligne : Dernière modification -->
+                        <div class="d-flex justify-content-between py-2">
+                            <strong>Dernière modification</strong>
+                            <span>
+                                {{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i') : '' }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div
+                    class="d-flex flex-column flex-sm-row gap-3 justify-content-center mb-4"
                 >
-            </div>
-        </div>
-        <div class="row justify-content-center mt-4">
-            <div class="col-auto">
-                <a class="btn" href="{{ path('user_dashboard') }}"
-                    >Revenir sur le tableau de bord</a
-                >
+                    <a
+                        class="btn flex-fill"
+                        href="{{ path('app_admin_edit', { id: user.id }) }}"
+                    >
+                        Modifier
+                    </a>
+                </div>
             </div>
         </div>
     </section>

@@ -2,108 +2,102 @@
 {% block body %}
 <main class="pt-5">
     <section id="user-account" class="container-fluid py-5">
-        <div class="container mx-auto">
-            <h1 class="text-center mb-4">Tableau de bord</h1>
-            <div class="row justify-content-center">
+        <div class="container">
+            <h1 class="text-center mb-5">Tableau de bord</h1>
+
+            <div class="row justify-content-center mb-5">
                 <div class="col-12 col-md-10 col-lg-8">
                     <h2 class="text-center mb-4">Animaux à examiner</h2>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Race</th>
-                                <th scope="col">Gender</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">ArrivalDate</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for animal in animals %}
-                            <tr>
-                                <td>{{ animal.name }}</td>
-                                <td>{{ animal.type }}</td>
-                                <td>{{ animal.race }}</td>
-                                <td>{{ animal.gender }}</td>
-                                <td>{{ animal.status }}</td>
-                                <td>
-                                    {{ animal.arrivalDate ? animal.arrivalDate|date('Y-m-d') : ''  }}
-                                </td>
-                                <td>
-                                    <a
-                                        class="btn"
-                                        href="{{
-                                            path('app_event_edit', {
-                                                id: event.id
-                                            })
-                                        }}"
-                                        >Modifier</a
+
+                    <div class="table-responsive shadow-sm border rounded">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for animal in animals %}
+                                <tr>
+                                    <td>{{ animal.name }}</td>
+                                    <td>{{ animal.type }}</td>
+                                    <td>
+                                        <a
+                                            class="btn btn-sm"
+                                            href="{{
+                                                path('app_animal_edit', {
+                                                    id: animal.id
+                                                })
+                                            }}"
+                                            >Modifier</a
+                                        >
+                                    </td>
+
+                                    {% else %}
+                                </tr>
+
+                                <tr>
+                                    <td
+                                        colspan="3"
+                                        class="text-center text-muted"
                                     >
-                                </td>
-
-                                {% else %}
-                            </tr>
-
-                            <tr>
-                                <td colspan="7">Aucun événements à venir.</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-auto">
-                    <a class="btn" href="{{ path('app_event_new') }}"
-                        >Ajouter un événements</a
-                    >
+                                        Aucun animal à examiner.
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
             <div class="row justify-content-center">
                 <div class="col-12 col-md-10 col-lg-8">
                     <h2 class="text-center mb-4">Evénement à venir</h2>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Date</th>
-                                <th scope="col">Lieu</th>
-                                <th scope="col">Date de Création</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for event in events %}
-                            <tr>
-                                <td>
-                                    {{ event.date ? event.date|date('Y-m-d H:i:s') : '' }}
-                                </td>
-                                <td>{{ event.place }}</td>
-                                <td>
-                                    {{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}
-                                </td>
-                                <td>
-                                    <a
-                                        class="btn"
-                                        href="{{
-                                            path('app_event_edit', {
-                                                id: event.id
-                                            })
-                                        }}"
-                                        >Modifier</a
+
+                    <div class="table-responsive shadow-sm border rounded">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Lieu</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for event in events %}
+                                <tr>
+                                    <td>
+                                        {{ event.date ? event.date|date('Y-m-d H:i:s') : '' }}
+                                    </td>
+                                    <td>{{ event.place }}</td>
+                                    <td>
+                                        <a
+                                            class="btn btn-sm"
+                                            href="{{
+                                                path('app_event_edit', {
+                                                    id: event.id
+                                                })
+                                            }}"
+                                            >Modifier</a
+                                        >
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td
+                                        colspan="3"
+                                        class="text-center text-muted"
                                     >
-                                </td>
-                            </tr>
-                            {% else %}
-                            <tr>
-                                <td colspan="4">Aucun événements à venir.</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-auto">
-                    <a class="btn" href="{{ path('app_event_new') }}"
-                        >Ajouter un événements</a
-                    >
+                                        Aucun événements à venir.
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
