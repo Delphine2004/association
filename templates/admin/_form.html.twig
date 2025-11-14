@@ -1,26 +1,26 @@
 {{ form_start(form) }}
 
-<div class="mb-3">
+<div class="mb-4">
     {{ form_label(form.email) }}
     {{ form_widget(form.email) }}
     {{ form_errors(form.email) }}
 </div>
 
-<div class="mb-3">
+<div class="mb-4">
     {{ form_label(form.password) }}
     {{ form_widget(form.password) }}
     {{ form_errors(form.password) }}
 </div>
 
 {% if form.role is defined %}
-<div class="mb-3">
+<div class="mb-4">
     {{ form_label(form.role) }}
     {{ form_widget(form.role) }}
     {{ form_errors(form.role) }}
 </div>
 {% endif %}
 
-<button class="btn btn-success">
+<button class="btn">
     {{ button_label|default('Enregistrer') }}
 </button>
 

@@ -1,4 +1,38 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="mb-4">
+    {{ form_label(form.name) }}
+    {{ form_widget(form.name) }}
+    {{ form_errors(form.name) }}
+</div>
+<div class="mb-4">
+    {{ form_label(form.type) }}
+    {{ form_widget(form.type) }}
+    {{ form_errors(form.type) }}
+</div>
+<div class="mb-4">
+    {{ form_label(form.race) }}
+    {{ form_widget(form.race) }}
+    {{ form_errors(form.race) }}
+</div>
+<div class="mb-4">
+    {{ form_label(form.gender) }}
+    {{ form_widget(form.gender) }}
+    {{ form_errors(form.gender) }}
+</div>
+<div class="mb-4">
+    {{ form_label(form.birthday) }}
+    {{ form_widget(form.birthday) }}
+    {{ form_errors(form.birthday) }}
+</div>
+<div class="mb-4">
+    {{ form_label(form.arrivalDate) }}
+    {{ form_widget(form.arrivalDate) }}
+    {{ form_errors(form.arrivalDate) }}
+</div>
+<div class="mb-4">
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description) }}
+    {{ form_errors(form.description) }}
+</div>
+<button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
