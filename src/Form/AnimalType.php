@@ -10,8 +10,7 @@ use App\Enum\AnimalGender;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -26,12 +25,12 @@ class AnimalType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom de l\'animal',
                 'required' => true,
-                'attr' => ['class' => 'form-select',],
+                'attr' => ['class' => 'form-control',],
             ])
             ->add('type', EnumType::class, [
                 'class' => AnimalCategory::class,
                 'label' => 'Type',
-                'choice_label' => 'name',
+                'choice_label' => fn(AnimalCategory $choice) =>  $choice->value,
                 'placeholder' => 'Choisir un type',
                 'required' => true,
                 'attr' => ['class' => 'form-select',],
@@ -39,7 +38,7 @@ class AnimalType extends AbstractType
             ->add('race', EnumType::class, [
                 'class' => AnimalRace::class,
                 'label' => 'Race',
-                'choice_label' => 'name',
+                'choice_label' => fn(AnimalRace $choice) => $choice->value,
                 'placeholder' => 'Choisir une race',
                 'required' => true,
                 'attr' => ['class' => 'form-select',],
@@ -47,12 +46,18 @@ class AnimalType extends AbstractType
             ->add('gender', EnumType::class, [
                 'class' => AnimalGender::class,
                 'label' => 'Genre',
-                'choice_label' => 'name',
+                'choice_label' => fn(AnimalGender $choice) => $choice->value,
                 'placeholder' => 'Choisir un genre',
                 'required' => true,
                 'attr' => ['class' => 'form-select',],
             ])
-            ->add('birthday', BirthdayType::class, [
+            ->add('picture', FileType::class, [
+                'label' => 'Photo',
+                'mapped' => false,
+                'required' => true,
+                'attr' => ['class' => 'form-control',],
+            ])
+            ->add('birthday', DateType::class, [
                 'label' => 'Date de naissance',
                 'required' => false,
                 'widget' => 'single_text',
@@ -68,8 +73,8 @@ class AnimalType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description de l\'animal',
-                'required' => false,
-                'attr' => ['class' => 'form-select',],
+                'required' => true,
+                'attr' => ['class' => 'form-control',],
             ])
         ;
     }
