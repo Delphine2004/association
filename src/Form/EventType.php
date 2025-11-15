@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EventType extends AbstractType
@@ -20,9 +21,7 @@ class EventType extends AbstractType
             ->add('date', DateType::class, [
                 'label' => 'Date de l\'événement',
                 'required' => true,
-                'attr' => [
-                    'class' => 'form-control'
-                ],
+                'attr' => ['class' => 'form-control'],
             ])
             ->add('place', TextType::class, [
                 'label' => 'Localisation de l\'événement',
@@ -38,6 +37,12 @@ class EventType extends AbstractType
                     'rows' => 5,
                     'placeholder' => 'L\'événement va se dérouler ...'
                 ],
+            ])
+            ->add('picture', FileType::class, [
+                'label' => 'Photo',
+                'mapped' => false,
+                'required' => true,
+                'attr' => ['class' => 'form-control',],
             ])
         ;
     }
