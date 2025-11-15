@@ -22,8 +22,6 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalById(int $id): ?Animal
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p') // évite les doublons de ligne
-            ->leftJoin('a.pictures', 'p')->addSelect('p') // left inclus l'animal même si pas de photo
             ->andWhere('a.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
@@ -41,8 +39,6 @@ class AnimalRepository extends ServiceEntityRepository
     public function findAnimalsByAdoptionStatus(AdoptionStatus $status, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p')
-            ->leftJoin('a.pictures', 'p')->addSelect('p')
             ->andWhere('a.status = :status')
             ->setParameter('status', $status->value)
             ->orderBy('a.id',  $orderBy)
@@ -56,9 +52,7 @@ class AnimalRepository extends ServiceEntityRepository
     // Par plusieurs critéres
     public function findAnimalsByFilters(?array $criteria): array
     {
-        $qb = $this->createQueryBuilder('a')
-            ->select('DISTINCT a', 'p')
-            ->leftJoin('a.pictures', 'p')->addSelect('p');
+        $qb = $this->createQueryBuilder('a');
 
         if (!$criteria) {
             return $qb->getQuery()->getResult();
