@@ -24,7 +24,7 @@ class AnimalSearchStaffType extends AbstractType
             ->add('type', EnumType::class, [
                 'class' => AnimalCategory::class,
                 'label' => 'Type',
-                'choice_label' => 'name',
+                'choice_label' => fn(AnimalCategory $choice) => $choice->value,
                 'placeholder' => 'Choisir un type',
                 'required' => false,
                 'attr' => [
@@ -34,7 +34,7 @@ class AnimalSearchStaffType extends AbstractType
             ->add('race', EnumType::class, [
                 'class' => AnimalRace::class,
                 'label' => 'Race',
-                'choice_label' => 'name',
+                'choice_label' => fn(AnimalRace $choice) => $choice->value,
                 'placeholder' => 'Choisir une race',
                 'required' => false,
                 'attr' => [
@@ -44,7 +44,7 @@ class AnimalSearchStaffType extends AbstractType
             ->add('gender', EnumType::class, [
                 'class' => AnimalGender::class,
                 'label' => 'Genre',
-                'choice_label' => 'name',
+                'choice_label' => fn(AnimalGender $choice) => $choice->value,
                 'placeholder' => 'Choisir un genre',
                 'required' => false,
                 'attr' => [
@@ -54,7 +54,7 @@ class AnimalSearchStaffType extends AbstractType
             ->add('adoptionStatus', EnumType::class, [
                 'class' => AdoptionStatus::class,
                 'label' => 'Statut',
-                'choice_label' => 'value',
+                'choice_label' => fn(AdoptionStatus $choice) => $choice->value,
                 'placeholder' => 'Choisir un statut',
                 'required' => false,
                 'attr' => [

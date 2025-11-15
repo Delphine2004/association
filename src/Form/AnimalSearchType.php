@@ -21,7 +21,7 @@ class AnimalSearchType extends AbstractType
             ->add('type', EnumType::class, [
                 'class' => AnimalCategory::class,
                 'label' => 'Type',
-                'choice_label' => 'name', // Afficher le nom du type
+                'choice_label' => fn(AnimalCategory $choice) => $choice->value,
                 'placeholder' => 'Choisir un type', // Première option vide
                 'required' => false,
                 'attr' => [
@@ -31,7 +31,7 @@ class AnimalSearchType extends AbstractType
             ->add('race', EnumType::class, [
                 'class' => AnimalRace::class,
                 'label' => 'Race',
-                'choice_label' => 'name', // Afficher le nom du type
+                'choice_label' => fn(AnimalRace $choice) => $choice->value,
                 'placeholder' => 'Choisir une race', // Première option vide
 
                 'required' => false,
@@ -42,7 +42,7 @@ class AnimalSearchType extends AbstractType
             ->add('gender', EnumType::class, [
                 'class' => AnimalGender::class,
                 'label' => 'Genre',
-                'choice_label' => 'name', // Afficher le nom du type
+                'choice_label' => fn(AnimalGender $choice) => $choice->value,
                 'placeholder' => 'Choisir un genre', // Première option vide
 
                 'required' => false,

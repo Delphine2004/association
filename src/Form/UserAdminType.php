@@ -64,7 +64,7 @@ class UserAdminType extends AbstractType
                     UserRole::cases(),
                     fn(UserRole $role) => $role !== UserRole::ADMIN
                 ), // Récupère toutes les valeurs de l'Enum et filtre le rôle admin
-                'choice_label' => fn(UserRole $role) => $role->name, // Utilisez une fonction pour afficher le nom
+                'choice_label' => fn(UserRole $choice) => $choice->value,
                 'placeholder' => 'Choisir un rôle', // Première option vide
 
                 'required' => false,
