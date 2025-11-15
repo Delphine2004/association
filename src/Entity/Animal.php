@@ -11,7 +11,6 @@ use App\Utils\RegexPatterns;
 use App\Repository\AnimalRepository;
 
 use DateTimeImmutable;
-use DateTimeInterface;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -53,6 +52,10 @@ class Animal
     #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalGender::class, nullable: false)]
     private ?AnimalGender $gender = null;
 
+    // Validation sur le type
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: false)]
+    private ?string $picture = null;
+
     #[Assert\NotNull(message: "Le statut d'adoption est obligatoire.")]
     #[ORM\Column(type: Types::STRING, length: 50, enumType: AdoptionStatus::class, nullable: false)]
     private ?AdoptionStatus $status = null;
@@ -75,17 +78,15 @@ class Animal
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $compatibleDog = false;
 
-    #[Assert\Type('DateTimeInterface')]
     #[Assert\LessThan('today UTC', message: "La date de naissance ne peut pas être dans le futur.")]
     #[ORM\Column(type: 'date', nullable: true)]
-    private ?DateTimeInterface $birthday = null;
+    private ?DateTimeImmutable $birthday = null;
 
 
     #[Assert\NotBlank(message: "La date d'arrivée est obligatoire.")]
-    #[Assert\Type('DateTimeInterface')]
     #[Assert\LessThan('today UTC', message: "La date d'arrivée ne peut pas être dans le futur.")]
     #[ORM\Column(type: 'date')]
-    private ?DateTimeInterface $arrivalDate = null;
+    private ?DateTimeImmutable $arrivalDate = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $createdAt = null;
@@ -93,16 +94,6 @@ class Animal
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $updatedAt = null;
 
-    /**
-     * @var Collection<int, Picture>
-     */
-    #[ORM\OneToMany(
-        targetEntity: Picture::class,
-        mappedBy: 'animal',
-        cascade: ['persist', 'remove'],
-        orphanRemoval: true
-    )]
-    private Collection $pictures;
 
     /**
      * @var Collection<int, User>
@@ -126,7 +117,6 @@ class Animal
 
     public function __construct()
     {
-        $this->pictures = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
@@ -200,6 +190,18 @@ class Animal
     public function getStatus(): ?AdoptionStatus
     {
         return $this->status;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): static
+    {
+        $this->picture = $picture;
+
+        return $this;
     }
 
     public function setStatus(AdoptionStatus $status): static
@@ -281,24 +283,24 @@ class Animal
         return $this;
     }
 
-    public function getBirthday(): ?DateTimeInterface
+    public function getBirthday(): ?DateTimeImmutable
     {
         return $this->birthday;
     }
 
-    public function setBirthday(?DateTimeInterface $birthday): static
+    public function setBirthday(?DateTimeImmutable $birthday): static
     {
 
         $this->birthday = $birthday;
         return $this;
     }
 
-    public function getArrivalDate(): ?DateTimeInterface
+    public function getArrivalDate(): ?DateTimeImmutable
     {
         return $this->arrivalDate;
     }
 
-    public function setArrivalDate(DateTimeInterface $arrivalDate): static
+    public function setArrivalDate(DateTimeImmutable $arrivalDate): static
     {
 
         $this->arrivalDate = $arrivalDate;
@@ -332,35 +334,6 @@ class Animal
     }
 
 
-    /**
-     * @return Collection<int, Picture>
-     */
-    public function getPictures(): Collection
-    {
-        return $this->pictures;
-    }
-
-    public function addPicture(Picture $picture): static
-    {
-        if (!$this->pictures->contains($picture)) {
-            $this->pictures->add($picture);
-            $picture->setAnimal($this);
-        }
-
-        return $this;
-    }
-
-    public function removePicture(Picture $picture): static
-    {
-        if ($this->pictures->removeElement($picture)) {
-            // set the owning side to null (unless already changed)
-            if ($picture->getAnimal() === $this) {
-                $picture->setAnimal(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, User>
