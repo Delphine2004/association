@@ -18,15 +18,14 @@ class EventSearchType extends AbstractType
             ->add('id', IntegerType::class, [
                 'label' => 'N°',
                 'required' => false,
-                'widget' => 'single_text',
-                'html5' => true,
                 'attr' => ['class' => 'form-control',],
             ])
             ->add('date', DateType::class, [
                 'label' => 'Date de l\'événement',
                 'required' => false,
                 'widget' => 'single_text',
-
+                'html5' => true,
+                'attr' => ['class' => 'form-control',],
             ]);
     }
 
