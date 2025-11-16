@@ -47,22 +47,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $updatedAt = null;
 
-    /**
-     * @var Collection<int, Animal>
-     */
-    #[ORM\ManyToMany(targetEntity: Animal::class, inversedBy: 'users')]
-    private Collection $animals;
 
-    /**
-     * @var Collection<int, Event>
-     */
-    #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'users')]
-    private Collection $events;
+    #[ORM\OneToMany(targetEntity: Animal::class, mappedBy: 'createdBy')]
+    private Collection $animalsCreated;
+
+    #[ORM\OneToMany(targetEntity: Animal::class, mappedBy: 'updatedBy')]
+    private Collection $animalsUpdated;
+
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'createdBy')]
+    private Collection $eventsCreated;
+
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'updatedBy')]
+    private Collection $eventsUpdated;
+
 
     public function __construct()
     {
-        $this->animals = new ArrayCollection();
-        $this->events = new ArrayCollection();
+        $this->animalsCreated = new ArrayCollection();
+        $this->animalsUpdated = new ArrayCollection();
+        $this->eventsCreated = new ArrayCollection();
+        $this->eventsUpdated = new ArrayCollection();
     }
 
 
@@ -151,57 +155,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->updatedAt;
     }
 
+    public function getAnimalsCreated(): Collection
+    {
+        return $this->animalsCreated;
+    }
+
+    public function getAnimalsUpdated(): Collection
+    {
+        return $this->animalsUpdated;
+    }
+
+    public function getEventsCreated(): Collection
+    {
+        return $this->eventsCreated;
+    }
+
+    public function getEventsUpdated(): Collection
+    {
+        return $this->eventsUpdated;
+    }
 
     // ----- Méthodes de vérification -----
 
     // ne pas supprimer car fait partie de UserInterface
     public function eraseCredentials(): void {}
-
-    /**
-     * @return Collection<int, Animal>
-     */
-    public function getAnimals(): Collection
-    {
-        return $this->animals;
-    }
-
-    public function addAnimal(Animal $animal): static
-    {
-        if (!$this->animals->contains($animal)) {
-            $this->animals->add($animal);
-        }
-
-        return $this;
-    }
-
-    public function removeAnimal(Animal $animal): static
-    {
-        $this->animals->removeElement($animal);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Event>
-     */
-    public function getEvents(): Collection
-    {
-        return $this->events;
-    }
-
-    public function addEvent(Event $event): static
-    {
-        if (!$this->events->contains($event)) {
-            $this->events->add($event);
-        }
-
-        return $this;
-    }
-
-    public function removeEvent(Event $event): static
-    {
-        $this->events->removeElement($event);
-
-        return $this;
-    }
 }

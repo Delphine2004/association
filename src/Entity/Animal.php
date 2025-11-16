@@ -11,6 +11,7 @@ use App\Utils\RegexPatterns;
 use App\Repository\AnimalRepository;
 
 use DateTimeImmutable;
+use DateTimeInterface; // uniquement la date
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -40,24 +41,23 @@ class Animal
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[Assert\NotBlank(message: "Veuillez sélectionner un type.")]
-    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalCategory::class, nullable: false)]
+    #[Assert\NotNull(message: "Veuillez sélectionner un type.")]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalCategory::class)]
     private ?AnimalCategory $type = null;
 
-    #[Assert\NotBlank(message: "Veuillez sélectionner une race.")]
-    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalRace::class, nullable: false)]
+    #[Assert\NotNull(message: "Veuillez sélectionner une race.")]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalRace::class)]
     private ?AnimalRace $race = null;
 
-    #[Assert\NotBlank(message: "Veuillez sélectionner un genre.")]
-    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalGender::class, nullable: false)]
+    #[Assert\NotNull(message: "Veuillez sélectionner un genre.")]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: AnimalGender::class)]
     private ?AnimalGender $gender = null;
 
     // Validation sur le type
     #[ORM\Column(type: Types::STRING, length: 255, nullable: false)]
     private ?string $picture = null;
 
-    #[Assert\NotNull(message: "Le statut d'adoption est obligatoire.")]
-    #[ORM\Column(type: Types::STRING, length: 50, enumType: AdoptionStatus::class, nullable: false)]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: AdoptionStatus::class)]
     private ?AdoptionStatus $status = null;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
@@ -78,15 +78,16 @@ class Animal
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
     private bool $compatibleDog = false;
 
+    #[Assert\Type('DateTimeInterface')]
     #[Assert\LessThan('today UTC', message: "La date de naissance ne peut pas être dans le futur.")]
     #[ORM\Column(type: 'date', nullable: true)]
-    private ?DateTimeImmutable $birthday = null;
+    private ?DateTimeInterface $birthday = null;
 
-
-    #[Assert\NotBlank(message: "La date d'arrivée est obligatoire.")]
+    #[Assert\Type('DateTimeInterface')]
+    #[Assert\NotNull(message: "La date d'arrivée est obligatoire.")]
     #[Assert\LessThan('today UTC', message: "La date d'arrivée ne peut pas être dans le futur.")]
     #[ORM\Column(type: 'date')]
-    private ?DateTimeImmutable $arrivalDate = null;
+    private ?DateTimeInterface $arrivalDate = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $createdAt = null;
@@ -94,12 +95,11 @@ class Animal
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $updatedAt = null;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'animalsCreated')]
+    private ?User $createdBy = null;
 
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'animals')]
-    private Collection $users;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'animalsUpdated')]
+    private ?User $updatedBy = null;
 
 
     #[ORM\PrePersist]
@@ -113,11 +113,6 @@ class Animal
     public function onPreUpdate(): void
     {
         $this->updatedAt = new DateTimeImmutable();
-    }
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -283,24 +278,24 @@ class Animal
         return $this;
     }
 
-    public function getBirthday(): ?DateTimeImmutable
+    public function getBirthday(): ?DateTimeInterface
     {
         return $this->birthday;
     }
 
-    public function setBirthday(?DateTimeImmutable $birthday): static
+    public function setBirthday(?DateTimeInterface $birthday): static
     {
 
         $this->birthday = $birthday;
         return $this;
     }
 
-    public function getArrivalDate(): ?DateTimeImmutable
+    public function getArrivalDate(): ?DateTimeInterface
     {
         return $this->arrivalDate;
     }
 
-    public function setArrivalDate(DateTimeImmutable $arrivalDate): static
+    public function setArrivalDate(DateTimeInterface $arrivalDate): static
     {
 
         $this->arrivalDate = $arrivalDate;
@@ -319,6 +314,30 @@ class Animal
     }
 
 
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): static
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getUpdatedBy(): ?User
+    {
+        return $this->updatedBy;
+    }
+
+    public function setUpdatedBy(?User $updatedBy): static
+    {
+        $this->updatedBy = $updatedBy;
+
+        return $this;
+    }
+
     #[Assert\Callback]
     public function validateBirthday(ExecutionContextInterface $context): void
     {
@@ -331,34 +350,5 @@ class Animal
                 ->atPath('birthday')
                 ->addViolation();
         }
-    }
-
-
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): static
-    {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->addAnimal($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): static
-    {
-        if ($this->users->removeElement($user)) {
-            $user->removeAnimal($this);
-        }
-
-        return $this;
     }
 }

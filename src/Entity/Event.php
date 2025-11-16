@@ -25,7 +25,7 @@ class Event
     private ?int $id = null;
 
     #[Assert\Type('DateTimeInterface')]
-    #[Assert\NotBlank(message: "La date de l'événement est obligatoire.")]
+    #[Assert\NotNull(message: "La date de l'événement est obligatoire.")]
     #[Assert\GreaterThanOrEqual('today', message: "La date de l'événement ne peut pas être dans le passé.")]
     #[ORM\Column(type: 'date')]
     private ?DateTimeInterface $date = null;
@@ -42,22 +42,21 @@ class Event
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column]
+    // Validation sur le type
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: false)]
+    private ?string $picture = null;
+
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $updatedAt = null;
 
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'events')]
-    private Collection $users;
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'eventsCreated')]
+    private ?User $createdBy = null;
 
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'eventsUpdated')]
+    private ?User $updatedBy = null;
 
 
     #[ORM\PrePersist]
@@ -115,6 +114,18 @@ class Event
         return $this;
     }
 
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): static
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
     public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
@@ -125,29 +136,26 @@ class Event
         return $this->updatedAt;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
+    public function getCreatedBy(): ?User
     {
-        return $this->users;
+        return $this->createdBy;
     }
 
-    public function addUser(User $user): static
+    public function setCreatedBy(?User $createdBy): static
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->addEvent($this);
-        }
+        $this->createdBy = $createdBy;
 
         return $this;
     }
 
-    public function removeUser(User $user): static
+    public function getUpdatedBy(): ?User
     {
-        if ($this->users->removeElement($user)) {
-            $user->removeEvent($this);
-        }
+        return $this->updatedBy;
+    }
+
+    public function setUpdatedBy(?User $updatedBy): static
+    {
+        $this->updatedBy = $updatedBy;
 
         return $this;
     }
