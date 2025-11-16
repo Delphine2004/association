@@ -1,13 +1,32 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Edit Event{% endblock %}
-
-{% block body %}
-    <h1>Edit Event</h1>
-
-    {{ include('event/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_event_index') }}">back to list</a>
-
-    {{ include('event/_delete_form.html.twig') }}
+{% extends 'base.html.twig' %} {% block title %}Evénement - Modifications{%
+endblock %} {% block body %}
+<main class="pt-5">
+    <section id="event-page" class="container-fluid py-5">
+        <div class="container">
+            <h1 class="text-center mb-4">Modification de l'événement</h1>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    {{
+                        include("event/_form.html.twig", {
+                            button_label: "Modifier"
+                        })
+                    }}
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-auto">
+                <a
+                    class="btn"
+                    href="{{
+                        path('app_event_show', {
+                            id: event.id
+                        })
+                    }}"
+                    >Revenir à l'événement</a
+                >
+            </div>
+        </div>
+    </section>
+</main>
 {% endblock %}
