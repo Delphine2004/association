@@ -1,42 +1,110 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %} {% block title %}Evénement - Informations{%
+endblock %} {% block body %}
 
-{% block title %}Event{% endblock %}
+<main class="pt-5">
+    <section
+        id="event-page"
+        class="container-fluid py-5 d-flex justify-content-center align-items-center"
+        style="min-height: 70vh"
+    >
+        <div class="container">
+            <h1 class="text-center mb-4">Informations événement</h1>
 
-{% block body %}
-    <h1>Event</h1>
+            <div class="mx-auto" style="max-width: 700px">
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-body">
+                        <!-- Ligne : Id -->
+                        <div
+                            class="d-flex justify-content-between py-2 border-bottom"
+                        >
+                            <strong>Id</strong>
+                            <span>{{ event.id }}</span>
+                        </div>
+                        <!-- Ligne : Date -->
+                        <div
+                            class="d-flex justify-content-between py-2 border-bottom"
+                        >
+                            <strong>Date</strong>
+                            <span
+                                >{{ event.date ? event.date|date('d/m/Y') : '' }}</span
+                            >
+                        </div>
+                        <!-- Ligne : Lieu -->
+                        <div
+                            class="d-flex justify-content-between py-2 border-bottom"
+                        >
+                            <strong>Lieu</strong>
+                            <span>{{ event.place }}</span>
+                        </div>
+                        <!-- Ligne : Description -->
+                        <div
+                            class="d-flex justify-content-between py-2 border-bottom"
+                        >
+                            <strong>Description</strong>
+                            <p>{{ event.description }}</p>
+                        </div>
+                        <!-- Ligne : Date de création -->
+                        <div
+                            class="d-flex justify-content-between py-2 border-bottom"
+                        >
+                            <strong>Date de création</strong>
+                            <span
+                                >{{ event.createdAt ? event.createdAt|date('d/m/Y H:i:s') : '' }}</span
+                            >
+                        </div>
+                        <!-- Ligne : Par -->
+                        <div
+                            class="d-flex justify-content-between py-2 border-bottom"
+                        >
+                            <strong>Par</strong>
+                            <span>{{ event.createdBy.email }}</span>
+                        </div>
+                        <!-- Ligne : Date de modification -->
+                        <div
+                            class="d-flex justify-content-between py-2 border-bottom"
+                        >
+                            <strong>Date de modification</strong>
+                            <span
+                                >{{ event.updatedAt ? event.updatedAt|date('d/m/Y H:i:s') : '' }}</span
+                            >
+                        </div>
+                        <!-- Ligne : Par -->
+                        <div
+                            class="d-flex justify-content-between py-2 border-bottom"
+                        >
+                            <strong>Id</strong>
+                            <span>{{
+                                event.updatedBy ? event.updatedBy.email : ""
+                            }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% if event.date >= "now"|date("Y-m-d") %}
+                <div
+                    class="d-flex flex-column flex-sm-row gap-5 justify-content-center mb-4"
+                >
+                    <a
+                        class="btn"
+                        href="{{ path('app_event_edit', { id: event.id }) }}"
+                        >Modifier</a
+                    >
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ event.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ event.date ? event.date|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Place</th>
-                <td>{{ event.place }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ event.description }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+                    {{ include("event/_delete_form.html.twig") }}
+                </div>
+                {% endif %}
+            </div>
 
-    <a href="{{ path('app_event_index') }}">back to list</a>
+            <div class="mx-auto">
+                <div
+                    class="d-flex flex-column flex-sm-row justify-content-center mb-4"
+                >
+                    <a class="btn" href="{{ path('app_event_index') }}"
+                        >Revenir aux événements</a
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
-    <a href="{{ path('app_event_edit', {'id': event.id}) }}">edit</a>
-
-    {{ include('event/_delete_form.html.twig') }}
 {% endblock %}
