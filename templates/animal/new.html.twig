@@ -1,11 +1,22 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}New Animal{% endblock %}
-
-{% block body %}
-    <h1>Create new Animal</h1>
-
-    {{ include('animal/_form.html.twig') }}
-
-    <a href="{{ path('app_animal_index') }}">back to list</a>
+{% extends 'base.html.twig' %} {% block title %}Espace utilisateur - Création
+animal{% endblock %} {% block body %}
+<main class="pt-5">
+    <section id="animal-page" class="container-fluid py-5">
+        <div class="container">
+            <h1 class="text-center mb-4">Création d'un animal</h1>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    {{ include("animal/_form.html.twig") }}
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-auto">
+                <a class="btn" href="{{ path('app_animal_index') }}"
+                    >Revenir aux animaux</a
+                >
+            </div>
+        </div>
+    </section>
+</main>
 {% endblock %}

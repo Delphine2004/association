@@ -1,11 +1,22 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}New Event{% endblock %}
-
-{% block body %}
-    <h1>Create new Event</h1>
-
-    {{ include('event/_form.html.twig') }}
-
-    <a href="{{ path('app_event_index') }}">back to list</a>
+{% extends 'base.html.twig' %} {% block title %}Espace utilisateur - Création
+événement{% endblock %} {% block body %}
+<main class="pt-5">
+    <section id="event-page" class="container-fluid py-5">
+        <div class="container">
+            <h1 class="text-center mb-4">Création d'un événement</h1>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    {{ include("event/_form.html.twig") }}
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-auto">
+                <a class="btn" href="{{ path('app_event_index') }}"
+                    >Revenir aux événements</a
+                >
+            </div>
+        </div>
+    </section>
+</main>
 {% endblock %}
