@@ -1,65 +1,110 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %} {% block title %}Espace utilisateur - Animaux{%
+endblock %} {% block body %}
+<main class="pt-5">
+    <section id="animal-page" class="container-fluid py-5">
+        <div class="container">
+            <h1 class="text-center mb-5">Gestion des animaux</h1>
 
-{% block title %}Animal index{% endblock %}
+            <div class="text-center mb-5">
+                <a class="btn btn-large" href="{{ path('app_animal_new') }}"
+                    >Ajouter un animal</a
+                >
+            </div>
 
-{% block body %}
-    <h1>Animal index</h1>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <!-- Filtre -->
+                    <div class="filter card shadow-sm border-0 p-4 mb-5">
+                        <h5 class="text-center mb-4">Filtrer les animaux</h5>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>Race</th>
-                <th>Gender</th>
-                <th>Status</th>
-                <th>Vaccinated</th>
-                <th>Sterilized</th>
-                <th>Chipped</th>
-                <th>CompatibleKid</th>
-                <th>CompatibleCat</th>
-                <th>CompatibleDog</th>
-                <th>Birthday</th>
-                <th>ArrivalDate</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for animal in animals %}
-            <tr>
-                <td>{{ animal.id }}</td>
-                <td>{{ animal.name }}</td>
-                <td>{{ animal.description }}</td>
-                <td>{{ animal.type }}</td>
-                <td>{{ animal.race }}</td>
-                <td>{{ animal.gender }}</td>
-                <td>{{ animal.status }}</td>
-                <td>{{ animal.vaccinated ? 'Yes' : 'No' }}</td>
-                <td>{{ animal.sterilized ? 'Yes' : 'No' }}</td>
-                <td>{{ animal.chipped ? 'Yes' : 'No' }}</td>
-                <td>{{ animal.compatibleKid ? 'Yes' : 'No' }}</td>
-                <td>{{ animal.compatibleCat ? 'Yes' : 'No' }}</td>
-                <td>{{ animal.compatibleDog ? 'Yes' : 'No' }}</td>
-                <td>{{ animal.birthday ? animal.birthday|date('Y-m-d') : '' }}</td>
-                <td>{{ animal.arrivalDate ? animal.arrivalDate|date('Y-m-d') : '' }}</td>
-                <td>{{ animal.createdAt ? animal.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ animal.updatedAt ? animal.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_animal_show', {'id': animal.id}) }}">show</a>
-                    <a href="{{ path('app_animal_edit', {'id': animal.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="18">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                        {{ form_start(searchForm, { method: "get" }) }}
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                {{ form_row(searchForm.adoptionStatus) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(searchForm.arrivalDate) }}
+                            </div>
+                        </div>
 
-    <a href="{{ path('app_animal_new') }}">Create new</a>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-4">
+                                {{ form_row(searchForm.type) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(searchForm.race) }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form_row(searchForm.gender) }}
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                {{ form_row(searchForm.vaccinated) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(searchForm.sterilized) }}
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn">Rechercher</button>
+                        </div>
+
+                        {{ form_end(searchForm) }}
+                    </div>
+
+                    <!-- Résultats -->
+                    <div class="table-responsive shadow-sm border rounded">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Genre</th>
+                                    <th scope="col">Statut</th>
+                                    <th scope="col" class="text-center">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for animal in animals %}
+                                <tr>
+                                    <td>{{ animal.id }}</td>
+                                    <td>{{ animal.name }}</td>
+                                    <td>{{ animal.type.value }}</td>
+                                    <td>{{ animal.gender.value }}</td>
+                                    <td>{{ animal.status.value }}</td>
+                                    <td class="text-center">
+                                        <a
+                                            class="btn btn-sm"
+                                            href="{{
+                                                path('app_animal_show', {
+                                                    id: animal.id
+                                                })
+                                            }}"
+                                            >Voir</a
+                                        >
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td
+                                        colspan="6"
+                                        class="text-center text-muted py-4"
+                                    >
+                                        Aucun animal
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 {% endblock %}

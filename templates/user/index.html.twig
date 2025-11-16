@@ -5,7 +5,7 @@
         <div class="container">
             <h1 class="text-center mb-5">Tableau de bord</h1>
 
-            <div class="row justify-content-center mb-5">
+            <div class="row justify-content-center">
                 <div class="col-12 col-md-10 col-lg-8">
                     <h2 class="text-center mb-4">Animaux à examiner</h2>
 
@@ -15,15 +15,17 @@
                                 <tr>
                                     <th scope="col">Nom</th>
                                     <th scope="col">Type</th>
-                                    <th scope="col">Actions</th>
+                                    <th scope="col" class="text-center">
+                                        Actions
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for animal in animals %}
                                 <tr>
                                     <td>{{ animal.name }}</td>
-                                    <td>{{ animal.type }}</td>
-                                    <td>
+                                    <td>{{ animal.type.value }}</td>
+                                    <td class="text-center">
                                         <a
                                             class="btn btn-sm"
                                             href="{{
@@ -50,6 +52,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="text-center m-5">
+                        <a class="btn" href="{{ path('app_animal_index') }}"
+                            >Animaux</a
+                        >
+                    </div>
                 </div>
             </div>
 
@@ -63,17 +70,19 @@
                                 <tr>
                                     <th scope="col">Date</th>
                                     <th scope="col">Lieu</th>
-                                    <th scope="col">Actions</th>
+                                    <th scope="col" class="text-center">
+                                        Actions
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for event in events %}
                                 <tr>
                                     <td>
-                                        {{ event.date ? event.date|date('Y-m-d H:i:s') : '' }}
+                                        {{ event.date ? event.date|date('d/m/Y') : '' }}
                                     </td>
                                     <td>{{ event.place }}</td>
-                                    <td>
+                                    <td class="text-center">
                                         <a
                                             class="btn btn-sm"
                                             href="{{
@@ -89,14 +98,19 @@
                                 <tr>
                                     <td
                                         colspan="3"
-                                        class="text-center text-muted"
+                                        class="text-center text-muted py-4"
                                     >
-                                        Aucun événements à venir.
+                                        Aucun événement à venir.
                                     </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
+                    </div>
+                    <div class="text-center m-5">
+                        <a class="btn" href="{{ path('app_event_index') }}"
+                            >Evénements</a
+                        >
                     </div>
                 </div>
             </div>
