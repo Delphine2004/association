@@ -36,12 +36,15 @@ class AnimalRepository extends ServiceEntityRepository
 
 
     // Par statut d'adoption
-    public function findAnimalsByAdoptionStatus(AdoptionStatus $status, int $limit = 10, string $orderBy = 'ASC'): array
-    {
+    public function findAnimalsByAdoptionStatus(
+        AdoptionStatus $status,
+        int $limit = 10,
+        string $orderBy = 'DESC'
+    ): array {
         return $this->createQueryBuilder('a')
             ->andWhere('a.status = :status')
             ->setParameter('status', $status->value)
-            ->orderBy('a.id',  $orderBy)
+            ->orderBy('a.updatedAt',  $orderBy)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
@@ -50,8 +53,11 @@ class AnimalRepository extends ServiceEntityRepository
 
 
     // Par plusieurs critéres
-    public function findAnimalsByFilters(?array $criteria): array
-    {
+    public function findAnimalsByFilters(
+        ?array $criteria,
+        int $limit = 10,
+        string $orderBy = 'DESC'
+    ): array {
         $qb = $this->createQueryBuilder('a');
 
         if (!$criteria) {
@@ -85,8 +91,9 @@ class AnimalRepository extends ServiceEntityRepository
             $qb->andWhere('a.compatibleDog = true');
         }
 
-        $qb->orderBy('a.arrivalDate', 'DESC');
-
-        return $qb->getQuery()->getResult();
+        return $qb->orderBy('a.updatedAt',  $orderBy)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
     }
 }

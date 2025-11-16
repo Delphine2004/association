@@ -27,21 +27,26 @@ class EventRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    public function findFutureEvents(int $limit = 10, string $orderBy = 'ASC'): array
-    {
+    public function findFutureEvents(
+        int $limit = 10,
+        string $orderBy = 'ASC'
+    ): array {
         $now = new DateTimeImmutable('today');
 
         return $this->createQueryBuilder('e')
             ->where('e.date >= :now')
             ->setParameter('now', $now)
-            ->orderBy('e.id',  $orderBy)
+            ->orderBy('e.date',  $orderBy)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }
 
-    public function findEventsByFields(?array $criteria, int $limit = 10, string $orderBy = 'ASC'): array
-    {
+    public function findEventsByFields(
+        ?array $criteria,
+        int $limit = 10,
+        string $orderBy = 'ASC'
+    ): array {
         $qb = $this->createQueryBuilder('e');
 
         if (!empty($criteria['id'])) {
@@ -57,7 +62,7 @@ class EventRepository extends ServiceEntityRepository
             }
         }
 
-        return $qb->orderBy('e.id',  $orderBy)
+        return $qb->orderBy('e.date',  $orderBy)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
