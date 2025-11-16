@@ -13,7 +13,9 @@ block body %}
                                 <tr>
                                     <th scope="col">Email</th>
                                     <th scope="col">Rôle</th>
-                                    <th scope="col">Actions</th>
+                                    <th scope="col" class="text-center">
+                                        Actions
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -21,9 +23,9 @@ block body %}
                                 <tr>
                                     <td>{{ user.email }}</td>
                                     <td>{{ user.role.name }}</td>
-                                    <td>
+                                    <td class="text-center">
                                         <a
-                                            class="btn"
+                                            class="btn btn-sm"
                                             href="{{
                                                 path('app_admin_show', {
                                                     id: user.id
