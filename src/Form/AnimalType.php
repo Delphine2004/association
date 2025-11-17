@@ -59,7 +59,9 @@ class AnimalType extends AbstractType
             ])
             ->add('birthday', DateType::class, [
                 'label' => 'Date de naissance',
-                'required' => false,
+                'required' => true,
+                'empty_data' => null,
+                'input' => 'datetime',
                 'widget' => 'single_text',
                 'html5' => true,
                 'attr' => ['class' => 'form-control',],
