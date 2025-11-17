@@ -28,18 +28,14 @@ class UserAdminType extends AbstractType
                 ],
             ])
             ->add('password', PasswordType::class, [
-                'label' => $options['is_edit']
-                    ? 'Nouveau mot de passe (facultatif)'
-                    : 'Mot de passe',
-                'required' => !$options['is_edit'], // seulement pour la création
+                'label' => 'Mot de passe',
+                'required' => true,
                 'mapped' => false, // n'est pas mappé avec la bd car il sera hashé
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => $options['is_edit']
-                        ? 'Laissez vide pour ne pas changer'
-                        : 'Mot de passe sécurisé',
+                    'placeholder' => 'Mot de passe sécurisé',
                 ],
-                'constraints' => $options['is_edit'] ? [] : [ // validations uniquement à la création
+                'constraints' => [
                     new Assert\NotBlank(['message' => 'Le mot de passe est obligatoire.']),
                     new Assert\Length([
                         'min' => 8,
@@ -55,38 +51,38 @@ class UserAdminType extends AbstractType
                         'minScore' => Assert\PasswordStrength::STRENGTH_MEDIUM,
                     ]),
                 ],
-            ]);
-        if (!$options['is_edit']) {
-            $builder->add('role', EnumType::class, [
+            ])
+            ->add('role', EnumType::class, [
                 'class' => UserRole::class,
                 'label' => 'Rôle',
-                'choices' => array_filter(
-                    UserRole::cases(),
-                    fn(UserRole $role) => $role !== UserRole::ADMIN
-                ), // Récupère toutes les valeurs de l'Enum et filtre le rôle admin
-                'choice_label' => fn(UserRole $choice) => $choice->value,
+                'choices' => array_reduce(UserRole::cases(), function ($carry, UserRole $role) {
+                    if ($role !== UserRole::ADMIN) {
+                        $carry[$role->value] = $role;
+                    }
+                    return $carry;
+                }, []), // Récupère toutes les valeurs de l'Enum et filtre le rôle admin
+                'choice_label' => fn(UserRole $choice) => $choice->name,
                 'placeholder' => 'Choisir un rôle', // Première option vide
-
                 'required' => false,
+                'mapped' => false,
                 'attr' => [
                     'class' => 'form-select',
                 ],
             ]);
-        }
-            /*
+
+        /*
             ->add('passwordConfirm', PasswordType::class, [
                 'label' => 'Confirmer le mot de passe',
 
                 'mapped' => false, // important : ne correspond pas à une propriété de l’entité
                 'attr' => ['class' => 'form-control', 'placeholder' => 'Vérification du mot de passe',],
-            ])*/;
+            ])*/
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'is_edit' => false,
         ]);
     }
 }
