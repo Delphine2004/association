@@ -91,7 +91,7 @@ final class AnimalController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Animal créé avec succès.');
-            return $this->redirectToRoute('app_animal_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_animal_show', ['id' => $animal->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('animal/new.html.twig', [
