@@ -17,10 +17,15 @@ endblock %} {% block body %}
                     <div class="filter card shadow-sm border-0 p-4 mb-5">
                         <h5 class="text-center mb-4">Filtrer les animaux</h5>
 
-                        {{ form_start(searchForm, { method: "get" }) }}
+                        {{ form_start(searchForm, { method: "get" }, {'attr': {'novalidate':  true
+
+
+
+
+                        }}) }}
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
-                                {{ form_row(searchForm.adoptionStatus) }}
+                                {{ form_row(searchForm.status) }}
                             </div>
                             <div class="col-md-6">
                                 {{ form_row(searchForm.arrivalDate) }}
@@ -41,10 +46,10 @@ endblock %} {% block body %}
 
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
-                                {{ form_row(searchForm.vaccinated) }}
+                                {{ form_row(searchForm.notVaccinated) }}
                             </div>
                             <div class="col-md-6">
-                                {{ form_row(searchForm.sterilized) }}
+                                {{ form_row(searchForm.notSterilized) }}
                             </div>
                         </div>
                         <div class="text-center">
