@@ -32,8 +32,15 @@ final class AnimalController extends AbstractController
 
         // Données du formulaire
         $criteria = $form->getData();
+        $notSterilized = $form->get('notSterilized')->getData();
+        $criteria['sterilized'] = $notSterilized ? false : null;
+        $notVaccinated = $form->get('notVaccinated')->getData();
+        $criteria['vaccinated'] = $notVaccinated ? false : null;
 
         $animals = $animalRepository->findAnimalsByFilters($criteria);
+
+        // Recrée un formulaire vide, sans données préremplies
+        $form = $this->createForm(AnimalSearchStaffType::class);
 
         return $this->render('animal/index.html.twig', [
             'searchForm' => $form->createView(),
