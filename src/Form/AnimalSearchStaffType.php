@@ -51,7 +51,7 @@ class AnimalSearchStaffType extends AbstractType
                     'class' => 'form-select',
                 ],
             ])
-            ->add('adoptionStatus', EnumType::class, [
+            ->add('status', EnumType::class, [
                 'class' => AdoptionStatus::class,
                 'label' => 'Statut',
                 'choice_label' => fn(AdoptionStatus $choice) => $choice->value,
@@ -61,16 +61,18 @@ class AnimalSearchStaffType extends AbstractType
                     'class' => 'form-select',
                 ],
             ])
-            ->add('sterilized', CheckboxType::class, [
-                'label' => 'Stérilisé(e)',
+            ->add('notSterilized', CheckboxType::class, [
+                'label' => 'Pas stérilisé(e)',
                 'required' => false,
+                'mapped' => false,
                 'attr' => [
                     'class' => 'form-check-input',
                 ],
             ])
-            ->add('vaccinated', CheckboxType::class, [
-                'label' => 'Vacciné(e)',
+            ->add('notVaccinated', CheckboxType::class, [
+                'label' => 'Pas vacciné(e)',
                 'required' => false,
+                'mapped' => false,
                 'attr' => [
                     'class' => 'form-check-input',
                 ],
