@@ -20,8 +20,8 @@ class UserRepository extends ServiceEntityRepository
     public function findUsersWithoutRole(string $role, int $limit = 10, string $orderBy = 'ASC'): array
     {
         return $this->createQueryBuilder('u')
-            ->where('u.role != :role')
-            ->setParameter('role', $role)
+            ->where('u.roles NOT LIKE :role')
+            ->setParameter('role', '%"' . $role . '"%')
             ->orderBy('u.id',  $orderBy)
             ->setMaxResults($limit)
             ->getQuery()

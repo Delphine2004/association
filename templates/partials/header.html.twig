@@ -55,16 +55,7 @@
                     {% if is_granted('ROLE_ADMIN')%}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('admin_dashboard') }}"
-                            >Tableau de bord</a
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            class="nav-link"
-                            href="{{
-                                path('app_user_show', { id: app.user.id })
-                            }}"
-                            >Mon compte</a
+                            >Utilisateurs</a
                         >
                     </li>
                     {% endif %}

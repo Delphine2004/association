@@ -38,8 +38,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[Assert\NotNull(message: "Veuillez sélectionner un rôle.")]
-    #[ORM\Column(type: Types::STRING, length: 50, enumType: UserRole::class)]
-    private ?UserRole $role = null;
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?DateTimeImmutable $createdAt = null;
@@ -118,29 +118,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRole(): ?UserRole
-    {
-        return $this->role;
-    }
-
-    public function getRoleValue(): ?string
-    {
-        return $this->role?->value;
-    }
 
     public function getRoles(): array
     {
-        $roles = ($this->role) ? [$this->role->value] : [];
+        $roles = ($this->roles);
 
         $roles[] = 'ROLE_USER'; // rôle requis par symfony
 
         return array_unique($roles);
     }
 
-    public function setRole(UserRole $role): static
+    public function setRoles(array $roles): self
     {
-        $this->role = $role;
+        $this->roles = $roles;
+        return $this;
+    }
 
+    public function addRole(string $role): self
+    {
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
         return $this;
     }
 

@@ -35,7 +35,12 @@ Informations compte{% endblock %} {% block body %}
                             class="d-flex justify-content-between py-2 border-bottom"
                         >
                             <strong>Rôle</strong>
-                            <span>{{ user.role.name }}</span>
+                            <span
+                                >{% for role in user.roles %} {% if role !=
+                                'ROLE_USER' %}
+                                {{ role|replace({'ROLE_': ''}) }}
+                                {% endif %} {% endfor %}</span
+                            >
                         </div>
 
                         <!-- Ligne : Date de création -->

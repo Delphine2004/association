@@ -21,7 +21,7 @@ class AdminFixtures extends Fixture
     {
         $admin = new User();
         $admin->setEmail('admin@association.fr');
-        $admin->setRole(UserRole::ADMIN);
+        $admin->setRoles([UserRole::ADMIN, UserRole::EMPLOYE]);
         $hashedPassword = $this->hasher->hashPassword($admin, 'admin123');
         $admin->setPassword($hashedPassword, true);
 
