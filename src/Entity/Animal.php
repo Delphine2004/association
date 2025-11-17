@@ -295,7 +295,7 @@ class Animal
         return $this->arrivalDate;
     }
 
-    public function setArrivalDate(DateTimeInterface $arrivalDate): static
+    public function setArrivalDate(?DateTimeInterface $arrivalDate): static
     {
 
         $this->arrivalDate = $arrivalDate;
