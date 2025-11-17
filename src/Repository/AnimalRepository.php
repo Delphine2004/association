@@ -64,6 +64,16 @@ class AnimalRepository extends ServiceEntityRepository
             return $qb->getQuery()->getResult();
         }
 
+        if (!empty($criteria['arrivalDate'])) {
+            $qb->andWhere('a.arrivalDate = :arrivalDate')
+                ->setParameter('arrivalDate', $criteria['arrivalDate']->format('Y-m-d'));
+        }
+
+        if (!empty($criteria['status'])) {
+            $qb->andWhere('a.status = :status')
+                ->setParameter('status', $criteria['status']->value);
+        }
+
         if (!empty($criteria['type'])) {
             $qb->andWhere('a.type = :type')
                 ->setParameter('type', $criteria['type']->value);
