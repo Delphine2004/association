@@ -34,6 +34,9 @@ final class EventController extends AbstractController
 
         $events = $eventRepository->findEventsByFields($criteria);
 
+        // Recrée un formulaire vide, sans données préremplies
+        $form = $this->createForm(EventSearchType::class);
+
         return $this->render('event/index.html.twig', [
             'searchForm' => $form->createView(),
             'events' => $events,
