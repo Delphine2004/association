@@ -6,13 +6,13 @@
     {{ form_errors(form.email) }}
 </div>
 
+{% if form.role is defined %}
 <div class="mb-4">
     {{ form_label(form.password) }}
     {{ form_widget(form.password) }}
     {{ form_errors(form.password) }}
 </div>
 
-{% if form.role is defined %}
 <div class="mb-4">
     {{ form_label(form.role) }}
     {{ form_widget(form.role) }}
