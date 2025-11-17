@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use App\Entity\User;
 use App\Enum\UserRole;
 use App\Form\UserAdminType;
+use App\Form\UserUpdateAdminType;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,11 +37,12 @@ final class AdminController extends AbstractController
         UserPasswordHasherInterface $passwordHasher
     ): Response {
         $user = new User();
-        $form = $this->createForm(UserAdminType::class, $user, ['is_edit' => false]);
+        $form = $this->createForm(UserAdminType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $plainPassword = $form->get('password')->getData();
+            $role = $form->get('role')->getData();
 
             if (empty($plainPassword)) {
                 $this->addFlash('error', 'Le mot de passe est obligatoire.');
@@ -48,6 +50,7 @@ final class AdminController extends AbstractController
             } else {
                 $hashedPassword = $passwordHasher->hashPassword($user, $plainPassword);
                 $user->setPassword($hashedPassword);
+                $user->setRoles($role ? [$role->value] : []);
 
                 $entityManager->persist($user);
                 $entityManager->flush();
@@ -86,21 +89,12 @@ final class AdminController extends AbstractController
     public function edit(
         Request $request,
         User $user,
-        EntityManagerInterface $entityManager,
-        UserPasswordHasherInterface $passwordHasher
+        EntityManagerInterface $entityManager
     ): Response {
-        $form = $this->createForm(UserAdminType::class, $user, ['is_edit' => true]);
+        $form = $this->createForm(UserUpdateAdminType::class, $user, []);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Vérifie si le mot de passe a été modifié
-            $plainPassword = $form->get('password')->getData();
-
-            if (!empty($plainPassword)) {
-                $hashedPassword = $passwordHasher->hashPassword($user, $plainPassword);
-                $user->setPassword($hashedPassword);
-            }
-
             $entityManager->flush();
 
             $this->addFlash('success', 'Utilisateur modifié avec succès.');
