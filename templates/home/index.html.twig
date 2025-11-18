@@ -380,7 +380,7 @@ Pattes{% endblock %} {% block body %}
                 <div class="col-10 col-md-8 mx-auto">
                     <form
                         class="row g-3 align-items-end"
-                        action="#"
+                        action="{{ path('home') }}"
                         method="post"
                         novalidate
                     >
@@ -397,7 +397,6 @@ Pattes{% endblock %} {% block body %}
                                 class="form-control"
                                 placeholder="exemple@mail.com"
                                 required
-                                aria-describedby="emailHelp"
                             />
                         </div>
                         <div class="col-12 col-md-3">
