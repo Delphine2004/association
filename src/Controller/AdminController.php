@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Enum\UserRole;
 use App\Form\UserAdminType;
 use App\Form\UserUpdateAdminType;
+use App\Service\MongoNewsletterService;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -103,6 +104,18 @@ final class AdminController extends AbstractController
         return $this->render('admin/edit.html.twig', [
             'user' => $user,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/newsletter/emails', name: 'admin_newsletter_emails')]
+    public function listEmails(MongoNewsletterService $newsletterService): Response
+    {
+        // Récupérer tous les emails via le service
+        $emails = $newsletterService->getAllEmails();
+
+        // Afficher dans un template (à créer)
+        return $this->render('admin/newsletter_emails.html.twig', [
+            'emails' => $emails,
         ]);
     }
 }
