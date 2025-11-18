@@ -6,6 +6,10 @@ footer {
     background-color: colors.$bs-pink;
     color: colors.$bs-brown;
 
+    a {
+        color: colors.$bs-brown;
+    }
+
     @media (min-width: 768px) {
         min-height: variables.$footer-height-desktop;
     }
