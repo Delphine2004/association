@@ -12,70 +12,57 @@ endblock %} {% block body %}
 
             <div class="mx-auto" style="max-width: 700px">
                 <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-header">
+                        <h2 class="text-center mb-4">Ref : {{ event.id }}</h2>
+                    </div>
                     <div class="card-body">
-                        <!-- Ligne : Id -->
-                        <div
-                            class="d-flex justify-content-between py-2 border-bottom"
-                        >
-                            <strong>Id</strong>
-                            <span>{{ event.id }}</span>
+                        <!--  -->
+                        <div class="py-2 mb-3 border-bottom">
+                            <div class="d-flex justify-content-between py-2">
+                                <strong>Date</strong>
+                                <span
+                                    >{{ event.date ? event.date|date('d/m/Y') : '' }}</span
+                                >
+                            </div>
+
+                            <div class="d-flex justify-content-between py-2">
+                                <strong>Lieu</strong>
+                                <span>{{ event.place }}</span>
+                            </div>
                         </div>
-                        <!-- Ligne : Date -->
-                        <div
-                            class="d-flex justify-content-between py-2 border-bottom"
-                        >
-                            <strong>Date</strong>
-                            <span
-                                >{{ event.date ? event.date|date('d/m/Y') : '' }}</span
-                            >
-                        </div>
-                        <!-- Ligne : Lieu -->
-                        <div
-                            class="d-flex justify-content-between py-2 border-bottom"
-                        >
-                            <strong>Lieu</strong>
-                            <span>{{ event.place }}</span>
-                        </div>
-                        <!-- Ligne : Description -->
+
+                        <!--  -->
                         <div
                             class="d-flex justify-content-between py-2 border-bottom"
                         >
                             <strong>Description</strong>
                             <p>{{ event.description }}</p>
                         </div>
-                        <!-- Ligne : Date de création -->
-                        <div
-                            class="d-flex justify-content-between py-2 border-bottom"
-                        >
-                            <strong>Date de création</strong>
-                            <span
-                                >{{ event.createdAt ? event.createdAt|date('d/m/Y H:i:s') : '' }}</span
+
+                        <!--  -->
+                        <div>
+                            <div class="d-flex justify-content-between py-2">
+                                <strong>Création : </strong>
+                                <span
+                                    >{{ event.createdAt ? event.createdAt|date('d/m/Y H:i:s') : '' }}
+                                    - {{ event.createdBy.email }}</span
+                                >
+                            </div>
+
+                            <div
+                                class="d-flex justify-content-between py-2 border-bottom"
                             >
-                        </div>
-                        <!-- Ligne : Par -->
-                        <div
-                            class="d-flex justify-content-between py-2 border-bottom"
-                        >
-                            <strong>Par</strong>
-                            <span>{{ event.createdBy.email }}</span>
-                        </div>
-                        <!-- Ligne : Date de modification -->
-                        <div
-                            class="d-flex justify-content-between py-2 border-bottom"
-                        >
-                            <strong>Date de modification</strong>
-                            <span
-                                >{{ event.updatedAt ? event.updatedAt|date('d/m/Y H:i:s') : '' }}</span
-                            >
-                        </div>
-                        <!-- Ligne : Par -->
-                        <div
-                            class="d-flex justify-content-between py-2 border-bottom"
-                        >
-                            <strong>Id</strong>
-                            <span>{{
-                                event.updatedBy ? event.updatedBy.email : ""
-                            }}</span>
+                                <strong>Modification : </strong>
+                                <span
+                                    >{{ event.updatedAt ? event.updatedAt|date('d/m/Y H:i:s') : '' }}
+                                    -
+                                    {{
+                                        event.updatedBy
+                                            ? event.updatedBy.email
+                                            : ""
+                                    }}</span
+                                >
+                            </div>
                         </div>
                     </div>
                 </div>
