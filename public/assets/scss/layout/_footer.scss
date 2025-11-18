@@ -8,6 +8,11 @@ footer {
 
     a {
         color: colors.$bs-brown;
+        text-decoration: none;
+    }
+
+    i {
+        color: colors.$bs-brown;
     }
 
     @media (min-width: 768px) {
