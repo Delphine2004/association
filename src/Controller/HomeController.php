@@ -81,11 +81,9 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/evenements', name: 'events')]
+    #[Route('/mentions', name: 'legal_notices')]
     public function renderEvent(): Response
     {
-        return $this->render('home/event.html.twig', [
-            'message' => 'ajout Bootstrap OK !'
-        ]);
+        return $this->render('home/legalNotices.html.twig');
     }
 }
