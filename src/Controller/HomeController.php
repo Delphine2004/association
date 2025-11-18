@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\AnimalRepository;
 use App\Repository\EventRepository;
+use App\Entity\Animal;
 use App\Enum\AdoptionStatus;
 use App\Form\AnimalSearchType;
 use App\Service\MongoNewsletterService;
@@ -81,9 +82,23 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/adoption/{id}', name: 'adoption_animal_show', methods: ['GET'])]
+    public function renderAnimal(Animal $animal): Response
+    {
+        return $this->render('home/adoption_show.html.twig', [
+            'animal' => $animal,
+        ]);
+    }
+
+    #[Route('/conditions', name: 'adoption_terms')]
+    public function renderTerms(): Response
+    {
+        return $this->render('home/adoption_terms.html.twig');
+    }
+
     #[Route('/mentions', name: 'legal_notices')]
     public function renderEvent(): Response
     {
-        return $this->render('home/legalNotices.html.twig');
+        return $this->render('home/legal_notices.html.twig');
     }
 }
