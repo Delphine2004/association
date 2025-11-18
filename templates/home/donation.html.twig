@@ -1,7 +1,38 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %} {% block title %}Faire un don - Coeurs à Quatre
+Pattes{% endblock %} {% block body %}
+<main class="pt-5">
+    <section id="donation-home" class="container-fluid py-5">
+        <div class="container text-center">
+            <img
+                src="{{ asset('assets/img/autres/hero-adoption.jpg') }}"
+                alt="Chien et chat qui se câlinent"
+                class="img-fluid rounded"
+                style="max-width: 70%; height: auto"
+            />
 
-{% block title %}Faire un don - Coeurs à Quatre Pattes{% endblock %}
+            <h1 class="text-center my-4">
+                Soutenez nos compagnons à quatre pattes
+            </h1>
 
-{% block body %}
-<section id="home" class="container-fluid mx-auto py-5"></section>
+            <div class="col-12 col-md-8 mx-auto">
+                <p class="lead">
+                    Chaque jour, nous accueillons des animaux abandonnés,
+                    maltraités ou perdus qui ont besoin d'une seconde chance.
+                    Grâce à votre générosité, nous pouvons leur offrir des soins
+                    vétérinaires, une alimentation de qualité, un refuge
+                    chaleureux et tout l'amour nécessaire en attendant de
+                    trouver leur famille pour la vie. Votre don fait la
+                    différence : 20€ permettent de vacciner un animal 50€
+                    couvrent une stérilisation 100€ financent des soins
+                    d'urgence Même le plus petit geste compte. Ensemble,
+                    donnons-leur l'espoir d'un avenir meilleur. Merci du fond du
+                    cœur pour votre soutien !
+                </p>
+            </div>
+        </div>
+    </section>
+    <section id="donation" class="container-fluid py-5">
+        <div class="container"></div>
+    </section>
+</main>
 {% endblock %}
