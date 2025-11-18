@@ -152,20 +152,28 @@ Pattes{% endblock %} {% block body %}
                     >
                         <!--Les images du carousel-->
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
+                            {% for animal in animalsToAdopt %}
+                            <div
+                                class="carousel-item {% if loop.first %}active{% endif %}"
+                            >
                                 <img
-                                    src="{{
-                                        asset('assets/img/animaux/chat1.jpg')
-                                    }}"
+                                    src="{{ asset('uploads/animals/' ~ animal.imageFilename) }}"
                                     class="d-block img-fluid"
-                                    alt="animal de compagnie"
+                                    alt="photo de {{ animal.name }}"
                                 />
                                 <div class="carousel-caption d-block">
                                     <h5 class="text-center">
-                                        Nom de l'animal et son âge
+                                        {{ animal.name }}
                                     </h5>
                                 </div>
                             </div>
+                            {% else %}
+                            <div class="carousel-item active">
+                                <p class="text-center">
+                                    Aucun animal à adopter pour le moment.
+                                </p>
+                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -212,20 +220,28 @@ Pattes{% endblock %} {% block body %}
                     >
                         <!-- Les Images du carousel des animaux adoptés -->
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
+                            {% for animal in animalsAdopted %}
+                            <div
+                                class="carousel-item {% if loop.first %}active{% endif %}"
+                            >
                                 <img
-                                    src="{{
-                                        asset('assets/img/animaux/chien2.jpg')
-                                    }}"
+                                    src="{{ asset('uploads/animals/' ~ animal.imageFilename) }}"
                                     class="d-block img-fluid"
-                                    alt="animal de compagnie"
+                                    alt="photo de {{ animal.name }}"
                                 />
                                 <div class="carousel-caption d-block">
                                     <h5 class="text-center">
-                                        Nom de l'animal et son âge
+                                        {{ animal.name }}
                                     </h5>
                                 </div>
                             </div>
+                            {% else %}
+                            <div class="carousel-item active">
+                                <p class="text-center">
+                                    Aucun animal à adopter pour le moment.
+                                </p>
+                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -264,28 +280,30 @@ Pattes{% endblock %} {% block body %}
                     >
                         <!--Les images du carousel-->
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
+                            {% for event in events %}
+                            <div
+                                class="carousel-item {% if loop.first %}active{% endif %}"
+                            >
                                 <div class="card mx-auto">
                                     <img
-                                        src="{{
-                                            asset(
-                                                'assets/img/events/anniversaire.jpg'
-                                            )
-                                        }}"
+                                        src="{{ asset('uploads/events/'  ~ event.imageFilename) }}"
                                         class="card-img-top"
-                                        alt="annivesaire"
+                                        alt="Photo événement de l'association"
                                     />
                                     <div class="card-body">
                                         <p class="card-text">
-                                            Le 15 juin, célébrons ensemble le
-                                            8ème anniversaire de notre
-                                            association ! Une journée festive
-                                            pour honorer tous nos sauvetages
-                                            réussis.
+                                            {{ event.description }}
                                         </p>
                                     </div>
                                 </div>
                             </div>
+                            {% else %}
+                            <div class="carousel-item active">
+                                <p class="text-center">
+                                    Aucun événement à venir pour le moment.
+                                </p>
+                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
