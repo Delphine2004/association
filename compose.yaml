@@ -11,6 +11,11 @@ services:
       # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
       DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@database:3306/${MYSQL_DATABASE}?serverVersion=${MYSQL_VERSION}&charset=${MYSQL_CHARSET}
       # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
+      MONGO_USER: ${MONGO_USER}
+      MONGO_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_DB: ${MONGO_DB}
+      MONGO_URI: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongo_db:27017/${MONGO_DB}
+
       MERCURE_URL: ${CADDY_MERCURE_URL:-http://php/.well-known/mercure}
       MERCURE_PUBLIC_URL: ${CADDY_MERCURE_PUBLIC_URL:-https://${SERVER_NAME}:${HTTPS_PORT}/.well-known/mercure}
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET}
@@ -55,7 +60,14 @@ services:
       - database_data:/var/lib/postgresql/data:rw
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
       # - ./docker/db/data:/var/lib/mysql:rw
-###< doctrine/doctrine-bundle ###
+  ###< doctrine/doctrine-bundle ###
+
+  mongo:
+    image: mongo:6.0
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+      - ./docker/mongo-init:/docker-entrypoint-initdb.d/
 
 volumes:
   caddy_data:
@@ -65,4 +77,5 @@ volumes:
 
   ###> doctrine/doctrine-bundle ###
   database_data:
-###< doctrine/doctrine-bundle ###
+  ###< doctrine/doctrine-bundle ###
+  mongo_data:

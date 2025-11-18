@@ -38,6 +38,10 @@ RUN set -eux; \
 		opcache \
 		zip \
 	;
+# Installer MongoDB
+RUN apt-get update && apt-get install -y libssl-dev pkg-config && \
+    pecl install mongodb && \
+    docker-php-ext-enable mongodb
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
