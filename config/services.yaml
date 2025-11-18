@@ -30,3 +30,13 @@ services:
     App\Controller\EventController:
         arguments:
             $uploadsEventsDirectory: "%uploads_events_directory%"
+
+    MongoDB\Client:
+        class: MongoDB\Client
+        arguments:
+            - "%env(MONGO_URI)%"
+
+    App\Service\MongoNewsletterService:
+        arguments:
+            $client: '@MongoDB\Client'
+            $dbName: "%env(MONGO_DB)%"
