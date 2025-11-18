@@ -5,6 +5,7 @@
     color: colors.$bs-brown;
 }
 
-.card-body {
+.card-body,
+.card-footer {
     background-color: colors.$bs-lightPink;
 }
