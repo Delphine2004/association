@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\AnimalRepository;
+use App\Repository\EventRepository;
+use App\Enum\AdoptionStatus;
 use App\Form\AnimalSearchType;
-use App\Form\NewsletterType;
 use App\Service\MongoNewsletterService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,10 +24,10 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'home')]
-    public function renderHome(Request $request, MongoNewsletterService $newsletter): Response
+    public function renderHome(Request $request, MongoNewsletterService $newsletter, AnimalRepository $animalRepository, EventRepository $eventRepository): Response
     {
         if ($request->isMethod('POST')) {
-            $email = trim($request->request->get('email'));
+            $email = strtolower(trim($request->request->get('email')));
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $this->addFlash('error', 'Adresse email invalide.');
@@ -42,7 +43,15 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('home/index.html.twig');
+        $animalsToAdopt = $animalRepository->findAnimalsByAdoptionStatus(AdoptionStatus::A_ADOPTER);
+        $animalsAdopted = $animalRepository->findAnimalsByAdoptionStatus(AdoptionStatus::ADOPTE);
+        $events = $eventRepository->findFutureEvents();
+
+        return $this->render('home/index.html.twig', [
+            'animalsToAdopt' => $animalsToAdopt,
+            'animalsAdopted' => $animalsAdopted,
+            'events' => $events,
+        ]);
     }
 
     #[Route('/donation', name: 'donation')]
