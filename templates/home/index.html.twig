@@ -157,7 +157,7 @@ Pattes{% endblock %} {% block body %}
                                 class="carousel-item {% if loop.first %}active{% endif %}"
                             >
                                 <img
-                                    src="{{ asset('uploads/animals/' ~ animal.imageFilename) }}"
+                                    src="{{ asset('uploads/animals/' ~ animal.picture) }}"
                                     class="d-block img-fluid"
                                     alt="photo de {{ animal.name }}"
                                 />
@@ -225,7 +225,7 @@ Pattes{% endblock %} {% block body %}
                                 class="carousel-item {% if loop.first %}active{% endif %}"
                             >
                                 <img
-                                    src="{{ asset('uploads/animals/' ~ animal.imageFilename) }}"
+                                    src="{{ asset('uploads/animals/' ~ animal.picture) }}"
                                     class="d-block img-fluid"
                                     alt="photo de {{ animal.name }}"
                                 />
@@ -286,7 +286,7 @@ Pattes{% endblock %} {% block body %}
                             >
                                 <div class="card mx-auto">
                                     <img
-                                        src="{{ asset('uploads/events/'  ~ event.imageFilename) }}"
+                                        src="{{ asset('uploads/events/'  ~ event.picture) }}"
                                         class="card-img-top"
                                         alt="Photo événement de l'association"
                                     />
