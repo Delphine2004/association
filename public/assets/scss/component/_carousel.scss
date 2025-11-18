@@ -1,7 +1,12 @@
 #carousel-to-adopt,
 #carousel-adopted,
 #carousel-event {
-    max-width: 800px; /* largeur max du carrousel */
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#carousel-event {
+    max-width: 500px;
     margin: 0 auto;
 }
 
@@ -28,16 +33,14 @@
 
 @media (min-width: 768px) {
     #carousel-to-adopt .carousel-inner,
-    #carousel-adopted .carousel-inner,
-    #carousel-event .carousel-inner {
+    #carousel-adopted .carousel-inner {
         width: 60%;
     }
 }
 
 @media (min-width: 1200px) {
     #carousel-to-adopt .carousel-item img,
-    #carousel-adopted .carousel-item img,
-    #carousel-event .carousel-item img {
+    #carousel-adopted .carousel-item img {
         height: 750px;
     }
 
