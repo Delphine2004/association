@@ -1,110 +1,130 @@
 {% extends 'base.html.twig' %} {% block title %}Adoption - Coeurs à Quatre
 Pattes{% endblock %} {% block body %}
-<section id="adoption" class="container-fluid py-5">
-    <div class="container">
-        <div class="row mb-4 justify-content-center">
-            <div class="col-12 mx-auto text-center">
-                <div class="col-12">
-                    <img
-                        src="{{ asset('assets/img/autres/hero-adoption.jpg') }}"
-                        alt="Chien et chat qui se câlinent"
-                        class="img-fluid rounded"
-                        style="max-width: 70%; height: auto"
-                    />
+<main class="pt-5">
+    <section id="adoption" class="container-fluid py-5">
+        <div class="container">
+            <div class="row mb-4 justify-content-center">
+                <div class="col-12 mx-auto text-center">
+                    <div class="col-12">
+                        <img
+                            src="{{
+                                asset('assets/img/autres/hero-adoption.jpg')
+                            }}"
+                            alt="Chien et chat qui se câlinent"
+                            class="img-fluid rounded"
+                            style="max-width: 70%; height: auto"
+                        />
+                    </div>
                 </div>
-            </div>
 
-            <div class="row justify-content-center align-items-center mt-4">
-                <div class="m-auto">
-                    <h1 class="text-center mb-3">Adopter un animal</h1>
-                </div>
-                <div class="col-12 col-md-6">
-                    <p class="lead">
-                        Offrez une seconde chance à un compagnon qui n'attend
-                        que vous. Nos animaux sont vaccinés, stérilisés et prêts
-                        à rejoindre leur foyer pour toujours. Chiens, chats,
-                        lapins... chacun mérite une famille aimante. Parcourez
-                        nos profils et trouvez celui qui fera battre votre cœur.
-                    </p>
-                </div>
-                <div class="col-12 col-md-4 d-flex justify-content-end">
-                    <a href="#" class="btn">Conditions d'adoption</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="adoption-search container-fluid">
-    <div class="container">
-        <!-- Filtre -->
-        <div class="filter card p-4 shadow-sm mb-4">
-            <h5 class="text-center mb-3">Filtrer les animaux</h5>
-
-            {{ form_start(searchForm, { method: "get" }) }}
-            <div class="row g-3 mt-1 d-flex justify-content-around">
-                <div class="col-md-3">
-                    {{ form_row(searchForm.type) }}
-                </div>
-                <div class="col-md-3">
-                    {{ form_row(searchForm.race) }}
-                </div>
-                <div class="col-md-3">
-                    {{ form_row(searchForm.gender) }}
-                </div>
-            </div>
-            <div class="row g-3 mt-1 d-flex justify-content-around">
-                <div class="col-md-3">
-                    {{ form_row(searchForm.compatibleKid) }}
-                </div>
-                <div class="col-md-3">
-                    {{ form_row(searchForm.compatibleCat) }}
-                </div>
-                <div class="col-md-3">
-                    {{ form_row(searchForm.compatibleDog) }}
-                </div>
-            </div>
-            <div class="col-12 d-flex justify-content-center">
-                <button class="btn">Rechercher</button>
-            </div>
-
-            {{ form_end(searchForm) }}
-        </div>
-
-        <!-- Resultats -->
-        <div class="row m-5">
-            {% if animals is empty %}
-            <div class="col-12">
-                <div class="text-center">
-                    Aucun animal ne correspond à votre recherche
-                </div>
-            </div>
-            {% else %} {% for animal in animals %}
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    {% if animal.pictures|length > 0 %}
-                    <img
-                        src="{{ asset('uploads/animals/' ~ animal.pictures[0].fileName) }}"
-                        class="card-img-top"
-                        alt="{{ animal.name }}"
-                    />
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ animal.name }}</h5>
-                        <p class="mb-1">
-                            <strong>Type :</strong> {{ animal.type.value }}
+                <div class="row justify-content-center align-items-center mt-4">
+                    <div class="m-auto">
+                        <h1 class="text-center mb-3">Adopter un animal</h1>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <p class="lead">
+                            Offrez une seconde chance à un compagnon qui
+                            n'attend que vous. Nos animaux sont vaccinés,
+                            stérilisés et prêts à rejoindre leur foyer pour
+                            toujours. Chiens, chats, lapins... chacun mérite une
+                            famille aimante. Parcourez nos profils et trouvez
+                            celui qui fera battre votre cœur.
                         </p>
-                        <p class="mb-1">
-                            <strong>Race :</strong> {{ animal.race.value }}
-                        </p>
-                        <p class="mb-1">
-                            <strong>Genre :</strong> {{ animal.gender.value }}
-                        </p>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <a href="{{ path('adoption_terms') }}" class="btn"
+                            >Conditions d'adoption</a
+                        >
                     </div>
                 </div>
             </div>
-            {% endfor %} {% endif %}
         </div>
-    </div>
-</section>
+    </section>
+
+    <section class="adoption-search container-fluid">
+        <div class="container">
+            <!-- Filtre -->
+            <div class="filter card p-4 shadow-sm mb-4">
+                <h5 class="text-center mb-3">Filtrer les animaux</h5>
+
+                {{ form_start(searchForm, { method: "get" }) }}
+                <div class="row g-3 mt-1 d-flex justify-content-around">
+                    <div class="col-md-3">
+                        {{ form_row(searchForm.type) }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form_row(searchForm.race) }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form_row(searchForm.gender) }}
+                    </div>
+                </div>
+                <div class="row g-3 mt-1 d-flex justify-content-around">
+                    <div class="col-md-3">
+                        {{ form_row(searchForm.compatibleKid) }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form_row(searchForm.compatibleCat) }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form_row(searchForm.compatibleDog) }}
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <button class="btn">Rechercher</button>
+                </div>
+
+                {{ form_end(searchForm) }}
+            </div>
+
+            <!-- Resultats -->
+            <div class="row m-5">
+                {% if animals is empty %}
+                <div class="col-12">
+                    <div class="text-center">
+                        Aucun animal ne correspond à votre recherche
+                    </div>
+                </div>
+                {% else %} {% for animal in animals %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img
+                            src="{{ asset('uploads/animals/' ~ animal.picture) }}"
+                            class="card-img-top"
+                            alt="{{ animal.name }}"
+                        />
+
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                {{ animal.name }}
+                            </h5>
+                            <p class="mb-1">
+                                <strong>Type :</strong> {{ animal.type.value }}
+                            </p>
+                            <p class="mb-1">
+                                <strong>Race :</strong> {{ animal.race.value }}
+                            </p>
+                            <p class="mb-1">
+                                <strong>Genre :</strong>
+                                {{ animal.gender.value }}
+                            </p>
+                        </div>
+                        <div class="card-footer border-0">
+                            <a
+                                href="{{
+                                    path('adoption_animal_show', {
+                                        id: animal.id
+                                    })
+                                }}"
+                                class="btn btn-outline-primary w-100"
+                                >Voir la fiche</a
+                            >
+                        </div>
+                    </div>
+                </div>
+                {% endfor %} {% endif %}
+            </div>
+        </div>
+    </section>
+</main>
 {% endblock %}
