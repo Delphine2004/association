@@ -2,75 +2,81 @@
 Pattes{% endblock %} {% block body %}
 <main class="pt-5">
     <!--Section hero-->
-    <section id="hero" class="container-fluid mx-auto py-5">
-        <div class="container row justify-content-center align-content-center">
-            <!--Image-->
-            <div
-                class="imgHero col-12 col-md-5 mb-4 mb-md-0 d-flex justify-content-center"
-            >
-                <img
-                    src="{{ asset('assets/img/Logo/Logo.webp') }}"
-                    alt="Logo association Coeurs à quatre pattes"
-                    class="img-fluid object-fit-cover"
-                />
-            </div>
-            <!-- Titre et boutons-->
-            <div
-                class="col-12 col-md-7 d-flex flex-column align-content-center py-5"
-            >
-                <!--Le titre et le slogan-->
-                <div class="mb-4">
-                    <h1 class="text-center text-lg-end fw-bold pb-3 hero-title">
-                        Cœur à Quatre Pattes
-                    </h1>
-                    <p class="text-center text-lg-start fst-italic hero-slogan">
-                        "Offrez-leur un foyer, gagnez un ami pour la vie."
-                    </p>
-                </div>
-                <!--Boutons-->
+    <section id="hero" class="container-fluid py-5">
+        <div class="container">
+            <div class="row justify-content-center align-content-center">
+                <!--Image-->
                 <div
-                    class="d-flex flex-column flex-md-row justify-content-md-end gap-4"
+                    class="imgHero col-12 col-md-5 mb-4 mb-md-0 d-flex justify-content-center"
                 >
-                    <!-- Bouton sur mobile -->
-                    <a
-                        class="btn w-100 d-md-none"
-                        href="{{ path('donation') }}"
-                        role="button"
-                        aria-label="Donner"
-                        >Donner</a
+                    <img
+                        src="{{ asset('assets/img/Logo/Logo.webp') }}"
+                        alt="Logo association Coeurs à quatre pattes"
+                        class="img-fluid object-fit-cover"
+                    />
+                </div>
+                <!-- Titre et boutons-->
+                <div
+                    class="col-12 col-md-7 d-flex flex-column align-content-center py-5"
+                >
+                    <!--Le titre et le slogan-->
+                    <div class="mb-4">
+                        <h1
+                            class="text-center text-lg-end fw-bold pb-3 hero-title"
+                        >
+                            Cœur à Quatre Pattes
+                        </h1>
+                        <p
+                            class="text-center text-lg-start fst-italic hero-slogan"
+                        >
+                            "Offrez-leur un foyer, gagnez un ami pour la vie."
+                        </p>
+                    </div>
+                    <!--Boutons-->
+                    <div
+                        class="d-flex flex-column flex-md-row justify-content-md-end gap-4"
                     >
+                        <!-- Bouton sur mobile -->
+                        <a
+                            class="btn w-100 d-md-none"
+                            href="{{ path('donation') }}"
+                            role="button"
+                            aria-label="Donner"
+                            >Donner</a
+                        >
 
-                    <a
-                        class="btn w-100 d-md-none"
-                        href="{{ path('adoption') }}"
-                        role="button"
-                        aria-label="Adopter"
-                        >Adopter</a
-                    >
+                        <a
+                            class="btn w-100 d-md-none"
+                            href="{{ path('adoption') }}"
+                            role="button"
+                            aria-label="Adopter"
+                            >Adopter</a
+                        >
 
-                    <!-- Bouton sur desktop -->
-                    <a
-                        class="btn px-4 d-none d-md-inline"
-                        href="{{ path('donation') }}"
-                        role="button"
-                        aria-label="Donner"
-                        >Donner</a
-                    >
+                        <!-- Bouton sur desktop -->
+                        <a
+                            class="btn px-4 d-none d-md-inline"
+                            href="{{ path('donation') }}"
+                            role="button"
+                            aria-label="Donner"
+                            >Donner</a
+                        >
 
-                    <a
-                        class="btn px-4 d-none d-md-inline"
-                        href="{{ path('adoption') }}"
-                        role="button"
-                        aria-label="Adopter"
-                        >Adopter</a
-                    >
+                        <a
+                            class="btn px-4 d-none d-md-inline"
+                            href="{{ path('adoption') }}"
+                            role="button"
+                            aria-label="Adopter"
+                            >Adopter</a
+                        >
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!--Section home-->
-    <section id="home" class="container-fluid mx-auto py-5">
+    <section id="home" class="container-fluid py-5">
         <div class="container">
             <!-- Présentation -->
             <h2 class="text-center mb-4">Qui sommes-nous&nbsp;?</h2>
@@ -117,143 +123,108 @@ Pattes{% endblock %} {% block body %}
     </section>
 
     <!--Section adoption-->
-    <section id="adoption" class="container-fluid mx-auto py-5">
+    <section id="adoption" class="container-fluid py-5">
         <!--Section à adopter-->
         <div class="container">
-            <!--Presentation-->
-            <div class="col-10 text-center mx-auto py-5">
-                <h2 class="mb-4">Ils n'attendent que vous</h2>
-                <p class="mb-4">
-                    Adopter un animal, c'est offrir une seconde chance à un être
-                    vivant en quête d'amour. Chaque adoption transforme deux
-                    vies : celle de l'animal recueilli et celle du foyer qui
-                    s'enrichit d'une présence affectueuse et fidèle.
-                </p>
+            <!-- Présentation -->
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 text-center mx-auto pt-5">
+                    <h2 class="text-center mb-4">Ils n'attendent que vous</h2>
+                    <p class="mb-4">
+                        Adopter un animal, c'est offrir une seconde chance à un
+                        être vivant en quête d'amour. Chaque adoption transforme
+                        deux vies : celle de l'animal recueilli et celle du
+                        foyer qui s'enrichit d'une présence affectueuse et
+                        fidèle.
+                    </p>
+                </div>
             </div>
 
             <!--Carousel des animaux à adopter-->
-            <div class="mx-auto py-5">
-                <div
-                    id="carousel-to-adopt"
-                    class="carousel slide mx-auto"
-                    data-bs-ride="carousel"
-                    data-bs-interval="5000"
-                    aria-label="Carrousel des animaux à adopter"
-                >
-                    <!--Les images du carousel-->
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img
-                                src="{{
-                                    asset('assets/img/animaux/chat1.jpg')
-                                }}"
-                                class="d-block img-fluid"
-                                alt="animal de compagnie"
-                            />
-                            <div class="carousel-caption d-block">
-                                <h5>Nom de l'animal et son âge</h5>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item">
-                            <img
-                                src="{{
-                                    asset('assets/img/animaux/chien1.jpg')
-                                }}"
-                                class="d-block img-fluid"
-                                alt="animal de compagnie"
-                            />
-                            <div class="carousel-caption d-block">
-                                <h5>Nom de l'animal et son âge</h5>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item">
-                            <img
-                                src="{{
-                                    asset('assets/img/animaux/chat3.jpg')
-                                }}"
-                                class="d-block img-fluid"
-                                alt="animal de compagnie"
-                            />
-                            <div class="carousel-caption d-block">
-                                <h5>Nom de l'animal et son âge</h5>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 mx-auto py-5">
+                    <div
+                        id="carousel-to-adopt"
+                        class="carousel slide mx-auto"
+                        data-bs-ride="carousel"
+                        data-bs-interval="5000"
+                        aria-label="Carrousel des animaux à adopter"
+                    >
+                        <!--Les images du carousel-->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img
+                                    src="{{
+                                        asset('assets/img/animaux/chat1.jpg')
+                                    }}"
+                                    class="d-block img-fluid"
+                                    alt="animal de compagnie"
+                                />
+                                <div class="carousel-caption d-block">
+                                    <h5 class="text-center">
+                                        Nom de l'animal et son âge
+                                    </h5>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Lien vers la page adoption -->
-                <div class="d-flex justify-content-center">
-                    <a
-                        class="btn m-4 px-4"
-                        href="{{ path('adoption') }}"
-                        role="button"
-                        aria-label="Rechercher les animaux à adopter"
-                        >Rechercher</a
-                    >
-                </div>
+            <!-- Lien vers la page adoption -->
+            <div class="d-flex justify-content-center">
+                <a
+                    class="btn m-4 px-4"
+                    href="{{ path('adoption') }}"
+                    role="button"
+                    aria-label="Rechercher les animaux à adopter"
+                    >Rechercher</a
+                >
             </div>
         </div>
 
         <!--Section adoptés-->
         <div class="container">
             <!--Presentation-->
-            <div class="col-10 text-center mx-auto py-5">
-                <h2 class="mb-4">Ils ont trouvé leur nouveau foyer</h2>
-                <p class="mb-4">
-                    Un temps sans foyer, nos protégés vivent aujourd'hui leur
-                    meilleure vie chez des familles aimantes. Leurs regards
-                    lumineux et leurs jeux joyeux témoignent du bonheur retrouvé
-                    grâce à votre générosité.
-                </p>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 text-center mx-auto pt-5">
+                    <h2 class="text-center mb-4">
+                        Ils ont trouvé leur nouveau foyer
+                    </h2>
+                    <p class="mb-4">
+                        Un temps sans foyer, nos protégés vivent aujourd'hui
+                        leur meilleure vie chez des familles aimantes. Leurs
+                        regards lumineux et leurs jeux joyeux témoignent du
+                        bonheur retrouvé grâce à votre générosité.
+                    </p>
+                </div>
             </div>
 
             <!--Carousel des animaux adoptés-->
-            <div class="mx-auto py-5">
-                <div
-                    id="carousel-adopted"
-                    class="carousel slide mx-auto"
-                    data-bs-ride="carousel"
-                    data-bs-interval="5000"
-                    aria-label="Carrousel des animaux adoptés"
-                >
-                    <!-- Les Images du carousel des animaux adoptés -->
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img
-                                src="{{
-                                    asset('assets/img/animaux/chien2.jpg')
-                                }}"
-                                class="d-block img-fluid"
-                                alt="animal de compagnie"
-                            />
-                            <div class="carousel-caption d-block">
-                                <h5>Nom de l'animal et son âge</h5>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img
-                                src="{{
-                                    asset('assets/img/animaux/chien3.jpg')
-                                }}"
-                                class="d-block img-fluid"
-                                alt="animal de compagnie"
-                            />
-                            <div class="carousel-caption d-block">
-                                <h5>Nom de l'animal et son âge</h5>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img
-                                src="{{
-                                    asset('assets/img/animaux/chat2.jpg')
-                                }}"
-                                class="d-block img-fluid"
-                                alt="animal de compagnie"
-                            />
-                            <div class="carousel-caption d-block">
-                                <h5>Nom de l'animal et son âge</h5>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 mx-auto py-5">
+                    <div
+                        id="carousel-adopted"
+                        class="carousel slide mx-auto"
+                        data-bs-ride="carousel"
+                        data-bs-interval="5000"
+                        aria-label="Carrousel des animaux adoptés"
+                    >
+                        <!-- Les Images du carousel des animaux adoptés -->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img
+                                    src="{{
+                                        asset('assets/img/animaux/chien2.jpg')
+                                    }}"
+                                    class="d-block img-fluid"
+                                    alt="animal de compagnie"
+                                />
+                                <div class="carousel-caption d-block">
+                                    <h5 class="text-center">
+                                        Nom de l'animal et son âge
+                                    </h5>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -263,36 +234,38 @@ Pattes{% endblock %} {% block body %}
     </section>
 
     <!--Section événements-->
-    <section id="event" class="container-fluid mx-auto py-5">
+    <section id="event" class="container-fluid py-5">
         <div class="container">
             <!-- Présentation -->
-            <div class="col-10 text-center mx-auto py-5">
-                <h2 class="mb-4">Les Evénements</h2>
-                <p>
-                    Découvrez nos prochains rendez-vous solidaires ! Journées
-                    portes ouvertes, collectes de dons, séances d'adoption et
-                    ateliers de sensibilisation - notre calendrier regorge
-                    d'occasions de vous engager pour la cause animale.
-                    Rejoignez-nous pour ces moments de partage où chaque
-                    participation contribue concrètement au bien-être de nos
-                    protégés.
-                </p>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 text-center mx-auto pb-5">
+                    <h2 class="text-center mb-4">Les Evénements</h2>
+                    <p class="mb-4">
+                        Découvrez nos prochains rendez-vous solidaires !
+                        Journées portes ouvertes, collectes de dons, séances
+                        d'adoption et ateliers de sensibilisation - notre
+                        calendrier regorge d'occasions de vous engager pour la
+                        cause animale. Rejoignez-nous pour ces moments de
+                        partage où chaque participation contribue concrètement
+                        au bien-être de nos protégés.
+                    </p>
+                </div>
             </div>
 
             <!-- Carousel des événements -->
-            <div class="mx-auto py-5">
-                <div
-                    id="carousel-event"
-                    class="carousel slide mx-auto"
-                    data-bs-ride="carousel"
-                    data-bs-interval="5000"
-                    aria-label="Carrousel des événements à venir"
-                >
-                    <!--Les images du carousel-->
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="col-12 col-sm-6 col-md-4">
-                                <div class="card">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 mx-auto py-5">
+                    <div
+                        id="carousel-event"
+                        class="carousel slide mx-auto"
+                        data-bs-ride="carousel"
+                        data-bs-interval="5000"
+                        aria-label="Carrousel des événements à venir"
+                    >
+                        <!--Les images du carousel-->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="card mx-auto">
                                     <img
                                         src="{{
                                             asset(
@@ -314,70 +287,22 @@ Pattes{% endblock %} {% block body %}
                                 </div>
                             </div>
                         </div>
-
-                        <div class="carousel-item">
-                            <div class="col-12 col-sm-6 col-md-4">
-                                <div class="card">
-                                    <img
-                                        src="{{
-                                            asset(
-                                                'assets/img/events/balade.jpg'
-                                            )
-                                        }}"
-                                        class="card-img-top"
-                                        alt="promenade des animaux"
-                                    />
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            Rejoignez notre Grande Promenade
-                                            annuelle le 23 mai ! Une balade
-                                            joyeuse où maîtres et animaux
-                                            adoptés partagent un moment
-                                            inoubliable ensemble.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item">
-                            <div class="col-12 col-sm-6 col-md-4">
-                                <div class="card">
-                                    <img
-                                        src="{{
-                                            asset('assets/img/events/noël.jpg')
-                                        }}"
-                                        class="card-img-top"
-                                        alt="Collecte"
-                                    />
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            Collecte solidaire au centre
-                                            commercial Les Rives du 10 au 12
-                                            juillet : vos dons de nourriture et
-                                            accessoires sauveront des vies !
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Newsletter -->
-        <div class="container">
-            <div class="col-10 text-center mx-auto py-5">
+            <!-- Newsletter -->
+            <div class="row justify-content-center">
                 <!-- Présentation newsletter -->
-                <div class="col-10 col-md-8 mx-auto">
-                    <p>
+                <div class="col-12 col-md-8 text-center mx-auto pt-5">
+                    <p class="mb-4">
                         Restez informé de nos actions et sauvetages !
                         Inscrivez-vous à notre newsletter mensuelle pour ne
                         manquer aucune actualité de nos protégés.
                     </p>
                 </div>
-                <div class="col-10 col-md-8 mx-auto">
+                <!--  -->
+                <div class="col-12 col-md-8 mx-auto">
                     <form
                         class="row g-3 align-items-end"
                         action="{{ path('home') }}"
@@ -410,12 +335,12 @@ Pattes{% endblock %} {% block body %}
         </div>
     </section>
 
-    <!--Section adress-->
-    <section id="adress" class="container-fluid mx-auto py-5">
+    <!--Section adresse -->
+    <section id="adress" class="container-fluid py-5">
         <div class="container">
             <h2 class="text-center mb-4">Où nous trouver ?</h2>
 
-            <div class="row justify-content-center text-center mx-auto py-5">
+            <div class="row justify-content-center text-center py-5">
                 <!-- Horaires + Adresse -->
                 <div class="col-12 col-md-4 mx-auto">
                     <h4>Horaires</h4>
@@ -448,7 +373,7 @@ Pattes{% endblock %} {% block body %}
                 </div>
 
                 <!-- Carte -->
-                <div class="col-12 col-md-8 mb-4">
+                <div class="col-12 col-md-6 mb-4">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2648.7113213397724!2d2.6783482999999992!3d48.4044867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e5f30b363aa115%3A0x5f677a18dd01695f!2sParking%20Mont%20Aigu!5e0!3m2!1sfr!2sfr!4v1746388522468!5m2!1sfr!2sfr"
                         width="100%"
@@ -462,10 +387,10 @@ Pattes{% endblock %} {% block body %}
             </div>
 
             <!-- Contact -->
-            <div class="row justify-content-center text-center mx-auto py-5">
+            <div class="row justify-content-center text-center py-5">
                 <!-- Présentation contact -->
                 <div class="col-12 col-md-9 mb-3 text-md-start">
-                    <p>
+                    <p class="mb-4">
                         Vous n'avez pas trouvé ce que vous chercher sur le site
                         ou vous avez besoin de renseignement complémentaire?
                         N'hésitez pas à nos contacter via ce formulaire. Nous
