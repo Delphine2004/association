@@ -8,19 +8,13 @@
 
 {% if form.role is defined %}
 <div class="mb-4">
-    {{ form_label(form.password) }}
-    {{ form_widget(form.password) }}
-    {{ form_errors(form.password) }}
-</div>
-
-<div class="mb-4">
     {{ form_label(form.role) }}
     {{ form_widget(form.role) }}
     {{ form_errors(form.role) }}
 </div>
 {% endif %}
 
-<button class="btn">
+<button class="btn w-100">
     {{ button_label|default('Enregistrer') }}
 </button>
 
