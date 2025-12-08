@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Validator\Constraints\File;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\Options;
@@ -63,6 +64,18 @@ class AnimalType extends AbstractType
                     'mapped' => false,
                     'required' => true,
                     'attr' => ['class' => 'form-control',],
+                    'constraints' => [
+                        new File([
+                            'maxSize' => '10M', // ICI tu règles la taille
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/webp',
+                            ],
+                            'mimeTypesMessage' => 'Merci d’uploader une image valide (jpeg, png, webp)',
+                        ])
+                    ],
+
                 ])
                 ->add('birthday', DateType::class, [
                     'label' => 'Date de naissance',
@@ -145,107 +158,6 @@ class AnimalType extends AbstractType
                 ])
             ;
         }
-
-        if ($mode === 'staffSearch') {
-            $builder
-                ->add('id', TextType::class, [
-                    'required' => false,
-                ])
-                ->add('name', TextType::class, [
-                    'label' => 'Nom de l\'animal',
-                    'required' => false,
-                ])
-                ->add('type', EnumType::class, [
-                    'class' => AnimalCategory::class,
-                    'choice_label' => fn(AnimalCategory $choice) => $choice->value,
-                    'required' => false,
-                ])
-                ->add('race', EnumType::class, [
-                    'class' => AnimalRace::class,
-                    'choice_label' => fn(AnimalRace $choice) => $choice->value,
-                    'required' => false,
-                ])
-                ->add('gender', EnumType::class, [
-                    'class' => AnimalGender::class,
-                    'choice_label' => fn(AnimalGender $choice) => $choice->value,
-                    'required' => false,
-                ])
-                ->add('status', EnumType::class, [
-                    'class' => AdoptionStatus::class,
-                    'choice_label' => fn(AdoptionStatus $choice) => $choice->value,
-                    'required' => false,
-                ])
-                ->add('notSterilized', CheckboxType::class, [
-                    'required' => false,
-                    'mapped' => false,
-                ])
-                ->add('notVaccinated', CheckboxType::class, [
-                    'required' => false,
-                    'mapped' => false,
-                ])
-                ->add('arrivalDate', DateType::class, [
-                    'required' => false,
-                    'widget' => 'single_text',
-                ])
-            ;
-        }
-
-        if ($mode === 'visitorSearch') {
-            $builder
-                ->add('type', EnumType::class, [
-                    'class' => AnimalCategory::class,
-                    'label' => 'Type',
-                    'choice_label' => fn(AnimalCategory $choice) => $choice->value,
-                    'placeholder' => 'Choisir un type', // Première option vide
-                    'required' => false,
-                    'attr' => [
-                        'class' => 'form-select', // class bootstrap
-                    ],
-                ])
-                ->add('race', EnumType::class, [
-                    'class' => AnimalRace::class,
-                    'label' => 'Race',
-                    'choice_label' => fn(AnimalRace $choice) => $choice->value,
-                    'placeholder' => 'Choisir une race', // Première option vide
-
-                    'required' => false,
-                    'attr' => [
-                        'class' => 'form-select',
-                    ],
-                ])
-                ->add('gender', EnumType::class, [
-                    'class' => AnimalGender::class,
-                    'label' => 'Genre',
-                    'choice_label' => fn(AnimalGender $choice) => $choice->value,
-                    'placeholder' => 'Choisir un genre', // Première option vide
-                    'required' => false,
-                    'attr' => [
-                        'class' => 'form-select',
-                    ],
-                ])
-                ->add('compatibleKid', CheckboxType::class, [
-                    'label' => 'Compatible Enfants',
-                    'required' => false,
-                    'attr' => [
-                        'class' => 'form-check-input',
-                    ],
-                ])
-                ->add('compatibleCat', CheckboxType::class, [
-                    'label' => 'Compatible Chats',
-                    'required' => false,
-                    'attr' => [
-                        'class' => 'form-check-input',
-                    ],
-                ])
-                ->add('compatibleDog', CheckboxType::class, [
-                    'label' => 'Compatible Chiens',
-                    'required' => false,
-                    'attr' => [
-                        'class' => 'form-check-input',
-                    ],
-                ])
-            ;
-        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -255,13 +167,5 @@ class AnimalType extends AbstractType
             'mode' => 'create', // valeur par défaut
             'csrf_protection' => true,
         ]);
-
-        $resolver->setNormalizer('data_class', function (Options $options, $value) {
-            return $options['mode'] === 'staffSearch' ? null : $value;
-        });
-
-        $resolver->setNormalizer('csrf_protection', function (Options $options, $value) {
-            return $options['mode'] === 'staffSearch' ? false : $value;
-        });
     }
 }
