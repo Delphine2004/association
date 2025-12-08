@@ -32,6 +32,7 @@
 # Docker
 # Logs de Docker (optionnel)
 docker-compose.override.yml
+docker/db/data/*
 
 # Fichiers temporaires, volumes ou données
 /data/
