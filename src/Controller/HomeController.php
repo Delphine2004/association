@@ -58,28 +58,13 @@ class HomeController extends AbstractController
     #[Route('/donation', name: 'donation')]
     public function renderDonation(): Response
     {
-        return $this->render('home/donation.html.twig', [
-            'message' => 'ajout Bootstrap OK !'
-        ]);
+        return $this->render('home/donation.html.twig');
     }
 
     #[Route('/adoption', name: 'adoption')]
-    public function renderAdoption(Request $request, AnimalRepository $animalRepository): Response
+    public function renderAdoption(): Response
     {
-        // Création du formulaire
-        $form = $this->createForm(AnimalType::class);
-        $form->handleRequest($request);
-
-        // Données du formulaire
-        $criteria = $form->getData();
-
-        // Récupération des animaux filtrés
-        $animals = $animalRepository->findAnimalsByFilters($criteria);
-
-        return $this->render('home/adoption.html.twig', [
-            'searchForm' => $form->createView(),
-            'animals' => $animals,
-        ]);
+        return $this->render('home/adoption.html.twig');
     }
 
     #[Route('/adoption/{id}', name: 'adoption_animal_show', methods: ['GET'])]
