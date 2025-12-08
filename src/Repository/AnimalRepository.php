@@ -58,47 +58,38 @@ class AnimalRepository extends ServiceEntityRepository
         int $limit = 10,
         string $orderBy = 'DESC'
     ): array {
+
         $qb = $this->createQueryBuilder('a');
 
-        if (!$criteria) {
-            return $qb->getQuery()->getResult();
+        if (!empty($criteria['id'])) {
+            $qb->andWhere('a.id = :id')
+                ->setParameter('id', $criteria['id']);
+        }
+
+        if (!empty($criteria['name'])) {
+            $qb->andWhere('a.name LIKE :name')
+                ->setParameter('name', '%' . $criteria['name'] . '%');
+        }
+
+        $enumFields = ['type', 'race', 'gender', 'status'];
+        foreach ($enumFields as $field) {
+            if (!empty($criteria[$field])) {
+                $qb->andWhere("a.$field = :$field")
+                    ->setParameter($field, $criteria[$field]);
+            }
+        }
+
+        $boolFields = ['compatibleKid', 'compatibleCat', 'compatibleDog', 'sterilized', 'vaccinated'];
+        foreach ($boolFields as $field) {
+            if (isset($criteria[$field])) {
+                $qb->andWhere("a.$field = :$field")
+                    ->setParameter($field, $criteria[$field]);
+            }
         }
 
         if (!empty($criteria['arrivalDate'])) {
             $qb->andWhere('a.arrivalDate = :arrivalDate')
                 ->setParameter('arrivalDate', $criteria['arrivalDate']->format('Y-m-d'));
-        }
-
-        if (!empty($criteria['status'])) {
-            $qb->andWhere('a.status = :status')
-                ->setParameter('status', $criteria['status']->value);
-        }
-
-        if (!empty($criteria['type'])) {
-            $qb->andWhere('a.type = :type')
-                ->setParameter('type', $criteria['type']->value);
-        }
-
-        if (!empty($criteria['race'])) {
-            $qb->andWhere('a.race = :race')
-                ->setParameter('race', $criteria['race']->value);
-        }
-
-        if (!empty($criteria['gender'])) {
-            $qb->andWhere('a.gender = :gender')
-                ->setParameter('gender', $criteria['gender']->value);
-        }
-
-        if (!empty($criteria['compatibleKid'])) {
-            $qb->andWhere('a.compatibleKid = true');
-        }
-
-        if (!empty($criteria['compatibleCat'])) {
-            $qb->andWhere('a.compatibleCat = true');
-        }
-
-        if (!empty($criteria['compatibleDog'])) {
-            $qb->andWhere('a.compatibleDog = true');
         }
 
         return $qb->orderBy('a.updatedAt',  $orderBy)
