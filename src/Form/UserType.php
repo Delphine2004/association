@@ -11,6 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,38 +19,154 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('password', PasswordType::class, [
-                'label' =>  'Mot de passe',
-                'required' => true, // seulement pour la création
-                'mapped' => false, // n'est pas mappé avec la bd car il sera hashé
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' =>  'Mot de passe sécurisé',
-                ],
-                'constraints' =>  [ // validations uniquement à la création
-                    new Assert\NotBlank(['message' => 'Le mot de passe est obligatoire.']),
-                    new Assert\Length([
-                        'min' => 8,
-                        'max' => 255,
-                        'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
-                        'maxMessage' => 'Le mot de passe ne peut pas dépasser {{ limit }} caractères.',
-                    ]),
-                    new Assert\Regex([
-                        'pattern' => RegexPatterns::PASSWORD,
-                        'message' => 'Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.',
-                    ]),
-                    new Assert\PasswordStrength([
-                        'minScore' => Assert\PasswordStrength::STRENGTH_MEDIUM,
-                    ]),
-                ],
-            ]);
+        $mode = $options['mode'];
+
+        // Pour l'admin: création d'utilisateur
+        if ($mode === 'create') {
+            $builder
+                ->add('email', EmailType::class, [
+                    'label' => 'Adresse e-mail',
+                    'required' => true,
+                    'attr' => [
+                        'class' => 'form-control',
+                        'placeholder' => 'exemple@email.com'
+                    ],
+                ])
+                ->add('password', RepeatedType::class, [
+                    'type' => PasswordType::class,
+                    'first_options' => [
+                        'label' => 'Mot de passe',
+                        'attr' => ['class' => 'form-control'],
+                    ],
+                    'second_options' => [
+                        'label' => 'Confirmer le mot de passe',
+                        'attr' => ['class' => 'form-control'],
+                    ],
+                    'label' => false,
+                    'required' => true,
+                    'mapped' => false, // n'est pas mappé avec la bd car il sera hashé
+                    'attr' => ['class' => 'form-control'],
+                    'constraints' => [
+                        new Assert\NotBlank(['message' => 'Le mot de passe est obligatoire.']),
+                        new Assert\Length([
+                            'min' => 12,
+                            'max' => 255,
+                            'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
+                            'maxMessage' => 'Le mot de passe ne peut pas dépasser {{ limit }} caractères.',
+                        ]),
+                        new Assert\Regex([
+                            'pattern' => RegexPatterns::PASSWORD,
+                            'message' => 'Le mot de passe doit contenir au moins 12 caractères incluant une majuscule, une minuscule, un chiffre et un caractère spécial.',
+                        ]),
+                    ],
+                ])
+                ->add('role', EnumType::class, [
+                    'class' => UserRole::class,
+                    'label' => 'Rôle',
+                    // Récupère toutes les valeurs de l'Enum et filtre le rôle admin
+                    'choices' => array_reduce(UserRole::cases(), function ($filteredRoles, UserRole $role) {
+                        if ($role !== UserRole::ADMIN) {
+                            $filteredRoles[$role->value] = $role;
+                        }
+                        return $filteredRoles;
+                    }, []),
+                    'choice_label' => fn(UserRole $choice) => $choice->name,
+                    'placeholder' => 'Choisir un rôle', // Première option vide
+                    'required' => false,
+                    'mapped' => false,
+                    'attr' => ['class' => 'form-select',],
+                ]);
+        }
+
+        // Pour l'admin : modification de l'email de l'utilisateur
+        if ($mode === 'updateUserByAdmin') {
+            $builder
+                ->add('email', EmailType::class, [
+                    'label' => 'Adresse e-mail',
+                    'required' => false,
+                    'attr' => [
+                        'class' => 'form-control',
+                        'placeholder' => 'exemple@exemple.com'
+                    ],
+                ]);
+        }
+
+        // Pour l'admin : modification de son email et de son mot de passe
+        if ($mode === 'updatAdmin') {
+            $builder
+                ->add('email', EmailType::class, [
+                    'label' => 'Adresse e-mail',
+                    'required' => false,
+                    'attr' => [
+                        'class' => 'form-control',
+                        'placeholder' => 'exemple@email.com'
+                    ],
+                ])
+                ->add('password', RepeatedType::class, [
+                    'type' => PasswordType::class,
+                    'first_options' => [
+                        'label' => 'Mot de passe',
+                        'attr' => ['class' => 'form-control'],
+                    ],
+                    'second_options' => [
+                        'label' => 'Confirmer le mot de passe',
+                        'attr' => ['class' => 'form-control'],
+                    ],
+                    'required' => true,
+                    'mapped' => false, // n'est pas mappé avec la bd car il sera hashé
+                    'constraints' => [
+                        new Assert\NotBlank(['message' => 'Le mot de passe est obligatoire.']),
+                        new Assert\Length([
+                            'min' => 12,
+                            'max' => 255,
+                            'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
+                            'maxMessage' => 'Le mot de passe ne peut pas dépasser {{ limit }} caractères.',
+                        ]),
+                        new Assert\Regex([
+                            'pattern' => RegexPatterns::PASSWORD,
+                            'message' => 'Le mot de passe doit contenir au moins 12 caractères incluant une majuscule, une minuscule, un chiffre et un caractère spécial.',
+                        ]),
+                    ],
+                ]);
+        }
+
+        // Pour l'utilisateur : modification mot de passe
+        if ($mode === 'updatUser') {
+            $builder
+                ->add('password', RepeatedType::class, [
+                    'type' => PasswordType::class,
+                    'first_options' => [
+                        'label' => 'Mot de passe',
+                        'attr' => ['class' => 'form-control'],
+                    ],
+                    'second_options' => [
+                        'label' => 'Confirmer le mot de passe',
+                        'attr' => ['class' => 'form-control'],
+                    ],
+                    'required' => true,
+                    'mapped' => false, // n'est pas mappé avec la bd car il sera hashé
+                    'constraints' => [
+                        new Assert\NotBlank(['message' => 'Le mot de passe est obligatoire.']),
+                        new Assert\Length([
+                            'min' => 12,
+                            'max' => 255,
+                            'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
+                            'maxMessage' => 'Le mot de passe ne peut pas dépasser {{ limit }} caractères.',
+                        ]),
+                        new Assert\Regex([
+                            'pattern' => RegexPatterns::PASSWORD,
+                            'message' => 'Le mot de passe doit contenir au moins 12 caractères incluant une majuscule, une minuscule, un chiffre et un caractère spécial.',
+                        ]),
+                    ],
+                ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'mode' => 'create', // valeur par défaut
         ]);
     }
 }
