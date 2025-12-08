@@ -16,7 +16,7 @@ endblock %} {% block body %}
                 <h5 class="text-center mb-4">Filtrer les animaux</h5>
                 <form id="search-form">
                     <div class="row g-3 mb-3 d-flex justify-content-around">
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <label class="form-label" for="animal-id"
                                 >Identifiant</label
                             >
@@ -27,7 +27,7 @@ endblock %} {% block body %}
                                 id="animal-id"
                             />
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <label class="form-label" for="name">Nom</label>
                             <input
                                 class="form-control"
@@ -39,7 +39,7 @@ endblock %} {% block body %}
                     </div>
 
                     <div class="row g-3 mb-3 d-flex justify-content-around">
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <label class="form-label" for="status"
                                 >Statut</label
                             >
@@ -56,7 +56,7 @@ endblock %} {% block body %}
                                 <option value="Adopté">Adopté</option>
                             </select>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <label class="form-label" for="gender">Genre</label>
                             <select
                                 class="form-select"
@@ -73,7 +73,7 @@ endblock %} {% block body %}
                     </div>
 
                     <div class="row g-3 mb-3 d-flex justify-content-around">
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <label class="form-label" for="type"
                                 >Catégorie</label
                             >
@@ -87,7 +87,7 @@ endblock %} {% block body %}
                                 <option value="Autre">Autre</option>
                             </select>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <label class="form-label" for="race">Race</label>
                             <select class="form-select" name="race" id="race">
                                 <option selected value="">
@@ -154,6 +154,22 @@ endblock %} {% block body %}
                                 <label
                                     class="form-check-label"
                                     for="not-sterilized"
+                                    >Non stérilisé</label
+                                >
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check form-check-inline">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    name="notChippedd"
+                                    id="not-chippedd"
+                                    value="1"
+                                />
+                                <label
+                                    class="form-check-label"
+                                    for="not-chippedd"
                                     >Non stérilisé</label
                                 >
                             </div>
