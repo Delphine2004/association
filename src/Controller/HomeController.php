@@ -6,7 +6,7 @@ use App\Repository\AnimalRepository;
 use App\Repository\EventRepository;
 use App\Entity\Animal;
 use App\Enum\AdoptionStatus;
-use App\Form\AnimalSearchType;
+use App\Form\AnimalType;
 use App\Service\MongoNewsletterService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -67,7 +67,7 @@ class HomeController extends AbstractController
     public function renderAdoption(Request $request, AnimalRepository $animalRepository): Response
     {
         // Création du formulaire
-        $form = $this->createForm(AnimalSearchType::class);
+        $form = $this->createForm(AnimalType::class);
         $form->handleRequest($request);
 
         // Données du formulaire

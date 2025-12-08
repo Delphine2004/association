@@ -5,8 +5,7 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 use App\Entity\User;
 use App\Enum\UserRole;
-use App\Form\UserAdminType;
-use App\Form\UserUpdateAdminType;
+use App\Form\UserType;
 use App\Service\MongoNewsletterService;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,7 +37,7 @@ final class AdminController extends AbstractController
         UserPasswordHasherInterface $passwordHasher
     ): Response {
         $user = new User();
-        $form = $this->createForm(UserAdminType::class, $user);
+        $form = $this->createForm(UserType::class, $user, ['mode' => 'create']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -92,7 +91,7 @@ final class AdminController extends AbstractController
         User $user,
         EntityManagerInterface $entityManager
     ): Response {
-        $form = $this->createForm(UserUpdateAdminType::class, $user, []);
+        $form = $this->createForm(UserType::class, $user, ['mode' => 'updateUserByAdmin']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
