@@ -89,7 +89,7 @@ class UserType extends AbstractType
         }
 
         // Pour l'admin : modification de son email et de son mot de passe
-        if ($mode === 'updatAdmin') {
+        if ($mode === 'updateAdmin') {
             $builder
                 ->add('email', EmailType::class, [
                     'label' => 'Adresse e-mail',
@@ -114,6 +114,7 @@ class UserType extends AbstractType
                     'constraints' => [
                         new Assert\NotBlank(['message' => 'Le mot de passe est obligatoire.']),
                         new Assert\Length([
+
                             'max' => 255,
                             'maxMessage' => 'Le mot de passe ne peut pas dépasser {{ limit }} caractères.',
                         ]),
@@ -126,7 +127,7 @@ class UserType extends AbstractType
         }
 
         // Pour l'utilisateur : modification mot de passe
-        if ($mode === 'updatUser') {
+        if ($mode === 'updateUser') {
             $builder
                 ->add('password', RepeatedType::class, [
                     'type' => PasswordType::class,
@@ -138,6 +139,7 @@ class UserType extends AbstractType
                         'label' => 'Confirmer le mot de passe',
                         'attr' => ['class' => 'form-control'],
                     ],
+                    'label' => false,
                     'required' => true,
                     'mapped' => false, // n'est pas mappé avec la bd car il sera hashé
                     'constraints' => [
