@@ -23,8 +23,12 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'home')]
-    public function renderHome(Request $request, MongoNewsletterService $newsletter, AnimalRepository $animalRepository, EventRepository $eventRepository): Response
-    {
+    public function renderHome(
+        Request $request,
+        MongoNewsletterService $newsletter,
+        AnimalRepository $animalRepository,
+        EventRepository $eventRepository
+    ): Response {
         if ($request->isMethod('POST')) {
             $email = strtolower(trim($request->request->get('email')));
 

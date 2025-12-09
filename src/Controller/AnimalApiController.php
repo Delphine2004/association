@@ -9,14 +9,11 @@ use App\Repository\AnimalRepository;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class AnimalApiController extends AbstractController
 {
-
-    // Route API qui renvoie le JSON (GET)
     #[Route('/animal/api', name: 'app_animal_index', methods: ['GET'])]
     public function index(
         Request $request,
@@ -73,13 +70,13 @@ final class AnimalApiController extends AbstractController
         // Transformation en tableau JSON des propriétés souhaitées
         $data = array_map(function (Animal $animal) {
             return [
-                'id'            => $animal->getId(),
-                'name'          => $animal->getName(),
-                'type'           => $animal->getType()->value,
-                'race'           => $animal->getRace()->value,
-                'gender'        => $animal->getGender()->value,
-                'picture'    => $animal->getPicture() ? '/uploads/animals/' . $animal->getPicture() : null,
-                'status'       => $animal->getStatus()->value,
+                'id' => $animal->getId(),
+                'name' => $animal->getName(),
+                'type' => $animal->getType()->value,
+                'race' => $animal->getRace()->value,
+                'gender' => $animal->getGender()->value,
+                'picture' => $animal->getPicture() ? '/uploads/animals/' . $animal->getPicture() : null,
+                'status' => $animal->getStatus()->value,
             ];
         }, $animals);
 
