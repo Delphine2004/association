@@ -79,7 +79,7 @@ class AnimalRepository extends ServiceEntityRepository
             }
         }
 
-        $boolFields = ['compatibleKid', 'compatibleCat', 'compatibleDog', 'sterilized', 'vaccinated'];
+        $boolFields = ['compatible_kid', 'compatible_cat', 'compatible_dog', 'sterilized', 'vaccinated', 'chipped'];
         foreach ($boolFields as $field) {
             if (isset($criteria[$field])) {
                 $qb->andWhere("a.$field = :$field")
