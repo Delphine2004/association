@@ -4,87 +4,55 @@ Evénements{% endblock %} {% block body %}
 <main class="pt-5">
     <section id="event-page" class="container-fluid py-5">
         <div class="container">
-            <h1 class="text-center mb-5">Gestion des événements</h1>
+            <h1 class="text-center m-5">Gestion des événements</h1>
 
-            <div class="text-center mb-5">
-                <a class="btn btn-large" href="{{ path('app_event_new') }}"
+            <div class="text-center m-5">
+                <a class="btn" href="{{ path('app_event_new') }}"
                     >Ajouter un événement</a
                 >
             </div>
 
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-8">
-                    <!-- Filtre -->
-                    <div class="filter card shadow-sm border-0 p-4 mb-5">
-                        <h5 class="text-center mb-4">
-                            Rechercher un événement
-                        </h5>
+            <div class="m-5">{% include 'partials/_flash.html.twig' %}</div>
 
-                        {{ form_start(searchForm, { method: "get" }) }}
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                {{ form_row(searchForm.id) }}
-                            </div>
-                            <div class="col-md-6">
-                                {{ form_row(searchForm.date) }}
-                            </div>
+            <!-- Filtre -->
+            <div class="filter card p-4 shadow-sm mb-4">
+                <h5 class="text-center mb-4">Rechercher un événement</h5>
+                <form id="event-search-form">
+                    <div class="row g-3 mb-3 d-flex justify-content-around">
+                        <div class="col-md-5">
+                            <label class="form-label" for="event-id"
+                                >Identifiant</label
+                            >
+                            <input
+                                class="form-control"
+                                type="number"
+                                name="eventId"
+                                id="event-id"
+                                min="1"
+                                step="1"
+                            />
                         </div>
-
-                        <div class="text-center">
-                            <button class="btn w-100">Rechercher</button>
+                        <div class="col-md-5">
+                            <label class="form-label" for="date">Date</label>
+                            <input
+                                class="form-control"
+                                type="date"
+                                name="date"
+                                id="date"
+                            />
                         </div>
-
-                        {{ form_end(searchForm) }}
                     </div>
 
-                    <!-- Résultats -->
-                    <div class="table-responsive shadow-sm border rounded">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Lieu</th>
-                                    <th scope="col" class="text-center">
-                                        Actions
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for event in events %}
-                                <tr>
-                                    <td>{{ event.id }}</td>
-                                    <td>
-                                        {{ event.date|date('d/m/Y') }}
-                                    </td>
-                                    <td>{{ event.place }}</td>
-                                    <td class="text-center">
-                                        <a
-                                            class="btn btn-sm"
-                                            href="{{
-                                                path('app_event_show', {
-                                                    id: event.id
-                                                })
-                                            }}"
-                                            >Voir</a
-                                        >
-                                    </td>
-                                </tr>
-                                {% else %}
-                                <tr>
-                                    <td
-                                        colspan="4"
-                                        class="text-center text-muted py-4"
-                                    >
-                                        Aucun événement
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-lg">
+                            Rechercher
+                        </button>
                     </div>
-                </div>
+                </form>
             </div>
+
+            <!-- Résultats -->
+            <div id="events-list" class="m-5"></div>
         </div>
     </section>
 </main>
