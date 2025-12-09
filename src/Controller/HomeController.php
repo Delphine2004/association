@@ -4,9 +4,7 @@ namespace App\Controller;
 
 use App\Repository\AnimalRepository;
 use App\Repository\EventRepository;
-use App\Entity\Animal;
 use App\Enum\AdoptionStatus;
-use App\Form\AnimalType;
 use App\Service\MongoNewsletterService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
