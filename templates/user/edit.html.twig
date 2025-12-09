@@ -1,17 +1,33 @@
-{% extends 'base.html.twig' %} {% block title %}Modification{% endblock %} {%
-block body %}
+{% extends 'base.html.twig' %} {% block title %}Modification compte{% endblock
+%} {% block body %}
 <main class="pt-5">
-    <section id="admin-account" class="container-fluid py-5">
+    <section id="account" class="container-fluid py-5">
         <div class="container">
-            <h1 class="text-center mb-5">Modification des informations</h1>
+            <h1 class="text-center m-5">Modification des informations</h1>
 
-            <div class="mx-auto form-edit">
+            <div class="mx-auto">
                 {{
                     include("user/_form.html.twig", {
                         button_label: "Modifier"
                     })
                 }}
             </div>
+
+            <div class="m-5">{% include 'partials/_flash.html.twig' %}</div>
+
+            {% if is_granted('ROLE_ADMIN')%}
+            <div class="text-center mt-5">
+                <a class="btn" href="{{ path('admin_dashboard') }}"
+                    >Revenir au tableau de bord</a
+                >
+            </div>
+            {% else %}
+            <div class="text-center mt-5">
+                <a class="btn" href="{{ path('user_dashboard') }}"
+                    >Revenir au tableau de bord</a
+                >
+            </div>
+            {% endif %}
         </div>
     </section>
 </main>

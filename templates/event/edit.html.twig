@@ -1,21 +1,22 @@
 {% extends 'base.html.twig' %} {% block title %}Evénement - Modifications{%
 endblock %} {% block body %}
+
 <main class="pt-5">
     <section id="event-page" class="container-fluid py-5">
         <div class="container">
-            <h1 class="text-center mb-4">Modification de l'événement</h1>
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-8">
-                    {{
-                        include("event/_form.html.twig", {
-                            button_label: "Modifier"
-                        })
-                    }}
-                </div>
+            <h1 class="text-center m-5">Modification de l'événement</h1>
+
+            <div class="mx-auto">
+                {{
+                    include("event/_form.html.twig", {
+                        button_label: "Modifier"
+                    })
+                }}
             </div>
-        </div>
-        <div class="row justify-content-center mt-4">
-            <div class="col-auto">
+
+            <div class="m-5">{% include 'partials/_flash.html.twig' %}</div>
+
+            <div class="text-center m-5">
                 <a
                     class="btn"
                     href="{{
