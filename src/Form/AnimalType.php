@@ -3,14 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Animal;
-use App\Enum\AdoptionStatus;
 use App\Enum\AnimalCategory;
 use App\Enum\AnimalRace;
 use App\Enum\AnimalGender;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
@@ -20,12 +18,14 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Validator\Constraints\File;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\Options;
+
 
 class AnimalType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ): void {
         $mode = $options['mode'];
 
         if ($mode === 'create') {
