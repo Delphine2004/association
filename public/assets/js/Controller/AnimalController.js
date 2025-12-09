@@ -26,6 +26,8 @@ export function showAnimalResult() {
             notSterilized:
                 document.getElementById("not-sterilized")?.checked ?? null,
             notChipped: document.getElementById("not-chipped")?.checked ?? null,
+            notVaccinated:
+                document.getElementById("not-vaccinated")?.checked ?? null,
             compatibleKid:
                 document.getElementById("compatible-kid")?.checked ?? null,
             compatibleCat:
