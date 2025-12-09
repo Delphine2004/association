@@ -34,6 +34,8 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/user, roles: ROLE_EMPLOYE }
+        - { path: ^/animal/api, roles: PUBLIC_ACCESS }
+        - { path: ^/animal/\d+$, roles: PUBLIC_ACCESS }
         - { path: ^/animal, roles: ROLE_EMPLOYE }
         - { path: ^/event, roles: ROLE_EMPLOYE }
 
