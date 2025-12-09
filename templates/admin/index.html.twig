@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %} {% block title %}Espace Admin{% endblock %} {%
 block body %}
+
 <main class="pt-5">
     <section id="admin-account" class="container-fluid py-5">
         <div class="container">
-            <h1 class="text-center mb-5">Gestion des utilisateurs</h1>
+            <h1 class="text-center m-5">Gestion des utilisateurs</h1>
+
+            <div class="text-center m-5">
+                <a class="btn" href="{{ path('app_user_new') }}"
+                    >Ajouter un utilisateur</a
+                >
+            </div>
+
+            <div class="m-5">{% include 'partials/_flash.html.twig' %}</div>
 
             <div class="row justify-content-center">
                 <div class="col-12 col-md-10 col-lg-8">
@@ -32,7 +41,7 @@ block body %}
                                         <a
                                             class="btn btn-sm"
                                             href="{{
-                                                path('app_admin_show', {
+                                                path('app_user_show', {
                                                     id: user.id
                                                 })
                                             }}"
@@ -49,13 +58,6 @@ block body %}
                                 {% endfor %}
                             </tbody>
                         </table>
-                    </div>
-                    <div class="text-center mt-5">
-                        <a
-                            class="btn btn-large"
-                            href="{{ path('app_user_new') }}"
-                            >Ajouter un utilisateur</a
-                        >
                     </div>
                 </div>
             </div>

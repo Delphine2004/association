@@ -1,20 +1,23 @@
 {% extends 'base.html.twig' %} {% block title %}Espace utilisateur - Animaux{%
 endblock %} {% block body %}
+
 <main class="pt-5">
     <section id="animal-page" class="container-fluid py-5">
         <div class="container">
-            <h1 class="text-center mb-5">Gestion des animaux</h1>
+            <h1 class="text-center m-5">Gestion des animaux</h1>
 
-            <div class="text-center mb-5">
-                <a class="btn btn-large" href="{{ path('app_animal_new') }}"
+            <div class="text-center m-5">
+                <a class="btn" href="{{ path('app_animal_new') }}"
                     >Ajouter un animal</a
                 >
             </div>
 
+            <div class="m-5">{% include 'partials/_flash.html.twig' %}</div>
+
             <!-- Filtre -->
             <div class="filter card p-4 shadow-sm mb-4">
                 <h5 class="text-center mb-4">Filtrer les animaux</h5>
-                <form id="search-form">
+                <form id="animal-search-form">
                     <div class="row g-3 mb-3 d-flex justify-content-around">
                         <div class="col-md-5">
                             <label class="form-label" for="animal-id"
@@ -126,7 +129,7 @@ endblock %} {% block body %}
                     </div>
 
                     <div class="row g-3 mb-3 d-flex justify-content-around">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-check form-check-inline">
                                 <input
                                     class="form-check-input"
@@ -142,7 +145,7 @@ endblock %} {% block body %}
                                 >
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-check form-check-inline">
                                 <input
                                     class="form-check-input"
@@ -158,26 +161,28 @@ endblock %} {% block body %}
                                 >
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-check form-check-inline">
                                 <input
                                     class="form-check-input"
                                     type="checkbox"
-                                    name="notChippedd"
-                                    id="not-chippedd"
+                                    name="notChipped"
+                                    id="not-chipped"
                                     value="1"
                                 />
                                 <label
                                     class="form-check-label"
-                                    for="not-chippedd"
-                                    >Non stérilisé</label
+                                    for="not-chipped"
+                                    >Non pucé</label
                                 >
                             </div>
                         </div>
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn">Rechercher</button>
+                        <button type="submit" class="btn btn-lg">
+                            Rechercher
+                        </button>
                     </div>
                 </form>
             </div>
