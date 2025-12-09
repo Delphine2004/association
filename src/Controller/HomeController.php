@@ -67,14 +67,6 @@ class HomeController extends AbstractController
         return $this->render('home/adoption.html.twig');
     }
 
-    #[Route('/adoption/{id}', name: 'adoption_animal_show', methods: ['GET'])]
-    public function renderAnimal(Animal $animal): Response
-    {
-        return $this->render('home/adoption_show.html.twig', [
-            'animal' => $animal,
-        ]);
-    }
-
     #[Route('/conditions', name: 'adoption_terms')]
     public function renderTerms(): Response
     {
