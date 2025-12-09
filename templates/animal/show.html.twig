@@ -107,7 +107,7 @@
 
                         <!--  -->
                         <div class="py-2 mb-3 border-bottom">
-                            <div class="d-flex justify-content-between py-2">
+                            <div class="py-2">
                                 <strong>Description</strong>
                                 <span>{{ animal.description }}</span>
                             </div>
@@ -115,14 +115,14 @@
 
                         <!--  -->
                         <div class="py-2 mb-3 border-bottom">
-                            <div class="d-flex justify-content-between py-2">
+                            <div class="py-2">
                                 <strong>Création: </strong>
                                 <span
                                     >{{ animal.createdAt ? animal.createdAt|date('d/m/Y H:i:s') : '' }}
                                     - {{ animal.createdBy.email }}</span
                                 >
                             </div>
-                            <div class="d-flex justify-content-between py-2">
+                            <div class="py-2">
                                 <strong>Modification</strong>
                                 <span
                                     >{{animal.updatedAt ? animal.updatedAt|date('d/m/Y H:i:s') : '' }}
@@ -138,7 +138,8 @@
                     </div>
                 </div>
 
-                {% if animal.status.value in ['En soin', 'A adopter'] %}
+                {% if is_granted('ROLE_EMPLOYE')%} {% if animal.status.value in
+                ['En soin', 'A adopter'] %}
                 <div
                     class="d-flex flex-column flex-sm-row gap-5 justify-content-center mb-4"
                 >
@@ -149,24 +150,35 @@
                     >
                     {{ include("animal/_delete_form.html.twig") }}
                 </div>
-                {% endif%} {% if animal.status.value == 'A adopter'%}
+                {% endif %} {% if animal.status.value == 'A adopter'%}
                 <div
                     class="d-flex flex-column flex-sm-row gap-5 justify-content-center mb-4"
                 >
                     {{ include("animal/_adopted_form.html.twig") }}
                 </div>
-                {% endif%}
+                {% endif %}
             </div>
 
             <div class="mx-auto">
                 <div
                     class="d-flex flex-column flex-sm-row justify-content-center mb-4"
                 >
-                    <a class="btn" href="{{ path('app_animal_index') }}"
+                    <a class="btn" href="{{ path('app_animal_page') }}"
                         >Revenir aux animaux</a
                     >
                 </div>
             </div>
+            {% else %}
+            <div class="mx-auto">
+                <div
+                    class="d-flex flex-column flex-sm-row justify-content-center mb-4"
+                >
+                    <a class="btn" href="{{ path('adoption') }}"
+                        >Revenir aux animaux</a
+                    >
+                </div>
+            </div>
+            {% endif %}
         </div>
     </section>
 </main>
