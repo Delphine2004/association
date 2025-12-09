@@ -3,12 +3,12 @@ import { Animal } from "../Model/Animal.js";
 export function showAnimalResult() {
     // Récupération des éléments
     const animalsList = document.getElementById("animals-list");
-    const searchForm = document.getElementById("search-form");
+    const searchForm = document.getElementById("animal-search-form");
 
     if (!animalsList && !searchForm) return;
 
     animalsList.innerHTML =
-        "<p>Merci de séléctionner des critéres de recherche.</p>";
+        '<p class="text-center">Merci de séléctionner des critéres de recherche.</p>';
 
     searchForm.addEventListener("submit", async function (event) {
         event.preventDefault();
@@ -62,7 +62,7 @@ export function showAnimalResult() {
             if (data.status === "success") {
                 animalsList.innerHTML = "";
                 if (data.count === 0) {
-                    animalsList.innerHTML = `<p>Aucun animal ne correspond à la recherche.</p>`;
+                    animalsList.innerHTML = `<p class="text-center">Aucun animal ne correspond à la recherche.</p>`;
                     searchForm.reset();
                 } else {
                     data.animals.forEach((animalData) => {
@@ -73,7 +73,7 @@ export function showAnimalResult() {
                 }
             }
         } catch (error) {
-            animalsList.innerHTML = `<p>Une erreur est survenue lors de la recherche.</p>`;
+            animalsList.innerHTML = `<p class="text-center">Une erreur est survenue lors de la recherche.</p>`;
         }
     });
 }
