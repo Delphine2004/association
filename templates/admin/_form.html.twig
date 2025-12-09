@@ -12,9 +12,15 @@
     {{ form_widget(form.role) }}
     {{ form_errors(form.role) }}
 </div>
+
+<div class="mb-4">
+    {{ form_label(form.password) }}
+    {{ form_widget(form.password) }}
+    {{ form_errors(form.password) }}
+</div>
 {% endif %}
 
-<button class="btn w-100">
+<button class="btn">
     {{ button_label|default('Enregistrer') }}
 </button>
 
