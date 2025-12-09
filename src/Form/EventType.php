@@ -32,6 +32,7 @@ class EventType extends AbstractType
                 ])
                 ->add('place', TextType::class, [
                     'label' => 'Localisation de l\'événement',
+                    'required' => true,
                     'attr' => [
                         'class' => 'form-control',
                         'placeholder' => 'La forêt'
@@ -39,6 +40,7 @@ class EventType extends AbstractType
                 ])
                 ->add('description', TextareaType::class, [
                     'label' => 'Description de l\'événement',
+                    'required' => true,
                     'attr' => [
                         'class' => 'form-control',
                         'rows' => 5,
@@ -67,17 +69,46 @@ class EventType extends AbstractType
 
         if ($mode === 'update') {
             $builder
-                ->add('id', IntegerType::class, [
-                    'label' => 'N°',
-                    'required' => false,
-                    'attr' => ['class' => 'form-control',],
-                ])
                 ->add('date', DateType::class, [
                     'label' => 'Date de l\'événement',
                     'required' => false,
                     'widget' => 'single_text',
                     'html5' => true,
                     'attr' => ['class' => 'form-control',],
+                ])
+                ->add('place', TextType::class, [
+                    'label' => 'Localisation de l\'événement',
+                    'required' => false,
+                    'attr' => [
+                        'class' => 'form-control',
+                        'placeholder' => 'La forêt'
+                    ],
+                ])
+                ->add('description', TextareaType::class, [
+                    'label' => 'Description de l\'événement',
+                    'required' => false,
+                    'attr' => [
+                        'class' => 'form-control',
+                        'rows' => 5,
+                        'placeholder' => 'L\'événement va se dérouler ...'
+                    ],
+                ])
+                ->add('picture', FileType::class, [
+                    'label' => 'Photo',
+                    'mapped' => false,
+                    'required' => false,
+                    'attr' => ['class' => 'form-control',],
+                    'constraints' => [
+                        new File([
+                            'maxSize' => '10M', // ICI tu règles la taille
+                            'mimeTypes' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/webp',
+                            ],
+                            'mimeTypesMessage' => 'Merci d’uploader une image valide (jpeg, png, webp)',
+                        ])
+                    ],
                 ]);
         }
     }
