@@ -45,13 +45,10 @@ class UserType extends AbstractType
                     'label' => false,
                     'required' => true,
                     'mapped' => false, // n'est pas mappé avec la bd car il sera hashé
-                    'attr' => ['class' => 'form-control'],
                     'constraints' => [
                         new Assert\NotBlank(['message' => 'Le mot de passe est obligatoire.']),
                         new Assert\Length([
-                            'min' => 12,
                             'max' => 255,
-                            'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
                             'maxMessage' => 'Le mot de passe ne peut pas dépasser {{ limit }} caractères.',
                         ]),
                         new Assert\Regex([
@@ -117,9 +114,7 @@ class UserType extends AbstractType
                     'constraints' => [
                         new Assert\NotBlank(['message' => 'Le mot de passe est obligatoire.']),
                         new Assert\Length([
-                            'min' => 12,
                             'max' => 255,
-                            'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
                             'maxMessage' => 'Le mot de passe ne peut pas dépasser {{ limit }} caractères.',
                         ]),
                         new Assert\Regex([
@@ -148,9 +143,7 @@ class UserType extends AbstractType
                     'constraints' => [
                         new Assert\NotBlank(['message' => 'Le mot de passe est obligatoire.']),
                         new Assert\Length([
-                            'min' => 12,
                             'max' => 255,
-                            'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
                             'maxMessage' => 'Le mot de passe ne peut pas dépasser {{ limit }} caractères.',
                         ]),
                         new Assert\Regex([
