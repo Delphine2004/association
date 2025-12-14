@@ -15,176 +15,218 @@ endblock %} {% block body %}
             <div class="m-5">{% include 'partials/_flash.html.twig' %}</div>
 
             <!-- Filtre -->
-            <div class="filter card p-4 shadow-sm mb-4">
-                <h5 class="text-center mb-4">Filtrer les animaux</h5>
-                <form id="animal-search-form">
-                    <div class="row g-3 mb-3 d-flex justify-content-around">
-                        <div class="col-md-5">
-                            <label class="form-label" for="animal-id"
-                                >Identifiant</label
+            <div class="row justify-content-center align-items-center mt-4">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <div class="filter card p-4 shadow-sm mb-4">
+                        <h5 class="text-center mb-4">Filtrer les animaux</h5>
+                        <form id="animal-search-form">
+                            <div
+                                class="row g-3 mb-3 d-flex justify-content-around"
                             >
-                            <input
-                                class="form-control"
-                                type="text"
-                                name="id"
-                                id="animal-id"
-                            />
-                        </div>
-                        <div class="col-md-5">
-                            <label class="form-label" for="name">Nom</label>
-                            <input
-                                class="form-control"
-                                type="text"
-                                name="name"
-                                id="name"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="row g-3 mb-3 d-flex justify-content-around">
-                        <div class="col-md-5">
-                            <label class="form-label" for="status"
-                                >Statut</label
-                            >
-                            <select
-                                class="form-select"
-                                name="status"
-                                id="status"
-                            >
-                                <option selected value="">
-                                    Sélectionner un statut
-                                </option>
-                                <option value="En soin">En soin</option>
-                                <option value="A adopter">A adopter</option>
-                                <option value="Adopté">Adopté</option>
-                            </select>
-                        </div>
-                        <div class="col-md-5">
-                            <label class="form-label" for="gender">Genre</label>
-                            <select
-                                class="form-select"
-                                name="gender"
-                                id="gender"
-                            >
-                                <option selected value="">
-                                    Sélectionner un genre
-                                </option>
-                                <option value="Femelle">Femelle</option>
-                                <option value="Mâle">Mâle</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row g-3 mb-3 d-flex justify-content-around">
-                        <div class="col-md-5">
-                            <label class="form-label" for="type"
-                                >Catégorie</label
-                            >
-                            <select class="form-select" name="type" id="type">
-                                <option selected value="">
-                                    Sélectionner une catégorie
-                                </option>
-                                <option value="Chat">Chat</option>
-                                <option value="Chien">Chien</option>
-                                <option value="Oiseau">Oiseau</option>
-                                <option value="Autre">Autre</option>
-                            </select>
-                        </div>
-                        <div class="col-md-5">
-                            <label class="form-label" for="race">Race</label>
-                            <select class="form-select" name="race" id="race">
-                                <option selected value="">
-                                    Sélectionner une race
-                                </option>
-                                <option value="Européen">Européen</option>
-                                <option value="Siamois">Siamois</option>
-                                <option value="Maine Coon">Maine Coon</option>
-                                <option value="Persan">Persan</option>
-                                <option value="Bengal">Bengal</option>
-                                <option value="Labrador">Labrador</option>
-                                <option value="Berger Allemand">
-                                    Berger Allemand
-                                </option>
-                                <option value="Bouledogue Français">
-                                    Bouledogue Français
-                                </option>
-                                <option value="Golden Retriever">
-                                    Golden Retriever
-                                </option>
-                                <option value="Beagle">Beagle</option>
-                                <option value="Perroquet">Perroquet</option>
-                                <option value="Canari">Canari</option>
-                                <option value="Perruche">Perruche</option>
-                                <option value="Colombier">Colombier</option>
-                                <option value="Tourterelle">Tourterelle</option>
-                                <option value="Lapin">Lapin</option>
-                                <option value="Hamster">Hamster</option>
-                                <option value="Cochon d’Inde">
-                                    Cochon d’Inde
-                                </option>
-                                <option value="Tortue">Tortue</option>
-                                <option value="Furet">Furet</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row g-3 mb-3 d-flex justify-content-around">
-                        <div class="col-md-3">
-                            <div class="form-check form-check-inline">
-                                <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    name="notVaccinated"
-                                    id="not-vaccinated"
-                                    value="1"
-                                />
-                                <label
-                                    class="form-check-label"
-                                    for="not-vaccinated"
-                                    >Non vacciné</label
-                                >
+                                <div class="col-md-5">
+                                    <label class="form-label" for="animal-id"
+                                        >Identifiant</label
+                                    >
+                                    <input
+                                        class="form-control"
+                                        type="text"
+                                        name="id"
+                                        id="animal-id"
+                                    />
+                                </div>
+                                <div class="col-md-5">
+                                    <label class="form-label" for="name"
+                                        >Nom</label
+                                    >
+                                    <input
+                                        class="form-control"
+                                        type="text"
+                                        name="name"
+                                        id="name"
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-check form-check-inline">
-                                <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    name="notSterilized"
-                                    id="not-sterilized"
-                                    value="1"
-                                />
-                                <label
-                                    class="form-check-label"
-                                    for="not-sterilized"
-                                    >Non stérilisé</label
-                                >
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-check form-check-inline">
-                                <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    name="notChipped"
-                                    id="not-chipped"
-                                    value="1"
-                                />
-                                <label
-                                    class="form-check-label"
-                                    for="not-chipped"
-                                    >Non pucé</label
-                                >
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-lg">
-                            Rechercher
-                        </button>
+                            <div
+                                class="row g-3 mb-3 d-flex justify-content-around"
+                            >
+                                <div class="col-md-5">
+                                    <label class="form-label" for="status"
+                                        >Statut</label
+                                    >
+                                    <select
+                                        class="form-select"
+                                        name="status"
+                                        id="status"
+                                    >
+                                        <option selected value="">
+                                            Sélectionner un statut
+                                        </option>
+                                        <option value="En soin">En soin</option>
+                                        <option value="A adopter">
+                                            A adopter
+                                        </option>
+                                        <option value="Adopté">Adopté</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-5">
+                                    <label class="form-label" for="gender"
+                                        >Genre</label
+                                    >
+                                    <select
+                                        class="form-select"
+                                        name="gender"
+                                        id="gender"
+                                    >
+                                        <option selected value="">
+                                            Sélectionner un genre
+                                        </option>
+                                        <option value="Femelle">Femelle</option>
+                                        <option value="Mâle">Mâle</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div
+                                class="row g-3 mb-3 d-flex justify-content-around"
+                            >
+                                <div class="col-md-5">
+                                    <label class="form-label" for="type"
+                                        >Catégorie</label
+                                    >
+                                    <select
+                                        class="form-select"
+                                        name="type"
+                                        id="type"
+                                    >
+                                        <option selected value="">
+                                            Sélectionner une catégorie
+                                        </option>
+                                        <option value="Chat">Chat</option>
+                                        <option value="Chien">Chien</option>
+                                        <option value="Oiseau">Oiseau</option>
+                                        <option value="Autre">Autre</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-5">
+                                    <label class="form-label" for="race"
+                                        >Race</label
+                                    >
+                                    <select
+                                        class="form-select"
+                                        name="race"
+                                        id="race"
+                                    >
+                                        <option selected value="">
+                                            Sélectionner une race
+                                        </option>
+                                        <option value="Européen">
+                                            Européen
+                                        </option>
+                                        <option value="Siamois">Siamois</option>
+                                        <option value="Maine Coon">
+                                            Maine Coon
+                                        </option>
+                                        <option value="Persan">Persan</option>
+                                        <option value="Bengal">Bengal</option>
+                                        <option value="Labrador">
+                                            Labrador
+                                        </option>
+                                        <option value="Berger Allemand">
+                                            Berger Allemand
+                                        </option>
+                                        <option value="Bouledogue Français">
+                                            Bouledogue Français
+                                        </option>
+                                        <option value="Golden Retriever">
+                                            Golden Retriever
+                                        </option>
+                                        <option value="Beagle">Beagle</option>
+                                        <option value="Perroquet">
+                                            Perroquet
+                                        </option>
+                                        <option value="Canari">Canari</option>
+                                        <option value="Perruche">
+                                            Perruche
+                                        </option>
+                                        <option value="Colombier">
+                                            Colombier
+                                        </option>
+                                        <option value="Tourterelle">
+                                            Tourterelle
+                                        </option>
+                                        <option value="Lapin">Lapin</option>
+                                        <option value="Hamster">Hamster</option>
+                                        <option value="Cochon d’Inde">
+                                            Cochon d’Inde
+                                        </option>
+                                        <option value="Tortue">Tortue</option>
+                                        <option value="Furet">Furet</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div
+                                class="row g-3 mb-3 d-flex justify-content-around"
+                            >
+                                <div class="col-md-3">
+                                    <div class="form-check form-check-inline">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            name="notVaccinated"
+                                            id="not-vaccinated"
+                                            value="1"
+                                        />
+                                        <label
+                                            class="form-check-label"
+                                            for="not-vaccinated"
+                                            >Non vacciné</label
+                                        >
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-check form-check-inline">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            name="notSterilized"
+                                            id="not-sterilized"
+                                            value="1"
+                                        />
+                                        <label
+                                            class="form-check-label"
+                                            for="not-sterilized"
+                                            >Non stérilisé</label
+                                        >
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-check form-check-inline">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            name="notChipped"
+                                            id="not-chipped"
+                                            value="1"
+                                        />
+                                        <label
+                                            class="form-check-label"
+                                            for="not-chipped"
+                                            >Non pucé</label
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-lg">
+                                    Rechercher
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
 
             <!-- Résultats -->

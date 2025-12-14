@@ -15,40 +15,50 @@ Evénements{% endblock %} {% block body %}
             <div class="m-5">{% include 'partials/_flash.html.twig' %}</div>
 
             <!-- Filtre -->
-            <div class="filter card p-4 shadow-sm mb-4">
-                <h5 class="text-center mb-4">Rechercher un événement</h5>
-                <form id="event-search-form">
-                    <div class="row g-3 mb-3 d-flex justify-content-around">
-                        <div class="col-md-5">
-                            <label class="form-label" for="event-id"
-                                >Identifiant</label
+            <div class="row justify-content-center align-items-center mt-4">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <div class="filter card p-4 shadow-sm mb-4">
+                        <h5 class="text-center mb-4">
+                            Rechercher un événement
+                        </h5>
+                        <form id="event-search-form">
+                            <div
+                                class="row g-3 mb-3 d-flex justify-content-around"
                             >
-                            <input
-                                class="form-control"
-                                type="number"
-                                name="eventId"
-                                id="event-id"
-                                min="1"
-                                step="1"
-                            />
-                        </div>
-                        <div class="col-md-5">
-                            <label class="form-label" for="date">Date</label>
-                            <input
-                                class="form-control"
-                                type="date"
-                                name="date"
-                                id="date"
-                            />
-                        </div>
-                    </div>
+                                <div class="col-12 col-md-5">
+                                    <label class="form-label" for="event-id"
+                                        >Identifiant</label
+                                    >
+                                    <input
+                                        class="form-control"
+                                        type="number"
+                                        name="eventId"
+                                        id="event-id"
+                                        min="1"
+                                        step="1"
+                                    />
+                                </div>
+                                <div class="col-12 col-md-5">
+                                    <label class="form-label" for="date"
+                                        >Date</label
+                                    >
+                                    <input
+                                        class="form-control"
+                                        type="date"
+                                        name="date"
+                                        id="date"
+                                    />
+                                </div>
+                            </div>
 
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-lg">
-                            Rechercher
-                        </button>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-lg">
+                                    Rechercher
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
 
             <!-- Résultats -->
