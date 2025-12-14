@@ -27,6 +27,9 @@ final class AnimalApiController extends AbstractController
         $notVaccinated = isset($criteria['notVaccinated']);
         $notSterilized = isset($criteria['notSterilized']);
         $notChipped = isset($criteria['notChipped']);
+        $compatibleKid = isset($criteria['compatibleKid']);
+        $compatibleCat = isset($criteria['compatibleCat']);
+        $compatibleDog = isset($criteria['compatibleDog']);
 
         // si coché, convertis en = false 
         if ($notVaccinated) {
@@ -37,6 +40,15 @@ final class AnimalApiController extends AbstractController
         }
         if ($notChipped) {
             $criteria['chipped'] = false;
+        }
+        if ($compatibleKid) {
+            $criteria['compatibleKid'] = true;
+        }
+        if ($compatibleCat) {
+            $criteria['compatibleCat'] = false;
+        }
+        if ($compatibleDog) {
+            $criteria['compatibleDog'] = false;
         }
 
         // Nettoyage des critères (supprime les champs inutiles)
