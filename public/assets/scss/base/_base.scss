@@ -32,10 +32,5 @@ h1,
 h2,
 h3 {
     font-family: fonts.$font-primary;
-    font-size: fonts.$font-size-lg;
-}
-
-h2,
-h3 {
-    font-size: fonts.$font-size-md;
+    font-weight: bold;
 }

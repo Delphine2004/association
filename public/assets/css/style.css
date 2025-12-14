@@ -42,12 +42,7 @@ h1,
 h2,
 h3 {
   font-family: "Quicksand", sans-serif;
-  font-size: 30px;
-}
-
-h2,
-h3 {
-  font-size: 20px;
+  font-weight: bold;
 }
 
 .navbar {
@@ -117,13 +112,6 @@ thead {
   color: #54352a;
 }
 
-#carousel-to-adopt,
-#carousel-adopted,
-#carousel-event {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
 #carousel-event {
   max-width: 500px;
   margin: 0 auto;
@@ -142,7 +130,6 @@ thead {
 #carousel-event .carousel-item img {
   height: 500px;
   width: 100%;
-  object-fit: cover;
   object-position: center;
 }
 
