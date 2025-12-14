@@ -4,10 +4,12 @@ Pattes{% endblock %} {% block body %}
     <!--Section hero-->
     <section id="hero" class="container-fluid py-5">
         <div class="container">
-            <div class="row justify-content-center align-content-center">
+            <div
+                class="row justify-content-center justify-content-md-between align-content-center"
+            >
                 <!--Image-->
                 <div
-                    class="imgHero col-12 col-md-5 mb-4 mb-md-0 d-flex justify-content-center"
+                    class="imgHero col-12 col-md-4 mb-4 mb-md-0 d-flex justify-content-between"
                 >
                     <img
                         src="{{ asset('assets/img/Logo/Logo.webp') }}"
@@ -17,58 +19,39 @@ Pattes{% endblock %} {% block body %}
                 </div>
                 <!-- Titre et boutons-->
                 <div
-                    class="col-12 col-md-7 d-flex flex-column align-content-center py-5"
+                    class="col-12 col-md-6 d-flex flex-column align-content-center py-5"
                 >
                     <!--Le titre et le slogan-->
                     <div class="mb-4">
-                        <h1
-                            class="text-center text-lg-end fw-bold pb-3 hero-title"
-                        >
+                        <h1 class="text-center fw-bold pb-3">
                             Cœur à Quatre Pattes
                         </h1>
-                        <p
-                            class="text-center text-lg-start fst-italic hero-slogan"
-                        >
+                        <p class="text-center fst-italic">
                             "Offrez-leur un foyer, gagnez un ami pour la vie."
                         </p>
                     </div>
+
                     <!--Boutons-->
                     <div
-                        class="d-flex flex-column flex-md-row justify-content-md-end gap-4"
+                        class="d-flex flex-column flex-md-row justify-content-md-center gap-4"
                     >
-                        <!-- Bouton sur mobile -->
                         <a
-                            class="btn w-100 d-md-none"
+                            class="btn w-100 w-md-auto px-md-4"
                             href="{{ path('donation') }}"
                             role="button"
                             aria-label="Donner"
-                            >Donner</a
                         >
+                            Donner
+                        </a>
 
                         <a
-                            class="btn w-100 d-md-none"
+                            class="btn w-100 w-md-auto px-md-4"
                             href="{{ path('adoption') }}"
                             role="button"
                             aria-label="Adopter"
-                            >Adopter</a
                         >
-
-                        <!-- Bouton sur desktop -->
-                        <a
-                            class="btn px-4 d-none d-md-inline"
-                            href="{{ path('donation') }}"
-                            role="button"
-                            aria-label="Donner"
-                            >Donner</a
-                        >
-
-                        <a
-                            class="btn px-4 d-none d-md-inline"
-                            href="{{ path('adoption') }}"
-                            role="button"
-                            aria-label="Adopter"
-                            >Adopter</a
-                        >
+                            Adopter
+                        </a>
                     </div>
                 </div>
             </div>
@@ -79,10 +62,11 @@ Pattes{% endblock %} {% block body %}
     <section id="home" class="container-fluid py-5">
         <div class="container">
             <!-- Présentation -->
-            <h2 class="text-center mb-4">Qui sommes-nous&nbsp;?</h2>
-            <div class="row justify-content-center align-items-center">
+
+            <div class="row justify-content-between align-items-center">
+                <h2 class="text-center">Qui sommes-nous ?</h2>
                 <!-- Paragraphe de présentation-->
-                <div class="col-12 col-md-6 text-md-start mb-4 mb-md-0">
+                <div class="col-12 col-md-10 col-lg-6 text-center mx-auto py-5">
                     <p>
                         Bienvenue sur le site de l'association
                         <strong>"Cœurs à Quatre Pattes"</strong>. Nous sommes
@@ -90,28 +74,25 @@ Pattes{% endblock %} {% block body %}
                         des animaux abandonnés ou maltraités. Depuis notre
                         création en 2015, nous œuvrons chaque jour pour offrir
                         une seconde chance aux compagnons à quatre pattes.
-                    </p>
-                    <p>
+                        <br />
                         Notre mission : <strong>secourir, soigner</strong> et
                         <strong>trouver un foyer aimant</strong>
                         pour chaque animal. Grâce à notre réseau de familles
                         d'accueil et à notre centre d'hébergement, nous avons
                         déjà permis à plus de 2 000 animaux de retrouver amour
                         et sécurité.
-                    </p>
-                    <p>
+                        <br />
                         Nous menons également des actions de sensibilisation
                         dans les écoles et auprès du grand public pour
                         encourager une adoption responsable et le respect du
                         bien-être animal.
-                    </p>
-                    <p>
+                        <br />
                         Rejoignez l'aventure et faites partie de notre combat
                         contre l'abandon et la maltraitance.
                     </p>
                 </div>
                 <!-- Image-->
-                <div class="col-12 col-md-3 d-flex justify-content-center p-2">
+                <div class="col-12 col-md-10 col-lg-4 mx-auto py-5">
                     <img
                         src="{{ asset('assets/img/autres/team.jpg') }}"
                         class="img-fluid rounded mx-auto d-block"
@@ -127,10 +108,10 @@ Pattes{% endblock %} {% block body %}
         <!--Section à adopter-->
         <div class="container">
             <!-- Présentation -->
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8 text-center mx-auto pt-5">
+            <div class="row justify-content-between">
+                <div class="col-12 col-md-10 col-lg-8 text-center mx-auto py-5">
                     <h2 class="text-center mb-4">Ils n'attendent que vous</h2>
-                    <p class="mb-4">
+                    <p>
                         Adopter un animal, c'est offrir une seconde chance à un
                         être vivant en quête d'amour. Chaque adoption transforme
                         deux vies : celle de l'animal recueilli et celle du
@@ -141,8 +122,8 @@ Pattes{% endblock %} {% block body %}
             </div>
 
             <!--Carousel des animaux à adopter-->
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8 mx-auto py-5">
+            <div class="row justify-content-between">
+                <div class="col-12 col-md-10 col-lg-8 mx-auto">
                     <div
                         id="carousel-to-adopt"
                         class="carousel slide mx-auto"
@@ -180,7 +161,7 @@ Pattes{% endblock %} {% block body %}
             </div>
 
             <!-- Lien vers la page adoption -->
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center py-5">
                 <a
                     class="btn btn-lg"
                     href="{{ path('adoption') }}"
@@ -194,12 +175,12 @@ Pattes{% endblock %} {% block body %}
         <!--Section adoptés-->
         <div class="container">
             <!--Presentation-->
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8 text-center mx-auto pt-5">
+            <div class="row justify-content-between">
+                <div class="col-12 col-md-10 col-lg-8 text-center mx-auto py-5">
                     <h2 class="text-center mb-4">
                         Ils ont trouvé leur nouveau foyer
                     </h2>
-                    <p class="mb-4">
+                    <p>
                         Un temps sans foyer, nos protégés vivent aujourd'hui
                         leur meilleure vie chez des familles aimantes. Leurs
                         regards lumineux et leurs jeux joyeux témoignent du
@@ -209,8 +190,8 @@ Pattes{% endblock %} {% block body %}
             </div>
 
             <!--Carousel des animaux adoptés-->
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8 mx-auto py-5">
+            <div class="row justify-content-between">
+                <div class="col-12 col-md-10 col-lg-8 mx-auto">
                     <div
                         id="carousel-adopted"
                         class="carousel slide mx-auto"
@@ -253,10 +234,10 @@ Pattes{% endblock %} {% block body %}
     <section id="event" class="container-fluid py-5">
         <div class="container">
             <!-- Présentation -->
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8 text-center mx-auto pb-5">
+            <div class="row justify-content-between">
+                <div class="col-12 col-md-10 col-lg-8 text-center mx-auto py-5">
                     <h2 class="text-center mb-4">Les Evénements</h2>
-                    <p class="mb-4">
+                    <p>
                         Découvrez nos prochains rendez-vous solidaires !
                         Journées portes ouvertes, collectes de dons, séances
                         d'adoption et ateliers de sensibilisation - notre
@@ -269,8 +250,8 @@ Pattes{% endblock %} {% block body %}
             </div>
 
             <!-- Carousel des événements -->
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8 mx-auto py-5">
+            <div class="row justify-content-between">
+                <div class="col-12 col-md-10 col-lg-8 mx-auto">
                     <div
                         id="carousel-event"
                         class="carousel slide mx-auto"
@@ -310,9 +291,9 @@ Pattes{% endblock %} {% block body %}
             </div>
 
             <!-- Newsletter -->
-            <div class="row justify-content-center">
+            <div class="row justify-content-between">
                 <!-- Présentation newsletter -->
-                <div class="col-12 col-md-8 text-center mx-auto pt-5">
+                <div class="col-12 col-md-10 col-lg-8 text-center mx-auto pt-5">
                     <p class="mb-4">
                         Restez informé de nos actions et sauvetages !
                         Inscrivez-vous à notre newsletter mensuelle pour ne
@@ -320,7 +301,7 @@ Pattes{% endblock %} {% block body %}
                     </p>
                 </div>
                 <!--  -->
-                <div class="col-12 col-md-8 mx-auto">
+                <div class="col-12 col-md-10 col-lg-8 mx-auto">
                     <form
                         class="row g-3 align-items-end"
                         action="{{ path('home') }}"
@@ -358,36 +339,38 @@ Pattes{% endblock %} {% block body %}
         <div class="container">
             <h2 class="text-center mb-4">Où nous trouver ?</h2>
 
-            <div class="row justify-content-center text-center py-5">
+            <div class="row justify-content-between text-center py-5">
                 <!-- Horaires + Adresse -->
                 <div class="col-12 col-md-4 mx-auto">
-                    <h4>Horaires</h4>
                     <div class="mx-auto py-3">
-                        <div class="d-flex justify-content-between">
+                        <h4>Horaires</h4>
+                        <div class="d-flex justify-content-between px-2">
                             <span>Lundi</span><span>10:00 - 20:00</span>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between px-2">
                             <span>Mardi</span><span>10:00 - 20:00</span>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between px-2">
                             <span>Mercredi</span><span>10:00 - 20:00</span>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between px-2">
                             <span>Jeudi</span><span>10:00 - 20:00</span>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between px-2">
                             <span>Vendredi</span><span>10:00 - 20:00</span>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between px-2">
                             <span>Samedi</span><span>10:00 - 20:00</span>
                         </div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between px-2">
                             <span>Dimanche</span><span>10:00 - 20:00</span>
                         </div>
                     </div>
 
-                    <h4 class="pt-5">Adresse</h4>
-                    <p>100 rue introuvable<br />99000 QUELQUE PART</p>
+                    <div class="mx-auto py-3">
+                        <h4 class="pt-5">Adresse</h4>
+                        <p>100 rue introuvable<br />99000 QUELQUE PART</p>
+                    </div>
                 </div>
 
                 <!-- Carte -->
@@ -405,7 +388,7 @@ Pattes{% endblock %} {% block body %}
             </div>
 
             <!-- Contact -->
-            <div class="row justify-content-center text-center py-5">
+            <div class="row justify-content-between text-center pb-5">
                 <!-- Présentation contact -->
                 <div class="col-12 col-md-9 mb-3 text-md-start">
                     <p class="mb-4">
