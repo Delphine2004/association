@@ -18,15 +18,6 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function findEventById(int $id): ?Event
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.id = :id')
-            ->setParameter('id', $id)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
-
     public function findFutureEvents(
         int $limit = 10,
         string $orderBy = 'ASC'

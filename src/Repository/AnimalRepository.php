@@ -18,23 +18,6 @@ class AnimalRepository extends ServiceEntityRepository
         parent::__construct($registry, Animal::class);
     }
 
-
-    public function findAnimalById(int $id): ?Animal
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.id = :id')
-            ->setParameter('id', $id)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-
-
-
-    //---------------------------
-
-
-
     // Par statut d'adoption
     public function findAnimalsByAdoptionStatus(
         AdoptionStatus $status,
@@ -79,7 +62,7 @@ class AnimalRepository extends ServiceEntityRepository
             }
         }
 
-        $boolFields = ['compatible_kid', 'compatible_cat', 'compatible_dog', 'sterilized', 'vaccinated', 'chipped'];
+        $boolFields = ['compatibleKid', 'compatibleCat', 'compatibleDog', 'sterilized', 'vaccinated', 'chipped'];
         foreach ($boolFields as $field) {
             if (isset($criteria[$field])) {
                 $qb->andWhere("a.$field = :$field")
