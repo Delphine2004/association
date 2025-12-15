@@ -50,9 +50,30 @@ export function showEventResult() {
                     eventsList.innerHTML = `<p class="text-center">Aucun événement ne correspond à la recherche.</p>`;
                     searchForm.reset();
                 } else {
+                    eventsList.innerHTML = `
+                    <div class="col-12 col-md-10 col-lg-8">
+                        <div class="table-responsive shadow-sm border rounded">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Lieu</th>
+                                        <th scope="col" class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="events-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    `;
+
+                    const tableBody =
+                        document.getElementById("events-table-body");
+
                     data.events.forEach((eventData) => {
                         const event = new Event(eventData);
-                        eventsList.innerHTML += event.getEventInfo();
+                        tableBody.innerHTML += event.getEventInfo();
                     });
                     searchForm.reset();
                 }

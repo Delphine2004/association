@@ -10,11 +10,14 @@ export class Event {
 
     getEventInfo() {
         return `
-        <div class="d-flex flex-column flex-md-row align-items-center justify-content-md-between mb-5 gap-2 gap-md-3">
-            <p class="mb-0">${this.id}</p>
-            <p class="mb-0">${this.date}</p>
-            <p class="mb-0">${this.place}</p>
-            <a class="btn btn-sm" href="/event/${this.id}">Voir</a>
-        </div>`;
+        <tr>
+            <td>${this.id}</td>
+            <td>${this.date}</td>
+            <td>${this.place}</td>
+            <td>
+                <a class="btn btn-sm" href="/event/${this.id}">Voir</a>
+            </td>
+        </tr>
+    `;
     }
 }
