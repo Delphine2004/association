@@ -3,31 +3,31 @@
 <main class="pt-5">
     <section id="account" class="container-fluid py-5">
         <div class="container">
-            <h1 class="text-center m-5">Modification des informations</h1>
-
-            <div class="mx-auto">
-                {{
-                    include("user/_form.html.twig", {
-                        button_label: "Modifier"
-                    })
-                }}
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <h1 class="text-center m-5">
+                        Modification des informations
+                    </h1>
+                    <div
+                        class="card bg-light-pink shadow-sm d-flex justify-content-evenly p-4"
+                    >
+                        {{
+                            include("user/_form.html.twig", {
+                                button_label: "Modifier"
+                            })
+                        }}
+                    </div>
+                    <div class="m-5">
+                        {% include 'partials/_flash.html.twig' %}
+                    </div>
+                </div>
             </div>
 
-            <div class="m-5">{% include 'partials/_flash.html.twig' %}</div>
-
-            {% if is_granted('ROLE_ADMIN')%}
-            <div class="text-center mt-5">
-                <a class="btn" href="{{ path('admin_dashboard') }}"
-                    >Revenir au tableau de bord</a
-                >
-            </div>
-            {% else %}
             <div class="text-center mt-5">
                 <a class="btn" href="{{ path('user_dashboard') }}"
                     >Revenir au tableau de bord</a
                 >
             </div>
-            {% endif %}
         </div>
     </section>
 </main>

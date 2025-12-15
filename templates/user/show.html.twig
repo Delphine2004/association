@@ -1,78 +1,109 @@
-{% extends 'base.html.twig' %} {% block title %}Espace utilisateur -
-Informations compte{% endblock %} {% block body %}
+{% extends 'base.html.twig' %} {% block title %}Information compte{% endblock %}
+{% block body %}
 
 <main class="pt-5">
-    <section
-        id="admin-account"
-        class="container-fluid py-5 d-flex justify-content-center align-items-center"
-        style="min-height: 70vh"
-    >
+    <section id="account" class="container-fluid py-5">
         <div class="container">
-            <h1 class="text-center mb-4">Information du compte</h1>
-
-            <!-- Card -->
-            <div class="mx-auto" style="max-width: 700px">
-                <div class="card shadow-sm border-0 mb-4">
-                    <div class="card-body">
-                        <!-- Ligne : Id -->
-                        <div
-                            class="d-flex justify-content-between py-2 border-bottom"
-                        >
-                            <strong>Id</strong>
-                            <span>{{ user.id }}</span>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-pink text-brown">
+                            <h2 class="text-center m-3">
+                                Compte n°{{ user.id }}
+                            </h2>
                         </div>
-
-                        <!-- Ligne : Email -->
-                        <div
-                            class="d-flex justify-content-between py-2 border-bottom"
-                        >
-                            <strong>Email</strong>
-                            <span>{{ user.email }}</span>
-                        </div>
-
-                        <!-- Ligne : Rôle -->
-                        <div
-                            class="d-flex justify-content-between py-2 border-bottom"
-                        >
-                            <strong>Rôle</strong>
-                            <span
-                                >{% for role in user.roles %} {% if role !=
-                                'ROLE_USER' %}
-                                {{ role|replace({'ROLE_': ''}) }}
-                                {% endif %} {% endfor %}</span
+                        <div class="card-body bg-light-pink text-brown">
+                            <!-- Ligne : Id -->
+                            <div
+                                class="d-flex flex-column flex-md-row justify-content-md-between py-2 border-bottom"
                             >
-                        </div>
+                                <strong>Id</strong>
+                                <span>{{ user.id }}</span>
+                            </div>
 
-                        <!-- Ligne : Date de création -->
-                        <div
-                            class="d-flex justify-content-between py-2 border-bottom"
-                        >
-                            <strong>Date de création</strong>
-                            <span>
-                                {{ user.createdAt ? user.createdAt|date('d/m/Y H:i') : '' }}
-                            </span>
-                        </div>
+                            <!-- Ligne : Email -->
+                            <div
+                                class="d-flex flex-column flex-md-row justify-content-md-between py-2 border-bottom"
+                            >
+                                <strong>Email</strong>
+                                <span>{{ user.email }}</span>
+                            </div>
 
-                        <!-- Ligne : Dernière modification -->
-                        <div class="d-flex justify-content-between py-2">
-                            <strong>Dernière modification</strong>
-                            <span>
-                                {{ user.updatedAt ? user.updatedAt|date('d/m/Y H:i') : '' }}
-                            </span>
+                            <!-- Ligne : Rôle -->
+                            <div
+                                class="d-flex flex-column flex-md-row justify-content-md-between py-2 border-bottom"
+                            >
+                                <strong>Rôle</strong>
+                                <span>
+                                    {% for role in user.roles %} {% if role !=
+                                    'ROLE_USER' %}
+                                    {{ role|replace({'ROLE_': ''}) }}
+                                    {% endif %} {% endfor %}</span
+                                >
+                            </div>
+
+                            <!-- Ligne : Date de création -->
+                            <div class="py-2 mb-3">
+                                <div
+                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
+                                >
+                                    <strong>Création : </strong>
+                                    <span>
+                                        {{ user.createdAt ? user.createdAt|date('d/m/Y H:i') : '' }}
+                                    </span>
+                                </div>
+
+                                <!-- Ligne : Dernière modification -->
+                                <div
+                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
+                                >
+                                    <strong>Modification : </strong>
+                                    <span>
+                                        {{ user.updatedAt ? user.updatedAt|date('d/m/Y H:i') : '' }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-pink">
+                            <div
+                                class="d-flex flex-column flex-md-row justify-content-center m-3 gap-3"
+                            >
+                                {# Bouton Modifier toujours affiché #}
+                                <div
+                                    class="{% if is_granted('ROLE_ADMIN') and app.user.id != user.id and 'ROLE_EMPLOYE' in user.roles and 'ROLE_ADMIN' not in user.roles %} flex-fill {% else %} mx-auto {% endif %}"
+                                >
+                                    <a
+                                        class="btn w-100"
+                                        href="{{
+                                            path('app_user_edit', {
+                                                id: user.id
+                                            })
+                                        }}"
+                                    >
+                                        Modifier
+                                    </a>
+                                </div>
+                                {# Bouton Supprimer uniquement pour admin sur
+                                compte employé différent de lui-même #} {% if
+                                is_granted('ROLE_ADMIN') and app.user.id !=
+                                user.id and 'ROLE_EMPLOYE' in user.roles and
+                                'ROLE_ADMIN' not in user.roles %}
+                                <div class="flex-fill">
+                                    {{
+                                        include("admin/_delete_form.html.twig")
+                                    }}
+                                </div>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- Action -->
-                <div
-                    class="d-flex flex-column flex-sm-row gap-5 justify-content-center mb-4"
-                >
-                    <a
-                        class="btn"
-                        href="{{ path('app_user_edit', { id: user.id }) }}"
-                    >
-                        Modifier
-                    </a>
-                </div>
+            </div>
+
+            <div class="text-center m-5">
+                <a class="btn" href="{{ path('user_dashboard') }}">
+                    Revenir sur le tableau de bord
+                </a>
             </div>
         </div>
     </section>

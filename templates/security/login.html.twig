@@ -5,54 +5,62 @@ body %}
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-10 col-lg-8">
-                    <form method="post">
-                        {% if error %}
-                        <div class="alert alert-danger">
-                            {{ error.messageKey|trans(error.messageData, 'security') }}
-                        </div>
-                        {% endif %}
+                    <h1 class="text-center m-5">Merci de vous connecter.</h1>
+                    <div
+                        class="card bg-light-pink shadow-sm d-flex justify-content-evenly p-4"
+                    >
+                        <form method="post">
+                            {% if error %}
+                            <div class="alert alert-danger">
+                                {{ error.messageKey|trans(error.messageData, 'security') }}
+                            </div>
+                            {% endif %}
 
-                        <h1 class="text-center mb-4">
-                            Merci de vous connecter.
-                        </h1>
-                        <div class="mb-3">
-                            <label for="username" class="form-label"
-                                >Identifiant</label
-                            >
+                            <div class="row mb-3 justify-content-center">
+                                <div class="col-12 col-md-10 text-brown mb-3">
+                                    <label for="username" class="form-label"
+                                        >Identifiant</label
+                                    >
+                                    <input
+                                        type="email"
+                                        value="{{ last_username }}"
+                                        name="_username"
+                                        id="username"
+                                        class="form-control"
+                                        autocomplete="email"
+                                        required
+                                        autofocus
+                                    />
+                                </div>
+                            </div>
+                            <div class="row mb-3 justify-content-center">
+                                <div class="col-12 col-md-10 text-brown mb-3">
+                                    <label for="password" class="form-label"
+                                        >Mot de passe</label
+                                    >
+                                    <input
+                                        type="password"
+                                        name="_password"
+                                        id="password"
+                                        class="form-control"
+                                        autocomplete="current-password"
+                                        required
+                                    />
+                                </div>
+                            </div>
                             <input
-                                type="email"
-                                value="{{ last_username }}"
-                                name="_username"
-                                id="username"
-                                class="form-control"
-                                autocomplete="email"
-                                required
-                                autofocus
+                                type="hidden"
+                                name="_csrf_token"
+                                data-controller="csrf-protection"
+                                value="{{ csrf_token('authenticate') }}"
                             />
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label"
-                                >Mot de passe</label
-                            >
-                            <input
-                                type="password"
-                                name="_password"
-                                id="password"
-                                class="form-control"
-                                autocomplete="current-password"
-                                required
-                            />
-                        </div>
-                        <input
-                            type="hidden"
-                            name="_csrf_token"
-                            data-controller="csrf-protection"
-                            value="{{ csrf_token('authenticate') }}"
-                        />
-                        <button class="btn w-100" type="submit">
-                            Se connecter
-                        </button>
-                    </form>
+                            <div class="text-center m-2">
+                                <button class="btn" type="submit">
+                                    Se connecter
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

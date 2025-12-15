@@ -2,93 +2,103 @@
 endblock %} {% block body %}
 
 <main class="pt-5">
-    <section
-        id="event-page"
-        class="container-fluid py-5 d-flex justify-content-center align-items-center"
-        style="min-height: 70vh"
-    >
+    <section id="event-page" class="container-fluid py-5">
         <div class="container">
-            <h1 class="text-center mb-4">Informations événement</h1>
-
-            <div class="mx-auto" style="max-width: 700px">
-                <div class="card shadow-sm border-0 mb-4">
-                    <div class="card-header">
-                        <h2 class="text-center mb-4">Ref : {{ event.id }}</h2>
-                    </div>
-                    <div class="card-body">
-                        <!--  -->
-                        <div class="py-2 mb-3 border-bottom">
-                            <div class="d-flex justify-content-between py-2">
-                                <strong>Date</strong>
-                                <span
-                                    >{{ event.date ? event.date|date('d/m/Y') : '' }}</span
-                                >
-                            </div>
-
-                            <div class="d-flex justify-content-between py-2">
-                                <strong>Lieu</strong>
-                                <span>{{ event.place }}</span>
-                            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-pink text-brown">
+                            <h2 class="text-center m-3">
+                                Evénement n°{{ event.id }}
+                            </h2>
                         </div>
-
-                        <!--  -->
-                        <div
-                            class="d-flex justify-content-between py-2 border-bottom"
-                        >
-                            <strong>Description</strong>
-                            <p>{{ event.description }}</p>
-                        </div>
-
-                        <!--  -->
-                        <div>
-                            <div class="d-flex justify-content-between py-2">
-                                <strong>Création : </strong>
-                                <span
-                                    >{{ event.createdAt ? event.createdAt|date('d/m/Y H:i:s') : '' }}
-                                    - {{ event.createdBy.email }}</span
-                                >
+                        <div class="card-body bg-light-pink text-brown">
+                            <!-- Photo -->
+                            <div class="image-wrapper mx-auto mb-4">
+                                <img
+                                    src="{{ asset('uploads/events/' ~ event.picture) }}"
+                                    alt="photo événement {{ event.id }}"
+                                    class="img-fluid rounded-4"
+                                />
                             </div>
 
+                            <!-- Date et lieu -->
+                            <div class="py-2 mb-3 border-bottom">
+                                <div
+                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
+                                >
+                                    <strong>Date :</strong>
+                                    <span
+                                        >{{ event.date ? event.date|date('d/m/Y') : '' }}</span
+                                    >
+                                </div>
+
+                                <div
+                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
+                                >
+                                    <strong>Lieu :</strong>
+                                    <span>{{ event.place }}</span>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
                             <div
-                                class="d-flex justify-content-between py-2 border-bottom"
+                                class="d-flex flex-column py-2 mb-3 border-bottom"
                             >
-                                <strong>Modification : </strong>
-                                <span
-                                    >{{ event.updatedAt ? event.updatedAt|date('d/m/Y H:i:s') : '' }}
-                                    -
-                                    {{
-                                        event.updatedBy
-                                            ? event.updatedBy.email
-                                            : ""
-                                    }}</span
+                                <strong>Description :</strong>
+                                <p>{{ event.description }}</p>
+                            </div>
+
+                            <!-- Création et modification -->
+                            <div class="py-2 mb-3">
+                                <div
+                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
                                 >
+                                    <strong>Création : </strong>
+                                    <span
+                                        >{{ event.createdAt ? event.createdAt|date('d/m/Y H:i:s') : '' }}
+                                    </span>
+                                </div>
+
+                                <div
+                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
+                                >
+                                    <strong>Modification : </strong>
+                                    <span
+                                        >{{ event.updatedAt ? event.updatedAt|date('d/m/Y H:i:s') : '' }}
+                                    </span>
+                                </div>
                             </div>
                         </div>
+
+                        {% if event.date >= date() %}
+                        <div class="card-footer bg-pink">
+                            <div
+                                class="d-flex flex-column flex-md-row justify-content-center m-3 gap-3"
+                            >
+                                <a
+                                    class="btn flex-fill"
+                                    href="{{
+                                        path('app_event_edit', { id: event.id })
+                                    }}"
+                                    >Modifier</a
+                                >
+                                <div class="flex-fill">
+                                    {{
+                                        include("event/_delete_form.html.twig")
+                                    }}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
-                {% if event.date >= "now"|date("Y-m-d") %}
-                <div
-                    class="d-flex flex-column flex-sm-row gap-5 justify-content-center mb-4"
-                >
-                    <a
-                        class="btn"
-                        href="{{ path('app_event_edit', { id: event.id }) }}"
-                        >Modifier</a
-                    >
-
-                    {{ include("event/_delete_form.html.twig") }}
-                </div>
-                {% endif %}
             </div>
 
-            <div class="mx-auto">
-                <div
-                    class="d-flex flex-column flex-sm-row justify-content-center mb-4"
+            <div class="text-center m-5">
+                <a class="btn" href="{{ path('app_event_page') }}"
+                    >Revenir aux événements</a
                 >
-                    <a class="btn" href="{{ path('app_event_index') }}"
-                        >Revenir aux événements</a
-                    >
-                </div>
             </div>
         </div>
     </section>
