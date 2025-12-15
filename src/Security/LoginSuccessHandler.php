@@ -18,15 +18,13 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
     {
         $roles = $token->getRoleNames();
 
-        if (in_array(UserRole::ADMIN->value, $roles, true)) {
-            // Redirection pour l’admin
-            return new RedirectResponse($this->router->generate('admin_dashboard'));
-        }
-
-        if (in_array(UserRole::EMPLOYE->value, $roles, true)) {
-            // Redirection pour l’employé
+        if (
+            in_array(UserRole::ADMIN->value, $roles, true)
+            || in_array(UserRole::EMPLOYE->value, $roles, true)
+        ) {
             return new RedirectResponse($this->router->generate('user_dashboard'));
         }
+
 
         // Redirection par défaut si pas de rôle
         return new RedirectResponse($this->router->generate('home'));
