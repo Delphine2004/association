@@ -74,7 +74,7 @@ export function showAnimalResult() {
                     animalsList.innerHTML = `
                     <div class="col-12 col-md-10 col-lg-8">
                         <div class="table-responsive shadow-sm border rounded">
-                            <table class="table table-striped">
+                            <table class="table table-hover align-middle mb-0">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
