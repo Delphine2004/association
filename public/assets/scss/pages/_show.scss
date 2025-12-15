@@ -1,0 +1,9 @@
+.image-wrapper {
+    max-width: 280px;
+}
+
+@media (min-width: 576px) {
+    .image-wrapper {
+        max-width: 350px;
+    }
+}

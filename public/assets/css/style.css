@@ -45,6 +45,18 @@ h3 {
   font-weight: bold;
 }
 
+.bg-light-pink {
+  background-color: #f2b8a2;
+}
+
+.bg-pink {
+  background-color: #f2937e;
+}
+
+.text-brown {
+  color: #54352a;
+}
+
 .navbar {
   min-height: 60px;
   background-color: #f2937e;
@@ -91,16 +103,6 @@ footer i {
 .btn:hover {
   background-color: #536102;
   color: #d6d9bf;
-}
-
-.card-header {
-  background-color: #f2937e;
-  color: #54352a;
-}
-
-.card-body,
-.card-footer {
-  background-color: #f2b8a2;
 }
 
 .filter {
@@ -163,6 +165,16 @@ thead {
 
 .imgHero img {
   width: 100%;
+}
+
+.image-wrapper {
+  max-width: 280px;
+}
+
+@media (min-width: 576px) {
+  .image-wrapper {
+    max-width: 350px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
