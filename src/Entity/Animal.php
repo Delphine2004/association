@@ -28,7 +28,7 @@ class Animal
     private ?int $id = null;
 
     #[Assert\NotBlank(message: "Le nom est obligatoire.")]
-    #[Assert\Regex(RegexPatterns::ONLY_TEXTE_REGEX)]
+    #[Assert\Regex(RegexPatterns::ONLY_TEXT_REGEX)]
     #[Assert\Length(max: 50, maxMessage: "Le nom ne doit pas dépasser 50 caractères.")]
     #[ORM\Column(length: 50)]
     private ?string $name = null;

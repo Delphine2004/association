@@ -30,12 +30,13 @@ class Event
 
 
     #[Assert\NotBlank(message: "L'endroit de l'événement est obligatoire.")]
-    #[Assert\Regex(RegexPatterns::ONLY_TEXTE_REGEX)]
+    #[Assert\Regex(RegexPatterns::FREE_TEXT_REGEX)]
     #[Assert\Length(max: 100, maxMessage: "L'endroit ne doit pas dépasser 100 caractères.")]
     #[ORM\Column(length: 100)]
     private ?string $place = null;
 
     #[Assert\NotBlank(message: "La description est obligatoire.")]
+    #[Assert\Regex(RegexPatterns::FREE_TEXT_REGEX)]
     #[Assert\Length(min: 20, minMessage: "La description doit contenir au moins 20 caractères.")]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
