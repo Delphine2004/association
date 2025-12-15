@@ -230,7 +230,11 @@ endblock %} {% block body %}
             </div>
 
             <!-- Résultats -->
-            <div id="animals-list" class="m-5"></div>
+            <div
+                id="animals-list"
+                class="row justify-content-center align-items-center my-4"
+                data-is-authenticated="{{ app.user ? '1' : '0' }}"
+            ></div>
         </div>
     </section>
 </main>
