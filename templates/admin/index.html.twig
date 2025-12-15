@@ -2,62 +2,80 @@
 block body %}
 
 <main class="pt-5">
-    <section id="admin-account" class="container-fluid py-5">
-        <div class="container">
-            <h1 class="text-center m-5">Gestion des utilisateurs</h1>
-
-            <div class="text-center m-5">
-                <a class="btn" href="{{ path('app_user_new') }}"
-                    >Ajouter un utilisateur</a
-                >
-            </div>
-
-            <div class="m-5">{% include 'partials/_flash.html.twig' %}</div>
-
+    <section class="container-fluid py-5">
+        <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-10 col-lg-8">
-                    <div class="table-responsive shadow-sm border rounded">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Rôle</th>
-                                    <th scope="col" class="text-center">
-                                        Actions
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for user in users %}
-                                <tr>
-                                    <td>{{ user.email }}</td>
-                                    <td>
-                                        {% for role in user.roles %} {% if role
-                                        != 'ROLE_USER' %}
-                                        {{ role|replace({'ROLE_': ''}) }}
-                                        {% endif %} {% endfor %}
-                                    </td>
-                                    <td class="text-center">
-                                        <a
-                                            class="btn btn-sm"
-                                            href="{{
-                                                path('app_user_show', {
-                                                    id: user.id
-                                                })
-                                            }}"
-                                            >Voir</a
-                                        >
-                                    </td>
-                                </tr>
-                                {% else %}
-                                <tr>
-                                    <td colspan="3">
-                                        Aucun utilisateur trouvé.
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-light-pink text-brown">
+                            <h2 class="text-center m-3">
+                                Gestion des utilisateurs
+                            </h2>
+                        </div>
+
+                        <div class="card-body">
+                            <div
+                                class="table-responsive shadow-sm border rounded"
+                            >
+                                <table
+                                    class="table table-hover align-middle mb-0"
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Rôle</th>
+                                            <th scope="col" class="text-center">
+                                                Actions
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in users %}
+                                        <tr>
+                                            <td>{{ user.email }}</td>
+                                            <td>
+                                                {% for role in user.roles %} {%
+                                                if role != 'ROLE_USER' %}
+                                                {{ role|replace({'ROLE_': ''}) }}
+                                                {% endif %} {% endfor %}
+                                            </td>
+                                            <td class="text-center">
+                                                <a
+                                                    class="btn btn-sm"
+                                                    href="{{
+                                                        path('app_user_show', {
+                                                            id: user.id
+                                                        })
+                                                    }}"
+                                                    >Voir</a
+                                                >
+                                            </td>
+                                        </tr>
+                                        {% else %}
+                                        <tr>
+                                            <td colspan="3">
+                                                Aucun utilisateur trouvé.
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card-footer bg-light-pink">
+                            <div
+                                class="d-flex flex-column flex-md-row justify-content-center m-3 gap-3"
+                            >
+                                <a class="btn" href="{{ path('app_user_new') }}"
+                                    >Ajouter un utilisateur</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center m-5">
+                        {% include 'partials/_flash.html.twig' %}
                     </div>
                 </div>
             </div>
