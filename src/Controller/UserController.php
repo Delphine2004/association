@@ -11,6 +11,7 @@ use App\Form\UserType;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -20,9 +21,18 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 final class UserController extends AbstractController
 {
 
-    #[Route('/dashboard', name: 'user_dashboard', methods: ['GET'])]
-    public function userAccount(AnimalRepository $animalRepository, EventRepository $eventRepository): Response
+    private Security $security;
+
+    public function __construct(Security $security)
     {
+        $this->security = $security;
+    }
+
+    #[Route('/dashboard', name: 'user_dashboard', methods: ['GET'])]
+    public function userAccount(
+        AnimalRepository $animalRepository,
+        EventRepository $eventRepository
+    ): Response {
 
         // Récupération des animaux à examiner
         $animals = $animalRepository->findAnimalsByAdoptionStatus(AdoptionStatus::EN_SOIN);
@@ -51,16 +61,36 @@ final class UserController extends AbstractController
         EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher
     ): Response {
-        $form = $this->createForm(UserType::class, $user, []);
+
+        if ($this->isGranted('ROLE_ADMIN')) {
+            if ($this->getUser() === $user) {
+                $mode = 'updateAdmin';
+            } else {
+                $mode = 'updateUserByAdmin';
+            }
+        } else {
+            $mode = 'updateUser';
+        }
+
+        $form = $this->createForm(UserType::class, $user, ['mode' => $mode]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Vérifie si le mot de passe a été modifié
-            $plainPassword = $form->get('password')->getData();
+            if ($form->has('password')) {
+                $plainPassword = $form->get('password')->getData();
+                if (!empty($plainPassword)) {
+                    $hashedPassword = $passwordHasher->hashPassword($user, $plainPassword);
+                    $user->setPassword($hashedPassword);
+                }
+            }
 
-            if (!empty($plainPassword)) {
-                $hashedPassword = $passwordHasher->hashPassword($user, $plainPassword);
-                $user->setPassword($hashedPassword);
+            // Vérifie si l'email a été modifié pour l'admin
+            if ($form->has('email')) {
+                $email = $form->get('email')->getData();
+                if ($email !== null && $email !== '') {
+                    $user->setEmail($email);
+                }
             }
 
             $entityManager->flush();
