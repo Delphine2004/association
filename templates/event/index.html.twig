@@ -7,7 +7,7 @@ Evénements{% endblock %} {% block body %}
             <h1 class="text-center m-5">Gestion des événements</h1>
 
             <div class="text-center m-5">
-                <a class="btn" href="{{ path('app_event_new') }}"
+                <a class="btn btn-lg" href="{{ path('app_event_new') }}"
                     >Ajouter un événement</a
                 >
             </div>
@@ -18,14 +18,12 @@ Evénements{% endblock %} {% block body %}
             <div class="row justify-content-center align-items-center mt-4">
                 <div class="col-12 col-md-10 col-lg-8">
                     <div class="filter card p-4 shadow-sm mb-4">
-                        <h5 class="text-center mb-4">
+                        <h5 class="text-center text-brown mb-4 mb-4">
                             Rechercher un événement
                         </h5>
                         <form id="event-search-form">
-                            <div
-                                class="row g-3 mb-3 d-flex justify-content-around"
-                            >
-                                <div class="col-12 col-md-5">
+                            <div class="row g-3 mb-3 justify-content-around">
+                                <div class="col-12 col-md-5 text-brown mb-4">
                                     <label class="form-label" for="event-id"
                                         >Identifiant</label
                                     >
@@ -38,7 +36,7 @@ Evénements{% endblock %} {% block body %}
                                         step="1"
                                     />
                                 </div>
-                                <div class="col-12 col-md-5">
+                                <div class="col-12 col-md-5 text-brown mb-4">
                                     <label class="form-label" for="date"
                                         >Date</label
                                     >
@@ -52,7 +50,7 @@ Evénements{% endblock %} {% block body %}
                             </div>
 
                             <div class="text-center">
-                                <button type="submit" class="btn btn-lg">
+                                <button type="submit" class="btn">
                                     Rechercher
                                 </button>
                             </div>

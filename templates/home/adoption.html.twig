@@ -40,10 +40,8 @@ Pattes{% endblock %} {% block body %}
                     <div class="filter card p-4 shadow-sm mb-4">
                         <h3 class="text-center mb-4">Filtrer les animaux</h3>
                         <form id="animal-search-form">
-                            <div
-                                class="row g-3 mb-3 d-flex justify-content-around"
-                            >
-                                <div class="col-md-3">
+                            <div class="row g-3 mb-3 justify-content-around">
+                                <div class="col-md-3 text-brown mb-4">
                                     <label class="form-label" for="type"
                                         >Catégorie</label
                                     >
@@ -61,7 +59,7 @@ Pattes{% endblock %} {% block body %}
                                         <option value="Autre">Autre</option>
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 text-brown mb-4">
                                     <label class="form-label" for="race"
                                         >Race</label
                                     >
@@ -117,7 +115,7 @@ Pattes{% endblock %} {% block body %}
                                         <option value="Furet">Furet</option>
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 text-brown mb-4">
                                     <label class="form-label" for="gender"
                                         >Genre</label
                                     >
@@ -135,10 +133,8 @@ Pattes{% endblock %} {% block body %}
                                 </div>
                             </div>
 
-                            <div
-                                class="row g-3 mb-3 d-flex justify-content-around"
-                            >
-                                <div class="col-md-3">
+                            <div class="row g-3 mb-3 justify-content-around">
+                                <div class="col-md-3 text-brown mb-4">
                                     <div class="form-check form-check-inline">
                                         <input
                                             class="form-check-input mt-0"
@@ -154,7 +150,7 @@ Pattes{% endblock %} {% block body %}
                                         >
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 text-brown mb-4">
                                     <div class="form-check form-check-inline">
                                         <input
                                             class="form-check-input mt-0"
@@ -170,7 +166,7 @@ Pattes{% endblock %} {% block body %}
                                         >
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 text-brown mb-4">
                                     <div class="form-check form-check-inline">
                                         <input
                                             class="form-check-input mt-0"
@@ -198,7 +194,11 @@ Pattes{% endblock %} {% block body %}
                 </div>
             </div>
             <!-- Resultats -->
-            <div id="animals-list" class="m-5"></div>
+            <div
+                id="animals-list"
+                class="row justify-content-center align-items-center my-4"
+                data-is-authenticated="{{ app.user ? '1' : '0' }}"
+            ></div>
         </div>
     </section>
 </main>
