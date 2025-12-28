@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/animal')]
+// #[IsGranted('ROLE_EMPLOYE')]
 final class AnimalController extends AbstractController
 {
     public function __construct(private string $uploadsAnimalsDirectory) {}

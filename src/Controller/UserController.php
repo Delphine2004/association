@@ -11,23 +11,16 @@ use App\Form\UserType;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/user')]
+#[IsGranted('ROLE_EMPLOYE')]
 final class UserController extends AbstractController
 {
-
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
-    }
-
     #[Route('/dashboard', name: 'user_dashboard', methods: ['GET'])]
     public function userAccount(
         AnimalRepository $animalRepository,

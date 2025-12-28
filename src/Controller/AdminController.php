@@ -10,18 +10,28 @@ use App\Service\MongoNewsletterService;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/admin')]
+#[IsGranted('ROLE_ADMIN')]
 final class AdminController extends AbstractController
 {
-    #[Route('/dashboard', name: 'admin_dashboard', methods: ['GET'])]
-    public function adminAccount(UserRepository $userRepository): Response
-    {
 
+    private Security $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+    #[Route('/dashboard', name: 'admin_dashboard', methods: ['GET'])]
+    public function adminAccount(
+        UserRepository $userRepository
+    ): Response {
         // Récupération des utilisateurs
         $users = $userRepository->findUsersWithoutRole(UserRole::ADMIN->value);
 
@@ -30,6 +40,7 @@ final class AdminController extends AbstractController
         ]);
     }
 
+    // Pas de vérification du token car fait avec le formType
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
@@ -44,75 +55,57 @@ final class AdminController extends AbstractController
             $plainPassword = $form->get('password')->getData();
             $role = $form->get('role')->getData();
 
-            if (empty($plainPassword)) {
-                $this->addFlash('error', 'Le mot de passe est obligatoire.');
-                // Ici, on *ne redirige pas* : on laisse tomber la suite et on réaffiche le formulaire
-            } else {
-                $hashedPassword = $passwordHasher->hashPassword($user, $plainPassword);
-                $user->setPassword($hashedPassword);
-                $user->setRoles($role ? [$role->value] : []);
+            $hashedPassword = $passwordHasher->hashPassword($user, $plainPassword);
 
-                $entityManager->persist($user);
-                $entityManager->flush();
+            $user->setPassword($hashedPassword);
+            $user->setRoles($role ? [$role->value] : []);
 
-                $this->addFlash('success', 'Utilisateur créé avec succès.');
-                return $this->redirectToRoute('admin_dashboard');
-            }
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Utilisateur créé avec succès.');
+            return $this->redirectToRoute('app_user_show', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        // Que le formulaire soit invalide ou que le mdp soit vide, on revient ici pour afficher le formulaire
         return $this->render('admin/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_show', methods: ['GET'])]
-    public function show(User $user): Response
-    {
-        return $this->render('admin/show.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->getPayload()->getString('_token'))) {
+    public function delete(
+        Request $request,
+        User $user,
+        EntityManagerInterface $entityManager,
+        Security $security
+    ): Response {
+
+
+        $currentUser = $security->getUser();
+
+        if ($currentUser === $user) {
+            throw $this->createAccessDeniedException(
+                'Vous ne pouvez pas supprimer votre propre compte.'
+            );
+        }
+
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager->remove($user);
             $entityManager->flush();
+            $this->addFlash('success', 'Utilisateur supprimé avec succès.');
+        } else {
+            $this->addFlash('error', 'Jeton CSRF invalide.');
         }
 
         return $this->redirectToRoute('admin_dashboard', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/edit', name: 'app_admin_edit', methods: ['GET', 'POST'])]
-    public function edit(
-        Request $request,
-        User $user,
-        EntityManagerInterface $entityManager
-    ): Response {
-        $form = $this->createForm(UserType::class, $user, ['mode' => 'updateUserByAdmin']);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Utilisateur modifié avec succès.');
-        }
-
-        return $this->render('admin/edit.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
-
     #[Route('/newsletter/emails', name: 'admin_newsletter_emails')]
-    public function listEmails(MongoNewsletterService $newsletterService): Response
-    {
-        // Récupérer tous les emails via le service
+    public function listEmails(
+        MongoNewsletterService $newsletterService
+    ): Response {
         $emails = $newsletterService->getAllEmails();
 
-        // Afficher dans un template (à créer)
         return $this->render('admin/newsletter_emails.html.twig', [
             'emails' => $emails,
         ]);

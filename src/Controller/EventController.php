@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/event')]
+// #[IsGranted('ROLE_EMPLOYE')]
 final class EventController extends AbstractController
 {
     public function __construct(private string $uploadsEventsDirectory) {}
