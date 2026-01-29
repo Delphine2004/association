@@ -58,7 +58,7 @@ services:
       start_period: 60s
     restart: unless-stopped
     volumes:
-      - ./docker/db/data:/var/lib/mysql:rw
+      - database_data:/var/lib/mysql:rw
   ###< doctrine/doctrine-bundle ###
 
   mongo:
