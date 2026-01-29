@@ -9,16 +9,16 @@
         "php": ">=8.4.14",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/dbal": "^3",
-        "doctrine/doctrine-bundle": "^2.18",
-        "doctrine/doctrine-migrations-bundle": "^3.5",
-        "doctrine/orm": "^3.5",
-        "mongodb/mongodb": "^2.1",
+        "doctrine/dbal": "^3.10.4",
+        "doctrine/doctrine-bundle": "^2.18.2",
+        "doctrine/doctrine-migrations-bundle": "^3.7",
+        "doctrine/orm": "^3.6.1",
+        "mongodb/mongodb": "^2.1.2",
         "runtime/frankenphp-symfony": "^0.2.0",
         "symfony/asset": "7.3.*",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",
-        "symfony/flex": "^2",
+        "symfony/flex": "^2.10",
         "symfony/form": "7.3.*",
         "symfony/framework-bundle": "7.3.*",
         "symfony/mime": "7.3.*",
@@ -28,8 +28,8 @@
         "symfony/twig-bundle": "7.3.*",
         "symfony/validator": "7.3.*",
         "symfony/yaml": "7.3.*",
-        "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/extra-bundle": "^2.12|^3.23",
+        "twig/twig": "^2.12|^3.23"
     },
     "config": {
         "allow-plugins": {
@@ -83,8 +83,8 @@
         }
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^4.3",
+        "doctrine/doctrine-fixtures-bundle": "^4.3.1",
         "soyuka/stubs-mongodb": "^1.0",
-        "symfony/maker-bundle": "^1.64"
+        "symfony/maker-bundle": "^1.65.1"
     }
 }
