@@ -13,9 +13,9 @@ enum AnimalRace: string
 
         // Chiens
     case CHIEN_LABRADOR = "Labrador";
-    case CHIEN_BERGER_ALLEMAND = "Berger Allemand";
-    case CHIEN_BOULEDOGUE_FRANCAIS = "Bouledogue Français";
-    case CHIEN_GOLDEN_RETRIEVER = "Golden Retriever";
+    case CHIEN_HUSKY = "Husky";
+    case CHIEN_ = "Bouledogue Français";
+    case CHIEN_CROISE = "Croisé";
     case CHIEN_BEAGLE = "Beagle";
 
         // Oiseaux
