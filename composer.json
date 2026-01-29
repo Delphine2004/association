@@ -84,7 +84,6 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^4.3.1",
-        "soyuka/stubs-mongodb": "^1.0",
         "symfony/maker-bundle": "^1.65.1"
     }
 }
