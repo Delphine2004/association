@@ -5,19 +5,14 @@ FROM dunglas/frankenphp:1-php8.4 AS frankenphp_base
 WORKDIR /app
 VOLUME /app/var/
 
-# Installer dépendances système requises
+# Installer dépendances système de base
 RUN apt-get update && apt-get install -y --no-install-recommends \
     file \
     git \
     curl \
-    ca-certificates \
-    gnupg \
-    libssl-dev \
-    pkg-config \
-    libxml2-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Installer Node.js 18 LTS
+# Installer Node.js 18 LTS (si tu en as vraiment besoin pour le build)
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     rm -rf /var/lib/apt/lists/*
@@ -31,8 +26,7 @@ RUN install-php-extensions \
     zip \
     pdo_mysql \
     xml \
-    && pecl install mongodb \
-    && docker-php-ext-enable mongodb
+    mongodb
 
 # Environnements, configs et autres (inchangés)
 ENV COMPOSER_ALLOW_SUPERUSER=1
