@@ -36,10 +36,10 @@ export class Animal {
         return `
         <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card h-100">
-                <img src="${this.image}" class="card-img-top" alt="${this.name}">
+                <img src="${this.picture}" class="card-img-top" alt="${this.name}">
                 <div class="card-body">
                     <h5 class="card-title">${this.name}</h5>
-                    <p class="card-text">${this.species} • ${this.age} ans</p>
+                    <p class="card-text">${this.type} • ${this.race}</p>
                     <a href="/animal/${this.id}" class="btn btn-sm">Voir</a>
                 </div>
             </div>
