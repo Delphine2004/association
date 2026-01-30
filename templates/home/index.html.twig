@@ -126,7 +126,7 @@ Pattes{% endblock %} {% block body %}
                 <div class="col-12 col-md-10 col-lg-8 mx-auto">
                     <div
                         id="carousel-to-adopt"
-                        class="carousel slide mx-auto"
+                        class="carousel slide rounded-4 overflow-hidden mx-auto"
                         data-bs-ride="carousel"
                         data-bs-interval="5000"
                         aria-label="Carrousel des animaux à adopter"
@@ -139,8 +139,8 @@ Pattes{% endblock %} {% block body %}
                             >
                                 <img
                                     src="{{ asset('uploads/animals/' ~ animal.picture) }}"
-                                    class="d-block img-fluid"
-                                    alt="photo de {{ animal.name }}"
+                                    class="d-block w-100"
+                                    alt="{{ animal.name }}"
                                 />
                                 <div class="carousel-caption d-block">
                                     <h5 class="text-center">
@@ -194,7 +194,7 @@ Pattes{% endblock %} {% block body %}
                 <div class="col-12 col-md-10 col-lg-8 mx-auto">
                     <div
                         id="carousel-adopted"
-                        class="carousel slide mx-auto"
+                        class="carousel slide rounded-4 overflow-hidden mx-auto"
                         data-bs-ride="carousel"
                         data-bs-interval="5000"
                         aria-label="Carrousel des animaux adoptés"
@@ -207,8 +207,8 @@ Pattes{% endblock %} {% block body %}
                             >
                                 <img
                                     src="{{ asset('uploads/animals/' ~ animal.picture) }}"
-                                    class="d-block img-fluid"
-                                    alt="photo de {{ animal.name }}"
+                                    class="d-block w-100"
+                                    alt="{{ animal.name }}"
                                 />
                                 <div class="carousel-caption d-block">
                                     <h5 class="text-center">
@@ -254,7 +254,7 @@ Pattes{% endblock %} {% block body %}
                 <div class="col-12 col-md-10 col-lg-8 mx-auto">
                     <div
                         id="carousel-event"
-                        class="carousel slide mx-auto"
+                        class="carousel slide rounded-4 overflow-hidden mx-auto"
                         data-bs-ride="carousel"
                         data-bs-interval="5000"
                         aria-label="Carrousel des événements à venir"
@@ -269,10 +269,12 @@ Pattes{% endblock %} {% block body %}
                                     <img
                                         src="{{ asset('uploads/events/'  ~ event.picture) }}"
                                         class="card-img-top"
-                                        alt="Photo événement de l'association"
+                                        alt="Evénement n°{{event.id}}"
                                     />
                                     <div class="card-body bg-light-pink">
-                                        <p class="card-text">
+                                        <h3 class="text-center mb-4">{{event.date ? event.date|date('d/m/Y') : '' }}</h3>
+                                        <h4 class="text-center mb-4">{{event.place}}</h4>
+                                        <p class="card-text text-center mb-4">
                                             {{ event.description }}
                                         </p>
                                     </div>
