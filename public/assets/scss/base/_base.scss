@@ -16,8 +16,6 @@ body {
 header,
 footer {
     flex-shrink: 0; /* Empêche le header/footer de rétrécir */
-    background-color: colors.$bs-pink;
-    color: colors.$bs-brown;
 }
 
 a {
@@ -34,16 +32,4 @@ h3,
 h4 {
     font-family: fonts.$font-primary;
     font-weight: bold;
-}
-
-.bg-light-pink {
-    background-color: colors.$bs-lightPink;
-}
-
-.bg-pink {
-    background-color: colors.$bs-pink;
-}
-
-.text-brown {
-    color: colors.$bs-brown;
 }

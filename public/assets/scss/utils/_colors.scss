@@ -4,3 +4,28 @@ $bs-darkgreen: #536102;
 $bs-green: #d6d9bf;
 $bs-brown: #54352a;
 $bs-white: #f2eadf;
+
+$border-brown: 1px solid $bs-brown;
+
+.bg-light-pink {
+    background-color: $bs-lightPink;
+    color: $bs-brown;
+}
+
+.bg-pink {
+    background-color: $bs-pink;
+    color: $bs-brown;
+}
+
+.bg-light {
+    background-color: $bs-white;
+    color: $bs-brown;
+}
+
+.text-brown {
+    color: $bs-brown;
+}
+
+.border-brown {
+    border: $border-brown;
+}

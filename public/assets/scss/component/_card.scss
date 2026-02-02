@@ -1,0 +1,6 @@
+.card-img-top {
+    height: 300px; /* hauteur uniforme */
+    width: 100%;
+    object-fit: cover; /* pas de déformation */
+    object-position: center top; /* parfait pour portraits */
+}
