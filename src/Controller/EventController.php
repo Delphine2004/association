@@ -10,9 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/event')]
-// #[IsGranted('ROLE_EMPLOYE')]
+#[IsGranted('ROLE_EMPLOYE')]
 final class EventController extends AbstractController
 {
     public function __construct(private string $uploadsEventsDirectory) {}

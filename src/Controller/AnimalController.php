@@ -12,14 +12,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/animal')]
-// #[IsGranted('ROLE_EMPLOYE')]
+
 final class AnimalController extends AbstractController
 {
     public function __construct(private string $uploadsAnimalsDirectory) {}
 
     #[Route('', name: 'app_animal_page', methods: ['GET'])]
+    #[IsGranted('ROLE_EMPLOYE')]
     public function page(): Response
     {
         return $this->render('animal/index.html.twig');
@@ -27,6 +29,7 @@ final class AnimalController extends AbstractController
 
     // Pas de vérification du token car fait avec le formType
     #[Route('/new', name: 'app_animal_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_EMPLOYE')]
     public function new(
         Request $request,
         EntityManagerInterface $entityManager
@@ -78,6 +81,7 @@ final class AnimalController extends AbstractController
 
     // Pas de vérification du token car fait avec le formType
     #[Route('/{id}/edit', name: 'app_animal_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_EMPLOYE')]
     public function edit(
         Request $request,
         Animal $animal,
@@ -111,6 +115,7 @@ final class AnimalController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_animal_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_EMPLOYE')]
     public function delete(
         Request $request,
         Animal $animal,
@@ -128,6 +133,7 @@ final class AnimalController extends AbstractController
     }
 
     #[Route('/{id}/adopt', name: 'app_animal_adopt', methods: ['POST'])]
+    #[IsGranted('ROLE_EMPLOYE')]
     public function adopt(
         Request $request,
         Animal $animal,
