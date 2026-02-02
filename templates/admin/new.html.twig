@@ -1,30 +1,29 @@
-{% extends 'base.html.twig' %} {% block title %}Espace Admin - Création
-utilisateur{% endblock %} {% block body %}
+{% extends 'base.html.twig' %}
+{% block title %}Espace Admin - Création
+	utilisateur
+{% endblock %}
+{% block body %}
 
-<main class="pt-5">
-    <section id="admin-account" class="container-fluid py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-8">
-                    <h1 class="text-center m-5">Création d'un utilisateur</h1>
+	<main class="pt-5">
+		<section id="admin-account" class="container-fluid py-5">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-12 col-md-10 col-lg-8">
+						<h1 class="text-center m-3">Ajout d'un utilisateur</h1>
 
-                    <div
-                        class="card bg-pink shadow-sm d-flex justify-content-evenly p-4"
-                    >
-                        {{ include("admin/_form.html.twig") }}
-                    </div>
+						<div class="card bg-light-pink text-brown shadow-sm d-flex justify-content-evenly p-4">
+							{{ include("user/_form.html.twig") }}
+						</div>
 
-                    <div class="m-5">
-                        {% include 'partials/_flash.html.twig' %}
-                    </div>
-                </div>
-            </div>
-            <div class="text-center m-5">
-                <a class="btn" href="{{ path('admin_dashboard') }}"
-                    >Revenir au tableau de bord</a
-                >
-            </div>
-        </div>
-    </section>
-</main>
+						<div class="m-5">
+							{% include 'partials/_flash.html.twig' %}
+						</div>
+					</div>
+				</div>
+				<div class="text-center m-5">
+					<a class="btn" href="{{ path('admin_dashboard') }}">Tableau de bord</a>
+				</div>
+			</div>
+		</section>
+	</main>
 {% endblock %}

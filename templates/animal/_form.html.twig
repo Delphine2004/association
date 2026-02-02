@@ -1,99 +1,99 @@
 {{ form_start(form, {'attr': {'novalidate': true}}) }}
 <!-- Pour ajout -->
 {% if form.name is defined %}
-<div class="row g-3 mb-3 justify-content-center">
-    <div class="col-md-10 text-brown mb-4">
-        {{ form_label(form.name) }}
-        {{ form_widget(form.name) }}
-        {{ form_errors(form.name) }}
-    </div>
-</div>
-<div class="row g-3 mb-3 justify-content-around">
-    <div class="col-md-3 text-brown mb-4">
-        {{ form_label(form.type) }}
-        {{ form_widget(form.type) }}
-        {{ form_errors(form.type) }}
-    </div>
-    <div class="col-md-3 text-brown mb-4">
-        {{ form_label(form.race) }}
-        {{ form_widget(form.race) }}
-        {{ form_errors(form.race) }}
-    </div>
-    <div class="col-md-3 text-brown mb-4">
-        {{ form_label(form.gender) }}
-        {{ form_widget(form.gender) }}
-        {{ form_errors(form.gender) }}
-    </div>
-</div>
+	<div class="row g-3 mb-3 justify-content-center">
+		<div class="col-md-10 text-brown mb-4">
+			{{ form_label(form.name) }}
+			{{ form_widget(form.name) }}
+			{{ form_errors(form.name) }}
+		</div>
+	</div>
+	<div class="row g-3 mb-3 justify-content-around">
+		<div class="col-md-3 text-brown mb-4">
+			{{ form_label(form.type) }}
+			{{ form_widget(form.type) }}
+			{{ form_errors(form.type) }}
+		</div>
+		<div class="col-md-3 text-brown mb-4">
+			{{ form_label(form.race) }}
+			{{ form_widget(form.race) }}
+			{{ form_errors(form.race) }}
+		</div>
+		<div class="col-md-3 text-brown mb-4">
+			{{ form_label(form.gender) }}
+			{{ form_widget(form.gender) }}
+			{{ form_errors(form.gender) }}
+		</div>
+	</div>
 
-<div class="row g-3 mb-3 justify-content-around">
-    <div class="col-md-5 text-brown mb-4">
-        {{ form_label(form.birthday) }}
-        {{ form_widget(form.birthday) }}
-        {{ form_errors(form.birthday) }}
-    </div>
-    <div class="col-md-5 text-brown mb-4">
-        {{ form_label(form.arrivalDate) }}
-        {{ form_widget(form.arrivalDate) }}
-        {{ form_errors(form.arrivalDate) }}
-    </div>
-</div>
+	<div class="row g-3 mb-3 justify-content-around">
+		<div class="col-md-5 text-brown mb-4">
+			{{ form_label(form.birthday) }}
+			{{ form_widget(form.birthday) }}
+			{{ form_errors(form.birthday) }}
+		</div>
+		<div class="col-md-5 text-brown mb-4">
+			{{ form_label(form.arrivalDate) }}
+			{{ form_widget(form.arrivalDate) }}
+			{{ form_errors(form.arrivalDate) }}
+		</div>
+	</div>
 {% endif %}
 
 <!-- Champs communs -->
 <div class="row mb-3 justify-content-center">
-    <div class="col-12 col-md-10 text-brown mb-4">
-        {{ form_label(form.picture) }}
-        {{ form_widget(form.picture) }}
-        {{ form_errors(form.picture) }}
-    </div>
-    <div class="col-12 col-md-10 text-brown mb-4">
-        {{ form_label(form.description) }}
-        {{ form_widget(form.description) }}
-        {{ form_errors(form.description) }}
-    </div>
+	<div class="col-12 col-md-10 text-brown mb-4">
+		{{ form_label(form.picture) }}
+		{{ form_widget(form.picture) }}
+		{{ form_errors(form.picture) }}
+	</div>
+	<div class="col-12 col-md-10 text-brown mb-4">
+		{{ form_label(form.description) }}
+		{{ form_widget(form.description) }}
+		{{ form_errors(form.description) }}
+	</div>
 </div>
 
 <!-- Pour modification -->
 {% if form.vaccinated is defined %}
-<div class="row mb-3 justify-content-between">
-    <div class="col-md-4 text-brown mb-4">
-        {{ form_label(form.vaccinated) }}
-        {{ form_widget(form.vaccinated) }}
-        {{ form_errors(form.vaccinated) }}
-    </div>
-    <div class="col-md-4 text-brown mb-4">
-        {{ form_label(form.sterilized) }}
-        {{ form_widget(form.sterilized) }}
-        {{ form_errors(form.sterilized) }}
-    </div>
-    <div class="col-md-4 text-brown mb-4">
-        {{ form_label(form.chipped) }}
-        {{ form_widget(form.chipped) }}
-        {{ form_errors(form.chipped) }}
-    </div>
-</div>
+	<div class="row mb-3 justify-content-between">
+		<div class="col-md-4 text-brown mb-4">
+			{{ form_label(form.vaccinated) }}
+			{{ form_widget(form.vaccinated) }}
+			{{ form_errors(form.vaccinated) }}
+		</div>
+		<div class="col-md-4 text-brown mb-4">
+			{{ form_label(form.sterilized) }}
+			{{ form_widget(form.sterilized) }}
+			{{ form_errors(form.sterilized) }}
+		</div>
+		<div class="col-md-4 text-brown mb-4">
+			{{ form_label(form.chipped) }}
+			{{ form_widget(form.chipped) }}
+			{{ form_errors(form.chipped) }}
+		</div>
+	</div>
 
-<div class="row mb-3 justify-content-between">
-    <div class="col-md-4 text-brown mb-4">
-        {{ form_label(form.compatibleKid) }}
-        {{ form_widget(form.compatibleKid) }}
-        {{ form_errors(form.compatibleKid) }}
-    </div>
-    <div class="col-md-4 text-brown mb-4">
-        {{ form_label(form.compatibleCat) }}
-        {{ form_widget(form.compatibleCat) }}
-        {{ form_errors(form.compatibleCat) }}
-    </div>
-    <div class="col-md-4 text-brown mb-4">
-        {{ form_label(form.compatibleDog) }}
-        {{ form_widget(form.compatibleDog) }}
-        {{ form_errors(form.compatibleDog) }}
-    </div>
-</div>
+	<div class="row mb-3 justify-content-between">
+		<div class="col-md-4 text-brown mb-4">
+			{{ form_label(form.compatibleKid) }}
+			{{ form_widget(form.compatibleKid) }}
+			{{ form_errors(form.compatibleKid) }}
+		</div>
+		<div class="col-md-4 text-brown mb-4">
+			{{ form_label(form.compatibleCat) }}
+			{{ form_widget(form.compatibleCat) }}
+			{{ form_errors(form.compatibleCat) }}
+		</div>
+		<div class="col-md-4 text-brown mb-4">
+			{{ form_label(form.compatibleDog) }}
+			{{ form_widget(form.compatibleDog) }}
+			{{ form_errors(form.compatibleDog) }}
+		</div>
+	</div>
 {% endif %}
 
 <div class="text-center m-2">
-    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+	<button class="btn">{{ button_label|default('Enregistrer') }}</button>
 </div>
 {{ form_end(form) }}

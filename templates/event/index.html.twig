@@ -1,70 +1,54 @@
-{% extends 'base.html.twig' %} {% block title %}Espace utilisateur -
-Evénements{% endblock %} {% block body %}
+{% extends 'base.html.twig' %}
+{% block title %}Espace utilisateur -
+	Evénements
+{% endblock %}
+{% block body %}
 
-<main class="pt-5">
-    <section id="event-page" class="container-fluid py-5">
-        <div class="container">
-            <h1 class="text-center m-5">Gestion des événements</h1>
+	<main class="pt-5">
+		<section id="event-page" class="container-fluid py-5">
+			<div class="container">
+				<h1 class="text-center m-3">Gestion des événements</h1>
 
-            <div class="text-center m-5">
-                <a class="btn btn-lg" href="{{ path('app_event_new') }}"
-                    >Ajouter un événement</a
-                >
-            </div>
+				<div class="text-center m-5">
+					<a class="btn btn-lg" href="{{ path('app_event_new') }}">Ajouter un événement</a>
+				</div>
 
-            <div class="m-5">{% include 'partials/_flash.html.twig' %}</div>
+				<div class="m-5">{% include 'partials/_flash.html.twig' %}</div>
 
-            <!-- Filtre -->
-            <div class="row justify-content-center align-items-center mt-4">
-                <div class="col-12 col-md-10 col-lg-8">
-                    <div class="filter card p-4 shadow-sm mb-4">
-                        <h5 class="text-center text-brown mb-4 mb-4">
-                            Rechercher un événement
-                        </h5>
-                        <form id="event-search-form">
-                            <div class="row g-3 mb-3 justify-content-around">
-                                <div class="col-12 col-md-5 text-brown mb-4">
-                                    <label class="form-label" for="event-id"
-                                        >Identifiant</label
-                                    >
-                                    <input
-                                        class="form-control"
-                                        type="number"
-                                        name="eventId"
-                                        id="event-id"
-                                        min="1"
-                                        step="1"
-                                    />
-                                </div>
-                                <div class="col-12 col-md-5 text-brown mb-4">
-                                    <label class="form-label" for="date"
-                                        >Date</label
-                                    >
-                                    <input
-                                        class="form-control"
-                                        type="date"
-                                        name="date"
-                                        id="date"
-                                    />
-                                </div>
-                            </div>
+				<!-- Filtre -->
+				<div class="row justify-content-center align-items-center mt-4">
+					<div class="col-12 col-md-10 col-lg-8">
+						<div class="filter card p-4 shadow-sm mb-4">
+							<h5 class="text-center text-brown mb-4 mb-4">
+								Rechercher un événement
+							</h5>
+							<form id="event-search-form">
+								<div class="row g-3 mb-3 justify-content-around">
+									<div class="col-12 col-md-5 text-brown mb-4">
+										<label class="form-label" for="event-id">Identifiant</label>
+										<input class="form-control" type="number" name="eventId" id="event-id" min="1" step="1"/>
+									</div>
+									<div class="col-12 col-md-5 text-brown mb-4">
+										<label class="form-label" for="date">Date</label>
+										<input class="form-control" type="date" name="date" id="date"/>
+									</div>
+								</div>
 
-                            <div class="text-center">
-                                <button type="submit" class="btn">
-                                    Rechercher
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+								<div class="text-center">
+									<button type="submit" class="btn">
+										Rechercher
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 
-            <!-- Résultats -->
-            <div
-                id="events-list"
-                class="row justify-content-center align-items-center my-4"
-            ></div>
-        </div>
-    </section>
-</main>
+				<!-- Résultats -->
+				<div class="row justify-content-center align-items-center my-4">
+					<div id="events-list" class="col-12 col-md-10 col-lg-8"></div>
+				</div>
+			</div>
+		</section>
+	</main>
 {% endblock %}

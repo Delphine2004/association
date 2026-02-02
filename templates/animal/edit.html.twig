@@ -1,41 +1,34 @@
-{% extends 'base.html.twig' %} {% block title %}Animal - Modification{% endblock
-%} {% block body %}
+{% extends 'base.html.twig' %}
+{% block title %}Animal - Modification
+{% endblock
+%}
+{% block body %}
 
-<main class="pt-5">
-    <section id="animal-page" class="container-fluid py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-8">
-                    <h1 class="text-center m-5">Modification de l'animal</h1>
+	<main class="pt-5">
+		<section id="animal-page" class="container-fluid py-5">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-12 col-md-10 col-lg-8">
+						<h1 class="text-center m-3">Modification de l'animal</h1>
 
-                    <div
-                        class="card bg-light-pink shadow-sm d-flex justify-content-evenly p-4"
-                    >
-                        {{
+						<div class="card bg-light-pink shadow-sm d-flex justify-content-evenly p-4">
+							{{
                             include("animal/_form.html.twig", {
                                 button_label: "Modifier"
                             })
                         }}
-                    </div>
+						</div>
 
-                    <div class="m-5">
-                        {% include 'partials/_flash.html.twig' %}
-                    </div>
-                </div>
-            </div>
+						<div class="m-5">
+							{% include 'partials/_flash.html.twig' %}
+						</div>
+					</div>
+				</div>
 
-            <div class="text-center m-5">
-                <a
-                    class="btn"
-                    href="{{
-                        path('app_animal_show', {
-                            id: animal.id
-                        })
-                    }}"
-                    >Revenir à l'animal</a
-                >
-            </div>
-        </div>
-    </section>
-</main>
+				<div class="text-center m-5">
+					<a class="btn" href="{{ path('app_animal_show', { id: animal.id }) }}">Revenir à l'animal</a>
+				</div>
+			</div>
+		</section>
+	</main>
 {% endblock %}

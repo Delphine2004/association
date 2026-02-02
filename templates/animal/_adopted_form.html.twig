@@ -1,12 +1,4 @@
-<form
-    method="post"
-    action="{{ path('app_animal_adopt', { id: animal.id }) }}"
-    onsubmit="return confirm('Confirmer l\'adoption de cet animal?');"
->
-    <input
-        type="hidden"
-        name="_token"
-        value="{{ csrf_token('adopt' ~ animal.id) }}"
-    />
-    <button class="btn w-100">Adopté(e)</button>
+<form method="post" action="{{ path('app_animal_adopt', { id: animal.id }) }}" onsubmit="return confirm('Confirmer l\'adoption de cet animal?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('adopt' ~ animal.id) }}"/>
+	<button class="btn w-100">Adopté(e)</button>
 </form>

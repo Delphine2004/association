@@ -1,235 +1,193 @@
-{% extends 'base.html.twig' %} {% block title %}Animal - Informations{%
-endblock%} {% block body %}
+{% extends 'base.html.twig' %}
+{% block title %}Animal - Informations{%
+endblock%}
+{% block body %}
 
-<main class="pt-5">
-    <section id="animal-page" class="container-fluid py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-8">
-                    <div class="card shadow-sm">
-                        <div class="card-header bg-pink text-brown">
-                            <h1 class="text-center m-3">
-                                Animal n°{{ animal.id }}
-                            </h1>
-                        </div>
-                        <div class="card-body bg-light-pink text-brown">
-                            <!-- Photo -->
-                            <div class="image-wrapper mx-auto mb-4">
-                                <img
-                                    src="{{ asset('uploads/animals/' ~ animal.picture) }}"
-                                    alt=" photo de {{ animal.name }}"
-                                    class="img-fluid rounded-4"
-                                />
-                            </div>
+	<main class="pt-5">
+		<section id="animal-page" class="container-fluid py-5">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-12 col-md-10 col-lg-8">
+						<div class="card shadow-sm">
+							<div class="card-header bg-pink text-brown">
+								<h1 class="text-center m-3">
+									Animal n°{{ animal.id }}
+								</h1>
+							</div>
+							<div
+								class="card-body bg-light-pink text-brown">
+								<!-- Photo -->
+								<div class="image-wrapper mx-auto mb-4">
+									<img src="{{ asset('uploads/animals/' ~ animal.picture) }}" alt="{{ animal.name }}" class="img-fluid rounded-4"/>
+								</div>
 
-                            <!-- ID, Nom et statut -->
-                            <div class="py-2 mb-3 border-bottom">
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong> Ref :</strong
-                                    ><span>{{ animal.id }}</span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong> Nom :</strong
-                                    ><span>{{ animal.name }}</span>
-                                </div>
-                                {% if is_granted('ROLE_EMPLOYE') %}
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong> Statut:</strong
-                                    ><span>{{ animal.status.value }}</span>
-                                </div>
-                                {% endif %}
-                            </div>
+								<!-- ID, Nom et statut -->
+								<div class="py-2 mb-3 border-bottom">
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>
+											Ref :</strong>
+										<span>{{ animal.id }}</span>
+									</div>
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>
+											Nom :</strong>
+										<span>{{ animal.name }}</span>
+									</div>
+									{% if is_granted('ROLE_EMPLOYE') %}
+										<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+											<strong>
+												Statut:</strong>
+											<span>{{ animal.status.value }}</span>
+										</div>
+									{% endif %}
+								</div>
 
-                            <!-- Type / Race / Genre -->
-                            <div class="py-2 mb-3 border-bottom">
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Type</strong>
-                                    <span>{{ animal.type.value }}</span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Race</strong>
-                                    <span>{{ animal.race.value }}</span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Genre</strong>
-                                    <span>{{ animal.gender.value }}</span>
-                                </div>
-                            </div>
+								<!-- Type / Race / Genre -->
+								<div class="py-2 mb-3 border-bottom">
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Type</strong>
+										<span>{{ animal.type.value }}</span>
+									</div>
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Race</strong>
+										<span>{{ animal.race.value }}</span>
+									</div>
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Genre</strong>
+										<span>{{ animal.gender.value }}</span>
+									</div>
+								</div>
 
-                            <!-- Médical -->
-                            <div class="py-2 mb-3 border-bottom">
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Vacciné(e)</strong>
-                                    <span>{{
+								<!-- Médical -->
+								<div class="py-2 mb-3 border-bottom">
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Vacciné(e)</strong>
+										<span>{{
                                         animal.vaccinated ? "Oui" : "Non"
                                     }}</span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Sterilisé(e)</strong>
-                                    <span>{{
+									</div>
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Sterilisé(e)</strong>
+										<span>{{
                                         animal.sterilized ? "Oui" : "Non"
                                     }}</span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Pucé(e)</strong>
-                                    <span>{{
+									</div>
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Pucé(e)</strong>
+										<span>{{
                                         animal.chipped ? "Oui" : "Non"
                                     }}</span>
-                                </div>
-                            </div>
+									</div>
+								</div>
 
-                            <!-- Comportement -->
-                            <div class="py-2 mb-3 border-bottom">
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Compatible enfant</strong>
-                                    <span>{{
+								<!-- Comportement -->
+								<div class="py-2 mb-3 border-bottom">
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Compatible enfant</strong>
+										<span>{{
                                         animal.compatibleKid ? "Oui" : "Non"
                                     }}</span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Compatible chat</strong>
-                                    <span>{{
+									</div>
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Compatible chat</strong>
+										<span>{{
                                         animal.compatibleCat ? "Oui" : "Non"
                                     }}</span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Compatible chien</strong>
-                                    <span>{{
+									</div>
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Compatible chien</strong>
+										<span>{{
                                         animal.compatibleDog ? "Oui" : "Non"
                                     }}</span>
-                                </div>
-                            </div>
+									</div>
+								</div>
 
-                            <!-- Dates -->
-                            <div class="py-2 mb-3 border-bottom">
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Date de naissance</strong>
-                                    <span
-                                        >{{ animal.birthday ? animal.birthday|date('d/m/Y') : '' }}</span
-                                    >
-                                </div>
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Date d'arrivée</strong>
-                                    <span
-                                        >{{ animal.arrivalDate ? animal.arrivalDate|date('d/m/Y') : '' }}</span
-                                    >
-                                </div>
-                            </div>
+								<!-- Dates -->
+								<div class="py-2 mb-3 border-bottom">
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Date de naissance</strong>
+										<span>{{ animal.birthday ? animal.birthday|date('d/m/Y') : '' }}</span>
+									</div>
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Date d'arrivée</strong>
+										<span>{{ animal.arrivalDate ? animal.arrivalDate|date('d/m/Y') : '' }}</span>
+									</div>
+								</div>
 
-                            <!-- Description -->
-                            <div
-                                class="d-flex flex-column py-2 mb-3 border-bottom"
-                            >
-                                <strong>Description</strong>
-                                <p>{{ animal.description }}</p>
-                            </div>
+								<!-- Description -->
+								<div class="d-flex flex-column py-2 mb-3 border-bottom">
+									<strong>Description</strong>
+									<p>{{ animal.description }}</p>
+								</div>
 
-                            <!-- Création et modification -->
-                            <div class="py-2 mb-3">
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Création : </strong>
-                                    <span
-                                        >{{ animal.createdAt ? animal.createdAt|date('d/m/Y H:i:s') : '' }}
-                                    </span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Modification : </strong>
-                                    <span
-                                        >{{animal.updatedAt ? animal.updatedAt|date('d/m/Y H:i:s') : '' }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        {% set STATUS_A_ADOPTER = 'A adopter' %} {% set
-                        STATUS_EN_SOIN = 'En soin' %} {% if
+								<!-- Création et modification -->
+								<div class="py-2 mb-3">
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Création :
+										</strong>
+										<span>{{ animal.createdAt ? animal.createdAt|date('d/m/Y H:i:s') : '' }}
+										</span>
+									</div>
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Modification :
+										</strong>
+										<span>{{animal.updatedAt ? animal.updatedAt|date('d/m/Y H:i:s') : '' }}
+										</span>
+									</div>
+								</div>
+							</div>
+							{% set STATUS_A_ADOPTER = 'A adopter' %}
+							{% set
+                        STATUS_EN_SOIN = 'En soin' %}
+							{% if
                         is_granted('ROLE_EMPLOYE') %}
-                        <div class="card-footer bg-pink">
-                            <div
-                                class="d-flex flex-column flex-md-row justify-content-center m-3 gap-3"
-                            >
-                                {% if animal.status.value in [STATUS_EN_SOIN,
+								<div class="card-footer bg-pink">
+									<div class="d-flex flex-column flex-md-row justify-content-center m-3 gap-3">
+										{% if animal.status.value in [STATUS_EN_SOIN,
                                 STATUS_A_ADOPTER] %}
 
-                                <a
-                                    class="btn flex-fill"
-                                    href="{{
-                                        path('app_animal_edit', {
-                                            id: animal.id
-                                        })
-                                    }}"
-                                >
-                                    Modifier
-                                </a>
-                                <div class="flex-fill">
-                                    {{
+											<a class="btn flex-fill" href="{{ path('app_animal_edit', { id: animal.id }) }}">
+												Modifier
+											</a>
+											<div class="flex-fill">
+												{{
                                         include("animal/_delete_form.html.twig")
                                     }}
-                                </div>
-                                {% endif %} {% if animal.status.value ==
+											</div>
+										{% endif %}
+										{% if animal.status.value ==
                                 STATUS_A_ADOPTER %}
-                                <div class="flex-fill">
-                                    {{
+											<div class="flex-fill">
+												{{
                                         include(
                                             "animal/_adopted_form.html.twig"
                                         )
                                     }}
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							{% endif %}
+						</div>
+					</div>
+				</div>
 
-            {% if is_granted('ROLE_EMPLOYE') %}
-            <div class="text-center m-5">
-                <a class="btn" href="{{ path('app_animal_page') }}">
-                    Revenir aux animaux
-                </a>
-            </div>
+				{% if is_granted('ROLE_EMPLOYE') %}
+					<div class="text-center m-5">
+						<a class="btn" href="{{ path('app_animal_page') }}">
+							Revenir aux animaux
+						</a>
+					</div>
 
-            {% else %}
-            <div class="text-center m-5">
-                <a class="btn" href="{{ path('adoption') }}">
-                    Revenir aux animaux
-                </a>
-            </div>
-            {% endif %}
-        </div>
-    </section>
-</main>
+				{% else %}
+					<div class="text-center m-5">
+						<a class="btn" href="{{ path('adoption') }}">
+							Revenir aux animaux
+						</a>
+					</div>
+				{% endif %}
+			</div>
+		</section>
+	</main>
 
 {% endblock %}

@@ -1,106 +1,63 @@
 <header class="bg-pink">
-    <nav
-        class="navbar navbar-expand-lg shadow-sm position-fixed w-100 z-3 pt-2"
-    >
-        <div class="container">
-            <a
-                class="navbar-brand d-flex align-items-center"
-                href="{{ path('home') }}"
-            >
-                <img
-                    class="logo"
-                    src="{{ asset('assets/img/logo/logo.webp') }}"
-                    alt="logo cœur à Quatre Pattes"
-            /></a>
-            <span>Cœur à Quatre Pattes</span>
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown"
-                aria-expanded="false"
-                aria-label="Toggle main navigation"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div
-                class="collapse navbar-collapse justify-content-end"
-                id="navbarNavDropdown"
-            >
-                <ul class="navbar-nav">
-                    <!-- Liens visibles uniquement par les visiteurs non
-                    connectés -->
-                    {% if not app.user %}
-                    <li class="nav-item me-3">
-                        <a class="nav-link" href="{{ path('donation') }}"
-                            >Donner</a
-                        >
-                    </li>
-                    <li class="nav-item me-3">
-                        <a class="nav-link" href="{{ path('adoption') }}"
-                            >Adopter</a
-                        >
-                    </li>
+	<nav class="navbar navbar-expand-lg shadow-sm position-fixed w-100 z-3 pt-2">
+		<div class="container">
+			<a class="navbar-brand d-flex align-items-center" href="{{ path('home') }}">
+				<img class="logo" src="{{ asset('assets/img/logo/logo.webp') }}" alt="logo cœur à Quatre Pattes"/></a>
+			<span>Cœur à Quatre Pattes</span>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle main navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+				<ul
+					class="navbar-nav">
+					<!-- Liens visibles uniquement par les visiteurs non
+					                    connectés -->
+					{% if not app.user %}
+						<li class="nav-item me-3">
+							<a class="nav-link" href="{{ path('donation') }}">Donner</a>
+						</li>
+						<li class="nav-item me-3">
+							<a class="nav-link" href="{{ path('adoption') }}">Adopter</a>
+						</li>
 
-                    {% endif %}
+					{% endif %}
 
-                    <!-- Liens visibles uniquement par l'admin
-                    connecté -->
-                    {% if is_granted('ROLE_ADMIN')%}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('admin_dashboard') }}"
-                            >Utilisateurs</a
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            class="nav-link"
-                            href="{{ path('admin_newsletter_emails') }}"
-                            >Emails</a
-                        >
-                    </li>
-                    {% endif %}
-                    <!-- Liens visibles uniquement par les employés
-                    connectés -->
-                    {% if is_granted('ROLE_EMPLOYE')%}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_animal_page') }}"
-                            >Animaux</a
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_event_page') }}"
-                            >Evénements</a
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('user_dashboard') }}"
-                            >Tableau de bord</a
-                        >
-                    </li>
-                    <li class="nav-item">
-                        <a
-                            class="nav-link"
-                            href="{{
-                                path('app_user_show', { id: app.user.id })
-                            }}"
-                            >Mon compte</a
-                        >
-                    </li>
+					<!-- Liens visibles uniquement par l'admin
+					                    connecté -->
+					{% if is_granted('ROLE_ADMIN')%}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('admin_dashboard') }}">Utilisateurs</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('admin_newsletter_emails') }}">Emails</a>
+						</li>
+					{% endif %}
+					<!-- Liens visibles uniquement par les employés
+					                    connectés -->
+					{% if is_granted('ROLE_EMPLOYE')%}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_animal_page') }}">Animaux</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_event_page') }}">Evénements</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('user_dashboard') }}">Tableau de bord</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_user_show', { id: app.user.id }) }}">Mon compte</a>
+						</li>
 
-                    {% endif %}
-                    <!-- Liens visibles uniquement par les
-                    utilisateurs connectés -->
-                    {% if app.user %}
-                    <li class="nav-item me-3">
-                        <a class="nav-link" href="{{ path('app_logout') }}"
-                            >Déconnexion</a
-                        >
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
+					{% endif %}
+					<!-- Liens visibles uniquement par les
+					                    utilisateurs connectés -->
+					{% if app.user %}
+						<li class="nav-item me-3">
+							<a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</nav>
 </header>

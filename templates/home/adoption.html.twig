@@ -1,205 +1,155 @@
-{% extends 'base.html.twig' %} {% block title %}Adoption - Coeurs à Quatre
-Pattes{% endblock %} {% block body %}
-<main class="pt-5">
-    <section id="adoption" class="container-fluid py-5">
-        <div class="container text-center">
-            <div class="row justify-content-center align-items-center mt-4">
-                <div class="col-12 col-md-10 col-lg-8">
-                    <img
-                        src="{{ asset('assets/img/autres/hero-adoption.jpg') }}"
-                        alt="Chien et chat qui se câlinent"
-                        class="img-fluid rounded d-block mx-auto"
-                    />
-                </div>
-            </div>
-            <div class="row justify-content-center align-items-center mt-4">
-                <div class="col-12 col-md-6 col-lg-5">
-                    <h1 class="text-center my-4">Adopter un animal</h1>
-                    <p class="lead text-center">
-                        Offrez une seconde chance à un compagnon qui n'attend
-                        que vous. Nos animaux sont vaccinés, stérilisés et prêts
-                        à rejoindre leur foyer pour toujours. Chiens, chats,
-                        lapins... chacun mérite une famille aimante. Parcourez
-                        nos profils et trouvez celui qui fera battre votre cœur.
-                    </p>
-                </div>
-                <div class="col-12 col-md-4 col-lg-3">
-                    <a href="{{ path('adoption_terms') }}" class="btn w-100"
-                        >Conditions d'adoption</a
-                    >
-                </div>
-            </div>
-        </div>
-    </section>
+{% extends 'base.html.twig' %}
+{% block title %}Adoption - Coeurs à Quatre
+	Pattes
+{% endblock %}
+{% block body %}
+	<main class="pt-5">
+		<section id="adoption" class="container-fluid py-5">
+			<div class="container text-center">
+				<div class="row justify-content-center align-items-center mt-4">
+					<div class="col-12 col-md-10 col-lg-8">
+						<img src="{{ asset('assets/img/autres/hero-adoption.jpg') }}" alt="Chien et chat qui se câlinent" class="img-fluid rounded d-block mx-auto"/>
+					</div>
+				</div>
+				<div class="row justify-content-center align-items-center mt-4">
+					<div class="col-12 col-md-6 col-lg-5">
+						<h1 class="text-center m-3">Adopter un animal</h1>
+						<p class="lead text-center">
+							Offrez une seconde chance à un compagnon qui n'attend
+							                        que vous. Nos animaux sont vaccinés, stérilisés et prêts
+							                        à rejoindre leur foyer pour toujours. Chiens, chats,
+							                        lapins... chacun mérite une famille aimante. Parcourez
+							                        nos profils et trouvez celui qui fera battre votre cœur.
+						</p>
+					</div>
+					<div class="col-12 col-md-4 col-lg-3">
+						<a href="{{ path('adoption_terms') }}" class="btn w-100">Conditions d'adoption</a>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <section id="adoption-search" class="container-fluid py-5">
-        <div class="container">
-            <!-- Filtre -->
-            <div class="row justify-content-center align-items-center mt-4">
-                <div class="col-12 col-md-10 col-lg-8">
-                    <div class="filter card p-4 shadow-sm mb-4">
-                        <h3 class="text-center mb-4">Filtrer les animaux</h3>
-                        <form id="animal-search-form">
-                            <div class="row g-3 mb-3 justify-content-around">
-                                <div class="col-md-3 text-brown mb-4">
-                                    <label class="form-label" for="type"
-                                        >Catégorie</label
-                                    >
-                                    <select
-                                        class="form-select"
-                                        name="type"
-                                        id="type"
-                                    >
-                                        <option selected value="">
-                                            Sélectionner
-                                        </option>
-                                        <option value="Chat">Chat</option>
-                                        <option value="Chien">Chien</option>
-                                        <option value="Oiseau">Oiseau</option>
-                                        <option value="Autre">Autre</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3 text-brown mb-4">
-                                    <label class="form-label" for="race"
-                                        >Race</label
-                                    >
-                                    <select
-                                        class="form-select"
-                                        name="race"
-                                        id="race"
-                                    >
-                                        <option selected value="">
-                                            Sélectionner
-                                        </option>
-                                        <option value="Européen">
-                                            Européen
-                                        </option>
-                                        <option value="Siamois">Siamois</option>
-                                        <option value="Maine Coon">
-                                            Maine Coon
-                                        </option>
-                                        <option value="Persan">Persan</option>
-                                        <option value="Bengal">Bengal</option>
-                                        <option value="Labrador">
-                                            Labrador
-                                        </option>
-                                        <option value="Berger Allemand">
-                                            Berger Allemand
-                                        </option>
-                                        <option value="Bouledogue Français">
-                                            Bouledogue Français
-                                        </option>
-                                        <option value="Golden Retriever">
-                                            Golden Retriever
-                                        </option>
-                                        <option value="Beagle">Beagle</option>
-                                        <option value="Perroquet">
-                                            Perroquet
-                                        </option>
-                                        <option value="Canari">Canari</option>
-                                        <option value="Perruche">
-                                            Perruche
-                                        </option>
-                                        <option value="Colombier">
-                                            Colombier
-                                        </option>
-                                        <option value="Tourterelle">
-                                            Tourterelle
-                                        </option>
-                                        <option value="Lapin">Lapin</option>
-                                        <option value="Hamster">Hamster</option>
-                                        <option value="Cochon d’Inde">
-                                            Cochon d’Inde
-                                        </option>
-                                        <option value="Tortue">Tortue</option>
-                                        <option value="Furet">Furet</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3 text-brown mb-4">
-                                    <label class="form-label" for="gender"
-                                        >Genre</label
-                                    >
-                                    <select
-                                        class="form-select"
-                                        name="gender"
-                                        id="gender"
-                                    >
-                                        <option selected value="">
-                                            Sélectionner
-                                        </option>
-                                        <option value="Femelle">Femelle</option>
-                                        <option value="Mâle">Mâle</option>
-                                    </select>
-                                </div>
-                            </div>
+		<section id="adoption-search" class="container-fluid py-5">
+			<div
+				class="container">
+				<!-- Filtre -->
+				<div class="row justify-content-center align-items-center mt-4">
+					<div class="col-12 col-md-10 col-lg-8">
+						<div class="filter card p-4 shadow-sm mb-4">
+							<h3 class="text-center mb-4">Filtrer les animaux</h3>
+							<form id="animal-search-form">
+								<div class="row g-3 mb-3 justify-content-around">
+									<div class="col-md-4 text-brown mb-4">
+										<label class="form-label" for="type">Catégorie</label>
+										<select class="form-select" name="type" id="type">
+											<option selected value="">
+												Sélectionner
+											</option>
+											<option value="Chat">Chat</option>
+											<option value="Chien">Chien</option>
+											<option value="Oiseau">Oiseau</option>
+											<option value="Autre">Autre</option>
+										</select>
+									</div>
+									<div class="col-md-4 text-brown mb-4">
+										<label class="form-label" for="race">Race</label>
+										<select class="form-select" name="race" id="race">
+											<option selected value="">
+												Sélectionner
+											</option>
+											<option value="Européen">
+												Européen
+											</option>
+											<option value="Siamois">Siamois</option>
+											<option value="Maine Coon">
+												Maine Coon
+											</option>
+											<option value="Persan">Persan</option>
+											<option value="Bengal">Bengal</option>
+											<option value="Labrador">
+												Labrador
+											</option>
+											<option value="Berger Allemand">
+												Berger Allemand
+											</option>
+											<option value="Bouledogue Français">
+												Bouledogue Français
+											</option>
+											<option value="Golden Retriever">
+												Golden Retriever
+											</option>
+											<option value="Beagle">Beagle</option>
+											<option value="Perroquet">
+												Perroquet
+											</option>
+											<option value="Canari">Canari</option>
+											<option value="Perruche">
+												Perruche
+											</option>
+											<option value="Colombier">
+												Colombier
+											</option>
+											<option value="Tourterelle">
+												Tourterelle
+											</option>
+											<option value="Lapin">Lapin</option>
+											<option value="Hamster">Hamster</option>
+											<option value="Cochon d’Inde">
+												Cochon d’Inde
+											</option>
+											<option value="Tortue">Tortue</option>
+											<option value="Furet">Furet</option>
+										</select>
+									</div>
+									<div class="col-md-4 text-brown mb-4">
+										<label class="form-label" for="gender">Genre</label>
+										<select class="form-select" name="gender" id="gender">
+											<option selected value="">
+												Sélectionner
+											</option>
+											<option value="Femelle">Femelle</option>
+											<option value="Mâle">Mâle</option>
+										</select>
+									</div>
+								</div>
 
-                            <div class="row g-3 mb-3 justify-content-around">
-                                <div class="col-md-3 text-brown mb-4">
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input mt-0"
-                                            type="checkbox"
-                                            name="compatibleKid"
-                                            id="compatible-kid"
-                                            value="1"
-                                        />
-                                        <label
-                                            class="form-label"
-                                            for="compatible-kid"
-                                            >Compatible enfant</label
-                                        >
-                                    </div>
-                                </div>
-                                <div class="col-md-3 text-brown mb-4">
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input mt-0"
-                                            type="checkbox"
-                                            name="compatibleCat"
-                                            id="compatible-cat"
-                                            value="1"
-                                        />
-                                        <label
-                                            class="form-label"
-                                            for="compatible-cat"
-                                            >Compatible chat</label
-                                        >
-                                    </div>
-                                </div>
-                                <div class="col-md-3 text-brown mb-4">
-                                    <div class="form-check form-check-inline">
-                                        <input
-                                            class="form-check-input mt-0"
-                                            type="checkbox"
-                                            name="compatibleDog"
-                                            id="compatible-dog"
-                                            value="1"
-                                        />
-                                        <label
-                                            class="form-label"
-                                            for="compatible-dog"
-                                            >Compatible chien</label
-                                        >
-                                    </div>
-                                </div>
-                            </div>
+								<div class="row g-3 mb-3 justify-content-around">
+									<div class="col-md-4 text-brown mb-4">
+										<div class="form-check form-check-inline">
+											<input class="form-check-input mt-0" type="checkbox" name="compatibleKid" id="compatible-kid" value="1"/>
+											<label class="form-label" for="compatible-kid">Compatible enfant</label>
+										</div>
+									</div>
+									<div class="col-md-4 text-brown mb-4">
+										<div class="form-check form-check-inline">
+											<input class="form-check-input mt-0" type="checkbox" name="compatibleCat" id="compatible-cat" value="1"/>
+											<label class="form-label" for="compatible-cat">Compatible chat</label>
+										</div>
+									</div>
+									<div class="col-md-4 text-brown mb-4">
+										<div class="form-check form-check-inline">
+											<input class="form-check-input mt-0" type="checkbox" name="compatibleDog" id="compatible-dog" value="1"/>
+											<label class="form-label" for="compatible-dog">Compatible chien</label>
+										</div>
+									</div>
+								</div>
 
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-lg">
-                                    Rechercher
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- Resultats -->
-            <div
-                id="animals-list"
-                class="row justify-content-center align-items-center my-4"
-                data-is-authenticated="{{ app.user ? '1' : '0' }}"
-            ></div>
-        </div>
-    </section>
-</main>
+								<div class="text-center">
+									<button type="submit" class="btn btn-lg">
+										Rechercher
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- Resultats -->
+				<div class="row justify-content-center my-4">
+					<div class="col-12 col-md-10 col-lg-8">
+						<div id="animals-list" class="row justify-content-center align-items-center" data-is-authenticated="{{ app.user ? '1' : '0' }}"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
 {% endblock %}
