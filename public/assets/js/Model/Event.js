@@ -5,19 +5,16 @@ export class Event {
         this.place = data.place;
         this.description = data.description;
         this.picture = data.picture;
-        console.log(this.date);
     }
 
     getEventInfo() {
         return `
-        <tr>
-            <td>${this.id}</td>
-            <td>${this.date}</td>
-            <td>${this.place}</td>
-            <td>
+        <div class="card border-brown rounded-4 p-3 mb-4 w-100">
+            <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 p-0">
+                <p class="card-text mb-0 text-md-start text-center">${this.date} - ${this.place}</p>
                 <a class="btn btn-sm" href="/event/${this.id}">Voir</a>
-            </td>
-        </tr>
+            </div>
+        </div>
     `;
     }
 }

@@ -19,27 +19,23 @@ export class Animal {
 
     getAnimalInfo() {
         return `
-        <tr>
-            <td>${this.id}</td>
-            <td>${this.name}</td>
-            <td>${this.type}</td>
-            <td>${this.gender}</td>
-            <td>${this.status}</td>
-            <td>
+        <div class="card border-brown rounded-4 p-3 mb-4 w-100">
+            <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 p-0">
+                <p class="card-text mb-0 text-md-start text-center">${this.name} - ${this.type} - ${this.gender} - ${this.status}</p>
                 <a class="btn btn-sm" href="/animal/${this.id}">Voir</a>
-            </td>
-        </tr>
+            </div>
+        </div>
         `;
     }
 
     getAnimalCard() {
         return `
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="col-12 col-md-6 mb-4">
             <div class="card h-100">
                 <img src="${this.picture}" class="card-img-top" alt="${this.name}">
-                <div class="card-body">
+                <div class="card-body bg-light-pink text-brown">
                     <h5 class="card-title">${this.name}</h5>
-                    <p class="card-text">${this.type} • ${this.race}</p>
+                    <p class="card-text">${this.type} - ${this.race}</p>
                     <a href="/animal/${this.id}" class="btn btn-sm">Voir</a>
                 </div>
             </div>
