@@ -15,7 +15,7 @@ class MongoNewsletterService
         $this->collection = $client->selectCollection($dbName, $collectionName);
     }
 
-    public function addEmail(string $email): bool
+    public function addEmail(string $email, bool $agreement): bool
     {
         // Vérifier si l'email existe déjà
         $exists = $this->collection->findOne(['email' => $email]);
@@ -25,6 +25,7 @@ class MongoNewsletterService
 
         $result = $this->collection->insertOne([
             'email' => $email,
+            'agreement' => $agreement,
             'createdAt' => new UTCDateTime(),
         ]);
 
