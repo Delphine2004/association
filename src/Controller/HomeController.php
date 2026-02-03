@@ -24,27 +24,9 @@ class HomeController extends AbstractController
 
     #[Route('/', name: 'home')]
     public function renderHome(
-        Request $request,
-        MongoNewsletterService $newsletter,
         AnimalRepository $animalRepository,
         EventRepository $eventRepository
     ): Response {
-        if ($request->isMethod('POST')) {
-            $email = strtolower(trim($request->request->get('email')));
-
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $this->addFlash('error', 'Adresse email invalide.');
-                return $this->redirectToRoute('home');
-            }
-
-            if ($newsletter->addEmail($email)) {
-                $this->addFlash('success', 'Inscription réussie !');
-            } else {
-                $this->addFlash('warning', 'Cet email est déjà inscrit.');
-            }
-
-            return $this->redirectToRoute('home');
-        }
 
         $animalsToAdopt = $animalRepository->findAnimalsByAdoptionStatus(AdoptionStatus::A_ADOPTER);
         $animalsAdopted = $animalRepository->findAnimalsByAdoptionStatus(AdoptionStatus::ADOPTE);

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}Accueil - Coeurs à Quatre
-		Pattes
+							Pattes
 {% endblock %}
 {% block body %}
 	<main
@@ -278,23 +278,41 @@
 					<div class="col-12 col-md-10 col-lg-8 text-center mx-auto pt-5">
 						<p class="mb-4">
 							Restez informé de nos actions et sauvetages !
-														                        Inscrivez-vous à notre newsletter mensuelle pour ne
-														                        manquer aucune actualité de nos protégés.
+																																																	                        Inscrivez-vous à notre newsletter mensuelle pour ne
+																																																	                        manquer aucune actualité de nos protégés.
 						</p>
 					</div>
 					<!--  -->
 					<div class="col-12 col-md-10 col-lg-8 mx-auto">
-						<form class="row g-3 align-items-end" action="{{ path('home') }}" method="post" novalidate>
+						<form id="letter-form" class="row g-3" action="{{ path('home') }}" method="post" novalidate>
+
 							<div class="col-12 col-md-9">
-								<label for="newsletter_email" class="form-label visually-hidden">Adresse email</label>
-								<input type="email" id="newsletter_email" name="email" class="form-control" placeholder="exemple@mail.com" required/>
+								<div class="row g-2">
+									<div class="col-12">
+										<label for="newsletter_email" class="form-label visually-hidden">
+											Adresse email
+										</label>
+										<input type="email" id="newsletter_email" name="email" class="form-control" placeholder="exemple@mail.com" required/>
+									</div>
+
+									<div class="col-12">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" id="agreement"/>
+											<label class="form-check-label" for="agreement">
+												Je souhaite m'inscrire à la newsletter
+											</label>
+										</div>
+									</div>
+								</div>
 							</div>
+
 							<div class="col-12 col-md-3">
-								<button type="submit" class="btn w-100">
+								<button id="letter-btn" type="submit" class="btn w-100">
 									S'inscrire
 								</button>
 							</div>
 						</form>
+						<div id="feedback" class="row"></div>
 					</div>
 				</div>
 			</div>
