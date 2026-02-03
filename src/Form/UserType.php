@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Enum\UserRole;
 use App\Utils\RegexPatterns;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -14,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class UserType extends AbstractType
 {
@@ -28,6 +28,7 @@ class UserType extends AbstractType
                     'label' => 'Adresse e-mail',
                     'required' => true,
                     'attr' => [
+                        'autocomplete' => 'email',
                         'class' => 'form-control',
                         'placeholder' => 'exemple@email.com'
                     ],
