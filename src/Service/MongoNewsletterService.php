@@ -41,4 +41,9 @@ class MongoNewsletterService
         }
         return $emails;
     }
+
+    public function deleteEmails(array $emails): void
+    {
+        $this->collection->deleteMany(['email' => ['$in' => $emails]]);
+    }
 }

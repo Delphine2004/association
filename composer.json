@@ -6,40 +6,32 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.4.14",
+        "php": ">=8.4.17",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/dbal": "^3.10.4",
-        "doctrine/doctrine-bundle": "^2.18.2",
-        "doctrine/doctrine-migrations-bundle": "^3.7",
-        "doctrine/orm": "^3.6.1",
-        "mongodb/mongodb": "^2.1.2",
-        "runtime/frankenphp-symfony": "^0.2.0",
-        "symfony/asset": "7.4.*",
-        "symfony/console": "7.4.*",
-        "symfony/dotenv": "7.4.*",
-        "symfony/flex": "^2.10",
-        "symfony/form": "7.4.*",
-        "symfony/framework-bundle": "7.4.*",
-        "symfony/http-client": "7.4.*",
-        "symfony/mailer": "7.4.*",
-        "symfony/mime": "7.4.*",
-        "symfony/runtime": "7.4.*",
-        "symfony/security-bundle": "7.4.*",
-        "symfony/translation": "7.4.*",
-        "symfony/twig-bundle": "7.4.*",
-        "symfony/validator": "7.4.*",
-        "symfony/yaml": "7.4.*",
+        "doctrine/doctrine-bundle": "^3.2",
+        "doctrine/doctrine-migrations-bundle": "^4.0",
+        "doctrine/orm": "^3.6",
+        "mongodb/mongodb": "^2.1",
+        "phpoffice/phpspreadsheet": "^5.4",
+        "symfony/asset": "8.0.*",
+        "symfony/console": "8.0.*",
+        "symfony/dotenv": "8.0.*",
+        "symfony/flex": "^2",
+        "symfony/form": "8.0.*",
+        "symfony/framework-bundle": "8.0.*",
+        "symfony/mailer": "8.0.*",
+        "symfony/mime": "8.0.*",
+        "symfony/runtime": "8.0.*",
+        "symfony/security-bundle": "8.0.*",
+        "symfony/translation": "8.0.*",
+        "symfony/twig-bundle": "8.0.*",
+        "symfony/validator": "8.0.*",
+        "symfony/yaml": "8.0.*",
         "symfonycasts/reset-password-bundle": "^1.24",
-        "twig/extra-bundle": "^2.12|^3.23",
-        "twig/intl-extra": "^3.23",
-        "twig/twig": "^2.12|^3.23"
+        "twig/intl-extra": "^3.23"
     },
     "config": {
-        "platform": {
-            "ext-mongodb": "2.1.0",
-            "ext-xml": "1.0"
-        },
         "allow-plugins": {
             "php-http/discovery": true,
             "symfony/flex": true,
@@ -66,7 +58,9 @@
         "symfony/polyfill-php74": "*",
         "symfony/polyfill-php80": "*",
         "symfony/polyfill-php81": "*",
-        "symfony/polyfill-php82": "*"
+        "symfony/polyfill-php82": "*",
+        "symfony/polyfill-php83": "*",
+        "symfony/polyfill-php84": "*"
     },
     "scripts": {
         "auto-scripts": {
@@ -86,12 +80,13 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.4.*",
+            "require": "8.0.*",
             "docker": true
         }
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^4.3.1",
-        "symfony/maker-bundle": "^1.65.1"
+        "doctrine/doctrine-fixtures-bundle": "^4.3",
+        "fakerphp/faker": "^1.24",
+        "symfony/maker-bundle": "^1.65"
     }
 }

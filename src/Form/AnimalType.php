@@ -65,15 +65,15 @@ class AnimalType extends AbstractType
                     'required' => true,
                     'attr' => ['class' => 'form-control',],
                     'constraints' => [
-                        new File([
-                            'maxSize' => '10M', // ICI tu règles la taille
-                            'mimeTypes' => [
+                        new File(
+                            maxSize: '10M', // ICI tu règles la taille
+                            mimeTypes: [
                                 'image/jpeg',
                                 'image/png',
                                 'image/webp',
                             ],
-                            'mimeTypesMessage' => 'Merci d’uploader une image valide (jpeg, png, webp)',
-                        ])
+                            mimeTypesMessage: 'Merci d’uploader une image valide (jpeg, png, webp)',
+                        )
                     ],
 
                 ])

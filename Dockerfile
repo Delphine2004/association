@@ -1,37 +1,48 @@
-# syntax=docker/dockerfile:1
+#syntax=docker/dockerfile:1
 
-FROM dunglas/frankenphp:1-php8.4 AS frankenphp_base
+# Versions
+FROM dunglas/frankenphp:1-php8.4 AS frankenphp_upstream
+
+# Base FrankenPHP image
+FROM frankenphp_upstream AS frankenphp_base
 
 WORKDIR /app
 VOLUME /app/var/
 
-# Installer dépendances système de base
+# persistent / runtime deps
+# hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    file \
-    git \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+	file \
+	git \
+	curl \
+	ca-certificates \
+	gnupg \
+	&& rm -rf /var/lib/apt/lists/*
 
-# Installer Node.js 18 LTS (si tu en as vraiment besoin pour le build)
+# Installer Node.js 18 (LTS)
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs && \
-    rm -rf /var/lib/apt/lists/*
+	apt-get install -y nodejs && \
+	rm -rf /var/lib/apt/lists/*
 
-# Installer extensions PHP requises, composer et mongoDB
-RUN install-php-extensions \
-    @composer \
-    apcu \
-    intl \
-    opcache \
-    zip \
-    pdo_mysql \
-    xml \
-    mongodb
+# Installer PHP
+RUN set -eux; \
+	install-php-extensions \
+	@composer \
+	apcu \
+	intl \
+	opcache \
+	zip \
+	gd \
+	;
+# Installer MongoDB
+RUN apt-get update && apt-get install -y libssl-dev pkg-config && \
+	pecl install mongodb && \
+	docker-php-ext-enable mongodb
 
-# Environnements, configs et autres (inchangés)
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV MERCURE_TRANSPORT_URL=bolt:///data/mercure.db
 ENV PHP_INI_SCAN_DIR=":$PHP_INI_DIR/app.conf.d"
+RUN install-php-extensions pdo_mysql
 
 COPY --link frankenphp/conf.d/10-app.ini $PHP_INI_DIR/app.conf.d/
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
@@ -41,7 +52,6 @@ ENTRYPOINT ["docker-entrypoint"]
 
 HEALTHCHECK --start-period=60s CMD curl -f http://localhost:2019/metrics || exit 1
 CMD [ "frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile" ]
-
 
 # Dev FrankenPHP image
 FROM frankenphp_base AS frankenphp_dev
@@ -54,7 +64,7 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN set -eux; \
 	install-php-extensions \
-		xdebug \
+	xdebug \
 	;
 
 COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/

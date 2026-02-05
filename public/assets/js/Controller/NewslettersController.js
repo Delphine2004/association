@@ -67,3 +67,15 @@ export function validateEmail() {
         }
     });
 }
+
+export function reloadEmailPage() {
+    const form = document.getElementById("export-form");
+
+    if (!form) return;
+
+    form.addEventListener("submit", function () {
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+    });
+}

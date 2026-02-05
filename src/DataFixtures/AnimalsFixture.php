@@ -31,7 +31,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => false,
                 'compatibleCat' => false,
                 'compatibleDog' => false,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -50,7 +50,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => false,
                 'compatibleCat' => false,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -69,7 +69,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => false,
                 'compatibleCat' => false,
                 'compatibleDog' => false,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -88,7 +88,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => false,
                 'compatibleCat' => false,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -107,7 +107,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => true,
                 'compatibleCat' => true,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -126,7 +126,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => false,
                 'compatibleCat' => false,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -137,7 +137,7 @@ class AnimalsFixture extends Fixture
                 'type' => AnimalCategory::CHIEN,
                 'race' => AnimalRace::CHIEN_CROISE,
                 'gender' => AnimalGender::FEMELLE,
-                'picture' => 'chien-croise.jpg',
+                'picture' => 'chien-croise-1.jpg',
                 'status' => AdoptionStatus::A_ADOPTER,
                 'vaccinated' => true,
                 'sterilized' => true,
@@ -145,7 +145,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => true,
                 'compatibleCat' => true,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -164,7 +164,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => false,
                 'compatibleCat' => false,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -183,7 +183,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => true,
                 'compatibleCat' => true,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -202,7 +202,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => true,
                 'compatibleCat' => true,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -221,7 +221,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => true,
                 'compatibleCat' => true,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -240,7 +240,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => true,
                 'compatibleCat' => true,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -259,7 +259,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => true,
                 'compatibleCat' => true,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -278,7 +278,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => true,
                 'compatibleCat' => false,
                 'compatibleDog' => false,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -297,7 +297,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => true,
                 'compatibleCat' => true,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -316,7 +316,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => true,
                 'compatibleCat' => false,
                 'compatibleDog' => false,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -328,14 +328,14 @@ class AnimalsFixture extends Fixture
                 'race' => AnimalRace::CHAT_EUROPEEN,
                 'gender' => AnimalGender::MALE,
                 'picture' => 'chat-4.jpg',
-                'status' => AdoptionStatus::A_ADOPTER,
+                'status' => AdoptionStatus::ADOPTE,
                 'vaccinated' => true,
                 'sterilized' => true,
                 'chipped' => true,
                 'compatibleKid' => true,
                 'compatibleCat' => true,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -347,14 +347,14 @@ class AnimalsFixture extends Fixture
                 'race' => AnimalRace::CHIEN_LABRADOR,
                 'gender' => AnimalGender::FEMELLE,
                 'picture' => 'chien-labrador-3.jpg',
-                'status' => AdoptionStatus::A_ADOPTER,
+                'status' => AdoptionStatus::ADOPTE,
                 'vaccinated' => true,
                 'sterilized' => true,
                 'chipped' => true,
                 'compatibleKid' => true,
                 'compatibleCat' => false,
                 'compatibleDog' => false,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -373,7 +373,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => true,
                 'compatibleCat' => true,
                 'compatibleDog' => true,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
@@ -392,7 +392,7 @@ class AnimalsFixture extends Fixture
                 'compatibleKid' => true,
                 'compatibleCat' => false,
                 'compatibleDog' => false,
-                'arrivalDate' => (new \DateTimeImmutable())->setTimestamp(mt_rand(
+                'arrivalDate' => (new \DateTime())->setTimestamp(mt_rand(
                     strtotime('-1 year'),
                     strtotime('now')
                 ))
