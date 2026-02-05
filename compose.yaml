@@ -1,25 +1,21 @@
 ---
+name: association
 services:
   php:
     image: ${IMAGES_PREFIX:-}app-php
     restart: unless-stopped
     environment:
       SERVER_NAME: ${SERVER_NAME}, php:80
-      DEFAULT_URI: http://${SERVER_NAME}:${HTTP_PORT}
+      DEFAULT_URI: http://localhost:${HTTP_PORT}
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
-      # Run "composer require symfony/orm-pack" to install and configure Doctrine ORM
       DATABASE_URL: mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@database:3306/${MYSQL_DATABASE}?serverVersion=${MYSQL_VERSION}&charset=${MYSQL_CHARSET}
-      # Run "composer require symfony/mercure-bundle" to install and configure the Mercure integration
+      
       MONGO_USER: ${MONGO_USER}
       MONGO_PASSWORD: ${MONGO_PASSWORD}
       MONGO_DB: ${MONGO_DB}
       MONGO_URI: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}:27017/${MONGO_DB}
-
-      MERCURE_URL: ${CADDY_MERCURE_URL:-http://php/.well-known/mercure}
-      MERCURE_PUBLIC_URL: ${CADDY_MERCURE_PUBLIC_URL:-https://${SERVER_NAME}:${HTTPS_PORT}/.well-known/mercure}
-      MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET}
-      # The two next lines can be removed after initial installation
+      
       SYMFONY_VERSION: ${SYMFONY_VERSION:-}
       STABILITY: ${STABILITY:-stable}
     volumes:
@@ -39,11 +35,6 @@ services:
         published: ${HTTP3_PORT}
         protocol: udp
 
-  # Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
-  ###> symfony/mercure-bundle ###
-  ###< symfony/mercure-bundle ###
-
-  ###> doctrine/doctrine-bundle ###
   database:
     image: mysql:${MYSQL_VERSION}
     environment:
@@ -59,7 +50,6 @@ services:
     restart: unless-stopped
     volumes:
       - database_data:/var/lib/mysql:rw
-  ###< doctrine/doctrine-bundle ###
 
   mongo:
     image: mongo:6.0
@@ -69,8 +59,10 @@ services:
       - mongo_data:/data/db
       - ./docker/mongo-init:/docker-entrypoint-initdb.d/
 
+
 volumes:
   caddy_data:
   caddy_config:
   database_data:
   mongo_data:
+
