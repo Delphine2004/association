@@ -164,13 +164,13 @@ thead {
 @media (min-width: 768px) {
   #carousel-to-adopt .carousel-item,
   #carousel-adopted .carousel-item {
-    height: 620px;
+    height: 600px;
   }
 }
 @media (min-width: 992px) {
   #carousel-to-adopt .carousel-item,
   #carousel-adopted .carousel-item {
-    height: 750px;
+    height: 710px;
   }
 }
 .card-img-top {
@@ -185,11 +185,11 @@ thead {
   background-color: #f2b8a2;
 }
 
-.imgHero {
+.img-hero {
   width: 300px;
 }
 
-.imgHero img {
+.img-hero img {
   width: 100%;
 }
 
