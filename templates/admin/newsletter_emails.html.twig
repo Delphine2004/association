@@ -1,28 +1,62 @@
 {% extends 'base.html.twig' %}
 {% block title %}Espace Admin - Emails
-	Newsletter
+			Newsletter
 {% endblock %}
 {% block body %}
 	<main class="pt-5">
 		<section id="admin-account" class="container-fluid py-5">
 			<div class="container">
-				<h1 class="text-center m-3">
-					Emails newsletter
-				</h1>
-				<div class="mx-auto">
-					{% if emails is empty %}
-						<p>Aucun email trouvé.</p>
-					{% else %}
-						<ul>
-							{% for email in emails %}
-								<li>{{ email }}</li>
-							{% endfor %}
-						</ul>
-					{% endif %}
-				</div>
+				<div class="row justify-content-center align-items-center">
+					<div class="col-12 col-md-10 col-lg-8">
+						<h1 class="text-center m-3">
+							Emails newsletter
+						</h1>
 
-				<div class="text-center mt-5">
-					<a class="btn" href="{{ path('admin_dashboard') }}">Tableau de bord</a>
+						<p>
+							<strong>{{ emails|length }}</strong>
+							email(s) actuellement en base.
+						</p>
+
+						{% if emails is empty %}
+              <p>Aucun email trouvé.</p>
+						{% else %}
+							<!-- Liste -->
+							<div class="table-responsive mb-4">
+								<table class="table table-striped align-middle">
+									<thead class="table-light">
+										<tr>
+											<th>Email</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+										{% for email in emails %}
+											<tr>
+												<td>{{ email }}</td>
+												
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+
+							<!-- Action critique -->
+              						<div class="alert alert-warning">
+							<strong>Attention :</strong><br>
+							L’export téléchargera un fichier Excel contenant tous les emails,
+							<u>puis supprimera définitivement ces données</u>
+							de la base.
+						</div>
+							<form id="export-form" method="post" action="{{ path('admin_export_and_delete_emails') }}" onsubmit="return confirm(
+									                'Cette action va télécharger un fichier Excel ET supprimer définitivement tous les emails.\n\nContinuer ?'
+									            );">
+								<button class="btn" type="submit">
+									Exporter en Excel et supprimer les emails
+								</button>
+							</form>
+						{% endif %}
+
+					</div>
 				</div>
 			</div>
 		</section>
