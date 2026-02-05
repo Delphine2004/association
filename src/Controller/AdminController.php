@@ -13,9 +13,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+
 
 #[Route('/admin')]
 #[IsGranted('ROLE_ADMIN')]
@@ -109,5 +116,53 @@ final class AdminController extends AbstractController
         return $this->render('admin/newsletter_emails.html.twig', [
             'emails' => $emails,
         ]);
+    }
+
+    #[Route('/admin/newsletter-emails/export', name: 'admin_export_and_delete_emails', methods: ['POST'])]
+    public function exportAndDelete(
+        MongoNewsletterService $newsletterService,
+    ): Response {
+
+        $emails = $newsletterService->getAllEmails();
+
+        if (count($emails) === 0) {
+            $this->addFlash('warning', 'Aucun email à exporter');
+            return $this->redirectToRoute('admin_newsletter_emails');
+        }
+
+        // Création Excel
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A1', 'Email');
+        $row = 2;
+
+        foreach ($emails as $email) {
+            $sheet->setCellValue("A{$row}", $email);
+            $row++;
+        }
+
+        $newsletterService->deleteEmails($emails);
+
+        // Fichier temporaire
+        $fileName = 'newsletter_emails_' . date('Ymd_His') . '.xlsx';
+        $tempFile = tempnam(sys_get_temp_dir(), 'emails_');
+        $tempFileXlsx = $tempFile . '.xlsx';
+        rename($tempFile, $tempFileXlsx);
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($tempFileXlsx);
+
+        return new BinaryFileResponse(
+            $tempFileXlsx,
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => "attachment; filename=\"$fileName\"",
+            ],
+            true,
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            false
+        );
     }
 }
