@@ -20,7 +20,7 @@ class EventRepository extends ServiceEntityRepository
 
     public function findFutureEvents(
         int $limit = 10,
-        string $orderBy = 'DESC'
+        string $orderBy = 'ASC'
     ): array {
         $now = new DateTimeImmutable('today');
 
@@ -36,7 +36,7 @@ class EventRepository extends ServiceEntityRepository
     public function findEventsByFields(
         ?array $criteria,
         int $limit = 10,
-        string $orderBy = 'DESC'
+        string $orderBy = 'ASC'
     ): array {
         $qb = $this->createQueryBuilder('e');
 
