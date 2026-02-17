@@ -24,6 +24,9 @@ jobs:
         uses: actions/checkout@v5
         with:
           persist-credentials: false
+      - name: Load .env
+        run: |
+          export $(grep -v '^#' .env | xargs)
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Build Docker images
@@ -42,10 +45,9 @@ jobs:
       - name: Start services
         run: docker compose up --wait --no-build
       - name: Check HTTP reachability
-        run: curl -v --fail-with-body http://localhost
+        run: curl -v --fail-with-body http://localhost:$HTTP_PORT
       - name: Check HTTPS reachability
-        if: false # Remove this line when the homepage is configured, or change the path to check
-        run: curl -v --insecure --fail-with-body https://localhost
+        run: curl -v --insecure --fail-with-body https://localhost:$HTTPS_PORT
       - name: Check Mercure reachability
         run: curl -vI --insecure --fail-with-body https://localhost/.well-known/mercure?topic=test
       - name: Create test database
