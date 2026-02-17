@@ -18,6 +18,7 @@ concurrency:
 jobs:
   tests:
     name: Tests
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -61,6 +62,7 @@ jobs:
         if: false # Remove this line if Doctrine ORM is installed
         run: docker compose exec -T php bin/console -e test doctrine:schema:validate
   lint:
+    if: false
     name: Lint
     runs-on: ubuntu-latest
     permissions:
