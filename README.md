@@ -125,7 +125,7 @@ Modifier les mots de passe dans le fichier .env si nécessaire.
 docker compose up -d --build
 ```
 
-L’application accessible : http://localhost:8000
+L’application accessible : http://localhost:8091
 
 MailHog accessible : http://localhost:8025
 
