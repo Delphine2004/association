@@ -9,8 +9,8 @@ body {
     font-family: fonts.$font-secondary;
     font-size: fonts.$font-size-base;
     line-height: 1.4;
-    background-color: colors.$bs-white;
-    color: colors.$bs-brown;
+    background-color: colors.$white;
+    color: colors.$brown;
 }
 
 header,
@@ -19,7 +19,7 @@ footer {
 }
 
 a {
-    color: colors.$bs-brown;
+    color: colors.$brown;
 }
 
 main {

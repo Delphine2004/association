@@ -1,29 +1,29 @@
-$bs-pink: #f2937e;
-$bs-lightPink: #f2b8a2;
-$bs-darkgreen: #536102;
-$bs-green: #d6d9bf;
-$bs-brown: #54352a;
-$bs-white: #f2eadf;
+$pink: #f2937e;
+$lightPink: #f2b8a2;
+$darkgreen: #536102;
+$green: #d6d9bf;
+$brown: #54352a;
+$white: #f2eadf;
 
-$border-brown: 1px solid $bs-brown;
+$border-brown: 1px solid $brown;
 
 .bg-light-pink {
-    background-color: $bs-lightPink;
-    color: $bs-brown;
+    background-color: $lightPink;
+    color: $brown;
 }
 
 .bg-pink {
-    background-color: $bs-pink;
-    color: $bs-brown;
+    background-color: $pink;
+    color: $brown;
 }
 
 .bg-light {
-    background-color: $bs-white;
-    color: $bs-brown;
+    background-color: $white;
+    color: $brown;
 }
 
 .text-brown {
-    color: $bs-brown;
+    color: $brown;
 }
 
 .border-brown {
