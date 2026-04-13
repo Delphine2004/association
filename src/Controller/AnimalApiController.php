@@ -61,7 +61,7 @@ final class AnimalApiController extends AbstractController
             $criteria['compatibleDog']
         );
 
-        // Validation légère (si tu veux, tu peux renforcer après)
+        // Validation légère
         if (isset($criteria['id']) && !ctype_digit($criteria['id'])) {
             return $this->json([
                 'status' => 'error',
@@ -72,7 +72,6 @@ final class AnimalApiController extends AbstractController
 
         // Si l'utilisateur N'EST PAS employé  filtrer automatiquement
         if (!$this->isGranted('ROLE_EMPLOYE')) {
-            // Exemple : n'afficher que les animaux "Disponible"
             $criteria['status'] = AdoptionStatus::A_ADOPTER->value;
         }
 
