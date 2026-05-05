@@ -125,11 +125,6 @@ Modifier les mots de passe dans le fichier .env si nécessaire.
 docker compose up -d --build
 ```
 
-L’application accessible : http://localhost:8091
-
-MailHog accessible : http://localhost:8025
-
-(Adapter les ports en fonction du fichier .env. si modifiés)
 
 ### 4. Créer la base de donnée :
 
@@ -153,6 +148,12 @@ Toujours dans le conteneur php
 php bin/console doctrine:fixtures:load
 ```
 
+L’application accessible : http://localhost:8091
+
+MailHog accessible : http://localhost:8025
+
+(Adapter les ports en fonction du fichier .env. si modifiés)
+
 ### Comptes de test
 
 Après exécution des fixtures, les comptes suivants sont disponibles :
@@ -165,6 +166,8 @@ Après exécution des fixtures, les comptes suivants sont disponibles :
   Email : staff@association.fr  
   Mot de passe : `staff123\*`
 
+
+La page de connexion est accéssible sur : http://localhost:8091/login
 ---
 
 ## 8. Auteur
