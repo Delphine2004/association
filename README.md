@@ -160,11 +160,11 @@ Après exécution des fixtures, les comptes suivants sont disponibles :
 
 - Administrateur  
   Email : admin@association.fr  
-  Mot de passe : `admin123\*`
+  Mot de passe : `admin123*`
 
 - Employé  
   Email : staff@association.fr  
-  Mot de passe : `staff123\*`
+  Mot de passe : `staff123*`
 
 
 La page de connexion est accéssible sur : http://localhost:8091/login
