@@ -33,40 +33,32 @@ class AnimalType extends AbstractType
                 ->add('name', TextType::class, [
                     'label' => 'Nom de l\'animal',
                     'required' => true,
-                    'attr' => ['class' => 'form-control',],
                 ])
                 ->add('type', EnumType::class, [
                     'class' => AnimalCategory::class,
                     'label' => 'Type',
                     'choice_label' => fn(AnimalCategory $choice) =>  $choice->value,
-                    'placeholder' => 'Choisir un type',
                     'required' => true,
-                    'attr' => ['class' => 'form-select',],
                 ])
                 ->add('race', EnumType::class, [
                     'class' => AnimalRace::class,
                     'label' => 'Race',
                     'choice_label' => fn(AnimalRace $choice) => $choice->value,
-                    'placeholder' => 'Choisir une race',
                     'required' => true,
-                    'attr' => ['class' => 'form-select',],
                 ])
                 ->add('gender', EnumType::class, [
                     'class' => AnimalGender::class,
                     'label' => 'Genre',
                     'choice_label' => fn(AnimalGender $choice) => $choice->value,
-                    'placeholder' => 'Choisir un genre',
                     'required' => true,
-                    'attr' => ['class' => 'form-select',],
                 ])
                 ->add('picture', FileType::class, [
                     'label' => 'Photo',
                     'mapped' => false,
                     'required' => true,
-                    'attr' => ['class' => 'form-control',],
                     'constraints' => [
                         new File(
-                            maxSize: '10M', // ICI tu règles la taille
+                            maxSize: '10M',
                             mimeTypes: [
                                 'image/jpeg',
                                 'image/png',
@@ -84,19 +76,16 @@ class AnimalType extends AbstractType
                     'input' => 'datetime',
                     'widget' => 'single_text',
                     'html5' => true,
-                    'attr' => ['class' => 'form-control',],
                 ])
                 ->add('arrivalDate', DateType::class, [
                     'label' => 'Date d\'arrivée',
                     'required' => true,
                     'widget' => 'single_text',
                     'html5' => true,
-                    'attr' => ['class' => 'form-control',],
                 ])
                 ->add('description', TextareaType::class, [
                     'label' => 'Description de l\'animal',
                     'required' => true,
-                    'attr' => ['class' => 'form-control',],
                 ])
             ;
         }
@@ -107,54 +96,34 @@ class AnimalType extends AbstractType
                     'label' => 'Photo',
                     'mapped' => false,
                     'required' => false,
-                    'attr' => ['class' => 'form-control',],
                 ])
                 ->add('vaccinated', CheckboxType::class, [
                     'label' => 'Vacciné(e)',
                     'required' => false,
-                    'attr' => [
-                        'class' => 'form-check-input',
-                    ],
                 ])
                 ->add('sterilized', CheckboxType::class, [
                     'label' => 'Stérilisé(e)',
                     'required' => false,
-                    'attr' => [
-                        'class' => 'form-check-input',
-                    ],
                 ])
                 ->add('chipped', CheckboxType::class, [
                     'label' => 'Pucé(e)',
                     'required' => false,
-                    'attr' => [
-                        'class' => 'form-check-input',
-                    ],
                 ])
                 ->add('compatibleKid', CheckboxType::class, [
                     'label' => 'Compatible Enfants',
                     'required' => false,
-                    'attr' => [
-                        'class' => 'form-check-input',
-                    ],
                 ])
                 ->add('compatibleCat', CheckboxType::class, [
                     'label' => 'Compatible Chats',
                     'required' => false,
-                    'attr' => [
-                        'class' => 'form-check-input',
-                    ],
                 ])
                 ->add('compatibleDog', CheckboxType::class, [
                     'label' => 'Compatible Chiens',
                     'required' => false,
-                    'attr' => [
-                        'class' => 'form-check-input',
-                    ],
                 ])
                 ->add('description', TextareaType::class, [
                     'label' => 'Description de l\'animal',
                     'required' => false,
-                    'attr' => ['class' => 'form-control',],
                 ])
             ;
         }

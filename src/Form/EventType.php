@@ -27,30 +27,19 @@ class EventType extends AbstractType
                 ->add('date', DateType::class, [
                     'label' => 'Date de l\'événement',
                     'required' => true,
-                    'attr' => ['class' => 'form-control'],
                 ])
                 ->add('place', TextType::class, [
                     'label' => 'Localisation de l\'événement',
                     'required' => true,
-                    'attr' => [
-                        'class' => 'form-control',
-                        'placeholder' => 'La forêt'
-                    ],
                 ])
                 ->add('description', TextareaType::class, [
                     'label' => 'Description de l\'événement',
                     'required' => true,
-                    'attr' => [
-                        'class' => 'form-control',
-                        'rows' => 5,
-                        'placeholder' => 'L\'événement va se dérouler ...'
-                    ],
                 ])
                 ->add('picture', FileType::class, [
                     'label' => 'Photo',
                     'mapped' => false,
                     'required' => true,
-                    'attr' => ['class' => 'form-control',],
                     'constraints' => [
                         new File(
                             maxSize: '10M', // ICI tu règles la taille
@@ -73,30 +62,19 @@ class EventType extends AbstractType
                     'required' => false,
                     'widget' => 'single_text',
                     'html5' => true,
-                    'attr' => ['class' => 'form-control',],
                 ])
                 ->add('place', TextType::class, [
                     'label' => 'Localisation de l\'événement',
                     'required' => false,
-                    'attr' => [
-                        'class' => 'form-control',
-                        'placeholder' => 'La forêt'
-                    ],
                 ])
                 ->add('description', TextareaType::class, [
                     'label' => 'Description de l\'événement',
                     'required' => false,
-                    'attr' => [
-                        'class' => 'form-control',
-                        'rows' => 5,
-                        'placeholder' => 'L\'événement va se dérouler ...'
-                    ],
                 ])
                 ->add('picture', FileType::class, [
                     'label' => 'Photo',
                     'mapped' => false,
                     'required' => false,
-                    'attr' => ['class' => 'form-control',],
                     'constraints' => [
                         new File(
                             maxSize: '10M', // ICI tu règles la taille

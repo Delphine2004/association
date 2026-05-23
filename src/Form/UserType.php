@@ -27,11 +27,6 @@ class UserType extends AbstractType
                 ->add('email', EmailType::class, [
                     'label' => 'Adresse e-mail',
                     'required' => true,
-                    'attr' => [
-                        'autocomplete' => 'email',
-                        'class' => 'form-control',
-                        'placeholder' => 'exemple@email.com'
-                    ],
                 ])
                 ->add('role', EnumType::class, [
                     'class' => UserRole::class,
@@ -47,17 +42,14 @@ class UserType extends AbstractType
                     'placeholder' => 'Choisir un rôle', // Première option vide
                     'required' => false,
                     'mapped' => false,
-                    'attr' => ['class' => 'form-select',],
                 ])
                 ->add('password', RepeatedType::class, [
                     'type' => PasswordType::class,
                     'first_options' => [
                         'label' => 'Mot de passe',
-                        'attr' => ['class' => 'form-control'],
                     ],
                     'second_options' => [
                         'label' => 'Confirmer le mot de passe',
-                        'attr' => ['class' => 'form-control'],
                     ],
                     'label' => false,
                     'required' => true,
@@ -83,10 +75,6 @@ class UserType extends AbstractType
                 ->add('email', EmailType::class, [
                     'label' => 'Adresse e-mail',
                     'required' => false,
-                    'attr' => [
-                        'class' => 'form-control',
-                        'placeholder' => 'exemple@exemple.com'
-                    ],
                 ]);
         }
 
@@ -96,20 +84,14 @@ class UserType extends AbstractType
                 ->add('email', EmailType::class, [
                     'label' => 'Adresse e-mail',
                     'required' => false,
-                    'attr' => [
-                        'class' => 'form-control',
-                        'placeholder' => 'exemple@email.com'
-                    ],
                 ])
                 ->add('password', RepeatedType::class, [
                     'type' => PasswordType::class,
                     'first_options' => [
                         'label' => 'Mot de passe',
-                        'attr' => ['class' => 'form-control'],
                     ],
                     'second_options' => [
                         'label' => 'Confirmer le mot de passe',
-                        'attr' => ['class' => 'form-control'],
                     ],
                     'label' => false,
                     'required' => true,
@@ -135,11 +117,9 @@ class UserType extends AbstractType
                     'type' => PasswordType::class,
                     'first_options' => [
                         'label' => 'Mot de passe',
-                        'attr' => ['class' => 'form-control'],
                     ],
                     'second_options' => [
                         'label' => 'Confirmer le mot de passe',
-                        'attr' => ['class' => 'form-control'],
                     ],
                     'label' => false,
                     'required' => true,
