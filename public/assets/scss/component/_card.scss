@@ -1,6 +1,19 @@
-.card-img-top {
-    height: 300px; /* hauteur uniforme */
-    width: 100%;
-    object-fit: cover; /* pas de déformation */
-    object-position: center top; /* parfait pour portraits */
+@use "../utils/colors";
+
+.card {
+    border: colors.$border-brown;
+    border-radius: colors.$border-radius;
+    color: colors.$brown;
+
+    .card-header,
+    .card-footer {
+        background-color: colors.$lightPink;
+    }
+
+    .card-img-top {
+        height: 300px;
+        width: 100%;
+        object-fit: cover;
+        object-position: center top;
+    }
 }
