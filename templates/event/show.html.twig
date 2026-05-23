@@ -10,13 +10,13 @@ endblock %}
 				<div class="row justify-content-center">
 					<div class="col-12 col-md-10 col-lg-8">
 						<div class="card shadow-sm">
-							<div class="card-header bg-pink py-3">
+							<div class="card-header py-3">
 								<h2 class="text-center m-3">
 									Evénement n°{{ event.id }}
 								</h2>
 							</div>
 							<div
-								class="card-body bg-light-pink text-brown">
+								class="card-body">
 								<!-- Photo -->
 								<div class="image-wrapper mx-auto mb-4">
 									<img src="{{ asset('uploads/events/' ~ event.picture) }}" alt="événement n°{{ event.id }}" class="img-fluid rounded-4"/>
@@ -60,7 +60,7 @@ endblock %}
 							</div>
 
 							{% if event.date >= date() %}
-								<div class="card-footer bg-pink">
+								<div class="card-footer">
 									<div class="d-flex flex-column flex-md-row justify-content-center m-3 gap-3">
 										<a class="btn flex-fill" href="{{ path('app_event_edit', { id: event.id }) }}">Modifier</a>
 										<div class="flex-fill">

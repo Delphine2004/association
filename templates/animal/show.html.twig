@@ -9,13 +9,13 @@ endblock%}
 				<div class="row justify-content-center">
 					<div class="col-12 col-md-10 col-lg-8">
 						<div class="card shadow-sm">
-							<div class="card-header bg-pink py-3">
+							<div class="card-header py-3">
 								<h1 class="text-center m-3">
 									Animal n°{{ animal.id }}
 								</h1>
 							</div>
 							<div
-								class="card-body bg-light-pink text-brown">
+								class="card-body">
 								<!-- Photo -->
 								<div class="image-wrapper mx-auto mb-4">
 									<img src="{{ asset('uploads/animals/' ~ animal.picture) }}" alt="{{ animal.name }}" class="img-fluid rounded-4"/>
@@ -141,7 +141,7 @@ endblock%}
                         STATUS_EN_SOIN = 'En soin' %}
 							{% if
                         is_granted('ROLE_EMPLOYE') %}
-								<div class="card-footer bg-pink">
+								<div class="card-footer">
 									<div class="d-flex flex-column flex-md-row justify-content-center m-3 gap-3">
 										{% if animal.status.value in [STATUS_EN_SOIN,
                                 STATUS_A_ADOPTER] %}
