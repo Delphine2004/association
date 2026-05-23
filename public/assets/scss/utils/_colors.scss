@@ -6,26 +6,4 @@ $brown: #54352a;
 $white: #f2eadf;
 
 $border-brown: 1px solid $brown;
-
-.bg-light-pink {
-    background-color: $lightPink;
-    color: $brown;
-}
-
-.bg-pink {
-    background-color: $pink;
-    color: $brown;
-}
-
-.bg-light {
-    background-color: $white;
-    color: $brown;
-}
-
-.text-brown {
-    color: $brown;
-}
-
-.border-brown {
-    border: $border-brown;
-}
+$border-radius: 0.4rem;
