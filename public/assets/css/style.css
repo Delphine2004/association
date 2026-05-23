@@ -1,9 +1,4 @@
 @charset "UTF-8";
-.bg-light-pink {
-  background-color: #f2b8a2;
-  color: #54352a;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -157,14 +152,14 @@ thead {
 }
 .card {
   border: 1px solid #54352a;
+  border-radius: 0.4rem;
+  color: #54352a;
 }
 .card .card-header,
 .card .card-footer {
   background-color: #f2b8a2;
-  color: #54352a;
 }
-
-.card-img-top {
+.card .card-img-top {
   height: 300px;
   width: 100%;
   object-fit: cover;
