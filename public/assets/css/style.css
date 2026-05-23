@@ -4,24 +4,6 @@
   color: #54352a;
 }
 
-.bg-pink {
-  background-color: #f2937e;
-  color: #54352a;
-}
-
-.bg-light {
-  background-color: #f2eadf;
-  color: #54352a;
-}
-
-.text-brown {
-  color: #54352a;
-}
-
-.border-brown {
-  border: 1px solid #54352a;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -173,11 +155,20 @@ thead {
     height: 710px;
   }
 }
+.card {
+  border: 1px solid #54352a;
+}
+.card .card-header,
+.card .card-footer {
+  background-color: #f2b8a2;
+  color: #54352a;
+}
+
 .card-img-top {
-  height: 300px; /* hauteur uniforme */
+  height: 300px;
   width: 100%;
-  object-fit: cover; /* pas de déformation */
-  object-position: center top; /* parfait pour portraits */
+  object-fit: cover;
+  object-position: center top;
 }
 
 #home,
