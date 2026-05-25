@@ -19,7 +19,7 @@
 						class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center py-5">
 						<!--Le titre et le slogan-->
 						<div class="mb-4">
-							<h1 class="text-center fw-bold pb-3">
+							<h1 class="fw-bold pb-3">
 								Cœur à Quatre Pattes
 							</h1>
 							<p class="text-center fst-italic">
@@ -49,7 +49,7 @@
 				<!-- Présentation -->
 
 				<div class="row justify-content-between align-items-center">
-					<h2 class="text-center">Qui sommes-nous ?</h2>
+					<h2>Qui sommes-nous ?</h2>
 					<!-- Paragraphe de présentation-->
 					<div class="col-12 col-md-10 col-lg-6 text-center mx-auto py-5">
 						<p>
@@ -95,7 +95,7 @@
 				<!-- Présentation -->
 				<div class="row justify-content-between">
 					<div class="col-12 col-md-10 col-lg-8 text-center mx-auto py-5">
-						<h2 class="text-center mb-4">Ils n'attendent que vous</h2>
+						<h2>Ils n'attendent que vous</h2>
 						<p>
 							Adopter un animal, c'est offrir une seconde chance à un
 														                        être vivant en quête d'amour. Chaque adoption transforme
@@ -117,7 +117,7 @@
 									<div class="carousel-item {% if loop.first %}active{% endif %}">
 										<img src="{{ asset('uploads/animals/' ~ animal.picture) }}" class="d-block w-100" alt="{{ animal.name }}"/>
 										<div class="carousel-caption">
-											<h5 class="text-center mb-2">
+											<h5>
 												{{ animal.name }}
 											</h5>
 											<a href="{{ path('app_animal_show', { id: animal.id }) }}" class="btn btn-sm m-3">Voir</a>
@@ -157,7 +157,7 @@
 				<!--Presentation-->
 				<div class="row justify-content-between">
 					<div class="col-12 col-md-10 col-lg-8 text-center mx-auto py-5">
-						<h2 class="text-center mb-4">
+						<h2>
 							Ils ont trouvé leur nouveau foyer
 						</h2>
 						<p>
@@ -180,7 +180,7 @@
 									<div class="carousel-item {% if loop.first %}active{% endif %}">
 										<img src="{{ asset('uploads/animals/' ~ animal.picture) }}" class="d-block w-100" alt="{{ animal.name }}"/>
 										<div class="carousel-caption">
-											<h5 class="text-center mb-2">
+											<h5>
 												{{ animal.name }}
 											</h5>
 										</div>
@@ -216,7 +216,7 @@
 				<!-- Présentation -->
 				<div class="row justify-content-between">
 					<div class="col-12 col-md-10 col-lg-8 text-center mx-auto py-5">
-						<h2 class="text-center mb-4">Les Evénements</h2>
+						<h2>Les Evénements</h2>
 						<p>
 							Découvrez nos prochains rendez-vous solidaires !
 														                        Journées portes ouvertes, collectes de dons, séances
@@ -241,8 +241,8 @@
 										<div class="card mx-auto">
 											<img src="{{ asset('uploads/events/' ~ event.picture) }}" class="card-img-top" alt="Evénement n°{{event.id}}"/>
 											<div class="card-body">
-												<h3 class="text-center mb-4">{{event.date ? event.date|format_datetime(pattern="EEEE d MMMM", locale='fr') : '' }}</h3>
-												<h4 class="text-center mb-4">{{event.place}}</h4>
+												<h3 >{{event.date ? event.date|format_datetime(pattern="EEEE d MMMM", locale='fr') : '' }}</h3>
+												<h4 >{{event.place}}</h4>
 												<p class="card-text text-center mb-4">
 													{{ event.description }}
 												</p>
@@ -321,7 +321,7 @@
 		<!--Section adresse -->
 		<section id="address" class="container-fluid py-5">
 			<div class="container">
-				<h2 class="text-center mb-4">Où nous trouver ?</h2>
+				<h2>Où nous trouver ?</h2>
 
 				<div
 					class="row justify-content-center text-center py-5">

@@ -39,9 +39,12 @@ main {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5 {
   font-family: "Quicksand", sans-serif;
   font-weight: bold;
+  text-align: center;
+  margin: 2rem;
 }
 
 .navbar {
