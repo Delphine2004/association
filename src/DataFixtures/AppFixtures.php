@@ -26,7 +26,7 @@ class AppFixtures extends Fixture
         $admin->setRoles([
             UserRole::EMPLOYE->value
         ]);
-        $hashedPassword = $this->hasher->hashPassword($admin, 'staff123');
+        $hashedPassword = $this->hasher->hashPassword($admin, 'Staff123*');
         $admin->setPassword($hashedPassword, true);
 
         $manager->persist($admin);
