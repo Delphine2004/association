@@ -2,7 +2,7 @@
 {% if
 is_granted('ROLE_ADMIN') and form.email is defined%}
 	<div class="row mb-3 justify-content-center">
-		<div class="col-12 col-md-10 text-brown mb-4">
+		<div class="col-12 col-md-10 mb-4">
 			{{ form_label(form.email) }}
 			{{ form_widget(form.email, {
         attr: {
@@ -15,7 +15,7 @@ is_granted('ROLE_ADMIN') and form.email is defined%}
 {% endif %}
 {% if form.password is defined %}
 	<div class="row mb-3 justify-content-center">
-		<div class="col-12 col-md-10 text-brown mb-4">
+		<div class="col-12 col-md-10 mb-4">
 			{{ form_label(form.password.first) }}
 			{{ form_widget(form.password.first, {
         attr: {
@@ -24,7 +24,7 @@ is_granted('ROLE_ADMIN') and form.email is defined%}
     }) }}
 			{{ form_errors(form.password.first) }}
 		</div>
-    		<div class="col-12 col-md-10 text-brown mb-4">
+    		<div class="col-12 col-md-10 mb-4">
 			{{ form_label(form.password.second) }}
 			{{ form_widget(form.password.second, {
         attr: {
@@ -37,7 +37,7 @@ is_granted('ROLE_ADMIN') and form.email is defined%}
 {% endif %}
 {% if form.role is defined %}
 	<div class="row mb-3 justify-content-center">
-		<div class="col-12 col-md-10 text-brown mb-4">
+		<div class="col-12 col-md-10 mb-4">
 			{{ form_label(form.role) }}
 			{{ form_widget(form.role, {
         attr: {

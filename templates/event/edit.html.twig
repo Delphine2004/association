@@ -8,25 +8,20 @@ endblock %}
 		<section id="event-page" class="container-fluid py-5">
 			<div class="container">
 				<div class="row justify-content-center">
+
 					<div class="col-12 col-md-10 col-lg-8">
-						<h1 class="text-center m-3">Modification de l'événement</h1>
-
-						<div class="card bg-light-pink shadow-sm d-flex justify-content-evenly p-4">
-							{{
-                            include("event/_form.html.twig", {
-                                button_label: "Modifier"
-                            })
-                        }}
-						</div>
-
-						<div class="m-5">
-							{% include 'partials/_flash.html.twig' %}
+						<div class="card card-form shadow-sm d-flex justify-content-evenly p-4">
+							<h1 class="text-center m-3">Modification de l'événement</h1>
+							{{ include("event/_form.html.twig", {button_label: "Modifier"})}}
 						</div>
 					</div>
-				</div>
 
-				<div class="text-center m-5">
-					<a class="btn" href="{{ path('app_event_show', { id: event.id }) }}">Revenir à l'événement</a>
+					<div class="col-12 col-md-10 col-lg-8">
+						<div class="text-center m-5">
+							<a class="btn" href="{{ path('app_event_show', { id: event.id }) }}">Revenir à l'événement</a>
+						</div>
+					</div>
+          
 				</div>
 			</div>
 		</section>

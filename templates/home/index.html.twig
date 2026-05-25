@@ -240,7 +240,7 @@
 									<div class="carousel-item {% if loop.first %}active{% endif %}">
 										<div class="card mx-auto">
 											<img src="{{ asset('uploads/events/' ~ event.picture) }}" class="card-img-top" alt="Evénement n°{{event.id}}"/>
-											<div class="card-body bg-light-pink">
+											<div class="card-body">
 												<h3 class="text-center mb-4">{{event.date ? event.date|format_datetime(pattern="EEEE d MMMM", locale='fr') : '' }}</h3>
 												<h4 class="text-center mb-4">{{event.place}}</h4>
 												<p class="card-text text-center mb-4">
