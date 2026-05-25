@@ -166,6 +166,10 @@ thead {
   object-position: center top;
 }
 
+.card-form {
+  background-color: #f2b8a2;
+}
+
 #home,
 #address {
   background-color: #f2b8a2;
