@@ -5,9 +5,11 @@
     background-color: colors.$lightPink;
 }
 
-.img-hero {
-    width: 300px;
-}
-.img-hero img {
-    width: 100%;
+#hero {
+    img {
+        width: 100%;
+        @media (min-width: 768px) {
+            width: 300px;
+        }
+    }
 }
