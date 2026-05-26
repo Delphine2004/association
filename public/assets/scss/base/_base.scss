@@ -15,7 +15,7 @@ body {
 
 header,
 footer {
-    flex-shrink: 0; /* Empêche le header/footer de rétrécir */
+    flex-shrink: 0;
 }
 
 a {
@@ -23,16 +23,20 @@ a {
 }
 
 main {
-    flex-grow: 1; /* prend tout l'espace disponible */
+    flex-grow: 1;
 }
 
 h1,
 h2,
 h3,
-h4,
-h5 {
+h4 {
     font-family: fonts.$font-primary;
     font-weight: bold;
     text-align: center;
     margin: 2rem;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 1rem;
 }
