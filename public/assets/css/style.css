@@ -119,16 +119,14 @@ thead {
     height: 710px;
   }
 }
-
 #carousel-to-adopt .carousel-item img,
-#carousel-adopted .carousel-item img,
-#carousel-event .carousel-item img {
+#carousel-adopted .carousel-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
-.carousel-caption {
+#carousel-to-adopt .carousel-item .carousel-caption,
+#carousel-adopted .carousel-item .carousel-caption {
   left: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
@@ -143,8 +141,37 @@ thead {
   text-align: center;
 }
 
-#carousel-event .card-body {
-  min-height: 300px;
+#carousel-event .carousel-item {
+  height: 700px;
+}
+@media (min-width: 768px) {
+  #carousel-event .carousel-item {
+    height: 900px;
+  }
+}
+#carousel-event .carousel-item .card-img-top {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+@media (min-width: 768px) {
+  #carousel-event .carousel-item .card-img-top {
+    height: 300px;
+  }
+}
+@media (min-width: 992px) {
+  #carousel-event .carousel-item .card-img-top {
+    height: 400px;
+  }
+}
+#carousel-event .carousel-item .card-body {
+  height: 450px;
+}
+@media (min-width: 768px) {
+  #carousel-event .carousel-item .card-body {
+    height: 350px;
+  }
 }
 
 .card {
