@@ -13,7 +13,7 @@ export class Event {
             <div class="row justify-content-center align-items-center w-100 g-3">
                 <div class="col-12 col-md-9">
                     <p class="fw-bold">${this.date}</p>
-                    <p>${this.place}</p>
+                    <p class="mb-0">${this.place}</p>
                 </div>
                 <div class="col-12 col-md-2 text-center">
                     <a class="btn w-100" href="/event/${this.id}">Voir</a>

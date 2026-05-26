@@ -23,19 +23,15 @@ export class Animal {
             <div class="row justify-content-center align-items-center w-100 g-3">
                 <div class="col-12 col-md-9">
                     <div class="d-flex flex-column flex-md-row justify-content-between">
-                        <div
-                            class="d-flex flex-column flex-md-row justify-content-between"
-                        >
-                            <p class="fw-bold">${this.name}</p>
+                        <div class="d-flex flex-column flex-md-row justify-content-between">
+                            <p class="fw-bold mb-0">${this.name}</p>
                         </div>
                         <div class="d-flex flex-row justify-content-around gap-3">
-                            <p>${this.type}</p>
-                            <p>${this.gender}</p>
+                            <p class="mb-0">${this.type}</p>
+                            <p class="mb-0">${this.gender}</p>
                         </div>
-                        <div
-                            class="d-flex flex-column flex-md-row justify-content-between"
-                        >
-                            <p>${this.status}</p>
+                        <div class="d-flex flex-column flex-md-row justify-content-between">
+                            <p class="mb-0">${this.status}</p>
                         </div>
                     </div>
                 </div>
