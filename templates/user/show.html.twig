@@ -1,112 +1,105 @@
-{% extends 'base.html.twig' %} {% block title %}Information compte{% endblock %}
+{% extends 'base.html.twig' %}
+{% block title %}Information compte
+{% endblock %}
 {% block body %}
 
-<main class="pt-5">
-    <section id="account" class="container-fluid py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-8">
-                    <div class="card shadow-sm">
-                        <div class="card-header py-3">
-                            <h2>
-                                Compte n°{{ user.id }}
-                            </h2>
-                        </div>
-                        <div class="card-body">
-                            <!-- Ligne : Id -->
-                            <div
-                                class="d-flex flex-column flex-md-row justify-content-md-between py-2 border-bottom"
-                            >
-                                <strong>Id</strong>
-                                <span>{{ user.id }}</span>
-                            </div>
+	<main class="pt-5">
+		<section id="account" class="container-fluid py-5">
+			<div class="container">
 
-                            <!-- Ligne : Email -->
-                            <div
-                                class="d-flex flex-column flex-md-row justify-content-md-between py-2 border-bottom"
-                            >
-                                <strong>Email</strong>
-                                <span>{{ user.email }}</span>
-                            </div>
+				<div class="row justify-content-center">
+					<div class="col-12 col-md-10 col-lg-8">
+						<div class="card shadow-sm">
+							<div class="card-header py-3">
+								<h2>Compte n°{{ user.id }}</h2>
+							</div>
 
-                            <!-- Ligne : Rôle -->
-                            <div
-                                class="d-flex flex-column flex-md-row justify-content-md-between py-2 border-bottom"
-                            >
-                                <strong>Rôle</strong>
-                                <span>
-                                    {% for role in user.roles %} {% if role !=
-                                    'ROLE_USER' %}
-                                    {{ role|replace({'ROLE_': ''}) }}
-                                    {% endif %} {% endfor %}</span
-                                >
-                            </div>
+							<div
+								class="card-body">
+								<!-- Ligne : Id -->
+								<div class="d-flex flex-column flex-md-row justify-content-md-between py-2 border-bottom">
+									<strong>Id</strong>
+									<span>{{ user.id }}</span>
+								</div>
 
-                            <!-- Ligne : Date de création -->
-                            <div class="py-2 mb-3">
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Création : </strong>
-                                    <span>
-                                        {{ user.createdAt ? user.createdAt|date('d/m/Y H:i') : '' }}
-                                    </span>
-                                </div>
+								<!-- Ligne : Email -->
+								<div class="d-flex flex-column flex-md-row justify-content-md-between py-2 border-bottom">
+									<strong>Email</strong>
+									<span>{{ user.email }}</span>
+								</div>
 
-                                <!-- Ligne : Dernière modification -->
-                                <div
-                                    class="d-flex flex-column flex-md-row justify-content-md-between py-2"
-                                >
-                                    <strong>Modification : </strong>
-                                    <span>
-                                        {{ user.updatedAt ? user.updatedAt|date('d/m/Y H:i') : '' }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <div
-                                class="d-flex flex-column flex-md-row justify-content-center m-3 gap-3"
-                            >
-                                {# Bouton Modifier toujours affiché #}
-                                <div
-                                    class="{% if is_granted('ROLE_ADMIN') and app.user.id != user.id and 'ROLE_EMPLOYE' in user.roles and 'ROLE_ADMIN' not in user.roles %} flex-fill {% else %} mx-auto {% endif %}"
-                                >
-                                    <a
-                                        class="btn w-100"
-                                        href="{{
-                                            path('app_user_edit', {
-                                                id: user.id
-                                            })
-                                        }}"
-                                    >
-                                        Modifier
-                                    </a>
-                                </div>
-                                {# Bouton Supprimer uniquement pour admin sur
-                                compte employé différent de lui-même #} {% if
-                                is_granted('ROLE_ADMIN') and app.user.id !=
-                                user.id and 'ROLE_EMPLOYE' in user.roles and
-                                'ROLE_ADMIN' not in user.roles %}
-                                <div class="flex-fill">
-                                    {{
-                                        include("admin/_delete_form.html.twig")
-                                    }}
-                                </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+								<!-- Ligne : Rôle -->
+								<div class="d-flex flex-column flex-md-row justify-content-md-between py-2 border-bottom">
+									<strong>Rôle</strong>
+									<span>
+										{% for role in user.roles %}
+											{% if role != 'ROLE_USER' %}
+												{{ role|replace({'ROLE_': ''}) }}
+											{% endif %}
+										{% endfor %}
+									</span>
+								</div>
 
-            <div class="text-center m-5">
-                <a class="btn" href="{{ path('user_dashboard') }}">
-                    Tableau de bord
-                </a>
-            </div>
-        </div>
-    </section>
-</main>
+								<!-- Ligne : Date de création -->
+								<div class="py-2 mb-3">
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Création :
+										</strong>
+										<span>
+											{{ user.createdAt ? user.createdAt|date('d/m/Y H:i') : '' }}
+										</span>
+									</div>
+
+									<!-- Ligne : Dernière modification -->
+									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
+										<strong>Modification :
+										</strong>
+										<span>
+											{{ user.updatedAt ? user.updatedAt|date('d/m/Y H:i') : '' }}
+										</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="card-footer py-5">
+								<div class="row justify-content-evenly g-3">
+									{% for label, messages in app.flashes %}
+										<div class="col-12 col-md-10">
+											{% for message in messages %}
+												<p class=" fw-bold text-center m-3 alert alert-{{ label }}">
+													{{ message }}
+												</p>
+											{% endfor %}
+										</div>
+									{% endfor %}
+
+									{% if is_granted('ROLE_ADMIN') and app.user.id != user.id and 'ROLE_EMPLOYE' in user.roles and 'ROLE_ADMIN' not in user.roles %}
+										<div class="col-12 col-md-5">
+											<div class="text-center">
+												<a class="btn w-100" href="{{path('app_user_edit', {id: user.id})}}">Modifier</a>
+											</div>
+										</div>
+									
+										<div class="col-12 col-md-5">
+											<div class="flex-fill">{{include("admin/_delete_form.html.twig")}}</div>
+										</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-md-10 col-lg-8">
+						<div class="text-center m-5">
+							<a class="btn" href="{{ path('user_dashboard') }}">
+								Tableau de bord
+							</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+	</main>
 
 {% endblock %}

@@ -8,6 +8,13 @@
 				<div class="row justify-content-center">
 					<div class="col-12 col-md-10 col-lg-8">
 						<h1>Tableau de bord</h1>
+						{% for label, messages in app.flashes %}
+							{% for message in messages %}
+								<p class="fw-bold text-center  m-3 alert alert-{{ label }}">
+									{{ message }}
+								</p>
+							{% endfor %}
+						{% endfor %}
 					</div>
 				</div>
 			</div>

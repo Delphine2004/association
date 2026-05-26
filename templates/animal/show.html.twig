@@ -8,11 +8,10 @@ endblock%}
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-12 col-md-10 col-lg-8">
+
 						<div class="card shadow-sm">
 							<div class="card-header py-3">
-								<h1>
-									Animal n°{{ animal.id }}
-								</h1>
+								<h1>Animal n°{{ animal.id }}</h1>
 							</div>
 							<div
 								class="card-body">
@@ -62,21 +61,15 @@ endblock%}
 								<div class="py-2 mb-3 border-bottom">
 									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
 										<strong>Vacciné(e)</strong>
-										<span>{{
-                                        animal.vaccinated ? "Oui" : "Non"
-                                    }}</span>
+										<span>{{animal.vaccinated ? "Oui" : "Non"}}</span>
 									</div>
 									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
 										<strong>Sterilisé(e)</strong>
-										<span>{{
-                                        animal.sterilized ? "Oui" : "Non"
-                                    }}</span>
+										<span>{{animal.sterilized ? "Oui" : "Non"}}</span>
 									</div>
 									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
 										<strong>Pucé(e)</strong>
-										<span>{{
-                                        animal.chipped ? "Oui" : "Non"
-                                    }}</span>
+										<span>{{animal.chipped ? "Oui" : "Non"}}</span>
 									</div>
 								</div>
 
@@ -84,21 +77,15 @@ endblock%}
 								<div class="py-2 mb-3 border-bottom">
 									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
 										<strong>Compatible enfant</strong>
-										<span>{{
-                                        animal.compatibleKid ? "Oui" : "Non"
-                                    }}</span>
+										<span>{{animal.compatibleKid ? "Oui" : "Non"}}</span>
 									</div>
 									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
 										<strong>Compatible chat</strong>
-										<span>{{
-                                        animal.compatibleCat ? "Oui" : "Non"
-                                    }}</span>
+										<span>{{animal.compatibleCat ? "Oui" : "Non"}}</span>
 									</div>
 									<div class="d-flex flex-column flex-md-row justify-content-md-between py-2">
 										<strong>Compatible chien</strong>
-										<span>{{
-                                        animal.compatibleDog ? "Oui" : "Non"
-                                    }}</span>
+										<span>{{animal.compatibleDog ? "Oui" : "Non"}}</span>
 									</div>
 								</div>
 
@@ -136,56 +123,72 @@ endblock%}
 									</div>
 								</div>
 							</div>
-							{% set STATUS_A_ADOPTER = 'A adopter' %}
-							{% set
-                        STATUS_EN_SOIN = 'En soin' %}
-							{% if
-                        is_granted('ROLE_EMPLOYE') %}
-								<div class="card-footer">
-									<div class="d-flex flex-column flex-md-row justify-content-center m-3 gap-3">
-										{% if animal.status.value in [STATUS_EN_SOIN,
-                                STATUS_A_ADOPTER] %}
 
-											<a class="btn flex-fill" href="{{ path('app_animal_edit', { id: animal.id }) }}">
-												Modifier
-											</a>
-											<div class="flex-fill">
-												{{
-                                        include("animal/_delete_form.html.twig")
-                                    }}
+							{% set STATUS_A_ADOPTER = 'A adopter' %}
+							{% set STATUS_EN_SOIN = 'En soin' %}
+
+							<div class="card-footer py-5">
+								<div class="row justify-content-evenly g-3">
+									{% for label, messages in app.flashes %}
+										<div class="col-12 col-md-10">
+											{% for message in messages %}
+												<p class=" fw-bold text-center m-3 alert alert-{{ label }}">
+													{{ message }}
+												</p>
+											{% endfor %}
+										</div>
+									{% endfor %}
+
+									{% if is_granted('ROLE_EMPLOYE') %}
+
+										{% if animal.status.value in [STATUS_EN_SOIN, STATUS_A_ADOPTER] %}
+											<div class="col-12 col-md-4">
+												<a class="btn w-100" href="{{ path('app_animal_edit', { id: animal.id }) }}">
+													Modifier
+												</a>
+											</div>
+
+											<div class="col-12 col-md-4">
+												<div class="flex-fill">
+													{{include("animal/_delete_form.html.twig")}}
+												</div>
 											</div>
 										{% endif %}
-										{% if animal.status.value ==
-                                STATUS_A_ADOPTER %}
-											<div class="flex-fill">
-												{{
-                                        include(
-                                            "animal/_adopted_form.html.twig"
-                                        )
-                                    }}
-											{% endif %}
-										</div>
-									</div>
+
+										{% if animal.status.value == STATUS_A_ADOPTER %}
+											<div class="col-12 col-md-4">
+												<div class="flex-fill">
+													{{include("animal/_adopted_form.html.twig")}}
+												</div>
+											</div>
+										{% endif %}
+
+									{% endif %}
 								</div>
-							{% endif %}
+							</div>
+
 						</div>
+
+					</div>
+
+					<div class="col-12 col-md-10 col-lg-8">
+						{% if is_granted('ROLE_EMPLOYE') %}
+							<div class="text-center m-5">
+								<a class="btn" href="{{ path('app_animal_page') }}">
+									Revenir aux animaux
+								</a>
+							</div>
+
+						{% else %}
+							<div class="text-center m-5">
+								<a class="btn" href="{{ path('adoption') }}">
+									Revenir aux animaux
+								</a>
+							</div>
+						{% endif %}
 					</div>
 				</div>
 
-				{% if is_granted('ROLE_EMPLOYE') %}
-					<div class="text-center m-5">
-						<a class="btn" href="{{ path('app_animal_page') }}">
-							Revenir aux animaux
-						</a>
-					</div>
-
-				{% else %}
-					<div class="text-center m-5">
-						<a class="btn" href="{{ path('adoption') }}">
-							Revenir aux animaux
-						</a>
-					</div>
-				{% endif %}
 			</div>
 		</section>
 	</main>

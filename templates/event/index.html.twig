@@ -1,19 +1,32 @@
 {% extends 'base.html.twig' %}
 {% block title %}Espace utilisateur -
-	Evénements
+				Evénements
 {% endblock %}
 {% block body %}
 
 	<main class="pt-5">
 		<section id="event-page" class="container-fluid py-5">
 			<div class="container">
-				<h1>Gestion des événements</h1>
 
-				<div class="text-center m-5">
-					<a class="btn btn-lg" href="{{ path('app_event_new') }}">Ajouter un événement</a>
+				<div class="row justify-content-center align-items-center  mt-4">
+					<div class="col-12 col-md-10 col-lg-8">
+						<h1>Gestion des événements</h1>
+					</div>
+					<div class="col-12 col-md-10 col-lg-8">
+						<div class="text-center m-5">
+							<a class="btn btn-lg" href="{{ path('app_event_new') }}">Ajouter un événement</a>
+						</div>
+					</div>
+					<div class="col-12 col-md-10 col-lg-8">
+						{% for label, messages in app.flashes %}
+							{% for message in messages %}
+								<p class="fw-bold text-center  m-3 alert alert-{{ label }}">
+									{{ message }}
+								</p>
+							{% endfor %}
+						{% endfor %}
+					</div>
 				</div>
-
-				<div class="m-5">{% include 'partials/_flash.html.twig' %}</div>
 
 				<!-- Filtre -->
 				<div class="row justify-content-center align-items-center mt-4">
