@@ -10,7 +10,7 @@ export function showAnimalResult() {
     const isAuthenticated = animalsList.dataset.isAuthenticated === "1";
 
     animalsList.innerHTML =
-        '<p class="text-center">Merci de séléctionner des critéres de recherche.</p>';
+        "<p>Merci de séléctionner des critéres de recherche.</p>";
 
     searchForm.addEventListener("submit", async function (event) {
         event.preventDefault();
@@ -64,7 +64,7 @@ export function showAnimalResult() {
             if (data.status === "success") {
                 animalsList.innerHTML = "";
                 if (!data || data.count === 0) {
-                    animalsList.innerHTML = `<p class="text-center">Aucun animal ne correspond à la recherche.</p>`;
+                    animalsList.innerHTML = `<p>Aucun animal ne correspond à la recherche.</p>`;
                     searchForm.reset();
                 } else if (isAuthenticated) {
                     data.animals.forEach((animalData) => {
@@ -81,8 +81,7 @@ export function showAnimalResult() {
             }
         } catch (error) {
             animalsList.innerHTML =
-                error ||
-                `<p class="text-center">Une erreur est survenue lors de la recherche.</p>`;
+                error || `<p>Une erreur est survenue lors de la recherche.</p>`;
         }
     });
 }

@@ -21,7 +21,7 @@ export class Animal {
         return `
         <div class="card p-3 mb-4 w-100">
             <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 p-0">
-                <p class="card-text mb-0 text-md-start text-center">${this.name} - ${this.type} - ${this.gender} - ${this.status}</p>
+                <p>${this.name} - ${this.type} - ${this.gender} - ${this.status}</p>
                 <a class="btn btn-sm" href="/animal/${this.id}">Voir</a>
             </div>
         </div>
@@ -34,8 +34,8 @@ export class Animal {
             <div class="card h-100">
                 <img src="${this.picture}" class="card-img-top" alt="${this.name}">
                 <div class="card-body">
-                    <h5 class="card-title">${this.name}</h5>
-                    <p class="card-text">${this.type} - ${this.race}</p>
+                    <h5>${this.name}</h5>
+                    <p>${this.type} - ${this.race}</p>
                     <a href="/animal/${this.id}" class="btn btn-sm">Voir</a>
                 </div>
             </div>

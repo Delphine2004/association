@@ -8,7 +8,7 @@ export function showEventResult() {
     if (!eventsList && !searchForm) return;
 
     eventsList.innerHTML =
-        '<p class="text-center">Merci de séléctionner des critéres de recherche.</p>';
+        "<p>Merci de séléctionner des critéres de recherche.</p>";
 
     searchForm.addEventListener("submit", async function (event) {
         event.preventDefault();
@@ -47,7 +47,7 @@ export function showEventResult() {
             if (data.status === "success") {
                 eventsList.innerHTML = "";
                 if (!data || data.count === 0) {
-                    eventsList.innerHTML = `<p class="text-center">Aucun événement ne correspond à la recherche.</p>`;
+                    eventsList.innerHTML = `<p>Aucun événement ne correspond à la recherche.</p>`;
                     searchForm.reset();
                 } else {
                     data.events.forEach((eventData) => {
@@ -59,8 +59,7 @@ export function showEventResult() {
             }
         } catch (error) {
             eventsList.innerHTML =
-                error ||
-                `<p class="text-center">Une erreur est survenue lors de la recherche.</p>`;
+                error || `<p>Une erreur est survenue lors de la recherche.</p>`;
         }
     });
 }

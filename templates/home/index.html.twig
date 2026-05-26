@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}Accueil - Coeurs à Quatre
-							Pattes
+{% block title %}Accueil - Coeurs à Quatre Pattes
 {% endblock %}
 {% block body %}
 	<main
@@ -9,33 +8,35 @@
 		<section id="hero" class="container-fluid py-5">
 			<div class="container">
 				<div
-					class="row justify-content-center justify-content-md-between align-content-center">
+					class="row align-content-center align-items-center">
 					<!--Image-->
-					<div class="img-hero col-12 col-md-6 mb-4 mb-md-0 d-flex justify-content-between">
+					<div class="col-12 col-md-4">
 						<img src="{{ asset('assets/img/Logo/Logo.webp') }}" alt="Logo association Coeurs à quatre pattes" class="img-fluid object-fit-cover"/>
 					</div>
 					<!-- Titre et boutons-->
-					<div
-						class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center py-5">
-						<!--Le titre et le slogan-->
-						<div class="mb-4">
-							<h1 class="fw-bold pb-3">
-								Cœur à Quatre Pattes
-							</h1>
-							<p class="text-center fst-italic">
-								"Offrez-leur un foyer, gagnez un ami pour la vie."
-							</p>
-						</div>
+					<div class="col-12 col-md-8">
+						<div
+							class="d-flex flex-column justify-content-center align-items-center gap-1">
+							<!--Le titre et le slogan-->
+							<div class="d-flex flex-column justify-content-center align-items-center">
+								<h1 class="fw-bold">
+									Cœur à Quatre Pattes
+								</h1>
+								<p class="fst-italic">
+									"Offrez-leur un foyer, gagnez un ami pour la vie."
+								</p>
+							</div>
 
-						<!--Boutons-->
-						<div class="d-flex flex-row justify-content-md-center gap-4">
-							<a class="btn w-100 w-md-auto px-md-4" href="{{ path('donation') }}" aria-label="Donner">
-								Donner
-							</a>
+							<!--Boutons-->
+							<div class="d-flex flex-row justify-content-md-center gap-4">
+								<a class="btn w-100 w-md-auto px-md-4" href="{{ path('donation') }}" aria-label="Donner">
+									Donner
+								</a>
 
-							<a class="btn w-100 w-md-auto px-md-4" href="{{ path('adoption') }}" aria-label="Adopter">
-								Adopter
-							</a>
+								<a class="btn w-100 w-md-auto px-md-4" href="{{ path('adoption') }}" aria-label="Adopter">
+									Adopter
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -47,39 +48,29 @@
 			<div
 				class="container">
 				<!-- Présentation -->
+				<div
+					class="row justify-content-between align-items-center">
 
-				<div class="row justify-content-between align-items-center">
-					<h2>Qui sommes-nous ?</h2>
 					<!-- Paragraphe de présentation-->
-					<div class="col-12 col-md-10 col-lg-6 text-center mx-auto py-5">
+					<div class="col-12 col-md-10 col-lg-6 py-5">
+						<h2>Qui sommes-nous ?</h2>
 						<p>
 							Bienvenue sur le site de l'association
-							<strong>"Cœurs à Quatre Pattes"</strong>. Nous sommes
-																                        une association dédiée à la protection et à l'adoption
-																                        des animaux abandonnés ou maltraités. Depuis notre
-																                        création en 2015, nous œuvrons chaque jour pour offrir
-																                        une seconde chance aux compagnons à quatre pattes.
+							<strong>"Cœurs à Quatre Pattes"</strong>. Nous sommes une association dédiée à la protection et à l'adoption des animaux abandonnés ou maltraités. Depuis notre création en 2015, nous œuvrons chaque jour pour offrir une seconde chance aux compagnons à quatre pattes.
 							<br/>
 							Notre mission :
 							<strong>secourir, soigner</strong>
 							et
 							<strong>trouver un foyer aimant</strong>
-							pour chaque animal. Grâce à notre réseau de familles
-														                        d'accueil et à notre centre d'hébergement, nous avons
-														                        déjà permis à plus de 2 000 animaux de retrouver amour
-														                        et sécurité.
+							pour chaque animal. Grâce à notre réseau de familles d'accueil et à notre centre d'hébergement, nous avons déjà permis à plus de 2 000 animaux de retrouver amour et sécurité.
 							<br/>
-							Nous menons également des actions de sensibilisation
-														                        dans les écoles et auprès du grand public pour
-														                        encourager une adoption responsable et le respect du
-														                        bien-être animal.
+							Nous menons également des actions de sensibilisation dans les écoles et auprès du grand public pour encourager une adoption responsable et le respect du bien-être animal.
 							<br/>
-							Rejoignez l'aventure et faites partie de notre combat
-														                        contre l'abandon et la maltraitance.
+							Rejoignez l'aventure et faites partie de notre combat contre l'abandon et la maltraitance.
 						</p>
 					</div>
 					<!-- Image-->
-					<div class="col-12 col-md-10 col-lg-4 mx-auto py-5">
+					<div class="col-12 col-md-10 col-lg-4 py-5">
 						<img src="{{ asset('assets/img/autres/team.jpg') }}" class="img-fluid rounded mx-auto d-block" alt="les membres de l'association Coeurs à quatre pattes"/>
 					</div>
 				</div>
@@ -87,28 +78,21 @@
 		</section>
 
 		<!--Section adoption-->
-		<section
-			id="adoption" class="container-fluid py-5">
-			<!--Section à adopter-->
+		<section id="adoption" class="container-fluid py-5">
 			<div
 				class="container">
-				<!-- Présentation -->
-				<div class="row justify-content-between">
-					<div class="col-12 col-md-10 col-lg-8 text-center mx-auto py-5">
+				<!--Section à adopter-->
+				<div
+					class="row flex-column justify-content-between align-items-center py-5">
+					<!-- Présentation -->
+					<div class="col-12 col-md-10 col-lg-8 py-2">
 						<h2>Ils n'attendent que vous</h2>
 						<p>
-							Adopter un animal, c'est offrir une seconde chance à un
-														                        être vivant en quête d'amour. Chaque adoption transforme
-														                        deux vies : celle de l'animal recueilli et celle du
-														                        foyer qui s'enrichit d'une présence affectueuse et
-														                        fidèle.
+							Adopter un animal, c'est offrir une seconde chance à un être vivant en quête d'amour. Chaque adoption transforme deux vies : celle de l'animal recueilli et celle du foyer qui s'enrichit d'une présence affectueuse et fidèle.
 						</p>
 					</div>
-				</div>
-
-				<!--Carousel des animaux à adopter-->
-				<div class="row justify-content-between">
-					<div class="col-12 col-md-10 col-lg-8 mx-auto">
+					<!--Carousel des animaux à adopter-->
+					<div class="col-12 col-md-10 col-lg-8 py-2">
 						<div
 							id="carousel-to-adopt" class="carousel slide rounded-4 overflow-hidden mx-auto" data-bs-ride="carousel" data-bs-interval="5000" aria-label="Carrousel des animaux à adopter">
 							<!--Les images du carousel-->
@@ -117,15 +101,15 @@
 									<div class="carousel-item {% if loop.first %}active{% endif %}">
 										<img src="{{ asset('uploads/animals/' ~ animal.picture) }}" class="d-block w-100" alt="{{ animal.name }}"/>
 										<div class="carousel-caption">
-											<h5>
+											<h5 class="text-center m-1">
 												{{ animal.name }}
 											</h5>
-											<a href="{{ path('app_animal_show', { id: animal.id }) }}" class="btn btn-sm m-3">Voir</a>
+											<a href="{{ path('app_animal_show', { id: animal.id }) }}" class="btn btn-sm m-1">Voir</a>
 										</div>
 									</div>
 								{% else %}
 									<div class="carousel-item active">
-										<p class="text-center">
+										<p>
 											Aucun animal à adopter pour le moment.
 										</p>
 									</div>
@@ -143,35 +127,25 @@
 
 						</div>
 					</div>
-				</div>
-
-				<!-- Lien vers la page adoption -->
-				<div class="d-flex justify-content-center py-5">
-					<a class="btn btn-lg" href="{{ path('adoption') }}" aria-label="Rechercher les animaux à adopter">Rechercher</a>
-				</div>
-			</div>
-
-			<!--Section adoptés-->
-			<div
-				class="container">
-				<!--Presentation-->
-				<div class="row justify-content-between">
-					<div class="col-12 col-md-10 col-lg-8 text-center mx-auto py-5">
-						<h2>
-							Ils ont trouvé leur nouveau foyer
-						</h2>
-						<p>
-							Un temps sans foyer, nos protégés vivent aujourd'hui
-														                        leur meilleure vie chez des familles aimantes. Leurs
-														                        regards lumineux et leurs jeux joyeux témoignent du
-														                        bonheur retrouvé grâce à votre générosité.
-						</p>
+					<!-- Lien vers la page adoption -->
+					<div class="col-12 col-md-4 py-2 m-4">
+						<a class="btn w-100" href="{{ path('adoption') }}" aria-label="Rechercher les animaux à adopter">Rechercher</a>
 					</div>
 				</div>
 
-				<!--Carousel des animaux adoptés-->
-				<div class="row justify-content-between">
-					<div class="col-12 col-md-10 col-lg-8 mx-auto">
+				<!--Section adoptés-->
+				<div
+					class="row flex-column justify-content-between align-items-center py-5">
+					<!--Presentation-->
+					<div class="col-12 col-md-10 col-lg-8 py-2">
+						<h2>Ils ont trouvé leur nouveau foyer</h2>
+						<p>
+							Un temps sans foyer, nos protégés vivent aujourd'hui leur meilleure vie chez des familles aimantes. Leurs regards lumineux et leurs jeux joyeux témoignent du bonheur retrouvé grâce à votre générosité.
+						</p>
+					</div>
+
+					<!--Carousel des animaux adoptés-->
+					<div class="col-12 col-md-10 col-lg-8 py-2">
 						<div
 							id="carousel-adopted" class="carousel slide rounded-4 overflow-hidden mx-auto" data-bs-ride="carousel" data-bs-interval="5000" aria-label="Carrousel des animaux adoptés">
 							<!-- Les Images du carousel des animaux adoptés -->
@@ -214,24 +188,16 @@
 			<div
 				class="container">
 				<!-- Présentation -->
-				<div class="row justify-content-between">
-					<div class="col-12 col-md-10 col-lg-8 text-center mx-auto py-5">
+				<div class="row flex-column justify-content-between align-items-center py-5">
+					<div class="col-12 col-md-10 col-lg-8 py-2">
 						<h2>Les Evénements</h2>
 						<p>
-							Découvrez nos prochains rendez-vous solidaires !
-														                        Journées portes ouvertes, collectes de dons, séances
-														                        d'adoption et ateliers de sensibilisation - notre
-														                        calendrier regorge d'occasions de vous engager pour la
-														                        cause animale. Rejoignez-nous pour ces moments de
-														                        partage où chaque participation contribue concrètement
-														                        au bien-être de nos protégés.
+							Découvrez nos prochains rendez-vous solidaires ! Journées portes ouvertes, collectes de dons, séances d'adoption et ateliers de sensibilisation - notre calendrier regorge d'occasions de vous engager pour la cause animale. Rejoignez-nous pour ces moments de partage où chaque participation contribue concrètement au bien-être de nos protégés.
 						</p>
 					</div>
-				</div>
 
-				<!-- Carousel des événements -->
-				<div class="row justify-content-between">
-					<div class="col-12 col-md-10 col-lg-8 mx-auto">
+					<!-- Carousel des événements -->
+					<div class="col-12 col-md-10 col-lg-8 py-2">
 						<div
 							id="carousel-event" class="carousel slide rounded-4 overflow-hidden mx-auto" data-bs-ride="carousel" data-bs-interval="5000" aria-label="Carrousel des événements à venir">
 							<!--Les images du carousel-->
@@ -241,8 +207,8 @@
 										<div class="card mx-auto">
 											<img src="{{ asset('uploads/events/' ~ event.picture) }}" class="card-img-top" alt="Evénement n°{{event.id}}"/>
 											<div class="card-body">
-												<h3 >{{event.date ? event.date|format_datetime(pattern="EEEE d MMMM", locale='fr') : '' }}</h3>
-												<h4 >{{event.place}}</h4>
+												<h3>{{event.date ? event.date|format_datetime(pattern="EEEE d MMMM", locale='fr') : '' }}</h3>
+												<h4>{{event.place}}</h4>
 												<p class="card-text text-center mb-4">
 													{{ event.description }}
 												</p>
@@ -273,17 +239,14 @@
 
 				<!-- Newsletter -->
 				<div
-					class="row justify-content-between my-5">
+					class="row flex-column justify-content-between align-items-center py-5">
 					<!-- Présentation newsletter -->
-					<div class="col-12 col-md-10 col-lg-8 text-center mx-auto pt-5">
+					<div class="col-12 col-md-10 col-lg-8 py-2">
 						<p class="mb-4">
-							Restez informé de nos actions et sauvetages !
-																																																	                        Inscrivez-vous à notre newsletter mensuelle pour ne
-																																																	                        manquer aucune actualité de nos protégés.
+							Restez informé de nos actions et sauvetages ! Inscrivez-vous à notre newsletter mensuelle pour ne manquer aucune actualité de nos protégés.
 						</p>
 					</div>
-					<!--  -->
-					<div class="col-12 col-md-10 col-lg-8 mx-auto">
+					<div class="col-12 col-md-10 col-lg-8 py-2">
 						<form id="letter-form" class="row g-3" action="{{ path('home') }}" method="post" novalidate>
 
 							<div class="col-12 col-md-9">
@@ -311,9 +274,11 @@
 									S'inscrire
 								</button>
 							</div>
+
+
 						</form>
-						<div id="feedback" class="row"></div>
 					</div>
+					<div class="col-12 col-md-10 col-lg-8 py-2" id="feedback"></div>
 				</div>
 			</div>
 		</section>
@@ -321,13 +286,13 @@
 		<!--Section adresse -->
 		<section id="address" class="container-fluid py-5">
 			<div class="container">
-				<h2>Où nous trouver ?</h2>
-
 				<div
-					class="row justify-content-center text-center py-5">
+					class="row justify-content-center align-items-center py-5">
 					<!-- Horaires + Adresse -->
-					<div class="col-12 col-md-4">
-						<div class="mx-auto py-3">
+					<div class="col-12 col-md-4 py-2">
+						<h2>Où nous trouver ?</h2>
+
+						<div class="d-flex flex-column py-3">
 							<h4>Horaires</h4>
 							<div class="d-flex justify-content-between px-2">
 								<span>Lundi</span>
@@ -359,33 +324,30 @@
 							</div>
 						</div>
 
-						<div class="mx-auto py-3">
+						<div class="d-flex flex-column py-3">
 							<h4 class="pt-5">Adresse</h4>
 							<p>100 rue introuvable<br/>99000 QUELQUE PART</p>
 						</div>
 					</div>
 
 					<!-- Carte -->
-					<div class="col-12 col-md-6">
+					<div class="col-12 col-md-6 py-2">
 						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2648.7113213397724!2d2.6783482999999992!3d48.4044867!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e5f30b363aa115%3A0x5f677a18dd01695f!2sParking%20Mont%20Aigu!5e0!3m2!1sfr!2sfr!4v1746388522468!5m2!1sfr!2sfr" width="100%" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localisation"></iframe>
 					</div>
 				</div>
 
 				<!-- Contact -->
 				<div
-					class="row justify-content-center text-center pb-5">
+					class="row justify-content-center align-items-center py-5">
 					<!-- Présentation contact -->
-					<div class="col-12 col-md-8 mb-3 text-md-start">
-						<p class="mb-4">
-							Vous n'avez pas trouvé ce que vous chercher sur le site
-														                        ou vous avez besoin de renseignement complémentaire?
-														                        N'hésitez pas à nos contacter via ce formulaire. Nous
-														                        vous répondrons dans les meilleurs délais.
+					<div class="col-12 col-md-8 py-2">
+						<p>
+							Vous n'avez pas trouvé ce que vous chercher sur le site ou vous avez besoin de renseignement complémentaire? N'hésitez pas à nos contacter via ce formulaire. Nous vous répondrons dans les meilleurs délais.
 						</p>
 					</div>
 					<!-- Lien vers formulaire de contact -->
-					<div class="col-12 col-md-2 text-md-start">
-						<a class="btn" href="mailto:dfumex2004@gmail.com">Nous contacter</a>
+					<div class="col-12 col-md-2 py-2">
+						<a class="btn w-100" href="mailto:dfumex2004@gmail.com">Nous contacter</a>
 					</div>
 				</div>
 			</div>

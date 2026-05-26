@@ -33,7 +33,7 @@ export function validateEmail() {
         }
 
         if (!agreement) {
-            feedback.innerHTML = `<p class="text-center">Vous devez confirmer votre inscription.</p>`;
+            feedback.innerHTML = `<p>Vous devez confirmer votre inscription.</p>`;
             return;
         }
 
@@ -53,15 +53,14 @@ export function validateEmail() {
             const data = await response.json();
 
             if (data.success) {
-                feedback.innerHTML = `<p class="text-center">Vous êtes bien inscrit(e)</p>`;
+                feedback.innerHTML = `<p>Vous êtes bien inscrit(e)</p>`;
                 letterForm.reset();
             } else {
-                feedback.innerHTML = `<p class="text-center">${data.message ?? "Email déjà inscrit."}</p>`;
+                feedback.innerHTML = `<p>${data.message ?? "Email déjà inscrit."}</p>`;
             }
         } catch (error) {
             feedback.innerHTML =
-                error ||
-                `<p class="text-danger text-center">Une erreur est survenue.</p>`;
+                error || `<p class="text-danger>Une erreur est survenue.</p>`;
         } finally {
             submitBtn.disabled = false;
         }
