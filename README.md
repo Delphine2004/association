@@ -142,11 +142,19 @@ php bin/console doctrine:migrations:migrate
 
 ### 5. Générer les données :
 
+#### Pour les Animaux, les Evénements et les Utilisateurs. (= Données MySQL)
 Toujours dans le conteneur php
 
 ```bash
 php bin/console doctrine:fixtures:load
 ```
+#### Pour les Emails (= Données NoSQL)
+Sortir du conteneur PHP
+
+```bash
+docker exec -i association-mongo-1 mongosh "mongodb://admin:adminpassword@localhost:27017/?authSource=admin" < scripts/data-emails.js
+```
+
 
 L’application accessible : http://localhost:8091
 
