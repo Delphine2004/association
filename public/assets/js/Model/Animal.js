@@ -20,9 +20,29 @@ export class Animal {
     getAnimalInfo() {
         return `
         <div class="card p-3 mb-4 w-100">
-            <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 p-0">
-                <p>${this.name} - ${this.type} - ${this.gender} - ${this.status}</p>
-                <a class="btn btn-sm" href="/animal/${this.id}">Voir</a>
+            <div class="row justify-content-center align-items-center w-100 g-3">
+                <div class="col-12 col-md-9">
+                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                        <div
+                            class="d-flex flex-column flex-md-row justify-content-between"
+                        >
+                            <p class="fw-bold">${this.name}</p>
+                        </div>
+                        <div class="d-flex flex-row justify-content-around gap-3">
+                            <p>${this.type}</p>
+                            <p>${this.gender}</p>
+                        </div>
+                        <div
+                            class="d-flex flex-column flex-md-row justify-content-between"
+                        >
+                            <p>${this.status}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-2 text-center">
+                    <a class="btn w-100" href="/animal/${this.id}">Voir</a>
+                </div>
             </div>
         </div>
         `;
