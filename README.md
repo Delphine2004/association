@@ -20,8 +20,8 @@ Coeur à Quatre Pattes est une application web développée avec Symfony permett
 
 #### Langage & Framework
 
-- PHP 8
-- Symfony 8
+- PHP 8.4
+- Symfony 7.4
 
 #### Gestion des données
 
