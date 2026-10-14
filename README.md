@@ -158,7 +158,7 @@ docker exec -i association-mongo-1 mongosh "mongodb://admin:adminpassword@localh
 
 L’application accessible : http://localhost:8091
 
-MailHog accessible : http://localhost:8025
+Emails accessibles : http://localhost:8025
 
 (Adapter les ports en fonction du fichier .env. si modifiés)
 
